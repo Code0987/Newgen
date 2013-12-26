@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Pictures.PicturesWidget"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Properties="clr-namespace:Pictures.Properties"
+             Background="Black"
+             MouseLeftButtonUp="UserControlMouseLeftButtonUp">
+    <UserControl.Resources>
+        <Storyboard x:Key="SwitchPictureAnim">
+            <DoubleAnimation AccelerationRatio="0.6"
+                             Completed="SwitchAnimationCompleted"
+                             Duration="0:0:0.7"
+                             FillBehavior="Stop"
+                             From="0"
+                             Storyboard.TargetName="PictureTranslate"
+                             Storyboard.TargetProperty="X"
+                             To="-350" />
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Header="{x:Static Properties:Resources.AddLookupFolder}"
+                      Click="MenuItem_AddLookupFolder_Click" />
+            <MenuItem Header="{x:Static Properties:Resources.ClearLookupFolders}"
+                      Click="MenuItem_ClearLookupFolders_Click" />
+            <Separator />
+            <MenuItem Header="{x:Static Properties:Resources.WidgetInfo}" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <Grid ClipToBounds="True">
+        <Image Name="PictureBg"
+               Stretch="UniformToFill">
+            <Image.RenderTransform>
+                <TranslateTransform x:Name="PictureBgTranslate" />
+            </Image.RenderTransform>
+        </Image>
+        <Image Name="Picture"
+               Stretch="UniformToFill">
+            <Image.RenderTransform>
+                <TranslateTransform x:Name="PictureTranslate" />
+            </Image.RenderTransform>
+        </Image>
+        <TextBlock Margin="10,0,0,10"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Bottom"
+                   FontSize="14"
+                   Foreground="White"
+                   Text="Pictures" />
+    </Grid>
+</UserControl>

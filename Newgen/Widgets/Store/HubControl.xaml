@@ -1,0 +1,117 @@
+﻿<UserControl x:Class="Store.HubControl" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Core="clr-namespace:Store" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:Properties="clr-namespace:Store.Properties" FontFamily="/Newgen.Base;component/Fonts/#Segoe WP" FontWeight="Light" Foreground="White" Loaded="UserControl_Loaded" mc:Ignorable="d">
+    <UserControl.Resources>
+        <Style x:Key="DragScrollViewer_ScrollBarThumb" TargetType="{x:Type Thumb}">
+            <Setter Property="SnapsToDevicePixels" Value="True" />
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="IsTabStop" Value="false" />
+            <Setter Property="Focusable" Value="true" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Thumb}">
+                        <Rectangle x:Name="Rect" Fill="Gray" HorizontalAlignment="Stretch" VerticalAlignment="Stretch" />
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter Property="Fill" TargetName="Rect" Value="#FFADADAD" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <ControlTemplate x:Key="DragScrollViewer_VerticalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid x:Name="Grid">
+                <Track IsDirectionReversed="true" Name="PART_Track">
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource DragScrollViewer_ScrollBarThumb}" Margin="1,0,1,0" />
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+        <ControlTemplate x:Key="DragScrollViewer_HorizontalScrollBar" TargetType="{x:Type ScrollBar}">
+            <Grid x:Name="Grid">
+                <Track IsDirectionReversed="False" Name="PART_Track">
+                    <Track.Thumb>
+                        <Thumb Style="{StaticResource DragScrollViewer_ScrollBarThumb}" Margin="0,1,0,1" />
+                    </Track.Thumb>
+                </Track>
+            </Grid>
+        </ControlTemplate>
+        <Style x:Key="{x:Type Core:DragScrollViewer}" TargetType="{x:Type Core:DragScrollViewer}">
+            <Setter Property="OverridesDefaultStyle" Value="True" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type Core:DragScrollViewer}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition />
+                                <RowDefinition Height="Auto" />
+                            </Grid.RowDefinitions>
+                            <ScrollContentPresenter Grid.Column="0" />
+                            <ScrollBar Grid.Column="1" Grid.Row="0" Height="Auto" Width="10" Maximum="{TemplateBinding ScrollableHeight}" Name="PART_VerticalScrollBar" OverridesDefaultStyle="True" Template="{StaticResource DragScrollViewer_VerticalScrollBar}" Value="{TemplateBinding VerticalOffset}" ViewportSize="{TemplateBinding ViewportHeight}" Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                            <ScrollBar Grid.Column="0" Grid.Row="1" Height="10" Width="Auto" Maximum="{TemplateBinding ScrollableWidth}" Name="PART_HorizontalScrollBar" Orientation="Horizontal" OverridesDefaultStyle="True" Template="{StaticResource DragScrollViewer_HorizontalScrollBar}" Value="{TemplateBinding HorizontalOffset}" ViewportSize="{TemplateBinding ViewportWidth}" Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                            <Grid Grid.Column="1" Grid.Row="1" />
+                        </Grid>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Button Style="{StaticResource MetroBackButton}" Click="BackButton_Click" Name="BackButton"></Button>
+        <TextBlock Margin="150,0,0,0" FontSize="76" FontWeight="Light" HorizontalAlignment="Left" Text="Store" VerticalAlignment="Top" />
+        <Grid Grid.Row="1" Margin="0,0,0,0" Background="#FF2B2B2B">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="160" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="400" />
+                <ColumnDefinition Width="400" />
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="1" FontSize="22" Text="INSTALLED" />
+            <TextBlock Grid.Column="2" FontSize="22" Text="AVAILABLE" />
+            <TextBlock Grid.Column="3" FontSize="22" Text="UPDATES" />
+        </Grid>
+        <Grid Grid.Row="2" Height="8">
+            <ProgressBar IsIndeterminate="True" Name="ProgressBar" Value="100" />
+        </Grid>
+        <Grid  Grid.Row="3">
+            <Core:DragScrollViewer ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Hidden">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="160" />
+                        <ColumnDefinition Width="400" />
+                        <ColumnDefinition Width="400" />
+                        <ColumnDefinition Width="400" />
+                    </Grid.ColumnDefinitions>
+                    <Core:DragScrollViewer Grid.Column="1" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <WrapPanel Margin="0,0,10,0" Name="InstalledWidgets" Orientation="Horizontal">
+
+                        </WrapPanel>
+                    </Core:DragScrollViewer>
+                    <Core:DragScrollViewer Grid.Column="2" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <WrapPanel Margin="0,0,10,0" Name="AvailableWidgets" Orientation="Horizontal">
+
+                        </WrapPanel>
+                    </Core:DragScrollViewer>
+                    <Core:DragScrollViewer Grid.Column="3" ScrollViewer.HorizontalScrollBarVisibility="Disabled" ScrollViewer.VerticalScrollBarVisibility="Visible">
+                        <WrapPanel Margin="0,0,10,0" Name="WidgetUpdates" Orientation="Horizontal">
+
+                        </WrapPanel>
+                    </Core:DragScrollViewer>
+                </Grid>
+            </Core:DragScrollViewer>
+        </Grid>
+    </Grid>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Store;component/Resources/hub_bg.png" />
+    </UserControl.Background>
+</UserControl>

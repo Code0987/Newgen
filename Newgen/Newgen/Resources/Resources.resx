@@ -1,0 +1,393 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BackItem" xml:space="preserve">
+    <value>Back</value>
+  </data>
+  <data name="ExitItem" xml:space="preserve">
+    <value>Exit Newgen</value>
+  </data>
+  <data name="UnLockItem" xml:space="preserve">
+    <value>Un-Lock ( Enable Dragging )</value>
+  </data>
+  <data name="Options12H" xml:space="preserve">
+    <value>12-hour time</value>
+  </data>
+  <data name="Options24H" xml:space="preserve">
+    <value>24-hour time</value>
+  </data>
+  <data name="OptionsAbout" xml:space="preserve">
+    <value>About Newgen</value>
+  </data>
+  <data name="OptionsAboutTabHeader" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="OptionsApplyButton" xml:space="preserve">
+    <value>apply</value>
+  </data>
+  <data name="OptionsBg" xml:space="preserve">
+    <value>Background color:</value>
+  </data>
+  <data name="OptionsBgAlpha" xml:space="preserve">
+    <value>Background color transparency:</value>
+  </data>
+  <data name="OptionsBgImg" xml:space="preserve">
+    <value>Background image:</value>
+  </data>
+  <data name="OptionsBgImgSelect" xml:space="preserve">
+    <value>select image</value>
+  </data>
+  <data name="OptionsBgImgUse" xml:space="preserve">
+    <value>Use image in backgound</value>
+  </data>
+  <data name="OptionsCancelButton" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="OptionsChangeBg" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="OptionsChangeStaticAppWidgetBgColor" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="OptionsCopyright" xml:space="preserve">
+    <value>Licensed under Type 2 License of NS.</value>
+  </data>
+  <data name="OptionsEnableAutoStart" xml:space="preserve">
+    <value>Start Newgen when Windows loads</value>
+  </data>
+  <data name="OptionsEnableUserTile" xml:space="preserve">
+    <value>Enable UserTile (User name and Picture) on main screen. (*)</value>
+  </data>
+  <data name="OptionsGeneralTabHeader" xml:space="preserve">
+    <value>general</value>
+  </data>
+  <data name="OptionsItem" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="OptionsLanguage" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="OptionsLockScreenTime" xml:space="preserve">
+    <value>Lock screen time (in minutes) (use blank or -1 for no screen):</value>
+  </data>
+  <data name="OptionsOkButton" xml:space="preserve">
+    <value>ok</value>
+  </data>
+  <data name="OptionsRestart" xml:space="preserve">
+    <value>* Some Changes will be applied after restarting Newgen.</value>
+  </data>
+  <data name="OptionsWidgetBgColor" xml:space="preserve">
+    <value>Fallback color for tiles background (*) (This only works when you don't set color):</value>
+  </data>
+  <data name="OptionsTilesSize" xml:space="preserve">
+    <value>Tiles size (*):</value>
+  </data>
+  <data name="OptionsTilesSpacing" xml:space="preserve">
+    <value>Space between tiles (*):</value>
+  </data>
+  <data name="OptionsTime" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="OptionsTimeFormat" xml:space="preserve">
+    <value>Time format:</value>
+  </data>
+  <data name="OptionsVersion" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="OptionsWindowTitle" xml:space="preserve">
+    <value>Newgen options</value>
+  </data>
+  <data name="ShareHubTip" xml:space="preserve">
+    <value>Select friends that you want to pin on a start screen</value>
+  </data>
+  <data name="PinAppItem" xml:space="preserve">
+    <value>Pin application / file</value>
+  </data>
+  <data name="PinWebItem" xml:space="preserve">
+    <value>Pin website / url</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>profile</value>
+  </data>
+  <data name="RefreshItem" xml:space="preserve">
+    <value>Refresh</value>
+  </data>
+  <data name="RemoveItem" xml:space="preserve">
+    <value>Unpin</value>
+  </data>
+  <data name="SaveItem" xml:space="preserve">
+    <value>Save Config</value>
+  </data>
+  <data name="SearchItem" xml:space="preserve">
+    <value>Search</value>
+  </data>
+  <data name="ShareItem" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="StartItem" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="TilesItem" xml:space="preserve">
+    <value>Pin widgets / tiles</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>what's new?</value>
+  </data>
+  <data name="WidgetsItem" xml:space="preserve">
+    <value>Widgets</value>
+  </data>
+  <data name="DevicesItem" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="OptionsEnableShowTaskbar" xml:space="preserve">
+    <value>Show taskbar ( in fullscreen mode )</value>
+  </data>
+  <data name="OptionsEnableHK" xml:space="preserve">
+    <value>Enable hot keys ( global keyboard support ) (*)</value>
+  </data>
+  <data name="OptionsKeyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
+  <data name="OptionsEnableShowTaskbarA" xml:space="preserve">
+    <value>Show taskbar always</value>
+  </data>
+  <data name="OptionsEnableTB" xml:space="preserve">
+    <value>Use thumbnails bar (*)</value>
+  </data>
+  <data name="OptionsEnableOOBE" xml:space="preserve">
+    <value>Enable Out Of Box Experience (*)</value>
+  </data>
+  <data name="OptionsStartBarBg" xml:space="preserve">
+    <value>Toolbar Background color:</value>
+  </data>
+  <data name="OptionsStartBarBgChange" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="OptionsStartBarLogo" xml:space="preserve">
+    <value>StartBar Logo:</value>
+  </data>
+  <data name="OptionsStartBarLogoChange" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="OptionsOOBETabHeader" xml:space="preserve">
+    <value>oobe</value>
+  </data>
+  <data name="OptionsUITabHeader" xml:space="preserve">
+    <value>ui</value>
+  </data>
+  <data name="OptionsWidgetsTabHeader" xml:space="preserve">
+    <value>widgets</value>
+  </data>
+  <data name="OptionsStartScreenSS" xml:space="preserve">
+    <value>StartScreen slide-show images (*):</value>
+  </data>
+  <data name="OptionsStartScreenSSEnable" xml:space="preserve">
+    <value>Enable StartScreen slide-show (*)</value>
+  </data>
+  <data name="OptionsStartScreenSSImgSelect" xml:space="preserve">
+    <value>select images</value>
+  </data>
+  <data name="OptionsStartScreenSSTimeFrame" xml:space="preserve">
+    <value>StartScreen slide-show interval (in seconds) (*):</value>
+  </data>
+  <data name="OptionsUpdatesTabHeader" xml:space="preserve">
+    <value>updates</value>
+  </data>
+  <data name="OptionsCFU" xml:space="preserve">
+    <value>check for updates</value>
+  </data>
+  <data name="OptionsULV" xml:space="preserve">
+    <value>update to latest version !</value>
+  </data>
+  <data name="OptionsUNA" xml:space="preserve">
+    <value>:) updated</value>
+  </data>
+  <data name="SearchHub" xml:space="preserve">
+    <value>Search Files &amp; Folders</value>
+  </data>
+  <data name="OptionsStartScreenTitle" xml:space="preserve">
+    <value>StartScreen Title:</value>
+  </data>
+  <data name="OptionsLockWidgets" xml:space="preserve">
+    <value>Lock widgets in their places, i.e. disable re-arrangment of widgets</value>
+  </data>
+  <data name="SaveSettingsItem" xml:space="preserve">
+    <value>Save curent settings</value>
+  </data>
+  <data name="GuideFirst_Welcome_Msg1" xml:space="preserve">
+    <value>* This is your first time, so we've prepared a tour for you. This'll take you to the whole map of Newgen. Click the 'Continue' button below to start.</value>
+  </data>
+  <data name="Text_Continue" xml:space="preserve">
+    <value>continue ...</value>
+  </data>
+  <data name="Text_Skip" xml:space="preserve">
+    <value>skip ...</value>
+  </data>
+  <data name="OptionsEnableShowStartbarA" xml:space="preserve">
+    <value>Show Startbar always</value>
+  </data>
+  <data name="OptionsEnableLog" xml:space="preserve">
+    <value>Enable logging of errors</value>
+  </data>
+  <data name="Text_Apply" xml:space="preserve">
+    <value>apply ...</value>
+  </data>
+  <data name="Text_Cancel" xml:space="preserve">
+    <value>cancel ...</value>
+  </data>
+  <data name="Text_Help_NH" xml:space="preserve">
+    <value>Newgen Help</value>
+  </data>
+  <data name="Text_Previous" xml:space="preserve">
+    <value>previous ...</value>
+  </data>
+  <data name="Text_Next" xml:space="preserve">
+    <value>next ...</value>
+  </data>
+  <data name="GuideFirst_Welcome_Msg2" xml:space="preserve">
+    <value>A product by NS. © 2013 NS. All rights reserved.</value>
+  </data>
+  <data name="Text_Welcome" xml:space="preserve">
+    <value>welcome</value>
+  </data>
+  <data name="PinDirItem" xml:space="preserve">
+    <value>Pin folder</value>
+  </data>
+  <data name="Text_App" xml:space="preserve">
+    <value>Newgen 13</value>
+  </data>
+  <data name="Text_DefaultTilesScreenTitle" xml:space="preserve">
+    <value>Newgen 13</value>
+  </data>
+  <data name="Url_BuyLicense" xml:space="preserve">
+    <value>http://nsapps.net/Apps/Newgen/?Action=BuyNow</value>
+  </data>
+  <data name="OptionsDisableStartBarClock" xml:space="preserve">
+    <value>Disable StartBar Clock</value>
+  </data>
+  <data name="Text_Settings_ProvideUsageData" xml:space="preserve">
+    <value>Provide Usage Data</value>
+  </data>
+  <data name="Text_Settings_ProvideUsageDataInfo" xml:space="preserve">
+    <value>Help us by providing application usage data for beter application experience and services. No private or personal data will be collected, neither will be shared.</value>
+  </data>
+  <data name="Link_App" xml:space="preserve">
+    <value>http://nsapps.net/apps/newgen</value>
+  </data>
+</root>

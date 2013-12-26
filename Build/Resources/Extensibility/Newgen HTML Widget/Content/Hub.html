@@ -1,0 +1,68 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        setTimeout(update, 1);
+
+        function update()
+        {
+            try
+            {
+                var date = new Date();
+
+                document.getElementById("time").innerHTML =
+            "<span style='color:rgb(" + (date.getSeconds()) + "," + (195 - date.getSeconds()) + "," + (195 + date.getSeconds()) + ");'>" +
+            date.toLocaleTimeString() +
+            "</span>";
+
+                if ($Newgen != null)
+                {
+
+                    document.getElementById("info").innerHTML =
+            "Newgen server at: " + $Newgen.ServerLocation() + "<br /><br />" +
+            "License status: " + $Newgen.LicenseStatus() + "<br /><br />" +
+            "Version: " + $Newgen.Version() + "";
+                }
+
+            } catch (e) { document.getElementById("info").innerHTML = "Error getting $Newgen data."; }
+
+            setTimeout(update, 1000);
+        }
+    </script>
+    <style type="text/css">
+        @-webkit-keyframes pulse {
+            from { text-shadow: 0 0 5px rgb(0,0,0);}
+            50% { text-shadow: 0 0 25px rgb(0,0,0);}
+            to { text-shadow: 0 0 5px rgb(0,0,0);}
+        }
+        div#txth {
+            position: relative;
+            -webkit-animation-name: pulse;
+            -webkit-animation-duration: 1s;
+            -webkit-animation-iteration-count: infinite;
+        }
+    </style>
+</head>
+<body style="background-color: rgb(0,100,200); font: normal small-caps 16px/25px 'Segoe UI Light'; text-shadow: 2px 1px 5px rgb(0,0,0);">
+    <div id="txth" style="font-size: 132px !important; text-align: center; text-shadow: 10px 10px 15px rgb(0,0,0); margin: 0px 0 0 0px;">
+        <img src="./Assets/Beaker.png" style="width: 150px; height: 150px; margin: 25px 0 0 -10px;" />
+        <span>Hub</span>
+    </div>
+    <p id="info" style="font-size: 64px !important; font-weight: bold; text-align: center; text-shadow: 2px 1px 5px rgb(0,0,0);">
+    </p>
+    <p style="font-weight: bold; text-align: center; box-shadow: 2px 1px 5px rgb(0,0,0);">
+        <button onclick="$Newgen.SendMessage('TEST','Hello world !')">
+            Click here to send message to Newgen</button>
+        <button onclick="$Newgen.ASD('My HTML Widget','Hello world !', function (r) {alert('Saved !')})">
+            Click here to create and save data to local file</button>
+        <button onclick="$Newgen.GSD('My HTML Widget', function (r) {alert(r)})">
+            Click here to get data saved from local file</button>
+        <button onclick="$Newgen.CSD('My HTML Widget', function (r) {alert(r)})">
+            Click here to clear local data file</button>
+        <br />
+        <button onclick="$Newgen.CloseHub();">
+            Click here to close this hub</button>
+    </p>
+    <p id="time" style="font-size: 106px !important; font-weight: bold; text-align: center; text-shadow: 2px 1px 5px rgb(0,0,0);">
+    </p>
+</body>
+</html>

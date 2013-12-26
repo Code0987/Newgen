@@ -1,0 +1,58 @@
+﻿<Newgen:HubWindow x:Class="Weather.Hub" xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:Newgen="Newgen.Base" xmlns:Properties="clr-namespace:Weather.Properties" Title="{x:Static Properties:Resources.Text_Weather}" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None" xmlns:ctl="clr-namespace:Weather" Loaded="HubWindow_Loaded">
+    <Newgen:HubWindow.Background>
+        <RadialGradientBrush>
+            <GradientStop Color="#FF0098FF" Offset="1" />
+            <GradientStop Color="#FF88CEFF" />
+        </RadialGradientBrush>
+    </Newgen:HubWindow.Background>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Newgen.Base;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid Name="Root">
+        <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource MetroBackButton}" VerticalAlignment="Top" HorizontalAlignment="Left" />
+        <Grid Margin="120,30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                <Image Name="Image_WeatherIcon" Source="Resources/weather_1.png" Height="280" />
+                <StackPanel>
+                    <TextBlock Name="TextBox_CurrentLocation" Text="Location" TextBlock.FontSize="60" TextBlock.FontWeight="Light" Margin="0,0,0,-40" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="TextBox_CurrentTemp" Text="0°" TextBlock.FontSize="160" TextBlock.FontWeight="Light" VerticalAlignment="Bottom" />
+                            <TextBlock Name="TextBox_CurrentLowTemp" Text="0°" TextBlock.FontSize="36" TextBlock.FontWeight="Light" VerticalAlignment="Bottom" Margin="-40,0,0,30" />
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Bottom" Margin="30,0,40,30">
+                            <TextBlock Name="TextBox_CurrentSky" Text="Sky" DockPanel.Dock="Bottom" TextBlock.FontSize="52" TextBlock.FontWeight="Light" />
+                            <TextBlock Name="TextBox_CurrentFeelsLike" Text="Feels like 0°" DockPanel.Dock="Bottom" TextBlock.FontSize="36" TextBlock.FontWeight="Light" />
+                        </StackPanel>
+                        <StackPanel VerticalAlignment="Bottom" Margin="30,0,40,30">
+                            <TextBlock Name="TextBox_CurrentHumidity" Text="0% Humidity" DockPanel.Dock="Bottom" TextBlock.FontSize="36" TextBlock.FontWeight="Light" />
+                            <TextBlock Name="TextBox_CurrentPrecip" Text="0% Chances of Rain" DockPanel.Dock="Bottom" TextBlock.FontSize="36" TextBlock.FontWeight="Light" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Grid x:Name="ForecastItems" Grid.Row="1" Margin="-15,30,-15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ctl:ForecastItem Grid.Column="0" Background="#3FB9007A" />
+                <ctl:ForecastItem Grid.Column="1" Background="#3FFF0000" />
+                <ctl:ForecastItem Grid.Column="2" Background="#3FFFC500" />
+                <ctl:ForecastItem Grid.Column="3" Background="#3F1A9100" />
+                <ctl:ForecastItem Grid.Column="4" Background="#3F002459" />
+            </Grid>
+        </Grid>
+    </Grid>
+</Newgen:HubWindow>

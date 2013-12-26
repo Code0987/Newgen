@@ -1,0 +1,9 @@
+<?xml version="1.0"?>
+<WidgetInfo xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <ID>NW-T-00</ID>
+  <Name>My Html Widget</Name>
+  <Version>1.0</Version>
+  <Description>My Html Widget</Description>
+  <Author>Ftware</Author>
+  <AuthorWeb>http://ftware.blogspot.com/</AuthorWeb>
+</WidgetInfo>

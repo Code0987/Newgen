@@ -1,0 +1,469 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="4.0">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Build</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{C1BC0E44-5776-45EE-BC80-50458FFC10EE}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Newgen</RootNamespace>
+    <AssemblyName>Newgen</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <FileAlignment>512</FileAlignment>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Build|AnyCPU' ">
+    <PlatformTarget>x86</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>..\..\Build\Cache\</OutputPath>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <NoWarn>108</NoWarn>
+    <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
+  </PropertyGroup>
+  <PropertyGroup>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>..\..\Build\Resources\Newgen.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>..\..\Build\Resources\Newgen_Icon.ico</ApplicationIcon>
+    <GenerateManifests>false</GenerateManifests>
+    <SignManifests>false</SignManifests>
+  </PropertyGroup>
+  <PropertyGroup />
+  <PropertyGroup />
+  <PropertyGroup>
+    <ApplicationManifest>app.manifest</ApplicationManifest>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\..\Core\iFramework\Code\Helpers\AnalyticsHelper.cs">
+      <Link>Code\Helper\AnalyticsHelper.cs</Link>
+    </Compile>
+    <Compile Include="Code\Helper\IconExtractor.cs" />
+    <Compile Include="Code\Helper\WinAPI.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\Widgets\NewgenAdWidget.cs" />
+    <Compile Include="Controls\ToolbarWindowHelper.cs" />
+    <Compile Include="Resources\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Reference Include="FacebookApi">
+      <HintPath>D:\Data\Apps\Ref\Lib1\FacebookApi.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.GData.AccessControl">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Google.GData.AccessControl.DLL</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.GData.Calendar">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Google.GData.Calendar.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.GData.Client">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Google.GData.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Google.GData.Extensions">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Google.GData.Extensions.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Hammock.ClientProfile">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Hammock.ClientProfile.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Interop.WMP">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Interop.WMP.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
+    <Reference Include="Ionic.Zip">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Ionic.Zip.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+      <HintPath>C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Microsoft.WindowsAPICodePack.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Microsoft.WindowsAPICodePack.Shell">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Microsoft.WindowsAPICodePack.Shell.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="Newtonsoft.Json">
+      <HintPath>D:\Data\Apps\Ref\Lib1\Newtonsoft.Json.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="NS.Web.Licensing.Client">
+      <HintPath>..\..\..\..\~Build\Release\NS.Web.Licensing.Client.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="OpenPop">
+      <HintPath>D:\Data\Apps\Ref\Lib1\OpenPop.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.configuration" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="System.Xaml">
+      <RequiredTargetFramework>4.0</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="TweetSharp">
+      <HintPath>D:\Data\Apps\Ref\Lib1\TweetSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="VisualStateManager">
+      <HintPath>D:\Data\Apps\Ref\Lib1\VisualStateManager.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WebKitBrowser">
+      <HintPath>D:\Data\Apps\Ref\WebKit\WebKitBrowser.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WebKitCore">
+      <HintPath>..\..\..\..\..\Data\Apps\Ref\WebKit\WebKitCore.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Page Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Code\FB\Friend.cs" />
+    <Compile Include="Code\Helper\SingleInstance.cs" />
+    <Compile Include="Controls\SearchAPI.cs" />
+    <Compile Include="Controls\SearchTextBox.cs" />
+    <Compile Include="Controls\TilesGroupBar.xaml.cs">
+      <DependentUpon>TilesGroupBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TilesToolbarItem.xaml.cs">
+      <DependentUpon>TilesToolbarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\DragScrollViewer.cs" />
+    <Compile Include="Controls\ShareItem.xaml.cs">
+      <DependentUpon>ShareItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Thumbnail.cs" />
+    <Compile Include="Controls\ToolbarItem.xaml.cs">
+      <DependentUpon>ToolbarItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\CommentItem.xaml.cs">
+      <DependentUpon>CommentItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewgenFriendWidgetControl.xaml.cs">
+      <DependentUpon>NewgenFriendWidgetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\WallItem.xaml.cs">
+      <DependentUpon>WallItem.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Widgets\NewgenAppWidget.cs" />
+    <Compile Include="Code\Widgets\NewgenFriendWidget.cs" />
+    <Compile Include="Controls\NewgenFriendWidgetHub.xaml.cs">
+      <DependentUpon>NewgenFriendWidgetHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Widgets\NewgenHtmlWidget.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Controls\NewgenShareFeedControl.xaml.cs">
+      <DependentUpon>NewgenShareFeedControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Widgets\NewgenWebPreviewWidget.cs" />
+    <Compile Include="Code\FB\SocialProvider.cs" />
+    <Compile Include="Code\Helper\WidgetServer.cs" />
+    <Compile Include="Code\FB\WallComment.cs" />
+    <Compile Include="Code\FB\WallEntry.cs" />
+    <Compile Include="Code\FB\WallEntryType.cs" />
+    <Compile Include="Code\Screen\WidgetManager.cs" />
+    <Compile Include="Code\Screen\WidgetProxy.cs" />
+    <Compile Include="Code\Screen\TilesScreenSystem.cs" />
+    <Compile Include="Code\Helper\Settings.cs" />
+    <Compile Include="Controls\AppWidgetOptionsHub.xaml.cs">
+      <DependentUpon>AppWidgetOptionsHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\NewgenHelp.xaml.cs">
+      <DependentUpon>NewgenHelp.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SwitchBar.xaml.cs">
+      <DependentUpon>SwitchBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SwitchAppPreview.xaml.cs">
+      <DependentUpon>SwitchAppPreview.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Code\Helper\Helper.cs" />
+    <Compile Include="Controls\AddressBarWindow.xaml.cs">
+      <DependentUpon>AddressBarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\SearchHub.xaml.cs">
+      <DependentUpon>SearchHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LockScreen.xaml.cs">
+      <DependentUpon>LockScreen.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\LeftClock.xaml.cs">
+      <DependentUpon>LeftClock.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ThumbnailsBar.xaml.cs">
+      <DependentUpon>ThumbnailsBar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\TilesToolbarWindow.xaml.cs">
+      <DependentUpon>TilesToolbarWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\Settings.xaml.cs">
+      <DependentUpon>Settings.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ShareHub.xaml.cs">
+      <DependentUpon>ShareHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\StartBar.xaml.cs">
+      <DependentUpon>StartBar.xaml</DependentUpon>
+    </Compile>
+    <Reference Include="WindowsFormsIntegration" />
+    <Reference Include="WmpWrapper">
+      <HintPath>D:\Data\Apps\Ref\Lib1\WmpWrapper.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controls\WidgetControl.xaml.cs">
+      <DependentUpon>WidgetControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\MainWindow.xaml.cs">
+      <DependentUpon>MainWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Resource Include="Resources\devices_icon.png" />
+    <Resource Include="Resources\Help\Slide1.PNG" />
+    <Resource Include="Resources\Help\Slide10.PNG" />
+    <Resource Include="Resources\Help\Slide11.PNG" />
+    <Resource Include="Resources\Help\Slide12.PNG" />
+    <Resource Include="Resources\Help\Slide13.PNG" />
+    <Resource Include="Resources\Help\Slide14.PNG" />
+    <Resource Include="Resources\Help\Slide15.PNG" />
+    <Resource Include="Resources\Help\Slide16.PNG" />
+    <Resource Include="Resources\Help\Slide17.PNG" />
+    <Resource Include="Resources\Help\Slide18.PNG" />
+    <Resource Include="Resources\Help\Slide19.PNG" />
+    <Resource Include="Resources\Help\Slide2.PNG" />
+    <Resource Include="Resources\Help\Slide20.PNG" />
+    <Resource Include="Resources\Help\Slide3.PNG" />
+    <Resource Include="Resources\Help\Slide4.PNG" />
+    <Resource Include="Resources\Help\Slide5.PNG" />
+    <Resource Include="Resources\Help\Slide6.PNG" />
+    <Resource Include="Resources\Help\Slide7.PNG" />
+    <Resource Include="Resources\Help\Slide8.PNG" />
+    <Resource Include="Resources\Help\Slide9.PNG" />
+    <EmbeddedResource Include="Resources\Resources.resx">
+      <SubType>Designer</SubType>
+      <Generator>PublicResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <AppDesigner Include="Properties\" />
+    <ProjectReference Include="..\Newgen.Base\Newgen.Base.csproj">
+      <Project>{74CB342D-3D96-42D5-8B13-76306FE35380}</Project>
+      <Name>Newgen.Base</Name>
+    </ProjectReference>
+    <Page Include="Controls\TilesGroupBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\TilesToolbarItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ShareItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ToolbarItem.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\WidgetControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\CommentItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewgenFriendWidgetControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\WallItem.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewgenFriendWidgetHub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewgenShareFeedControl.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AppWidgetOptionsHub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\NewgenHelp.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SwitchBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\SwitchAppPreview.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\AddressBarWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\SearchHub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LockScreen.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\LeftClock.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ThumbnailsBar.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\TilesToolbarWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\MainWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\Settings.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\ShareHub.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Controls\StartBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Resource Include="Resources\default_icon.png" />
+    <Resource Include="Resources\exit_icon.png" />
+    <Resource Include="Resources\settings_icon.png" />
+    <Resource Include="Resources\tiles_icon.png" />
+    <Resource Include="Resources\back_icon.png" />
+    <Resource Include="Resources\pin_icon.png" />
+    <Resource Include="Resources\questionmark_icon.png" />
+    <Resource Include="Resources\sync_icon.png" />
+    <Resource Include="Resources\share_icon.png" />
+    <Resource Include="Resources\pinweb_icon.png" />
+    <Resource Include="Resources\save_icon.png" />
+    <Resource Include="Resources\start_icon.png" />
+    <Resource Include="Resources\comments_icon.png" />
+    <Resource Include="Resources\remove_icon.png" />
+    <Resource Include="Resources\back_icon_hub.png" />
+    <Resource Include="Resources\people_icon.png" />
+    <None Include="app.config" />
+    <None Include="app.manifest" />
+    <None Include="Cache\BgImage.data">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <Resource Include="Resources\search_icon.png" />
+    <Resource Include="Resources\refresh.png" />
+    <Resource Include="app.ico" />
+    <Resource Include="Resources\Icons\batt1.png" />
+    <Resource Include="Resources\Icons\batt10.png" />
+    <Resource Include="Resources\Icons\batt2.png" />
+    <Resource Include="Resources\Icons\batt3.png" />
+    <Resource Include="Resources\Icons\batt4.png" />
+    <Resource Include="Resources\Icons\batt5.png" />
+    <Resource Include="Resources\Icons\batt6.png" />
+    <Resource Include="Resources\Icons\batt7.png" />
+    <Resource Include="Resources\Icons\batt8.png" />
+    <Resource Include="Resources\Icons\batt9.png" />
+    <Resource Include="Resources\clear.png" />
+    <Resource Include="Resources\search.png" />
+    <Resource Include="Resources\connect_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Help\Slide21.PNG" />
+    <Resource Include="Resources\Help\Slide22.PNG" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\..\Build\Resources\Newgen_Logo.png">
+      <Link>Resources\Newgen_Logo.png</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Ad.png" />
+    <Resource Include="Resources\FreeVersionAd.png" />
+    <Resource Include="Resources\UpdateAd.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    </PostBuildEvent>
+  </PropertyGroup>
+  <PropertyGroup>
+    <PreBuildEvent>
+            xcopy "D:\Data\Apps\Ref\Webkit" "..\..\Build\Cache\Lib\Webkit" /s /i /c /f /r /y
+            xcopy "D:\Data\Apps\Ref\Lib1" "..\..\Build\Cache\Lib\" /s /i /c /f /r /y
+        </PreBuildEvent>
+  </PropertyGroup>
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

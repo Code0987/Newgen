@@ -1,0 +1,49 @@
+﻿<UserControl x:Class="Socialite.Hub"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Socialite="clr-namespace:Socialite"
+             Loaded="UserControlLoaded">
+    <Grid>
+        <Socialite:DragScrollViewer Margin="0,120,0,0"
+                                    DragEverywhere="True"
+                                    HorizontalScrollBarVisibility="Hidden"
+                                    VerticalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Horizontal">
+                <DockPanel Margin="150,0,0,20">
+                    <TextBlock MaxWidth="380"
+                               Margin="0,0,0,0"
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               DockPanel.Dock="Top"
+                               FontSize="26"
+                               FontWeight="Light"
+                               Text="what's new?"
+                               TextWrapping="Wrap" />
+                    <WrapPanel Name="FeedPanel"
+                               Margin="0,20,0,20"
+                               HorizontalAlignment="Left"
+                               Orientation="Vertical" />
+                </DockPanel>
+            </StackPanel>
+        </Socialite:DragScrollViewer>
+        <Image Name="BackButton"
+               Width="48"
+               Margin="20"
+               HorizontalAlignment="Left"
+               VerticalAlignment="Top"
+               MouseLeftButtonUp="BackButtonMouseLeftButtonUp"
+               Source="/Socialite;component/Resources/back_icon_hub.png" />
+        <TextBlock Margin="150,0,0,0"
+                   HorizontalAlignment="Left"
+                   VerticalAlignment="Top"
+                   FontSize="76"
+                   Text="Socialite" />
+    </Grid>
+    <UserControl.Background>
+        <ImageBrush ImageSource="/Socialite;component/Resources/bg.png"
+                    Stretch="None"
+                    TileMode="Tile"
+                    Viewport="0,0,1919.26784216013,1079.15060015153"
+                    ViewportUnits="Absolute" />
+    </UserControl.Background>
+</UserControl>

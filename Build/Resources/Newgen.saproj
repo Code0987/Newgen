@@ -1,0 +1,1026 @@
+<SmartAssemblyProject ProjectId="{23dde533-207c-4885-baa6-ebe12ca30144}" Version="2.0">
+    <MainAssemblyFileName>..\..\Newgen\Newgen\obj\Build\Newgen.exe</MainAssemblyFileName>
+    <FriendlyName>Newgen</FriendlyName>
+    <CompanyName>Ftware</CompanyName>
+    <Configuration Name="Release">
+        <ApplicationName>Newgen</ApplicationName>
+        <Destination DestinationFileName="..\Cache\Newgen.exe" />
+        <Assemblies>
+            <Assembly AssemblyName="Newgen.Base, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding Embed="0" />
+            </Assembly>
+            <Assembly AssemblyName="iFr.Helper, Culture=neutral, PublicKeyToken=c5fd6d7f36d8f34b">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="Social.Base, Culture=neutral, PublicKeyToken=null">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="FacebookApi, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de" HintPath="..\Cache\Lib\FacebookApi.dll">
+                <Merging Merge="0">
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="0" Embed="0" Encrypt="0" />
+            </Assembly>
+            <Assembly AssemblyName="Ionic.Zip, Culture=neutral, PublicKeyToken=edbe51ad942a3f5c" HintPath="..\..\Cache\Lib\Ionic.Zip.dll">
+                <Merging Merge="0">
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="0" Embed="0" Encrypt="0" />
+            </Assembly>
+            <Assembly AssemblyName="Newgen, Culture=neutral, PublicKeyToken=null">
+                <Merging>
+                    <ResourcesCompression Compress="1" />
+                    <MemberRefsProxy />
+                    <Pruning Prune="0">
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation Obfuscate="1">
+                        <Exclusion>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Properties</Namespace>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>AddressBarWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>LeftClock</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>LockScreen</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>MainWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>SearchHub</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>Settings</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>ShareHub</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>SwitchAppPreview</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>SwitchBar</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>ThumbnailsBar</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>TilesToolbarWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>ToolbarWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Core.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>CommentItem</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Core.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>NewgenFriendWidgetControl</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Core.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>WallItem</OwnerType>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>ImageView</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>SearchItem</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>DragScrollViewer</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>Thumbnail</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>TilesToolbarItem</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>ToolbarItem</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>WidgetControl</OwnerType>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>SearchTextBox</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <ReturnType>System.Void</ReturnType>
+                                <OwnerType>ShareItem</OwnerType>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>Settings</Name>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen</Namespace>
+                            </Token>
+                        </Exclusion>
+                    </Obfuscation>
+                    <ControlFlow Obfuscate="1" ObfuscationLevel="3" />
+                    <ResourcesPruning />
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.AssemblyResolver, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.Zip, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="{smartassembly}.MemoryManagement, Culture=neutral, PublicKeyToken=null">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="{smartassembly}.ResourceResolver, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.StringsEncoding, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="Newgen.Base, Culture=neutral, PublicKeyToken=02a52059e3d4e3f8">
+                <Merging Merge="0">
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="0" Embed="0" Encrypt="0" />
+            </Assembly>
+            <Assembly AssemblyName="Social.Base, Culture=neutral, PublicKeyToken=02a52059e3d4e3f8">
+                <Merging Merge="0">
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                </Merging>
+                <Embedding Compress="0" Embed="0" Encrypt="0" />
+            </Assembly>
+            <Assembly AssemblyName="Newgen, Culture=neutral, PublicKeyToken=02a52059e3d4e3f8">
+                <Merging>
+                    <ResourcesCompression Compress="1" />
+                    <MemberRefsProxy Proxy="0" />
+                    <Pruning Prune="0">
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation Obfuscate="1">
+                        <Exclusion>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>XamlGeneratedNamespace</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Properties</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Controls</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Core</Namespace>
+                                <Name>NewgenAppWidget</Name>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Core</Namespace>
+                                <Name>NewgenHtmlWidget</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Core</Namespace>
+                                <Name>NewgenWebPreviewWidget</Name>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Core</Namespace>
+                                <Name>SocialProvider</Name>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Windows</Namespace>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace />
+                                <Name>&lt;PrivateImplementationDetails&gt;{F1DF9D9F-CD12-48A6-B511-FB278092D18E}</Name>
+                            </Token>
+                        </Exclusion>
+                    </Obfuscation>
+                    <ControlFlow Obfuscate="1" ObfuscationLevel="3" />
+                    <ResourcesPruning />
+                </Merging>
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="iLicense.Client, Culture=neutral, PublicKeyToken=0add5992c0fd2ce2" HintPath="..\..\Cache\Lib\iLicense.Client.dll">
+                <Merging Merge="0">
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                    <MemberRefsProxy />
+                    <ResourcesCompression />
+                </Merging>
+                <Embedding Compress="0" Embed="0" Encrypt="0" />
+            </Assembly>
+            <Assembly AssemblyName="WebKitBrowser, Culture=neutral, PublicKeyToken=b967213f6d29a3be" HintPath="..\Cache\Lib\Webkit\WebKitBrowser.dll">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="WebKit.Interop, Culture=neutral, PublicKeyToken=b967213f6d29a3be" HintPath="..\Cache\Lib\Webkit\WebKit.Interop.dll">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="PresentationFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="mscorlib, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Configuration, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Xml, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.SqlXml, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Security, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="PresentationCore, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.VisualC, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="WindowsBase, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Xaml, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Accessibility, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Drawing, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Xml.Linq, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Core, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Numerics, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Runtime.Serialization, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="SMDiagnostics, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Runtime.DurableInstancing, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Transactions, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.EnterpriseServices, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.DirectoryServices, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Runtime.Remoting, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Web, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.Build.Framework, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Runtime.Caching, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Web.ApplicationServices, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Web.Services, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Design, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Windows.Forms, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Runtime.Serialization.Formatters.Soap, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Deployment, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Drawing.Design, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.OracleClient, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Web.RegularExpressions, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.Build.Utilities.v4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.DirectoryServices.Protocols, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.Build.Tasks.v4.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceProcess, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Configuration.Install, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="UIAutomationProvider, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="UIAutomationTypes, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Windows.Input.Manipulations, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="PresentationUI, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="ReachFramework, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Printing, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.CSharp, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Dynamic, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="stdole, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.WindowsAPICodePack.Shell, Culture=neutral, PublicKeyToken=31bf3856ad364e35" HintPath="..\..\Cache\Lib\Microsoft.WindowsAPICodePack.Shell.dll">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.WindowsAPICodePack, Culture=neutral, PublicKeyToken=31bf3856ad364e35" HintPath="..\..\Cache\Lib\Microsoft.WindowsAPICodePack.dll">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="PresentationCFFRasterizer, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="WindowsFormsIntegration, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceModel, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.IdentityModel, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Messaging, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.IdentityModel.Selectors, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.Transactions.Bridge, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceModel.Activation, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceModel.Activities, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Activities, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.VisualBasic.Activities.Compiler, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.VisualBasic, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Management, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="Microsoft.JScript, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Activities.DurableInstancing, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Xaml.Hosting, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceModel.Web, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Web.Extensions, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.Linq, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.Services.Client, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.Services.Design, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Data.Entity, Culture=neutral, PublicKeyToken=b77a5c561934e089">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="PoweredBySmartAssembly, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.ResourceResolver, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.MemoryManagement, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.HouseOfCards, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartTroubleshooting, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartExceptionsCore, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="SmartAssembly.Shared, Culture=neutral, PublicKeyToken=7f465a1c156d4d57">
+                <Merging>
+                    <Obfuscation>
+                        <Exclusion />
+                    </Obfuscation>
+                </Merging>
+            </Assembly>
+            <Assembly AssemblyName="Newgen.Base, Culture=neutral, PublicKeyToken=08a47fbfd2ce9c96" HintPath="..\Cache\Newgen.Base.dll">
+                <Merging />
+                <Embedding Embed="0" />
+            </Assembly>
+            <Assembly AssemblyName="Newgen, Culture=neutral, PublicKeyToken=08a47fbfd2ce9c96">
+                <Merging>
+                    <ResourcesCompression Compress="0" />
+                    <MemberRefsProxy />
+                    <Pruning Prune="0">
+                        <Exclusion />
+                    </Pruning>
+                    <Obfuscation Obfuscate="1">
+                        <Exclusion>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Properties</Namespace>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>AddressBarWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>LeftClock</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>LockScreen</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>MainWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>SearchHub</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>Settings</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>ShareHub</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>SwitchAppPreview</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>SwitchBar</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>ThumbnailsBar</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>TilesToolbarWindow</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Windows</OwnerNamespace>
+                                <OwnerType>ToolbarWindow</OwnerType>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                                <Name>ImageView</Name>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                                <Name>SearchItem</Name>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                                <Name>DragScrollViewer</Name>
+                            </Token>
+                            <Token Table="TypeDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                                <Name>Thumbnail</Name>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>TilesToolbarItem</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>ToolbarItem</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>WidgetControl</OwnerType>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen.Controls</Namespace>
+                                <Name>SearchTextBox</Name>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>System.Windows.Markup.IComponentConnector.Connect</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>System.Int32,System.Object</Parameters>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>ShareItem</OwnerType>
+                            </Token>
+                            <Token Table="WholeType">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <ItemType>Class</ItemType>
+                                <Namespace>Newgen</Namespace>
+                                <Name>Settings</Name>
+                            </Token>
+                            <Token Table="FieldDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>CS$&lt;&gt;9__CachedAnonymousMethodDelegate3</Name>
+                                <FieldType>class [WindowsBase]System.Windows.PropertyChangedCallback</FieldType>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="FieldDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>CS$&lt;&gt;9__CachedAnonymousMethodDelegate4</Name>
+                                <FieldType>class [WindowsBase]System.Windows.PropertyChangedCallback</FieldType>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="FieldDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>CS$&lt;&gt;9__CachedAnonymousMethodDelegate5</Name>
+                                <FieldType>class [WindowsBase]System.Windows.PropertyChangedCallback</FieldType>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>&lt;.cctor&gt;b__0</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>class [WindowsBase]System.Windows.DependencyObject,valuetype [WindowsBase]System.Windows.DependencyPropertyChangedEventArgs</Parameters>
+                                <Static>1</Static>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>&lt;.cctor&gt;b__1</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>class [WindowsBase]System.Windows.DependencyObject,valuetype [WindowsBase]System.Windows.DependencyPropertyChangedEventArgs</Parameters>
+                                <Static>1</Static>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>&lt;.cctor&gt;b__2</Name>
+                                <ReturnType>System.Void</ReturnType>
+                                <Parameters>class [WindowsBase]System.Windows.DependencyObject,valuetype [WindowsBase]System.Windows.DependencyPropertyChangedEventArgs</Parameters>
+                                <Static>1</Static>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="MethodDef">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Name>ArrangeOverride</Name>
+                                <ReturnType>valuetype [WindowsBase]System.Windows.Size</ReturnType>
+                                <Parameters>valuetype [WindowsBase]System.Windows.Size</Parameters>
+                                <OwnerNamespace>Newgen.Controls</OwnerNamespace>
+                                <OwnerType>Thumbnail</OwnerType>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Controls.Search</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Controls</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Hubs</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Resources</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>Newgen.Windows</Namespace>
+                            </Token>
+                            <Token Table="Namespace">
+                                <Assembly>Newgen</Assembly>
+                                <Module>Newgen.exe</Module>
+                                <Namespace>XamlGeneratedNamespace</Namespace>
+                            </Token>
+                        </Exclusion>
+                    </Obfuscation>
+                    <ControlFlow Obfuscate="1" ObfuscationLevel="2" />
+                    <ResourcesPruning />
+                </Merging>
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="System.ComponentModel.DataAnnotations, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.ServiceModel.Internals, Culture=neutral, PublicKeyToken=31bf3856ad364e35">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="System.Net.Http, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+                <Merging />
+            </Assembly>
+            <Assembly AssemblyName="WebKitCore, Culture=neutral, PublicKeyToken=b967213f6d29a3be" HintPath="..\Cache\Lib\Webkit\WebKitCore.dll">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="JSCore, Culture=neutral, PublicKeyToken=b967213f6d29a3be" HintPath="..\Cache\Lib\Webkit\JSCore.dll">
+                <Merging />
+                <Embedding />
+            </Assembly>
+            <Assembly AssemblyName="NS.Web.Licensing.Client, Culture=neutral, PublicKeyToken=0add5992c0fd2ce2">
+                <Merging />
+                <Embedding />
+            </Assembly>
+        </Assemblies>
+        <Options>
+            <Obfuscation FieldsNameMangling="1" NameMangling="1" />
+            <ExceptionReporting ReportExceptions="0" Template="res:{SmartExceptions}.1033.dll" UseCustomTemplate="0" />
+            <FeatureUsageReporting ReportUsages="0" Template="res:SmartUsageWithUIConsentFirstRun1033.dll" />
+            <StrongNameSigning KeyFileName=".\Newgen.snk" Password="" Sign="1" TamperProtect="1" />
+            <OtherProtections SuppressIldasm="1" />
+            <StringsEncoding Compress="0" Encode="1" UseCache="0" />
+            <OtherOptimizations ManageMemory="1" SealClasses="0" />
+            <Debugging CreatePDB="0" ObfuscateDocumentsURL="0" />
+        </Options>
+    </Configuration>
+</SmartAssemblyProject>

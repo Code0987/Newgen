@@ -1,0 +1,611 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Newgen.Base</name>
+    </assembly>
+    <members>
+        <member name="T:Newgen.Base.E">
+            <summary>
+            Newgen's runtime shared data
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.MSG_NE">
+            <summary>
+            Message for network related problems
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.MSG_QA_INSTALLWIDGET">
+            <summary>
+            Message for asking user confirmation
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.MSG_ER_FEATURE">
+            <summary>
+            Message for error on any feature
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.MSG_ER_SRVER">
+            <summary>
+            Internal.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.TilesSizeFactor">
+            <summary>
+            Tiles size / scale factor
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.MinTilesSize">
+            <summary>
+            Minimum size of any tile
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.E.ImageFilter">
+            <summary>
+            Image formats supported by Newgen
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.E.#cctor">
+            <summary>
+            Initializes the <see cref="T:Newgen.Base.E"/> class.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.E.Init">
+            <summary>
+            Init.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.E.CallEvent(System.String)">
+            <summary>
+            Calls the event.
+            </summary>
+            <param name="name">The name.</param>
+        </member>
+        <member name="M:Newgen.Base.E.CreateSettingsPathForWidget(System.String)">
+            <summary>
+            Creates the settings path for widget.
+            </summary>
+            <param name="widgetname">The widgetname.</param>
+            <returns>The String.</returns>
+            <remarks>...</remarks>
+        </member>
+        <member name="M:Newgen.Base.E.AddorUpdateData(System.String,System.Object)">
+            <summary>
+            Add or the update data.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="value">The value.</param>
+        </member>
+        <member name="M:Newgen.Base.E.RemoveData(System.String)">
+            <summary>
+            Removes the data.
+            </summary>
+            <param name="key">The key.</param>
+        </member>
+        <member name="M:Newgen.Base.E.GetSharedLocalData(System.String)">
+            <summary>
+            Gets the shared local data.
+            </summary>
+            <param name="fn">The fn.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.E.SetSharedLocalData(System.String,System.String)">
+            <summary>
+            Gets the shared local data.
+            </summary>
+            <param name="fn">The fn.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.E.ClearSharedLocalData(System.String)">
+            <summary>
+            Clears the shared local data.
+            </summary>
+            <param name="widgetname">The widgetname.</param>
+            <param name="data">The data.</param>
+        </member>
+        <member name="M:Newgen.Base.E.GetBitmap(System.String)">
+            <summary>
+            Gets the bitmap.
+            </summary>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.E.Play(System.Uri)">
+            <summary>
+            Plays the specified media source.
+            </summary>
+            <param name="source">The source.</param>
+        </member>
+        <member name="P:Newgen.Base.E.Root">
+            <summary>
+            Gets the root.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.WidgetsRoot">
+            <summary>
+            Gets the widgets root.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.LogsRoot">
+            <summary>
+            Gets the logs root.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.ErrorLog">
+            <summary>
+            Gets the error log.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.CacheRoot">
+            <summary>
+            Gets the cache root.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.Config">
+            <summary>
+            Gets the config.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.BgImage">
+            <summary>
+            Gets the bg image.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.ExternData">
+            <summary>
+            Gets the extern data.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.UserImage">
+            <summary>
+            Gets the user image.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.RowsCount">
+            <summary>
+            Gets or sets the rows count.
+            </summary>
+            <value>
+            The rows count.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.ColumnsCount">
+            <summary>
+            Gets or sets the columns count.
+            </summary>
+            <value>
+            The columns count.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.Margin">
+            <summary>
+            Gets or sets the margin.
+            </summary>
+            <value>
+            The margin.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.Language">
+            <summary>
+            Gets or sets the language.
+            </summary>
+            <value>
+            The language.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.BackgroundColor">
+            <summary>
+            Gets or sets the color of the background.
+            </summary>
+            <value>
+            The color of the background.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.AnimationTimePrecision">
+            <summary>
+            Gets or sets the animation time precision.
+            </summary>
+            <value>
+            The animation time precision.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.TileSpacing">
+            <summary>
+            Gets or sets the tile spacing.
+            </summary>
+            <value>
+            The tile spacing.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.E.MinTileHeight">
+            <summary>
+            Gets or sets the min height of the tile.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.MinTileWidth">
+            <summary>
+            Gets or sets the min width of the tile.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.E.Objects">
+            <summary>
+            Gets or sets the objects.
+            </summary>
+            <value>
+            The objects.
+            </value>
+        </member>
+        <member name="E:Newgen.Base.E.HubOpening">
+            <summary>
+            Occurs when [hub opening].
+            </summary>
+        </member>
+        <member name="E:Newgen.Base.E.HubClosing">
+            <summary>
+            Occurs when [hub closing].
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.Helper">
+            <summary>
+            Helper
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.Helper.RunFor(System.Action,System.Int32,System.Double)">
+            <summary>
+            Runs specified <see cref="T:System.Action"/> for given count with timeframe as tick time (duration/delay) for each count. Use -1 for infinite. Although you can control timer manually.
+            </summary>
+            <param name="work">The work.</param>
+            <param name="count">The count.</param>
+            <param name="timeframe">The timeframe.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.Helper.Delay(System.Action,System.Double)">
+            <summary>
+            Delays the specified work.
+            </summary>
+            <param name="work">The work.</param>
+            <param name="time">The time.</param>
+        </member>
+        <member name="T:Newgen.Base.AnimationType">
+            <summary>
+            Animation type
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.AnimationType.Internal">
+            <summary>
+            Animation is controlled internally, i.e. default animation.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.AnimationType.Custom">
+            <summary>
+            Animation not controlled internally, i.e. you'll have to implement your logic for animation.
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.HubWindow">
+            <summary>
+            Hub Window. This enables to use Hub feature of Newgen.
+            It's basically a full-screen window for presenting custom data.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.HubWindow.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Newgen.Base.HubWindow"/> class.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.HubWindow.InitializeComponent">
+            <summary>
+            Initializes the component.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.HubWindow.Animation">
+            <summary>
+            Gets or sets the animation type used by this window.
+            </summary>
+            <value>
+            The animation.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.HubWindow.IsHubActive">
+            <summary>
+            Gets or sets a value indicating whether this instance is active.
+            </summary>
+            <value>
+            	<c>true</c> if this instance is active; otherwise, <c>false</c>.
+            </value>
+        </member>
+        <member name="T:Newgen.Base.Native">
+            <summary>
+              The native Win32 APIs used by the library.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.Native.WM_COPYDATA">
+            <summary>
+              The WM_COPYDATA constant.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.Native.EnumWindows(Newgen.Base.Native.EnumWindowsProc,System.IntPtr)">
+            <summary>
+              The API used to enumerate topvlevel windows.
+            </summary>
+            <param name = "lpEnumFunc">The delegate called when a window is located.</param>
+            <param name = "lParam">The lParam passed to the deleage.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.Native.GetProp(System.IntPtr,System.String)">
+            <summary>
+              Gets a named window property for a given window address.
+              This returns zero if not found.
+            </summary>
+            <param name = "hwnd">The window containing the property.</param>
+            <param name = "lpString">The property name to lookup.</param>
+            <returns>The property data, or 0 if not found.</returns>
+        </member>
+        <member name="M:Newgen.Base.Native.RemoveProp(System.IntPtr,System.String)">
+            <summary>
+              Removes a named property from a given window.
+            </summary>
+            <param name = "hwnd">The window whose property should be removed.</param>
+            <param name = "lpString">The property name.</param>
+            <returns>A value indicating whether the function succeeded.</returns>
+        </member>
+        <member name="M:Newgen.Base.Native.SendMessageTimeout(System.IntPtr,System.UInt32,System.IntPtr,Newgen.Base.Native.COPYDATASTRUCT@,Newgen.Base.Native.SendMessageTimeoutFlags,System.UInt32,System.IntPtr@)">
+            <summary>
+              Sends a native windows message to a specified window.
+            </summary>
+            <param name = "hwnd">The window to which the message should be sent.</param>
+            <param name = "wMsg">The native windows message type.</param>
+            <param name = "wParam">A pointer to the wPAram data.</param>
+            <param name = "lParam">The struct containing lParam data</param>
+            <param name = "flags">The timeout flags.</param>
+            <param name = "timeout">The timeout value in miliseconds.</param>
+            <param name = "result">The result.</param>
+            <returns></returns>
+        </member>
+        <member name="M:Newgen.Base.Native.SetProp(System.IntPtr,System.String,System.Int32)">
+            <summary>
+              Sets a window proerty value.
+            </summary>
+            <param name = "hwnd">The window on which to attach the property.</param>
+            <param name = "lpString">The property name.</param>
+            <param name = "hData">The property value.</param>
+            <returns>A value indicating whether the function succeeded.</returns>
+        </member>
+        <member name="T:Newgen.Base.Native.EnumWindowsProc">
+            <summary>
+              A delegate used by the EnumChildWindows windows API to enumerate windows.
+            </summary>
+            <param name = "hwnd">A pointer to a window that was found.</param>
+            <param name = "lParam">The lParam passed by the EnumChildWindows API.</param>
+            <returns></returns>
+        </member>
+        <member name="T:Newgen.Base.Native.SendMessageTimeoutFlags">
+            <summary>
+              Specifies how to send the message. This parameter can be one or
+              more of the following values.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.Native.SendMessageTimeoutFlags.SMTO_NORMAL">
+            <summary>
+              The calling thread is not prevented from processing other
+              requests while waiting for the function to return.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.Native.SendMessageTimeoutFlags.SMTO_BLOCK">
+            <summary>
+              Prevents the calling thread from processing any other
+              requests until the function returns.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.Native.SendMessageTimeoutFlags.SMTO_ABORTIFHUNG">
+            <summary>
+              Returns without waiting for the time-out period to elapse
+              if the receiving thread appears to not respond or "hangs."
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.Native.SendMessageTimeoutFlags.SMTO_NOTIMEOUTIFNOTHUNG">
+            <summary>
+              Microsoft Windows 2000/Windows XP: Do not enforce the time-out
+              period as long as the receiving thread is processing messages.
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.Native.COPYDATASTRUCT">
+            <summary>
+              The struct used to marshal data between applications using
+              the windows messaging API.
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.MessagingHelper">
+            <summary>
+            Provides methods to send string formatted messages to Newgen and widgets.
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.MessagingHelper.NewgenKey">
+            <summary>
+            Message key for Newgen
+            </summary>
+        </member>
+        <member name="F:Newgen.Base.MessagingHelper.NewgenWidgetKey">
+            <summary>
+            Message key for Newgen widget
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.MessagingHelper.SendMessageToNewgen(System.String,System.String)">
+            <summary>
+            Sends the message to newgen.
+            </summary>
+            <param name="key">The key.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Newgen.Base.MessagingHelper.SendMessageToWidget(System.String,System.String)">
+            <summary>
+            Sends the message to widget.
+            </summary>
+            <param name="name">The name.</param>
+            <param name="message">The message.</param>
+        </member>
+        <member name="M:Newgen.Base.MessagingHelper.AddListener(System.IntPtr)">
+            <summary>
+            Adds the listener.
+            </summary>
+            <param name="hWnd">The h WND.</param>
+        </member>
+        <member name="M:Newgen.Base.MessagingHelper.RemoveListener(System.IntPtr)">
+            <summary>
+            Removes the listener.
+            </summary>
+            <param name="hWnd">The h WND.</param>
+        </member>
+        <member name="E:Newgen.Base.MessagingHelper.MessageReceived">
+            <summary>
+            Occurs when [message received].
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.MessagingHelper.MessageHandler">
+            <summary>
+            Message handler
+            </summary>
+            <param name="e">The <see cref="T:Newgen.Base.MessageEventArgs"/> instance containing the event data.</param>
+        </member>
+        <member name="T:Newgen.Base.NewgenWidget">
+            <summary>
+            Abstract for Newgen widget definition
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.Load">
+            <summary>
+            Loads this instance.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.Unload">
+            <summary>
+            Unloads this instance.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.Load(System.String)">
+            <summary>
+            Loads from the specified path.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.Load(System.String,System.String,System.Int32)">
+            <summary>
+            Load.
+            </summary>
+            <param name="id">The id.</param>
+            <param name="name">The name.</param>
+            <param name="seed">The seed.</param>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.Refresh">
+            <summary>
+            Refreshes this instance.
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.NewgenWidget.HandleMessage(System.String)">
+            <summary>
+            Handles the message.
+            </summary>
+            <param name="message">The message.</param>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.Name">
+            <summary>
+            Gets the name.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.WidgetControl">
+            <summary>
+            Gets the widget control.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.IconPath">
+            <summary>
+            Gets the icon path.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.ColumnSpan">
+            <summary>
+            Gets the column span.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.X">
+            <summary>
+            Gets the X.
+            </summary>
+        </member>
+        <member name="P:Newgen.Base.NewgenWidget.Y">
+            <summary>
+            Gets the Y.
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.WidgetInfo">
+            <summary>
+            Widget redistribution definition
+            </summary>
+        </member>
+        <member name="T:Newgen.Base.XmlSerializable">
+            <summary>
+            Abstract for Xml serialized objects
+            </summary>
+        </member>
+        <member name="M:Newgen.Base.XmlSerializable.Save(System.String)">
+            <summary>
+            Saves to the specified path.
+            </summary>
+            <param name="path">The path.</param>
+        </member>
+        <member name="M:Newgen.Base.XmlSerializable.Load(System.Type,System.String)">
+            <summary>
+            Loads the specified t.
+            </summary>
+            <param name="t">The t.</param>
+            <param name="path">The path.</param>
+            <returns></returns>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.ID">
+            <summary>
+            Gets or sets the ID.
+            </summary>
+            <value>
+            The ID.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.Name">
+            <summary>
+            Gets or sets the name.
+            </summary>
+            <value>
+            The name.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.Version">
+            <summary>
+            Gets or sets the version.
+            </summary>
+            <value>
+            The version.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.Description">
+            <summary>
+            Gets or sets the description.
+            </summary>
+            <value>
+            The description.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.Author">
+            <summary>
+            Gets or sets the author.
+            </summary>
+            <value>
+            The author.
+            </value>
+        </member>
+        <member name="P:Newgen.Base.WidgetInfo.AuthorWeb">
+            <summary>
+            Gets or sets the author web.
+            </summary>
+            <value>
+            The author web.
+            </value>
+        </member>
+    </members>
+</doc>

@@ -1,0 +1,27 @@
+﻿<html>
+<head>
+    <script type="text/javascript">
+        setTimeout(update, 1);
+
+        function update()
+        {
+            var date = new Date();
+
+            document.getElementById("time").innerHTML =
+            "<span style='color:rgb(" + (date.getSeconds()) + "," + (195 + date.getSeconds()) + "," + (255 - date.getSeconds()) + ");'>" +
+            date.toLocaleTimeString() +
+            "</span>";
+
+            setTimeout(update, 1000);
+        }
+    </script>
+</head>
+<body style="background-color: rgb(0,120,200); font: normal small-caps 16px/25px 'Segoe UI Light'; text-shadow: 2px 1px 5px rgb(0,0,0);">
+    <p style="font-size: 32px !important; vertical-align: middle; margin: 35px 0 0 10px;">
+        My Html Widget
+        <img src="./Assets/Beaker.png" style="width: 50px; height: 50px; margin: -35px 0 0 -10px;" align="middle" />
+    </p>
+    <p id="time" style="font-size: 16px !important; font-weight: bold; float: right; text-shadow: 2px 1px 5px rgb(0,0,0);">
+    </p>
+</body>
+</html>

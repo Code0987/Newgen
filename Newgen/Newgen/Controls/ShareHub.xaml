@@ -1,0 +1,53 @@
+﻿<Newgen:HubWindow x:Class="Newgen.Windows.ShareHub" 
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:Controls="clr-namespace:Newgen.Controls"
+                  xmlns:Newgen="Newgen.Base"
+                  xmlns:r="clr-namespace:Newgen.Resources"
+                  Closing="Window_Closing"
+                  SourceInitialized="Window_SourceInitialized"
+                  Topmost="False">
+    <Window.Background>
+        <RadialGradientBrush>
+            <GradientStop Offset="0" Color="White" />
+            <GradientStop Offset="1" Color="#FFF2F2F2" />
+        </RadialGradientBrush>
+    </Window.Background>
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Newgen.Base;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Button Name="BackButton" 
+               Click="BackButton_Click"
+                Style="{StaticResource MetroBackButton}" />
+        <TextBlock Margin="150,0,0,0" 
+                   VerticalAlignment="Top"
+                   FontSize="76"
+                   Text="Settings" />
+        <Controls:DragScrollViewer Margin="0,150,0,0" 
+                                   DragEverywhere="True"
+                                   HorizontalScrollBarVisibility="Hidden"
+                                   VerticalScrollBarVisibility="Disabled">
+            <StackPanel Orientation="Horizontal">
+                <DockPanel>
+                    <TextBlock Margin="150,0,0,0" 
+                               HorizontalAlignment="Left"
+                               VerticalAlignment="Top"
+                               DockPanel.Dock="Top"
+                               FontSize="26"
+                               FontWeight="Light"
+                               Text="{x:Static r:Resources.ShareHubTip}"
+                               TextWrapping="Wrap" />
+                    <WrapPanel Name="SharePanel" 
+                               Margin="145,20,0,20"
+                               HorizontalAlignment="Left"
+                               Orientation="Vertical" />
+                </DockPanel>
+            </StackPanel>
+        </Controls:DragScrollViewer>
+    </Grid>
+</Newgen:HubWindow>

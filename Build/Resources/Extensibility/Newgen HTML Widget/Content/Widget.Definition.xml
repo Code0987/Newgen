@@ -1,0 +1,23 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<NewgenHTMLWidget>
+  <!-- Name or Title of this HTML Widget -->
+  <Name>My HTML Widget</Name>
+  
+  <!-- Icon of this HTML Widget NOTE: Use only valid image files -->
+  <Icon>Icon.png</Icon>
+  
+  <!-- Number of Columns occupied by this Widget on TilesScreen -->
+  <CSpan>2</CSpan>
+  
+  <!-- Relative path to the main content view (Tile) NOTE: Use HTML file only -->
+  <Content>Tile.html</Content>
+  
+  <!-- Relative path to the main content view (Tile) image when content cannot be loaded -->
+  <Content.FallbackImage>Content.FallbackImage.png</Content.FallbackImage>
+
+  <!-- Relative path to the hub view (Hub) NOTE: Use HTML file only -->
+  <Hub>Hub.html</Hub>
+
+  <!-- Relative path to the options hub (Settings Hub) NOTE: Use HTML file only -->
+  <Options>Options.html</Options>
+</NewgenHTMLWidget>

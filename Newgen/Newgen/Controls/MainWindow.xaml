@@ -1,0 +1,167 @@
+﻿<Window x:Class="Newgen.Windows.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:Controls="clr-namespace:Newgen.Controls"
+        xmlns:PresentationOptions="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
+        xmlns:r="clr-namespace:Newgen.Resources"
+        AllowsTransparency="True"
+        Background="Transparent"
+        Closing="Window_Closing"
+        Loaded="Window_Loaded"
+        MouseLeftButtonUp="Window_MouseLeftButtonUp"
+        MouseMove="Window_MouseMove"
+        RenderOptions.BitmapScalingMode="Fant"
+        RenderOptions.EdgeMode="Unspecified"
+        ResizeMode="NoResize"
+        ShowInTaskbar="False"
+        SourceInitialized="Window_SourceInitialized"
+        WindowStyle="None">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Newgen.Base;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid x:Name="Root">
+        <Canvas x:Name="AnimationCanvas">
+            <Image Name="AnimationImage2"
+                   Canvas.Left="0"
+                   PresentationOptions:Freeze="True"
+                   Stretch="Fill" />
+            <Image Name="AnimationImage"
+                   Canvas.Left="0"
+                   PresentationOptions:Freeze="True"
+                   Stretch="Fill" />
+        </Canvas>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <Grid x:Name="Header"
+                  Grid.Row="0"
+                  Margin="120,40,46,40"
+                  Opacity="0.0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock x:Name="Header_TitleText"
+                           Grid.Column="0"
+                           HorizontalAlignment="Left"
+                           VerticalAlignment="Top"
+                           FontSize="56"
+                           FontWeight="Light"
+                           Foreground="#C8FFFFFF"
+                           MouseUp="Header_TitleText_MouseUp"
+                           PresentationOptions:Freeze="True"
+                           Text="Start" />
+                <Grid x:Name="UserTile" Grid.Column="1">
+                    <Grid.ContextMenu>
+                        <ContextMenu>
+                            <MenuItem Click="MenuItem_CUT_Click"
+                                      Header="Change User Tile"
+                                      PresentationOptions:Freeze="True" />
+                            <MenuItem Click="MenuItem_Lock_Click"
+                                      Header="Lock"
+                                      PresentationOptions:Freeze="True" />
+                            <MenuItem Click="MenuItem_LogOff_Click"
+                                      Header="Log Off"
+                                      PresentationOptions:Freeze="True" />
+                            <MenuItem Click="MenuItem_Restart_Click"
+                                      Header="Restart"
+                                      PresentationOptions:Freeze="True" />
+                            <MenuItem Click="MenuItem_Shutdown_Click"
+                                      Header="Shutdown"
+                                      PresentationOptions:Freeze="True" />
+                        </ContextMenu>
+                    </Grid.ContextMenu>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="64" />
+                    </Grid.ColumnDefinitions>
+                    <Grid.RenderTransform>
+                        <TranslateTransform x:Name="UserTileTranslate" X="0" />
+                    </Grid.RenderTransform>
+                    <Grid.Resources>
+                        <Storyboard x:Key="LeftAnim" BeginTime="0:0:0.05">
+                            <DoubleAnimation AccelerationRatio="0.7"
+                                             DecelerationRatio="0.3"
+                                             Duration="0:0:0.2"
+                                             Storyboard.TargetName="UserTileTranslate"
+                                             Storyboard.TargetProperty="X"
+                                             To="-1" />
+                        </Storyboard>
+                    </Grid.Resources>
+                    <Grid Grid.Column="0">
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="Auto" />
+                            <RowDefinition Height="*" />
+                        </Grid.RowDefinitions>
+                        <TextBlock Name="Header_UserName"
+                                   Grid.Row="0"
+                                   Margin="0,8,12,0"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Center"
+                                   FontSize="24"
+                                   Foreground="#C8FFFFFF"
+                                   PresentationOptions:Freeze="True"
+                                   Text="Me : User"
+                                   TextWrapping="Wrap" />
+                        <TextBlock Name="Header_Lock"
+                                   Grid.Row="1"
+                                   Margin="0,0,12,8"
+                                   HorizontalAlignment="Right"
+                                   VerticalAlignment="Bottom"
+                                   FontSize="16"
+                                   Foreground="#C8FFFFFF"
+                                   MouseLeftButtonDown="Header_Lock_MouseLeftButtonDown"
+                                   PresentationOptions:Freeze="True"
+                                   Text="Lock"
+                                   TextWrapping="Wrap">
+                            <TextBlock.Style>
+                                <Style TargetType="{x:Type TextBlock}">
+                                    <Setter Property="Cursor" Value="Hand" />
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="TextDecorations" Value="Underline" />
+                                            <Setter Property="Foreground" Value="#3399ff" />
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </TextBlock.Style>
+                        </TextBlock>
+                    </Grid>
+                    <Image Name="Header_UserPic"
+                           Grid.Column="1"
+                           Width="64"
+                           Height="64"
+                           PresentationOptions:Freeze="True"
+                           Source="/Resources/Newgen_logo.png"
+                           Stretch="Fill" />
+                </Grid>
+            </Grid>
+            <Controls:DragScrollViewer x:Name="DragScroll"
+                                       Grid.Row="1"
+                                       DragEverywhere="true"
+                                       HorizontalScrollBarVisibility="Hidden"
+                                       VerticalScrollBarVisibility="Disabled">
+                <Grid x:Name="WidgetsContainer" Margin="118,0,0,0">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="50" />
+                        <RowDefinition />
+                    </Grid.RowDefinitions>
+                    <VirtualizingStackPanel Name="GroupsHost"
+                                            Grid.Row="0"
+                                            Margin="0,0,0,10"
+                                            Orientation="Horizontal" />
+                    <Grid Name="WidgetHost"
+                          Grid.Row="1"
+                          ShowGridLines="False" />
+                    <Canvas Name="DragCanvas" PresentationOptions:Freeze="True" />
+                </Grid>
+            </Controls:DragScrollViewer>
+        </Grid>
+    </Grid>
+</Window>

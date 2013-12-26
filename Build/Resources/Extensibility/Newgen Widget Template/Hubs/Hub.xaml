@@ -1,0 +1,41 @@
+﻿<Newgen:HubWindow x:Class="TemplateWidget.Hubs.Hub"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:app="clr-namespace:TemplateWidget"
+                  xmlns:Newgen="Newgen.Base"
+                  MinWidth="800"
+                  MinHeight="600">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Newgen.Base;component/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Button Name="BackButton"
+                    Click="BackButton_Click"
+                    Style="{StaticResource MetroBackButton}" />
+            <TextBlock Margin="150,0,0,0"
+                       HorizontalAlignment="Left"
+                       VerticalAlignment="Top"
+                       FontSize="76"
+                       FontWeight="Light"
+                       Text="{x:Static app:Resources.HubTitle}" />
+        </Grid>
+        <TabControl Grid.Row="1" Margin="150,0,0,0">
+            <TabItem Header="Tab1">
+                <ScrollViewer HorizontalScrollBarVisibility="Auto" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock VerticalAlignment="Top" Text="{x:Static app:Resources.HelloString}" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </Grid>
+</Newgen:HubWindow>

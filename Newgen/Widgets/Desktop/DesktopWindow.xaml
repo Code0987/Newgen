@@ -1,0 +1,41 @@
+﻿<Newgen:HubWindow x:Class="Desktop.DesktopWindow"
+                  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                  xmlns:Newgen="Newgen.Base"
+                  Title="DesktopWindow"
+                  AllowsTransparency="True"
+                  Background="Transparent"
+                  ResizeMode="NoResize"
+                  SourceInitialized="Window_SourceInitialized"
+                  WindowStyle="None">
+    <Window.Resources>
+        <Storyboard x:Key="Anim" Completed="StoryboardCompleted">
+            <DoubleAnimation AccelerationRatio="0.4"
+                             Duration="0:0:0.4"
+                             Storyboard.TargetName="DesktopImage"
+                             Storyboard.TargetProperty="(Canvas.Left)"
+                             To="0" />
+        </Storyboard>
+        <Storyboard x:Key="FadeOutAnim">
+            <DoubleAnimation Duration="0:0:0.2"
+                             Storyboard.TargetName="this"
+                             Storyboard.TargetProperty="Opacity"
+                             To="0" />
+        </Storyboard>
+    </Window.Resources>
+    <Canvas>
+        <Image Name="DesktopImage"
+               RenderTransformOrigin="0.5,0.5"
+               Stretch="UniformToFill">
+            <Image.RenderTransform>
+                <TransformGroup>
+                    <ScaleTransform x:Name="DesktopImageScale"
+                                    ScaleX="1"
+                                    ScaleY="{Binding ElementName=DesktopImageScale,
+                                                     Path=ScaleX}" />
+                    <TranslateTransform x:Name="DesktopImageTranslate" />
+                </TransformGroup>
+            </Image.RenderTransform>
+        </Image>
+    </Canvas>
+</Newgen:HubWindow>

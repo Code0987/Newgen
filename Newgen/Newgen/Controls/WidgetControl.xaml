@@ -1,0 +1,63 @@
+﻿<UserControl x:Class="Newgen.Controls.WidgetControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             x:Name="this"
+             AllowDrop="True"
+             Background="Transparent"
+             MouseEnter="this_MouseEnter"
+             MouseLeave="UserControlMouseLeave"
+             MouseLeftButtonDown="UserControlMouseLeftButtonDown"
+             MouseLeftButtonUp="UserControlMouseLeftButtonUp"
+             Opacity="0"
+             RenderTransformOrigin="0.5,0.5">
+    <UserControl.Resources>
+        <Storyboard x:Key="LoadAnim"
+                    Completed="StoryboardCompleted"
+                    FillBehavior="Stop">
+            <DoubleAnimation DecelerationRatio="0.7"
+                             Duration="0:0:0.20"
+                             From="0.4"
+                             Storyboard.TargetName="Scale"
+                             Storyboard.TargetProperty="ScaleX"
+                             To="1" />
+            <DoubleAnimation DecelerationRatio="0.7"
+                             Duration="0:0:0.5"
+                             From="100"
+                             Storyboard.TargetName="Translate"
+                             Storyboard.TargetProperty="X"
+                             To="0" />
+            <DoubleAnimation Duration="0:0:0.6"
+                             From="0"
+                             Storyboard.TargetName="this"
+                             Storyboard.TargetProperty="Opacity"
+                             To="1" />
+        </Storyboard>
+        <Storyboard x:Key="MouseDownAnim">
+            <DoubleAnimation AccelerationRatio="0.3"
+                             DecelerationRatio="0.7"
+                             Duration="0:0:0.4"
+                             Storyboard.TargetName="Scale"
+                             Storyboard.TargetProperty="ScaleX"
+                             To="0.95" />
+        </Storyboard>
+        <Storyboard x:Key="MouseUpAnim">
+            <DoubleAnimation AccelerationRatio="0.3"
+                             DecelerationRatio="0.7"
+                             Duration="0:0:0.25"
+                             Storyboard.TargetName="Scale"
+                             Storyboard.TargetProperty="ScaleX"
+                             To="1" />
+        </Storyboard>
+    </UserControl.Resources>
+    <UserControl.RenderTransform>
+        <TransformGroup>
+            <ScaleTransform x:Name="Scale"
+                            ScaleX="1"
+                            ScaleY="{Binding ElementName=Scale,
+                                             Path=ScaleX,
+                                             FallbackValue=1}" />
+            <TranslateTransform x:Name="Translate" />
+        </TransformGroup>
+    </UserControl.RenderTransform>
+    <Grid Name="Root" />
+</UserControl>
