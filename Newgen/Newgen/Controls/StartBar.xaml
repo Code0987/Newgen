@@ -4,103 +4,144 @@
                         xmlns:Controls="clr-namespace:Newgen.Controls"
                         xmlns:r="clr-namespace:Newgen.Resources"
                         Width="80"
-                        Loaded="Window_Loaded"
                         DragEnter="Window_DragEnter"
                         Drop="Window_Drop"
+                        Loaded="Window_Loaded"
                         PreviewKeyDown="Window_PreviewKeyDown"
                         PreviewMouseLeftButtonUp="Window_PreviewMouseLeftButtonUp">
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Click="MenuItem_Tiles_Click"
-                      Header="{x:Static r:Resources.TilesItem}">
+            <MenuItem Click="MenuItem_Tiles_Click" Header="{x:Static r:Resources.TilesItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/tiles_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource ViewTilesGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Click="MenuItem_PinApp_Click"
-                      Header="{x:Static r:Resources.PinAppItem}">
+            <MenuItem Click="MenuItem_PinApp_Click" Header="{x:Static r:Resources.PinAppItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/pin_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource BoardPinGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Click="MenuItem_PinDir_Click"
-                      Header="{x:Static r:Resources.PinDirItem}">
+            <MenuItem Click="MenuItem_PinDir_Click" Header="{x:Static r:Resources.PinDirItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/pin_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource BoardPinGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="MenuItem_PinWeb"
                       Click="MenuItem_PinWeb_Click"
                       Header="{x:Static r:Resources.PinWebItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/pinweb_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource FavouriteGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Click="MenuItem_Refresh_Click"
-                      Header="{x:Static r:Resources.RefreshItem}">
+            <MenuItem Click="MenuItem_Refresh_Click" Header="{x:Static r:Resources.RefreshItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/refresh.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource RefreshGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="MenuItem_SS"
                       Click="MenuItem_SS_Click"
                       Header="{x:Static r:Resources.SaveSettingsItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/refresh.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource SaveAsGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="MenuItem_Help"
                       Click="MenuItem_Help_Click"
                       Header="{x:Static r:Resources.Text_Help_NH}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/questionmark_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource HelpGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem Click="MenuItem_Exit_Click"
-                      Header="{x:Static r:Resources.ExitItem}">
+            <MenuItem Click="MenuItem_Exit_Click" Header="{x:Static r:Resources.ExitItem}">
                 <MenuItem.Icon>
-                    <Image Width="16"
-                           Height="16"
-                           Source="/Newgen;component/Resources/exit_icon.png" />
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource CloseGeometry}"
+                          Fill="{StaticResource ControlGlyphBrush}"
+                          Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
     </Window.ContextMenu>
-    <StackPanel Name="Toolbar"
-                VerticalAlignment="Center">
+    <StackPanel Name="Toolbar" VerticalAlignment="Center">
         <Controls:ToolbarItem x:Name="SearchButton"
                               Title="{x:Static r:Resources.SearchItem}"
-                              Icon="/Newgen;component/Resources/search_icon.png"
-                              MouseLeftButtonUp="SearchButtonMouseLeftButtonUp" />
+                              MouseLeftButtonUp="SearchButtonMouseLeftButtonUp">
+            <Controls:ToolbarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="WhiteSmoke" Geometry="{StaticResource SearchGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Controls:ToolbarItem.Icon>
+        </Controls:ToolbarItem>
         <Controls:ToolbarItem x:Name="ShareButton"
                               Title="{x:Static r:Resources.ShareItem}"
-                              Icon="/Newgen;component/Resources/share_icon.png"
-                              MouseLeftButtonUp="ShareButtonMouseLeftButtonUp" />
+                              MouseLeftButtonUp="ShareButtonMouseLeftButtonUp">
+            <Controls:ToolbarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="WhiteSmoke" Geometry="{StaticResource ShareGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Controls:ToolbarItem.Icon>
+        </Controls:ToolbarItem>
         <Controls:ToolbarItem x:Name="StartButton"
                               Title="{x:Static r:Resources.StartItem}"
-                              Icon="/Newgen;component/Resources/start_icon.png"
-                              MouseLeftButtonDown="StartButtonMouseLeftButtonDown" />
+                              MouseLeftButtonDown="StartButtonMouseLeftButtonDown">
+            <Controls:ToolbarItem.Icon>
+                <ImageBrush ImageSource="/Newgen;component/Resources/start_icon.png" />
+            </Controls:ToolbarItem.Icon>
+        </Controls:ToolbarItem>
         <Controls:ToolbarItem x:Name="DevicesButton"
                               Title="{x:Static r:Resources.DevicesItem}"
-                              Icon="/Newgen;component/Resources/devices_icon.png"
-                              MouseLeftButtonDown="DevicesButtonMouseLeftButtonDown" />
+                              MouseLeftButtonDown="DevicesButtonMouseLeftButtonDown">
+            <Controls:ToolbarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="WhiteSmoke" Geometry="{StaticResource DevicesGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Controls:ToolbarItem.Icon>
+        </Controls:ToolbarItem>
         <Controls:ToolbarItem x:Name="SettingsButton"
                               Title="{x:Static r:Resources.OptionsItem}"
-                              Icon="/Newgen;component/Resources/settings_icon.png"
-                              MouseLeftButtonUp="SettingsButtonMouseLeftButtonUp" />
+                              MouseLeftButtonUp="SettingsButtonMouseLeftButtonUp">
+            <Controls:ToolbarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="WhiteSmoke" Geometry="{StaticResource Settings1Geometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </Controls:ToolbarItem.Icon>
+        </Controls:ToolbarItem>
     </StackPanel>
 </Controls:ToolbarWindow>

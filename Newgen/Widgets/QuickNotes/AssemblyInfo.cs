@@ -6,7 +6,7 @@ using System.Windows;
 [assembly: AssemblyTitle("QuickNotes")]
 [assembly: AssemblyCompany("NS")]
 [assembly: AssemblyProduct("QuickNotes")]
-[assembly: AssemblyCopyright("Copyright © 2013 NS")]
+[assembly: AssemblyCopyright("Copyright © 2014 NS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]

@@ -16,7 +16,7 @@ namespace Newgen.Base
         /// <summary>
         /// Message for network related problems
         /// </summary>
-        public const string MSG_NE = "Oops !\n\n Something went wrong ! We can't get information from server. Please report it to NS or try again next time.";
+        public const string MSG_NE = "Oops !\n\nSomething went wrong ! We can't get information from server. Please report it to NS or try again next time.";
 
         /// <summary>
         /// Message for asking user confirmation
@@ -26,7 +26,7 @@ namespace Newgen.Base
         /// <summary>
         /// Message for error on any feature
         /// </summary>
-        public const string MSG_ER_FEATURE = "ERROR !\n\n Cannot use this feature now. General error, try next time.";
+        public const string MSG_ER_FEATURE = "ERROR !\n\nCannot use this feature now. General error, try next time.";
 
         /// <summary>
         /// Internal.
@@ -251,8 +251,8 @@ namespace Newgen.Base
         /// <summary>
         /// Gets the shared local data.
         /// </summary>
-        /// <param name="fn">The fn.</param>
-        /// <returns></returns>
+        /// <param name="widgetname">The widgetname.</param>
+        /// <returns>System.String.</returns>
         public static string GetSharedLocalData(string widgetname)
         {
             if(!File.Exists(E.WidgetsRoot + widgetname + "\\Shared.data"))
@@ -266,8 +266,8 @@ namespace Newgen.Base
         /// <summary>
         /// Gets the shared local data.
         /// </summary>
-        /// <param name="fn">The fn.</param>
-        /// <returns></returns>
+        /// <param name="widgetname">The widgetname.</param>
+        /// <param name="data">The data.</param>
         public static void SetSharedLocalData(string widgetname, string data)
         {
             File.WriteAllText(E.WidgetsRoot + widgetname + "\\Shared.data", data);

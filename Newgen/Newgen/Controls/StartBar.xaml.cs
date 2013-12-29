@@ -27,12 +27,6 @@ namespace Newgen.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            this.StartButton.IconImage.ImageFailed += (a, b) =>
-            {
-                this.StartButton.Icon = new System.Windows.Media.Imaging.BitmapImage(
-                    new Uri("/Newgen;component/Resources/start_icon.png", UriKind.Relative)
-                    );
-            };
         }
 
         private void Window_DragEnter(object sender, DragEventArgs e)

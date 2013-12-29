@@ -1,7 +1,7 @@
 #define MyAppId        "{{c3373d77-29c6-4670-8afb-43f0830bc3cf}"
 #define MyAppName      "Newgen"
-#define MyAppVersion   "12.3.0.2"
-#define MyAppURL       "http://nsapps.net/apps/newgen/"
+#define MyAppVersion   "13.0.0.0"
+#define MyAppURL       "http://NSApps.net/Apps/Newgen"
 #define MyAppSize      50
 
 #define IsPortableMode 0

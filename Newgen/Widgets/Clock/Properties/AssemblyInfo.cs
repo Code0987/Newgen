@@ -9,7 +9,7 @@ using System.Runtime.InteropServices;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Clock")]
-[assembly: AssemblyCopyright("Copyright © 2013 Newgen Team")]
+[assembly: AssemblyCopyright("Copyright © 2014 Newgen Team")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

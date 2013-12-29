@@ -28,7 +28,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
-    <NoWarn>108</NoWarn>
+    <NoWarn>108;0219;1762</NoWarn>
     <CodeAnalysisRuleSet>MinimumRecommendedRules.ruleset</CodeAnalysisRuleSet>
   </PropertyGroup>
   <PropertyGroup>
@@ -96,6 +96,7 @@
       <EmbedInteropTypes>True</EmbedInteropTypes>
       <HintPath>C:\Program Files (x86)\Microsoft.NET\Primary Interop Assemblies\Microsoft.mshtml.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.QualityTools.Testing.Fakes, Version=11.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=MSIL" />
     <Reference Include="Microsoft.WindowsAPICodePack">
       <HintPath>D:\Data\Apps\Ref\Lib1\Microsoft.WindowsAPICodePack.dll</HintPath>
       <Private>False</Private>
@@ -143,11 +144,11 @@
       <Private>False</Private>
     </Reference>
     <Reference Include="WebKitBrowser">
-      <HintPath>D:\Data\Apps\Ref\WebKit\WebKitBrowser.dll</HintPath>
+      <HintPath>..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WebKitCore">
-      <HintPath>..\..\..\..\..\Data\Apps\Ref\WebKit\WebKitCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />
@@ -253,6 +254,7 @@
     <Reference Include="WmpWrapper">
       <HintPath>D:\Data\Apps\Ref\Lib1\WmpWrapper.dll</HintPath>
       <Private>False</Private>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -265,7 +267,6 @@
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Resource Include="Resources\devices_icon.png" />
     <Resource Include="Resources\Help\Slide1.PNG" />
     <Resource Include="Resources\Help\Slide10.PNG" />
     <Resource Include="Resources\Help\Slide11.PNG" />
@@ -397,28 +398,14 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Resource Include="Resources\default_icon.png" />
-    <Resource Include="Resources\exit_icon.png" />
-    <Resource Include="Resources\settings_icon.png" />
-    <Resource Include="Resources\tiles_icon.png" />
-    <Resource Include="Resources\back_icon.png" />
-    <Resource Include="Resources\pin_icon.png" />
-    <Resource Include="Resources\questionmark_icon.png" />
-    <Resource Include="Resources\sync_icon.png" />
-    <Resource Include="Resources\share_icon.png" />
-    <Resource Include="Resources\pinweb_icon.png" />
-    <Resource Include="Resources\save_icon.png" />
     <Resource Include="Resources\start_icon.png" />
     <Resource Include="Resources\comments_icon.png" />
-    <Resource Include="Resources\remove_icon.png" />
-    <Resource Include="Resources\back_icon_hub.png" />
     <Resource Include="Resources\people_icon.png" />
     <None Include="app.config" />
     <None Include="app.manifest" />
     <None Include="Cache\BgImage.data">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Resource Include="Resources\search_icon.png" />
-    <Resource Include="Resources\refresh.png" />
     <Resource Include="app.ico" />
     <Resource Include="Resources\Icons\batt1.png" />
     <Resource Include="Resources\Icons\batt10.png" />
@@ -430,9 +417,7 @@
     <Resource Include="Resources\Icons\batt7.png" />
     <Resource Include="Resources\Icons\batt8.png" />
     <Resource Include="Resources\Icons\batt9.png" />
-    <Resource Include="Resources\clear.png" />
     <Resource Include="Resources\search.png" />
-    <Resource Include="Resources\connect_icon.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Help\Slide21.PNG" />
@@ -455,9 +440,9 @@
   </PropertyGroup>
   <PropertyGroup>
     <PreBuildEvent>
-            xcopy "D:\Data\Apps\Ref\Webkit" "..\..\Build\Cache\Lib\Webkit" /s /i /c /f /r /y
+            xcopy "D:\Data\Apps\Ref\Webkit.Net\bin\Release" "..\..\Build\Cache\Lib\Webkit" /s /i /c /f /r /y
             xcopy "D:\Data\Apps\Ref\Lib1" "..\..\Build\Cache\Lib\" /s /i /c /f /r /y
-        </PreBuildEvent>
+</PreBuildEvent>
   </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.

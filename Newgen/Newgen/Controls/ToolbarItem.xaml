@@ -2,8 +2,8 @@
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              Margin="5,10,5,0"
-             MouseLeave="UserControlMouseLeave"
              MouseEnter="UserControl_MouseEnter"
+             MouseLeave="UserControlMouseLeave"
              MouseLeftButtonDown="UserControlMouseLeftButtonDown"
              MouseLeftButtonUp="UserControlMouseLeftButtonUp"
              RenderTransformOrigin="0.5,0.5">
@@ -19,9 +19,10 @@
                    Foreground="White"
                    TextAlignment="Center"
                    TextWrapping="Wrap" />
-        <Image Name="IconImage"
-               Width="40"
-               HorizontalAlignment="Center"
-               RenderOptions.BitmapScalingMode="HighQuality" />
+        <Border Name="IconImage"
+                MinWidth="40"
+                MinHeight="40"
+                HorizontalAlignment="Center"
+                RenderOptions.BitmapScalingMode="HighQuality" />
     </DockPanel>
 </UserControl>

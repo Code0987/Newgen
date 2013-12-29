@@ -211,7 +211,7 @@ namespace Internet
                     leftanimation = null;
                     Helper.Delay(new Action(() =>
                     {
-                        IsHubActive = false; Topmost = false; Hide(); Close();
+                        IsHubActive = false; Topmost = false; Close();
                     }), 1);
                 };
                 this.BeginAnimation(LeftProperty, leftanimation);

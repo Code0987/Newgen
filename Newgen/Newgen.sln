@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 2012
+# Visual Studio 2013
+VisualStudioVersion = 12.0.21005.1
+MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newgen", "Newgen\Newgen.csproj", "{C1BC0E44-5776-45EE-BC80-50458FFC10EE}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Newgen.Base", "Newgen.Base\Newgen.Base.csproj", "{74CB342D-3D96-42D5-8B13-76306FE35380}"

@@ -375,7 +375,7 @@
                                     </Style>
                                 </TextBlock.Style>
                             </TextBlock>
-                            <TextBlock Margin="10,0,5,10" Text="Copyright © 2013 NS. All rights reserved." />
+                            <TextBlock Margin="10,0,5,10" Text="Copyright © 2014 NS. All rights reserved." />
                             <StackPanel x:Name="Content_LicBox" Margin="0,10,0,0" />
                         </StackPanel>
                     </Grid>

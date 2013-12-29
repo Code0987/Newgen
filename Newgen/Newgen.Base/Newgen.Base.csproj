@@ -25,6 +25,7 @@
     <DocumentationFile>..\..\Build\Cache\Newgen.Base.xml</DocumentationFile>
     <AllowUnsafeBlocks>false</AllowUnsafeBlocks>
     <GenerateSerializationAssemblies>On</GenerateSerializationAssemblies>
+    <NoWarn>1572;1591</NoWarn>
   </PropertyGroup>
   <PropertyGroup>
     <SignAssembly>true</SignAssembly>
@@ -66,11 +67,6 @@
     </Resource>
     <Resource Include="Resources\Fonts\SegoeWP.ttf" />
     <Resource Include="Resources\Fonts\SegoeWP-Light.ttf" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\BackIcon1.png" />
-    <Resource Include="Resources\BackIcon1_Hover.png" />
-    <Resource Include="Resources\BackIcon1_Pressed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.

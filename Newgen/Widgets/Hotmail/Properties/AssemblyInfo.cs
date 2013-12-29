@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyConfiguration("")]
 [assembly: AssemblyCompany("")]
 [assembly: AssemblyProduct("Hotmail")]
-[assembly: AssemblyCopyright("Copyright © 2013 Eraile 2013")]
+[assembly: AssemblyCopyright("Copyright © 2014 Eraile 2014")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 

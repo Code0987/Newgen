@@ -8,7 +8,7 @@ using System.Windows;
 [assembly: Guid("c3373d77-29c6-4670-8afb-43f0830bc3cf")]
 [assembly: AssemblyCompany("NS")]
 [assembly: AssemblyProduct("Newgen 13")]
-[assembly: AssemblyCopyright("Copyright © 2013 NS")]
+[assembly: AssemblyCopyright("Copyright © 2014 NS")]
 [assembly: AssemblyTrademark("Newgen")]
 [assembly: AssemblyCulture("")]
 [assembly: ComVisible(false)]

@@ -41,11 +41,11 @@
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
     <Reference Include="WebKitBrowser">
-      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\WebKit\WebKitBrowser.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitBrowser.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WebKitCore">
-      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\WebKit\WebKitCore.dll</HintPath>
+      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitCore.dll</HintPath>
       <Private>False</Private>
     </Reference>
     <Reference Include="WindowsBase" />

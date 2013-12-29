@@ -3,8 +3,9 @@
                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
                   xmlns:Newgen="Newgen.Base"
                   xmlns:r="clr-namespace:Newgen.Resources"
+                  Background="#FFEBFBCF"
                   FontFamily="{StaticResource ContentFontFamily}"
-                  Loaded="HubWindow_Loaded" Background="#FFFFCA52">
+                  Loaded="HubWindow_Loaded">
     <Window.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
@@ -54,14 +55,18 @@
                          FontSize="20"
                          TextWrapping="WrapWithOverflow" />
             </StackPanel>
-            <Image x:Name="IconImage"
-                   Grid.Column="1"
-                   MaxWidth="256"
-                   MaxHeight="256"
-                   HorizontalAlignment="Right"
-                   VerticalAlignment="Top"
-                   Source="/Newgen;component/Resources/tiles_icon.png"
-                   Stretch="Fill" />
+            <StackPanel Grid.Column="1" Margin="0,0,25,0">
+                <Image x:Name="IconImage"
+                       MaxWidth="256"
+                       MaxHeight="256"
+                       HorizontalAlignment="Right"
+                       VerticalAlignment="Top"
+                       Source="/Newgen;component/Resources/default_icon.png"
+                       Stretch="Fill" />
+                <Button HorizontalAlignment="Stretch"
+                        Click="ChangeIconButton_Click"
+                        Content="change icon image ?" />
+            </StackPanel>
         </Grid>
     </DockPanel>
 </Newgen:HubWindow>

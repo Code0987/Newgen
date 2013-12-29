@@ -21,7 +21,6 @@ namespace Newgen.Windows
     public partial class SearchHub : Window
     {
         // Background thread for our search
-        private Thread backgroundSearchThread = null;
         internal ShellSearchFolder searchFolder = null;
         private ShellContainer selectedScope = (ShellContainer)KnownFolders.UsersFiles;
 

@@ -97,7 +97,7 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to A product by NS. © 2013 NS. All rights reserved..
+        ///   Looks up a localized string similar to A product by NS. © 2014 NS. All rights reserved..
         /// </summary>
         public static string GuideFirst_Welcome_Msg2 {
             get {

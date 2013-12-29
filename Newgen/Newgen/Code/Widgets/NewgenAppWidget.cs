@@ -22,6 +22,7 @@ namespace Newgen.Core
         internal string args;
         internal Grid widgetcontrol;
         internal Image icon;
+        internal string cachedImage;
         internal TextBlock title;
         private MenuItem mi_options;
 
@@ -61,21 +62,21 @@ namespace Newgen.Core
             this.widgetcontrol = new Grid();
 
             this.icon = new Image();
-            this.icon.Width = 42;
-            this.icon.Height = 42;
+            this.icon.MinWidth = 64;
+            this.icon.MinHeight = 64;
 
             BitmapSource source = null;
             try
             {
-                var cachedfile = E.CacheRoot + HelperMethods.ConvertToSafeFileName(fileorfolder) + ".png";
-                if(File.Exists(cachedfile))
-                    source = E.GetBitmap(cachedfile);
+                cachedImage = E.CacheRoot + HelperMethods.ConvertToSafeFileName(fileorfolder) + ".png";
+                if (File.Exists(cachedImage))
+                    source = E.GetBitmap(cachedImage);
                 else
                 {
                     try
                     {
                         source = IconExtractor.GetThumbnail(fileorfolder) as BitmapSource;
-                        var fs = File.Create(cachedfile);
+                        var fs = File.Create(cachedImage);
                         var encoder = new PngBitmapEncoder();
                         encoder.Frames.Add(BitmapFrame.Create(source));
                         encoder.Save(fs);
@@ -89,15 +90,15 @@ namespace Newgen.Core
             catch { }
 
             this.icon.Source = source;
-            this.icon.VerticalAlignment = VerticalAlignment.Bottom;
-            this.icon.HorizontalAlignment = HorizontalAlignment.Left;
-            this.icon.Margin = new Thickness(12);
+            this.icon.VerticalAlignment = VerticalAlignment.Center;
+            this.icon.HorizontalAlignment = HorizontalAlignment.Center;
+            this.icon.Margin = new Thickness(18);
             this.widgetcontrol.Children.Add(icon);
 
             this.title = new TextBlock();
             this.title.Foreground = System.Windows.Media.Brushes.White;
-            this.title.Margin = new Thickness(12, 20, 12, 40);
-            this.title.VerticalAlignment = VerticalAlignment.Top;
+            this.title.Margin = new Thickness(8);
+            this.title.VerticalAlignment = VerticalAlignment.Bottom;
             this.title.HorizontalAlignment = HorizontalAlignment.Left;
 
             string[] data = HelperMethods.GetDataArray(this.fileorfolder);
@@ -123,7 +124,7 @@ namespace Newgen.Core
                 HelperMethods.SetDataArray(this.fileorfolder, this.args, 2);
             }
 
-            this.title.FontSize = 22;
+            this.title.FontSize = 12.5;
             this.title.FontWeight = FontWeights.Light;
             this.title.TextWrapping = TextWrapping.WrapWithOverflow;
             this.title.TextTrimming = TextTrimming.CharacterEllipsis;
@@ -172,6 +173,7 @@ namespace Newgen.Core
                 Process p = new Process();
                 p.StartInfo.Arguments = this.args;
                 p.StartInfo.FileName = this.fileorfolder;
+                p.StartInfo.UseShellExecute = true;
                 p.Start();
             }
             catch { }

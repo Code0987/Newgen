@@ -90,7 +90,7 @@ namespace Gmail
                 anInteger = Convert.ToInt32(RefreshTime.Text);
                 anInteger = int.Parse(RefreshTime.Text);
             }
-            catch (Exception ex)
+            catch
             {
                 RefreshTime.Text = Widget.Settings.RefreshInterval.ToString();
             }

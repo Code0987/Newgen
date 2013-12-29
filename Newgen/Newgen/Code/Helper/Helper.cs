@@ -306,7 +306,7 @@ namespace Newgen.Core
             }
 
             if(lwlast == null)
-                return new string[0];
+                return new string[1];
             else
             {
                 try { return lwlast.ObjectData.Split(delimiter); }

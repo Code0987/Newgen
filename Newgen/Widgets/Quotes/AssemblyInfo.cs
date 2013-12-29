@@ -6,7 +6,7 @@ using System.Windows;
 [assembly: AssemblyTitle("Quotes")]
 [assembly: AssemblyCompany("NS")]
 [assembly: AssemblyProduct("Quotes")]
-[assembly: AssemblyCopyright("Copyright © 2013 NS")]
+[assembly: AssemblyCopyright("Copyright © 2014 NS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
 [assembly: AssemblyDescription("")]

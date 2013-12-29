@@ -239,7 +239,7 @@ namespace Newgen.Base.Communication
 /*
 Newgen Runtime Shared Data @ Widget API
 ---------------------------------------
-© 2013 NS, Neeraj.
+© 2014 NS, Neeraj.
 ---------------------------------------
 */
 

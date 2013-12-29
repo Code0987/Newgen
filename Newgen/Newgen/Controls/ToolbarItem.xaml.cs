@@ -1,6 +1,7 @@
 ﻿using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 
 namespace Newgen.Controls
 {
@@ -22,10 +23,10 @@ namespace Newgen.Controls
             set { TitleTextBlock.Text = value; }
         }
 
-        public ImageSource Icon
+        public Brush Icon
         {
-            get { return IconImage.Source; }
-            set { IconImage.Source = value; }
+            get { return IconImage.Background; }
+            set { IconImage.Background = value; }
         }
 
         private void UserControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e)
