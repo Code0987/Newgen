@@ -9,7 +9,7 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>D:\Projects\iApps\Newgen\Newgen\Help</OutputPath>
+    <OutputPath>.\Help</OutputPath>
     <ImageFolderPath />
     <HtmlFormats>
       <HtmlHelp>true</HtmlHelp>

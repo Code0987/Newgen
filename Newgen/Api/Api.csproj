@@ -1,0 +1,270 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003" DefaultTargets="Build" ToolsVersion="12.0">
+  <PropertyGroup>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>8.0.30703</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{74CB342D-3D96-42D5-8B13-76306FE35380}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Newgen</RootNamespace>
+    <AssemblyName>Newgen.Api</AssemblyName>
+    <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <ExpressionBlendVersion>12.0.50320.0</ExpressionBlendVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>TRACE;DEBUG;Native;Net4;Net45</DefineConstants>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>false</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DebugType>full</DebugType>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+    <OutputPath>bin\Release\</OutputPath>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Optimize>true</Optimize>
+    <ErrorReport>prompt</ErrorReport>
+    <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
+    <DefineConstants>Native;Net4;Net45</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="System" />
+    <Reference Include="System.ComponentModel.Composition" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Management" />
+    <Reference Include="System.Net" />
+    <Reference Include="System.Reflection.Context" />
+    <Reference Include="System.Runtime.Caching" />
+    <Reference Include="System.Runtime.DurableInstancing" />
+    <Reference Include="System.Runtime.Remoting" />
+    <Reference Include="System.Runtime.Serialization" />
+    <Reference Include="System.Runtime.Serialization.Formatters.Soap" />
+    <Reference Include="System.Security" />
+    <Reference Include="System.ServiceModel" />
+    <Reference Include="System.ServiceModel.Activation" />
+    <Reference Include="System.ServiceModel.Activities" />
+    <Reference Include="System.ServiceModel.Channels" />
+    <Reference Include="System.ServiceModel.Discovery" />
+    <Reference Include="System.ServiceModel.Routing" />
+    <Reference Include="System.ServiceModel.Web" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.Extensions" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xaml" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Xml" />
+    <Reference Include="WindowsBase" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Collection\DictionaryExtensions.cs">
+      <Link>References\DictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Communication\IPC\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs">
+      <Link>References\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\EventExtensions.cs">
+      <Link>References\EventExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\NotifyPropertyExtension.cs">
+      <Link>References\NotifyPropertyExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\StringExtensions.cs">
+      <Link>References\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\TypeExtensions.cs">
+      <Link>References\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\DataStoreHelper.cs">
+      <Link>References\DataStoreHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\SerializationExtensions.cs">
+      <Link>References\SerializationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\StorageExtensions.cs">
+      <Link>References\StorageExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\StreamExtensions.cs">
+      <Link>References\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Language\Parsers\ArgumentsParser.cs">
+      <Link>References\ArgumentsParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Animation\AnimationExtensions.cs">
+      <Link>References\AnimationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Imaging\ImagingBase.cs">
+      <Link>References\ImagingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Imaging\ImagingExtensions.cs">
+      <Link>References\ImagingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Native\WinAPI.cs">
+      <Link>References\WinAPI.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Native\WinAPIManagedHelper.cs">
+      <Link>References\WinAPIManagedHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\DispatcherThreading.cs">
+      <Link>References\DispatcherThreading.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\SingleInstanceHelper.cs">
+      <Link>References\SingleInstanceHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\Singleton.cs">
+      <Link>References\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\ThreadingExtensions.cs">
+      <Link>References\ThreadingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ApplicationExtensions.cs">
+      <Link>References\ApplicationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ControlsExtensions.cs">
+      <Link>References\ControlsExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\MarkupExtension.cs">
+      <Link>References\MarkupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\NotificationExtensions.cs">
+      <Link>References\NotificationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ToastNotification.xaml.cs">
+      <Link>References\ToastNotification.xaml.cs</Link>
+      <DependentUpon>ToastNotification.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Web\DownloadExtensions.cs">
+      <Link>References\DownloadExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\libns.net\Web\FeedsAggregator.cs">
+      <Link>References\FeedsAggregator.cs</Link>
+    </Compile>
+    <Compile Include="Core\AnimationType.cs" />
+    <Compile Include="Core\E.cs" />
+    <Compile Include="Core\Helper.cs" />
+    <Compile Include="Core\HubWindow.cs" />
+    <Compile Include="Packages\PackageSettings.cs" />
+    <Compile Include="Packages\Package.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Packages\PackageMetadata.cs" />
+    <Resource Include="Resources\Fonts\segoeuil.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </Resource>
+    <Resource Include="Resources\Fonts\seguili.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+    </Resource>
+    <Resource Include="Resources\Fonts\OpenSans-Light.ttf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+    </Resource>
+    <Resource Include="Resources\Fonts\SourceSansPro-Light.otf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+    </Resource>
+    <Resource Include="Resources\Fonts\SourceSansPro-LightIt.otf">
+      <IsSystemFont>True</IsSystemFont>
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+    </Resource>
+    <Resource Include="Resources\Themes\WPFExplicit.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Resources\Fonts\SegoeWP.ttf" />
+    <Resource Include="Resources\Fonts\SegoeWP-Light.ttf">
+      <All>True</All>
+      <AutoFill>True</AutoFill>
+      <Uppercase>True</Uppercase>
+      <Lowercase>True</Lowercase>
+      <Numbers>True</Numbers>
+      <Punctuation>True</Punctuation>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Themes\MSControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Resources\Themes\Core.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Resources\Themes\WPF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+    <Resource Include="Resources\Themes\Palette.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Themes\Glyphs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Themes\Theme.Metro.Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\..\..\libns\libns.net\libns.net\UI\ToastNotification.xaml">
+      <Link>References\ToastNotification.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Resource Include="Resources\Themes\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\Expression\Blend\.NETFramework\v4.5\Microsoft.Expression.Blend.WPF.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

@@ -1,0 +1,405 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!--
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+ -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <data name="BackItem" xml:space="preserve">
+    <value>वापस</value>
+  </data>
+  <data name="ExitItem" xml:space="preserve">
+    <value>बाहर निकलें न्यूजेन</value>
+  </data>
+  <data name="UnLockItem" xml:space="preserve">
+    <value>संयुक्त राष्ट्र के लॉक ( खींचकर सक्षम)</value>
+  </data>
+  <data name="Options12H" xml:space="preserve">
+    <value>12 घंटे का समय</value>
+  </data>
+  <data name="Options24H" xml:space="preserve">
+    <value>24 घंटे का समय</value>
+  </data>
+  <data name="OptionsAbout" xml:space="preserve">
+    <value>न्यूजेन बारे में</value>
+  </data>
+  <data name="OptionsAboutTabHeader" xml:space="preserve">
+    <value>के बारे में</value>
+  </data>
+  <data name="OptionsApplyButton" xml:space="preserve">
+    <value>लागू करना</value>
+  </data>
+  <data name="OptionsBg" xml:space="preserve">
+    <value>पृष्ठभूमि रंग :</value>
+  </data>
+  <data name="OptionsBgAlpha" xml:space="preserve">
+    <value>पृष्ठभूमि रंग पारदर्शिता :</value>
+  </data>
+  <data name="OptionsBgImg" xml:space="preserve">
+    <value>पृष्ठभूमि छवि :</value>
+  </data>
+  <data name="OptionsBgImgSelect" xml:space="preserve">
+    <value>छवि का चयन</value>
+  </data>
+  <data name="OptionsBgImgUse" xml:space="preserve">
+    <value>Backgound में छवि का उपयोग करें</value>
+  </data>
+  <data name="OptionsCancelButton" xml:space="preserve">
+    <value>रद्द करें</value>
+  </data>
+  <data name="OptionsChangeBg" xml:space="preserve">
+    <value>परिवर्तन</value>
+  </data>
+  <data name="OptionsChangeStaticAppWidgetBgColor" xml:space="preserve">
+    <value>परिवर्तन</value>
+  </data>
+  <data name="OptionsCopyright" xml:space="preserve">
+    <value>प्रकार एन एस के 2 लाइसेंस के अंतर्गत लाइसेंस . ( Http://NSApps.net/License )</value>
+  </data>
+  <data name="OptionsEnableAutoStart" xml:space="preserve">
+    <value>न्यूजेन प्रारंभ जब विंडोज लोड</value>
+  </data>
+  <data name="OptionsEnableUserTile" xml:space="preserve">
+    <value>मुख्य स्क्रीन पर UserBadgeControl (यूजर नाम और चित्र ) सक्षम करें. (*)</value>
+  </data>
+  <data name="OptionsGeneralTabHeader" xml:space="preserve">
+    <value>सामान्य</value>
+  </data>
+  <data name="OptionsItem" xml:space="preserve">
+    <value>सेटिंग्स</value>
+  </data>
+  <data name="OptionsLanguage" xml:space="preserve">
+    <value>भाषा</value>
+  </data>
+  <data name="OptionsLockScreenTime" xml:space="preserve">
+    <value>स्क्रीन समय ( मिनट में ) ताला ( कोई स्क्रीन के लिए रिक्त या -1 का उपयोग करें) :</value>
+  </data>
+  <data name="OptionsOkButton" xml:space="preserve">
+    <value>ok</value>
+  </data>
+  <data name="OptionsRestart" xml:space="preserve">
+    <value>* कुछ परिवर्तन न्यूजेन बाद शुरु लागू किया जाएगा .</value>
+  </data>
+  <data name="OptionsWidgetBgColor" xml:space="preserve">
+    <value>टाइल पृष्ठभूमि (*) ( आप रंग निर्धारित नहीं करते हैं, तब यह केवल काम करता है ) के लिए fallback रंग :</value>
+  </data>
+  <data name="OptionsTilesSize" xml:space="preserve">
+    <value>टाइलें आकार (*) :</value>
+  </data>
+  <data name="OptionsTilesSpacing" xml:space="preserve">
+    <value>टाइल्स के बीच अंतरिक्ष (*) :</value>
+  </data>
+  <data name="OptionsTime" xml:space="preserve">
+    <value>समय</value>
+  </data>
+  <data name="OptionsTimeFormat" xml:space="preserve">
+    <value>समय प्रारूप:</value>
+  </data>
+  <data name="OptionsVersion" xml:space="preserve">
+    <value>संस्करण</value>
+  </data>
+  <data name="OptionsWindowTitle" xml:space="preserve">
+    <value>न्यूजेन विकल्प</value>
+  </data>
+  <data name="ShareHubTip" xml:space="preserve">
+    <value>आप एक शुरुआत स्क्रीन पर पिन करने के लिए चाहता हूँ कि मित्रों का चयन करें</value>
+  </data>
+  <data name="PinAppItem" xml:space="preserve">
+    <value>पिन आवेदन / फ़ाइल</value>
+  </data>
+  <data name="PinWebItem" xml:space="preserve">
+    <value>पिन वेबसाइट / यूआरएल</value>
+  </data>
+  <data name="Profile" xml:space="preserve">
+    <value>रूपरेखा</value>
+  </data>
+  <data name="RefreshItem" xml:space="preserve">
+    <value>ताज़ा करे</value>
+  </data>
+  <data name="RemoveItem" xml:space="preserve">
+    <value>अनपिन</value>
+  </data>
+  <data name="SaveItem" xml:space="preserve">
+    <value>सहेजें विन्यास</value>
+  </data>
+  <data name="SearchItem" xml:space="preserve">
+    <value>खोज</value>
+  </data>
+  <data name="ShareItem" xml:space="preserve">
+    <value>शेयर</value>
+  </data>
+  <data name="StartItem" xml:space="preserve">
+    <value>प्रारंभ</value>
+  </data>
+  <data name="TilesItem" xml:space="preserve">
+    <value>पिन विगेट्स / टाइलें</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>नया क्या है?</value>
+  </data>
+  <data name="WidgetsItem" xml:space="preserve">
+    <value>विजेट</value>
+  </data>
+  <data name="DevicesItem" xml:space="preserve">
+    <value>डिवाइसेज</value>
+  </data>
+  <data name="OptionsEnableShowTaskbar" xml:space="preserve">
+    <value>दिखाएँ टास्कबार ( फुल स्क्रीन मोड में )</value>
+  </data>
+  <data name="OptionsEnableHK" xml:space="preserve">
+    <value>गर्म चाबियाँ ( वैश्विक कुंजीपटल समर्थन ) सक्षम करें ( *)</value>
+  </data>
+  <data name="OptionsKeyboard" xml:space="preserve">
+    <value>कीबोर्ड</value>
+  </data>
+  <data name="OptionsEnableShowTaskbarA" xml:space="preserve">
+    <value>हमेशा कार्य पट्टी दिखाएँ</value>
+  </data>
+  <data name="OptionsEnableTB" xml:space="preserve">
+    <value>थंबनेल बार (*) का प्रयोग करें</value>
+  </data>
+  <data name="OptionsEnableOOBE" xml:space="preserve">
+    <value>बाहर बॉक्स अनुभव सक्षम करें ( *)</value>
+  </data>
+  <data name="OptionsStartBarBg" xml:space="preserve">
+    <value>टूलबार पृष्ठभूमि रंग :</value>
+  </data>
+  <data name="OptionsStartBarBgChange" xml:space="preserve">
+    <value>परिवर्तन</value>
+  </data>
+  <data name="OptionsStartBarLogo" xml:space="preserve">
+    <value>StartBar लोगो:</value>
+  </data>
+  <data name="OptionsStartBarLogoChange" xml:space="preserve">
+    <value>परिवर्तन</value>
+  </data>
+  <data name="OptionsOOBETabHeader" xml:space="preserve">
+    <value>OOBE</value>
+  </data>
+  <data name="OptionsUITabHeader" xml:space="preserve">
+    <value>ui</value>
+  </data>
+  <data name="OptionsWidgetsTabHeader" xml:space="preserve">
+    <value>विगेट्स</value>
+  </data>
+  <data name="OptionsStartScreenSS" xml:space="preserve">
+    <value>StartScreen स्लाइड शो छवियों (*) :</value>
+  </data>
+  <data name="OptionsStartScreenSSEnable" xml:space="preserve">
+    <value>StartScreen स्लाइड शो सक्षम करें ( *)</value>
+  </data>
+  <data name="OptionsStartScreenSSImgSelect" xml:space="preserve">
+    <value>छवियों का चयन</value>
+  </data>
+  <data name="OptionsStartScreenSSTimeFrame" xml:space="preserve">
+    <value>( सेकंड में ) StartScreen स्लाइड शो अंतराल (*) :</value>
+  </data>
+  <data name="OptionsUpdatesTabHeader" xml:space="preserve">
+    <value>अपडेट</value>
+  </data>
+  <data name="OptionsCFU" xml:space="preserve">
+    <value>अद्यतन के लिए जाँच</value>
+  </data>
+  <data name="OptionsULV" xml:space="preserve">
+    <value>नवीनतम संस्करण के लिए अद्यतन !</value>
+  </data>
+  <data name="OptionsUNA" xml:space="preserve">
+    <value>:) अद्यतन</value>
+  </data>
+  <data name="SearchHub" xml:space="preserve">
+    <value>खोज फ़ाइलें</value>
+  </data>
+  <data name="OptionsStartScreenTitle" xml:space="preserve">
+    <value>StartScreen शीर्षक:</value>
+  </data>
+  <data name="OptionsLockWidgets" xml:space="preserve">
+    <value>अपनी जगह में विगेट्स लॉक , यानी विगेट्स की फिर से व्यवस्था को निष्क्रिय</value>
+  </data>
+  <data name="SaveSettingsItem" xml:space="preserve">
+    <value>Curent सेटिंग्स सहेजें</value>
+  </data>
+  <data name="GuideFirst_Welcome_Msg1" xml:space="preserve">
+    <value>* यह आपकी पहली बार है , तो हम आप के लिए एक दौरे के लिए तैयार है . इस न्यूजेन के पूरे नक्शे के लिए ले जाऊँगा . शुरू करने के लिए नीचे दिए गए ' जारी ' बटन पर क्लिक करें.</value>
+  </data>
+  <data name="Text_Continue" xml:space="preserve">
+    <value>जारी ...</value>
+  </data>
+  <data name="Text_Skip" xml:space="preserve">
+    <value>छोड़ ...</value>
+  </data>
+  <data name="OptionsEnableShowStartbarA" xml:space="preserve">
+    <value>दिखाएँ Startbar हमेशा</value>
+  </data>
+  <data name="OptionsEnableLog" xml:space="preserve">
+    <value>त्रुटियों की लॉगिंग सक्षम</value>
+  </data>
+  <data name="Text_Apply" xml:space="preserve">
+    <value>लागू ...</value>
+  </data>
+  <data name="Text_Cancel" xml:space="preserve">
+    <value>रद्द ...</value>
+  </data>
+  <data name="Text_Help_NH" xml:space="preserve">
+    <value>न्यूजेन मदद</value>
+  </data>
+  <data name="Text_Previous" xml:space="preserve">
+    <value>पिछले ...</value>
+  </data>
+  <data name="Text_Next" xml:space="preserve">
+    <value>अगले ...</value>
+  </data>
+  <data name="GuideFirst_Welcome_Msg2" xml:space="preserve">
+    <value>A product by NS. © 2014 NS. All rights reserved.</value>
+  </data>
+  <data name="Text_Welcome" xml:space="preserve">
+    <value>आपका स्वागत है</value>
+  </data>
+  <data name="PinDirItem" xml:space="preserve">
+    <value>पिन फ़ोल्डर</value>
+  </data>
+  <data name="Text_App" xml:space="preserve">
+    <value>न्यूजेन BlueShift</value>
+  </data>
+  <data name="Text_DefaultTilesScreenTitle" xml:space="preserve">
+    <value>न्यूजेन BlueShift</value>
+  </data>
+  <data name="Url_BuyLicense" xml:space="preserve">
+    <value>http://NSApps.net/Apps/Newgen</value>
+  </data>
+  <data name="OptionsDisableStartBarClock" xml:space="preserve">
+    <value>StartBar घड़ी अक्षम</value>
+  </data>
+  <data name="Text_Settings_ProvideUsageData" xml:space="preserve">
+    <value>उपयोग डेटा प्रदान करें</value>
+  </data>
+  <data name="Text_Settings_ProvideUsageDataInfo" xml:space="preserve">
+    <value>Beter आवेदन अनुभव और सेवाओं के लिए आवेदन उपयोग डेटा उपलब्ध कराने के द्वारा मदद करते हैं. कोई निजी या व्यक्तिगत डेटा न तो साझा किया जाएगा , एकत्र किया जाएगा .</value>
+  </data>
+  <data name="Link_App" xml:space="preserve">
+    <value>http://NSApps.net/Apps/Newgen</value>
+  </data>
+  <data name="StoreHub" xml:space="preserve">
+    <value>न्यूजेन स्टोर</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>दुकान</value>
+  </data>
+  <data name="ChangeTileColor" xml:space="preserve">
+    <value>बदले टाइल रंग</value>
+  </data>
+  <data name="AppLinkTileOptionsHubTitle" xml:space="preserve">
+    <value>एप्लिकेशन लिंक समायोजित ...</value>
+  </data>
+</root>

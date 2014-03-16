@@ -1,0 +1,404 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" xmlns:System="clr-namespace:System;assembly=mscorlib">
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="WPF.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <SolidColorBrush x:Key="ControlForegroundBrush" Color="#FF212121" />
+    <SolidColorBrush x:Key="ControlMouseOverFillBrush" Color="#3D000000" />
+    <SolidColorBrush x:Key="ControlMouseOverStrokeBrush" Color="Gray" />
+    <SolidColorBrush x:Key="ControlPressedStrokeBrush" Color="#FFC7C7C7" />
+    <SolidColorBrush x:Key="ControlDisabledBrush" Color="#7C000000" />
+
+    <Style x:Key="ScrollBarThumb" TargetType="{x:Type Thumb}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="IsTabStop" Value="false" />
+        <Setter Property="Focusable" Value="true" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Rectangle x:Name="Rect"
+                               Width="Auto"
+                               Height="Auto"
+                               HorizontalAlignment="Stretch"
+                               VerticalAlignment="Stretch"
+                               Fill="#24FFFFFF" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="true">
+                            <Setter TargetName="Rect" Property="Fill" Value="#64FFFFFF" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <ControlTemplate x:Key="ScrollBarV" TargetType="{x:Type ScrollBar}">
+        <Grid x:Name="Grid">
+            <Track x:Name="PART_Track" IsDirectionReversed="true">
+                <Track.Thumb>
+                    <Thumb Margin="1,0,1,0" Style="{StaticResource ScrollBarThumb}" />
+                </Track.Thumb>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+    <ControlTemplate x:Key="ScrollBarH" TargetType="{x:Type ScrollBar}">
+        <Grid x:Name="Grid">
+            <Track x:Name="PART_Track" IsDirectionReversed="False">
+                <Track.Thumb>
+                    <Thumb Margin="0,1,0,1" Style="{StaticResource ScrollBarThumb}" />
+                </Track.Thumb>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+    <Style TargetType="{x:Type ScrollBar}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="true" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Height" Value="15" />
+                <Setter Property="Template" Value="{StaticResource ScrollBarH}" />
+            </Trigger>
+            <Trigger Property="Orientation" Value="Vertical">
+                <Setter Property="Width" Value="15" />
+                <Setter Property="Height" Value="Auto" />
+                <Setter Property="Template" Value="{StaticResource ScrollBarV}" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type MenuItem}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="BorderBrush" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="Padding" Value="8,5,15,2" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="MenuItem">
+                    <Grid>
+                        <Rectangle Fill="{TemplateBinding Background}"
+                                   RadiusX="0"
+                                   RadiusY="0"
+                                   Stroke="{TemplateBinding BorderBrush}"
+                                   StrokeThickness="{TemplateBinding BorderThickness}" />
+                        <Rectangle x:Name="Bg"
+                                   Fill="{StaticResource ControlDisabledBrush}"
+                                   Opacity="0"
+                                   RadiusX="0"
+                                   RadiusY="0"
+                                   StrokeThickness="0" />
+                        <Grid Margin="{TemplateBinding Padding}">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="2" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="17" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter x:Name="IconPresenter"
+                                              Margin="1"
+                                              VerticalAlignment="Center"
+                                              Content="{TemplateBinding Icon}"
+                                              Opacity=".7" />
+                            <ContentPresenter x:Name="Presenter"
+                                              Grid.Column="2"
+                                              MinWidth="120"
+                                              Content="{TemplateBinding Header}"
+                                              ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                              Opacity=".7" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsHighlighted" Value="true">
+                            <Setter TargetName="Bg" Property="Opacity" Value="1" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type ContextMenu}">
+        <Setter Property="Background" Value="#FFFFFFFF" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderBrush" Value="Black" />
+        <Setter Property="Padding" Value="0,4,0,4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContextMenu}">
+                    <Border x:Name="Menu"
+                            Margin="5,5,5,5"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="0"
+                            Opacity="0">
+                        <Border.Effect>
+                            <DropShadowEffect BlurRadius="5" Opacity="0.7" ShadowDepth="0" />
+                        </Border.Effect>
+                        <Border.Triggers>
+                            <EventTrigger RoutedEvent="Rectangle.Loaded">
+                                <BeginStoryboard>
+                                    <Storyboard>
+                                        <DoubleAnimation Duration="0:0:0.2"
+                                                         Storyboard.TargetName="Menu"
+                                                         Storyboard.TargetProperty="Opacity"
+                                                         To="1" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </EventTrigger>
+                        </Border.Triggers>
+                        <Grid>
+                            <ItemsPresenter Margin="{TemplateBinding Padding}" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style TargetType="{x:Type TabControl}">
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource ContentFontSize}" />
+        <Setter Property="ClipToBounds" Value="True" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabControl}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            ClipToBounds="{TemplateBinding ClipToBounds}"
+                            KeyboardNavigation.DirectionalNavigation="Local"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}"
+                            TextBlock.FontFamily="{TemplateBinding FontFamily}"
+                            TextBlock.FontSize="{TemplateBinding FontSize}"
+                            TextBlock.Foreground="{TemplateBinding Foreground}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition x:Name="FirstColumnDefinition" Width="*" />
+                                <ColumnDefinition x:Name="SecondColumnDefinition" Width="0" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition x:Name="FirstRowDefinition" Height="Auto" />
+                                <RowDefinition x:Name="SecondRowDefinition" Height="*" />
+                            </Grid.RowDefinitions>
+                            <TabPanel x:Name="HeaderPanel"
+                                      Grid.Row="0"
+                                      Grid.Column="0"
+                                      Panel.ZIndex="1"
+                                      Background="Transparent"
+                                      IsItemsHost="True"
+                                      KeyboardNavigation.TabIndex="1" />
+                            <Border x:Name="ContentPanel"
+                                    Grid.Row="1"
+                                    Grid.Column="0"
+                                    Background="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                         Path=SelectedItem.(TabItem.Background)}"
+                                    BorderBrush="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                          Path=SelectedItem.(TabItem.BorderBrush)}"
+                                    BorderThickness="{Binding RelativeSource={RelativeSource TemplatedParent},
+                                                              Path=SelectedItem.(TabItem.BorderThickness)}"
+                                    KeyboardNavigation.DirectionalNavigation="Contained"
+                                    KeyboardNavigation.TabIndex="2"
+                                    KeyboardNavigation.TabNavigation="Local">
+                                <ContentPresenter x:Name="PART_SelectedContentHost" Margin="{TemplateBinding Padding}" ContentSource="SelectedContent" />
+                            </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Bottom">
+                            <Setter TargetName="FirstRowDefinition" Property="Height" Value="*" />
+                            <Setter TargetName="SecondRowDefinition" Property="Height" Value="Auto" />
+                            <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="1" />
+                            <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter TargetName="FirstColumnDefinition" Property="Width" Value="Auto" />
+                            <Setter TargetName="SecondColumnDefinition" Property="Width" Value="*" />
+                            <Setter TargetName="FirstRowDefinition" Property="Height" Value="*" />
+                            <Setter TargetName="SecondRowDefinition" Property="Height" Value="0" />
+                            <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="ContentPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="FirstColumnDefinition" Property="Width" Value="*" />
+                            <Setter TargetName="SecondColumnDefinition" Property="Width" Value="Auto" />
+                            <Setter TargetName="FirstRowDefinition" Property="Height" Value="*" />
+                            <Setter TargetName="SecondRowDefinition" Property="Height" Value="0" />
+                            <Setter TargetName="HeaderPanel" Property="Grid.Column" Value="1" />
+                            <Setter TargetName="ContentPanel" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="HeaderPanel" Property="Grid.Row" Value="0" />
+                            <Setter TargetName="ContentPanel" Property="Grid.Row" Value="0" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Setter Property="UseLayoutRounding" Value="True" />
+    </Style>
+    <Style x:Key="TabItemHeaderStyle" TargetType="{x:Type ContentControl}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{StaticResource Brush04}" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="FontFamily" Value="{StaticResource ContentFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource ContentFontSizeExtraLarge}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Padding" Value="10" />
+        <Setter Property="Margin" Value="0,0,20,10" />
+        <Setter Property="ClipToBounds" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ContentControl}">
+                    <Border Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="{TemplateBinding BorderThickness}">
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch">
+                            <ContentPresenter Margin="{TemplateBinding Padding}"
+                                              HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                              VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                              RecognizesAccessKey="True" />
+                        </Grid>
+                    </Border>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush01}" />
+            </Trigger>
+            <DataTrigger Binding="{Binding RelativeSource={RelativeSource AncestorType={x:Type TabItem}}, Path=IsSelected}" Value="True">
+                <Setter Property="Foreground" Value="{StaticResource Brush01}" />
+            </DataTrigger>
+        </Style.Triggers>
+    </Style>
+    <Style TargetType="{x:Type TabItem}">
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TabItem}">
+                    <Border Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}">
+                        <ContentControl x:Name="ContentHost"
+                                        Content="{TemplateBinding Header}"
+                                        Padding="{TemplateBinding Padding}"
+                                        Style="{StaticResource TabItemHeaderStyle}" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="TabStripPlacement" Value="Left">
+                            <Setter TargetName="ContentHost" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                        <Trigger Property="TabStripPlacement" Value="Right">
+                            <Setter TargetName="ContentHost" Property="LayoutTransform">
+                                <Setter.Value>
+                                    <RotateTransform Angle="-90" />
+                                </Setter.Value>
+                            </Setter>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <!--  Hub Styles  -->
+
+    <Thickness x:Key="HubContentMargin">150,0,0,0</Thickness>
+    <Thickness x:Key="HubFooterMargin">20</Thickness>
+    <Thickness x:Key="HubControlMargin">5</Thickness>
+
+    <Style x:Key="ResetWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Control.FontFamily" Value="{StaticResource ContentFontFamily}" />
+        <Setter Property="Control.FontSize" Value="{StaticResource ContentFontSize}" />
+        <Setter Property="Control.Background" Value="Transparent" />
+        <Setter Property="Control.Foreground" Value="{StaticResource ControlForegroundBrush}" />
+        <Setter Property="Control.SnapsToDevicePixels" Value="True" />
+        <Setter Property="TextOptions.TextFormattingMode" Value="Ideal" />
+        <Setter Property="TextOptions.TextRenderingMode" Value="Auto" />
+        <Setter Property="RenderOptions.ClearTypeHint" Value="Auto" />
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="AllowDrop" Value="True" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+    </Style>
+
+    <Style x:Key="HubTitleStyle" TargetType="{x:Type TextBlock}">
+        <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource ContentFontSizeExtraExtraLarge}" />
+        <Setter Property="Margin" Value="{StaticResource HubContentMargin}" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+    </Style>
+
+    <Style x:Key="HubBackButton" TargetType="{x:Type Button}">
+        <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+        <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="OverridesDefaultStyle" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="HorizontalAlignment" Value="Left" />
+        <Setter Property="Margin" Value="20" />
+        <Setter Property="Width" Value="64" />
+        <Setter Property="Height" Value="64" />
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="BorderBrush" Value="{x:Null}" />
+        <Setter Property="Background" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Button}">
+                    <Grid Background="Transparent">
+                        <Border Background="{Binding Background, RelativeSource={RelativeSource TemplatedParent}}" />
+                        <Path x:Name="PART_Bg"
+                              Data="{StaticResource CircleGeometry}"
+                              Fill="{StaticResource GlyphBackgroundBrush}"
+                              Stretch="Fill" />
+                        <Path x:Name="PART_Glyph"
+                              Margin="12"
+                              Data="{StaticResource PreviousGeometry}"
+                              Fill="{StaticResource GlyphBackgroundBrush}"
+                              Stretch="Fill" />
+                        <Rectangle x:Name="FocusVisualElement"
+                                   IsHitTestVisible="false"
+                                   Opacity="0"
+                                   StrokeThickness="1" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="PART_Bg" Property="Fill" Value="{StaticResource ControlPressedStrokeBrush}" />
+                            <Setter TargetName="PART_Glyph" Property="Fill" Value="#FFFFFFFF" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="PART_Bg" Property="Fill" Value="{StaticResource ControlMouseOverStrokeBrush}" />
+                            <Setter TargetName="PART_Glyph" Property="Fill" Value="{StaticResource ControlMouseOverFillBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

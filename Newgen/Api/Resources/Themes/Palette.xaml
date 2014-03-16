@@ -1,0 +1,144 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                    mc:Ignorable="d">
+
+    <!--  THEME BRUSHES - For Color Tuner  -->
+    <SolidColorBrush x:Key="Brush01" Color="#BF008DDE" />
+    <SolidColorBrush x:Key="Brush02" Color="#BFFFFFFF" />
+    <SolidColorBrush x:Key="Brush03" Color="#BFC6C6C6" />
+    <SolidColorBrush x:Key="Brush04" Color="#BF565656" />
+    <SolidColorBrush x:Key="Brush05" Color="#BF333333" />
+
+    <!--  THEME COLORS  -->
+    <!--  Base Colors  -->
+    <Color x:Key="Color_000">#BF282828</Color>
+    <SolidColorBrush x:Key="Brush_000" Color="{StaticResource Color_000}" />
+    <Color x:Key="Color_001">#D83F3F3F</Color>
+    <SolidColorBrush x:Key="Brush_001" Color="{StaticResource Color_001}" />
+    <Color x:Key="Color_002">#BF565656</Color>
+    <SolidColorBrush x:Key="Brush_002" Color="{StaticResource Color_002}" />
+    <Color x:Key="Color_003">#BF858585</Color>
+    <SolidColorBrush x:Key="Brush_003" Color="{StaticResource Color_003}" />
+    <Color x:Key="Color_004">#BFB9B9B9</Color>
+    <SolidColorBrush x:Key="Brush_004" Color="{StaticResource Color_004}" />
+    <Color x:Key="Color_005">#BFD7D7D7</Color>
+    <SolidColorBrush x:Key="Brush_005" Color="{StaticResource Color_005}" />
+    <Color x:Key="Color_006">#BFE7E7E7</Color>
+    <SolidColorBrush x:Key="Brush_006" Color="{StaticResource Color_006}" />
+    <Color x:Key="Color_007">#BFF4F4F4</Color>
+    <SolidColorBrush x:Key="Brush_007" Color="{StaticResource Color_007}" />
+    <Color x:Key="Color_008">#BFF9F9F9</Color>
+    <SolidColorBrush x:Key="Brush_008" Color="{StaticResource Color_008}" />
+    <Color x:Key="Color_009">#BFFFFFFF</Color>
+    <SolidColorBrush x:Key="Brush_009" Color="{StaticResource Color_009}" />
+
+    <!--  Transparent and Whites with transparency  -->
+    <Color x:Key="Color_010">#E5FFFFFF</Color>
+    <!--  90% White  -->
+    <SolidColorBrush x:Key="Brush_010" Color="{StaticResource Color_010}" />
+    <Color x:Key="Color_011">#BFFFFFFF</Color>
+    <!--  75% White  -->
+    <SolidColorBrush x:Key="Brush_011" Color="{StaticResource Color_011}" />
+    <Color x:Key="Color_012">#99FFFFFF</Color>
+    <!--  60% White  -->
+    <SolidColorBrush x:Key="Brush_012" Color="{StaticResource Color_012}" />
+    <Color x:Key="Color_013">#72FFFFFF</Color>
+    <!--  45% White  -->
+    <SolidColorBrush x:Key="Brush_013" Color="{StaticResource Color_013}" />
+    <Color x:Key="Color_014">#4CFFFFFF</Color>
+    <!--  30% White  -->
+    <SolidColorBrush x:Key="Brush_014" Color="{StaticResource Color_014}" />
+    <Color x:Key="Color_016">#00FFFFFF</Color>
+    <!--  0% White  -->
+    <SolidColorBrush x:Key="Brush_016" Color="{StaticResource Color_016}" />
+
+    <!--  Blacks and grays with transparency  -->
+    <Color x:Key="Color_018">#72000000</Color>
+    <!--  45% Black  -->
+    <SolidColorBrush x:Key="Brush_018" Color="{StaticResource Color_018}" />
+    <Color x:Key="Color_019">#4C000000</Color>
+    <!--  30% Black  -->
+    <SolidColorBrush x:Key="Brush_019" Color="{StaticResource Color_019}" />
+    <Color x:Key="Color_020">#26000000</Color>
+    <!--  15% Black  -->
+    <SolidColorBrush x:Key="Brush_020" Color="{StaticResource Color_020}" />
+    <Color x:Key="Color_021">#00000000</Color>
+    <!--  0% Black  -->
+    <SolidColorBrush x:Key="Brush_021" Color="{StaticResource Color_021}" />
+    <Color x:Key="Color_022">#66E2E2E2</Color>
+    <SolidColorBrush x:Key="Brush_022" Color="{StaticResource Color_022}" />
+
+    <!--  Theme Accent colors  -->
+    <Color x:Key="Color_023">#BF0052B3</Color>
+    <SolidColorBrush x:Key="Brush_023" Color="{StaticResource Color_023}" />
+    <Color x:Key="Color_024">#BF0085DE</Color>
+    <SolidColorBrush x:Key="Brush_024" Color="{StaticResource Color_024}" />
+    <Color x:Key="Color_025">#BF80B3EF</Color>
+    <SolidColorBrush x:Key="Brush_025" Color="{StaticResource Color_025}" />
+    <Color x:Key="Color_026">#BFB2C2EF</Color>
+    <SolidColorBrush x:Key="Brush_026" Color="{StaticResource Color_026}" />
+    <Color x:Key="Color_027">#2600AADE</Color>
+    <SolidColorBrush x:Key="Brush_027" Color="{StaticResource Color_027}" />
+
+    <!--  Theme Error colors  -->
+    <Color x:Key="Color_028">#BFD0284C</Color>
+    <SolidColorBrush x:Key="Brush_028" Color="{StaticResource Color_028}" />
+    <Color x:Key="Color_029">#BFF55E7F</Color>
+    <SolidColorBrush x:Key="Brush_029" Color="{StaticResource Color_029}" />
+    <Color x:Key="Color_030">#BFFFCAD5</Color>
+    <SolidColorBrush x:Key="Brush_030" Color="{StaticResource Color_030}" />
+
+    <!--  Colors for Chart Series  -->
+    <Color x:Key="Color_035">#FF006481</Color>
+    <SolidColorBrush x:Key="Brush_035" Color="{StaticResource Color_035}" />
+    <Color x:Key="Color_037">#FF8A9B0F</Color>
+    <SolidColorBrush x:Key="Brush_037" Color="{StaticResource Color_037}" />
+    <Color x:Key="Color_038">#FF3E4700</Color>
+    <SolidColorBrush x:Key="Brush_038" Color="{StaticResource Color_038}" />
+    <Color x:Key="Color_040">#FFF14D0F</Color>
+    <SolidColorBrush x:Key="Brush_040" Color="{StaticResource Color_040}" />
+    <Color x:Key="Color_041">#FF8D2E00</Color>
+    <SolidColorBrush x:Key="Brush_041" Color="{StaticResource Color_041}" />
+    <Color x:Key="Color_043">#FF81106B</Color>
+    <SolidColorBrush x:Key="Brush_043" Color="{StaticResource Color_043}" />
+    <Color x:Key="Color_044">#FF410135</Color>
+    <SolidColorBrush x:Key="Brush_044" Color="{StaticResource Color_044}" />
+    <Color x:Key="Color_046">#FFFCA910</Color>
+    <SolidColorBrush x:Key="Brush_046" Color="{StaticResource Color_046}" />
+    <Color x:Key="Color_047">#FF8D4902</Color>
+    <SolidColorBrush x:Key="Brush_047" Color="{StaticResource Color_047}" />
+    <Color x:Key="Color_049">#FF037A54</Color>
+    <SolidColorBrush x:Key="Brush_049" Color="{StaticResource Color_049}" />
+    <Color x:Key="Color_050">#FF003F2A</Color>
+    <SolidColorBrush x:Key="Brush_050" Color="{StaticResource Color_050}" />
+    <Color x:Key="Color_052">#FF154D85</Color>
+    <SolidColorBrush x:Key="Brush_052" Color="{StaticResource Color_052}" />
+    <Color x:Key="Color_053">#FF02284D</Color>
+    <SolidColorBrush x:Key="Brush_053" Color="{StaticResource Color_053}" />
+    <Color x:Key="Color_055">#FF543511</Color>
+    <SolidColorBrush x:Key="Brush_055" Color="{StaticResource Color_055}" />
+    <Color x:Key="Color_056">#FF211303</Color>
+    <SolidColorBrush x:Key="Brush_056" Color="{StaticResource Color_056}" />
+    <Color x:Key="Color_058">#FF89806D</Color>
+    <SolidColorBrush x:Key="Brush_058" Color="{StaticResource Color_058}" />
+    <Color x:Key="Color_059">#FF393225</Color>
+    <SolidColorBrush x:Key="Brush_059" Color="{StaticResource Color_059}" />
+    <Color x:Key="Color_061">#FF58458B</Color>
+    <SolidColorBrush x:Key="Brush_061" Color="{StaticResource Color_061}" />
+    <Color x:Key="Color_062">#FF211347</Color>
+    <SolidColorBrush x:Key="Brush_062" Color="{StaticResource Color_062}" />
+    <Color x:Key="Color_063">#7FB9B9B9</Color>
+    <SolidColorBrush x:Key="Brush_063" Color="{StaticResource Color_063}" />
+    <Color x:Key="Color_064">#33565656</Color>
+    <SolidColorBrush x:Key="Brush_064" Color="{StaticResource Color_064}" />
+    <Color x:Key="Color_065">#7F3F3F3F</Color>
+    <SolidColorBrush x:Key="Brush_065" Color="{StaticResource Color_065}" />
+    <Color x:Key="Color_066">#FF686868</Color>
+    <SolidColorBrush x:Key="Brush_066" Color="{StaticResource Color_066}" />
+    <Color x:Key="Color_067">#800050DE</Color>
+    <SolidColorBrush x:Key="Brush_067" Color="{StaticResource Color_067}" />
+    <Color x:Key="Color_068">#CC3F3F3F</Color>
+    <SolidColorBrush x:Key="Brush_068" Color="{StaticResource Color_068}" />
+</ResourceDictionary>

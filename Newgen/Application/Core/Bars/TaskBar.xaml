@@ -1,0 +1,18 @@
+﻿<app:ToolbarWindow x:Class="Newgen.TaskBar"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:app="clr-namespace:Newgen"
+                   Width="55"
+                   MouseLeave="OnMouseLeave"
+                   MouseLeftButtonDown="OnMouseLeftButtonDown"
+                   MouseLeftButtonUp="OnMouseLeftButtonUp"
+                   MouseMove="OnMouseMove"
+                   MouseRightButtonDown="OnMouseRightButtonDown"
+                   PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp">
+    <app:DragScrollViewer Margin="0,150,0,150"
+                          DragEverywhere="True"
+                          HorizontalScrollBarVisibility="Auto"
+                          VerticalScrollBarVisibility="Auto" VerticalAlignment="Center">
+        <StackPanel Name="ItemsContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
+    </app:DragScrollViewer>
+</app:ToolbarWindow>

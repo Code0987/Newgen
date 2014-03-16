@@ -1,0 +1,141 @@
+﻿<app:ToolbarWindow x:Class="Newgen.StartBar"
+                   xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                   xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:app="clr-namespace:Newgen"
+                   xmlns:r="clr-namespace:Newgen.Resources"
+                   Width="80"
+                   DragEnter="OnDragEnter"
+                   Drop="OnDrop"
+                   Loaded="OnLoaded"
+                   Location="Right"
+                   PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp">
+    <Window.ContextMenu>
+        <ContextMenu>
+            <MenuItem Click="OnTilesItemClick" Header="{x:Static r:Definitions.TilesItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource ViewTilesGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="OnPinAppItemClick" Header="{x:Static r:Definitions.PinAppItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource BoardPinGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="OnPinDirItemClick" Header="{x:Static r:Definitions.PinDirItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource BoardPinGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="PinWebItem" Click="OnPinWebItemClick" Header="{x:Static r:Definitions.PinWebItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource FavouriteGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="OnRefreshItemClick" Header="{x:Static r:Definitions.RefreshItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource RefreshGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem x:Name="SaveSettingsItem" Click="OnSaveSettingsItemClick" Header="{x:Static r:Definitions.SaveSettingsItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource SaveAsGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+            <MenuItem Click="OnExitItemClick" Header="{x:Static r:Definitions.ExitItem}">
+                <MenuItem.Icon>
+                    <Path Width="16"
+                          Height="16"
+                          Data="{StaticResource CloseGeometry}"
+                          Fill="{StaticResource GlyphBackgroundBrush}"
+                          Stretch="Fill" />
+                </MenuItem.Icon>
+            </MenuItem>
+        </ContextMenu>
+    </Window.ContextMenu>
+    <StackPanel Name="ItemsContainer" VerticalAlignment="Center">
+        <app:StartBarItem x:Name="SearchButton"
+                         Title="{x:Static r:Definitions.SearchItem}"
+                         MouseLeftButtonUp="OnSearchButtonMouseLeftButtonUp"
+                         Order="5">
+            <app:StartBarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource SearchGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </app:StartBarItem.Icon>
+        </app:StartBarItem>
+        <app:StartBarItem x:Name="DevicesButton"
+                         Title="{x:Static r:Definitions.DevicesItem}"
+                         MouseLeftButtonDown="OnDevicesButtonMouseLeftButtonUp"
+                         Order="3">
+            <app:StartBarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource DevicesGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </app:StartBarItem.Icon>
+        </app:StartBarItem>
+        <app:StartBarItem x:Name="StartButton"
+                         Title="{x:Static r:Definitions.StartItem}"
+                         MouseLeftButtonDown="OnStartButtonMouseLeftButtonUp"
+                         Order="0">
+            <app:StartBarItem.Icon>
+                <VisualBrush Stretch="Uniform">
+                    <VisualBrush.Visual>
+                        <Image Source="/Resources/Newgen_Icon.ico" />
+                    </VisualBrush.Visual>
+                </VisualBrush>
+            </app:StartBarItem.Icon>
+        </app:StartBarItem>
+        <app:StartBarItem x:Name="StoreButton"
+                         Title="{x:Static r:Definitions.StoreItem}"
+                         MouseLeftButtonUp="OnStoreButtonMouseLeftButtonUp"
+                         Order="2">
+            <app:StartBarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource StoreGeometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </app:StartBarItem.Icon>
+        </app:StartBarItem>
+        <app:StartBarItem x:Name="SettingsButton"
+                         Title="{x:Static r:Definitions.OptionsItem}"
+                         MouseLeftButtonUp="OnSettingsButtonMouseLeftButtonUp"
+                         Order="4">
+            <app:StartBarItem.Icon>
+                <DrawingBrush>
+                    <DrawingBrush.Drawing>
+                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource Settings1Geometry}" />
+                    </DrawingBrush.Drawing>
+                </DrawingBrush>
+            </app:StartBarItem.Icon>
+        </app:StartBarItem>
+    </StackPanel>
+</app:ToolbarWindow>

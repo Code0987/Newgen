@@ -1,0 +1,278 @@
+﻿<Window x:Class="Newgen.Windows.SettingsHub"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:r="clr-namespace:Newgen.Resources"
+        Background="White"
+        Closed="Window_Closed"
+        Closing="Window_Closing"
+        SourceInitialized="WindowSourceInitialized"
+        Style="{StaticResource ResetWindowStyle}"
+        d:DesignHeight="1366"
+        d:DesignWidth="1366"
+        mc:Ignorable="d">
+    <Window.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary Source="/Themes/Generic.xaml" />
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <DockPanel Name="Root">
+        <Grid DockPanel.Dock="Top">
+            <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource HubBackButton}" />
+            <TextBlock Style="{StaticResource HubTitleStyle}" Text="Settings" />
+        </Grid>
+        <Grid DockPanel.Dock="Bottom">
+            <StackPanel Margin="{StaticResource HubFooterMargin}" HorizontalAlignment="Right" Orientation="Horizontal">
+                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource ContentFontSizeSmall}" Text="{x:Static r:Definitions.OptionsRestart}" />
+                <Button Name="OkButton"
+                        Margin="{StaticResource HubControlMargin}"
+                        Click="OkButtonClick"
+                        Content="{x:Static r:Definitions.OptionsOkButton}" />
+                <Button Name="CancelButton"
+                        Margin="{StaticResource HubControlMargin}"
+                        Click="CancelButtonClick"
+                        Content="{x:Static r:Definitions.OptionsCancelButton}" />
+            </StackPanel>
+        </Grid>
+        <TabControl x:Name="Tabs" Margin="{StaticResource HubContentMargin}">
+            <TabItem x:Name="Tab_UI" Header="{x:Static r:Definitions.OptionsUITabHeader}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <CheckBox Name="EnableShowTaskbarACheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowTaskbarA}" />
+                        <CheckBox Name="EnableShowTaskbarCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowTaskbar}" />
+                        <CheckBox Name="EnableUseTBCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableTB}" />
+                        <CheckBox Name="EnableUserTile" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableUserTile}" />
+                        <CheckBox Name="EnableBgImage" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsBgImgUse}" />
+                        <DockPanel Margin="30,0,0,0">
+                            <Button Name="ChangeBgImg"
+                                    HorizontalAlignment="Left"
+                                    Click="ChangeBgImgClick"
+                                    Content="{x:Static r:Definitions.OptionsBgImgSelect}" />
+                        </DockPanel>
+                        <TextBlock x:Name="TextBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsBg}" />
+                        <DockPanel Margin="30,0,0,0">
+                            <Rectangle Name="NewgenBgColor"
+                                       Width="40"
+                                       Height="40"
+                                       HorizontalAlignment="Left"
+                                       Fill="#FF250931"
+                                       Stroke="LightGray"
+                                       StrokeThickness="2" />
+                            <Button Name="ChangeBgColorButton"
+                                    HorizontalAlignment="Left"
+                                    Click="ChangeBgColorButtonClick"
+                                    Content="{x:Static r:Definitions.OptionsChangeBg}" />
+                        </DockPanel>
+                        <CheckBox Name="Enable_OOBE_SS" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsStartScreenSSEnable}" />
+                        <StackPanel x:Name="OOBE_SS" Margin="30,0,0,0">
+                            <Button Name="ChangeSSImgs"
+                                    HorizontalAlignment="Left"
+                                    Click="ChangeSSImgs_Click"
+                                    Content="{x:Static r:Definitions.OptionsStartScreenSSImgSelect}" />
+                            <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartScreenSSTimeFrame}" />
+                            <TextBox Name="ValStartScreenSSTimeFrame" Margin="0,0,0,0" Text="15" />
+                        </StackPanel>
+
+                        <TextBlock x:Name="TextBgTrans" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsBgAlpha}" />
+                        <Slider Name="BgColorAlpha"
+                                Margin="30,0,0,10"
+                                LargeChange="5"
+                                Maximum="255"
+                                Minimum="1"
+                                SmallChange="1"
+                                Value="255" />
+                        <CheckBox Name="EnableStartBarAlways" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowStartbarA}" />
+                        <TextBlock x:Name="TextStartBatBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartBarBg}" />
+                        <DockPanel Margin="30,0,0,0">
+                            <Rectangle Name="StartBarBgColor"
+                                       Width="40"
+                                       Height="40"
+                                       Margin="0,0,0,0"
+                                       HorizontalAlignment="Left"
+                                       Stroke="LightGray"
+                                       StrokeThickness="2" />
+                            <Button Name="ChangeStartBarBgColorButton"
+                                    HorizontalAlignment="Left"
+                                    Click="ChangeStartBarBgColorButton_Click"
+                                    Content="{x:Static r:Definitions.OptionsStartBarBgChange}" />
+                        </DockPanel>
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartScreenTitle}" />
+                        <TextBox Name="ValStartScreenTitle" Margin="30,0,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="Tab_Tiles" Header="{x:Static r:Definitions.OptionsWidgetsTabHeader}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <CheckBox Name="EnableWidgetLock" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsLockWidgets}" />
+                        <TextBlock x:Name="TextTilesSizeScale" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTilesSize}" />
+                        <Slider Name="TilesSizeScale" Margin="30,0,0,0" SmallChange="1" />
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTilesSpacing}" />
+                        <TextBox Name="ValTilesSpacing" Margin="30,0,0,0" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="Tab_General" Header="{x:Static r:Definitions.OptionsGeneralTabHeader}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <CheckBox Name="EnableAutoStartCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableAutoStart}" />
+                        <TextBlock Margin="0,15,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsKeyboard}" />
+                        <CheckBox Name="EnableHK"
+                                  Margin="0,5,0,0"
+                                  Click="CheckBoxClick"
+                                  Content="{x:Static r:Definitions.OptionsEnableHK}" />
+                        <TextBlock Margin="0,10,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsTime}" />
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTimeFormat}" />
+                        <WrapPanel Margin="30,0,0,0" Orientation="Horizontal">
+                            <RadioButton Name="Time12HRadioButton"
+                                         Margin="0,0,20,0"
+                                         Click="CheckBoxClick"
+                                         Content="{x:Static r:Definitions.Options12H}"
+                                         IsChecked="True" />
+                            <RadioButton Name="Time24HRadioButton" Click="CheckBoxClick" Content="{x:Static r:Definitions.Options24H}" />
+                        </WrapPanel>
+                        <TextBlock Margin="0,10,0,0" Text="{x:Static r:Definitions.OptionsLockScreenTime}" />
+                        <TextBox Name="ValLockTime" Margin="30,0,0,0" TextChanged="ValLockTime_TextChanged" />
+                        <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsLanguage}" />
+                        <ComboBox Name="LanguageComboBox" Margin="0,5,0,0" SelectionChanged="ComboBoxSelectionChanged" />
+                        <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Text_Settings_ProvideUsageData}" />
+                        <StackPanel Margin="0,5,0,0">
+                            <CheckBox x:Name="CheckBox_PUD" Click="CheckBox_PUD_Click" Content="{x:Static r:Definitions.Text_Settings_ProvideUsageData}" />
+                            <TextBlock Margin="0,6,0,0"
+                                       VerticalAlignment="Center"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       Text="{x:Static r:Definitions.Text_Settings_ProvideUsageDataInfo}"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="Wrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem Header="TaskBar" x:Name="Tab_Taskbar">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <TextBlock Margin="0,5,0,0" Text="Programs you don't wish to be displayed on TaskBar" />
+                        <TextBlock Margin="30,5,0,0" FontStyle="Italic" Text="Select the items to exclude" />
+                        <TextBlock Margin="30,5,0,0" FontStyle="Italic" Text="Use Ctrl + Mouse Left Click to select multiple items." />
+                        <ListBox Height="150" Margin="30,0,0,0" Width="200" Background="#32000000" HorizontalAlignment="Left" Name="ListBox_ItemsToExclude" SelectionChanged="ListBox_ItemsToExclude_SelectionChanged" SelectionMode="Extended">
+                            <ListBox.ItemTemplate>
+                                <DataTemplate>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="20" />
+                                            <ColumnDefinition />
+                                        </Grid.ColumnDefinitions>
+                                        <Image Grid.Column="0" Height="20" Width="20" Source="{Binding Icon}" Stretch="Fill" />
+                                        <TextBlock Grid.Column="1" Margin="5,0,0,0" Text="{Binding ProcessName}" VerticalAlignment="Center" />
+                                    </Grid>
+                                </DataTemplate>
+                            </ListBox.ItemTemplate>
+                        </ListBox>
+                        <Button Height="30" Margin="30,0,5,0" Width="200" Click="Button_AddPEXL_Click" Content="Add .exe to list" HorizontalAlignment="Left" Name="Button_AddPEXL" />
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="Tab_Updates" Header="{x:Static r:Definitions.OptionsUpdatesTabHeader}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <StackPanel>
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" MinWidth="256" />
+                            </Grid.ColumnDefinitions>
+                            <Button Name="UpdateButton"
+                                    Grid.Column="0"
+                                    HorizontalAlignment="Left"
+                                    Click="UpdateButton_Click"
+                                    Content="{x:Static r:Definitions.OptionsCFU}" />
+                            <ProgressBar Name="ProgressBar"
+                                         Grid.Column="1"
+                                         Height="40"
+                                         IsIndeterminate="True"
+                                         Value="100" />
+                        </Grid>
+                        <StackPanel x:Name="UpdatesInfo"
+                                    Margin="0,10,10,10"
+                                    Orientation="Vertical"
+                                    Visibility="Collapsed">
+                            <TextBlock Name="VersionTextBlock"
+                                       Margin="0,0,0,5"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       Foreground="#FF48DBF5"
+                                       Text="Version : ..."
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Name="SizeTextBlock"
+                                       Margin="0,0,0,5"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       Foreground="#FFD19100"
+                                       Text="Size : ... kB"
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Name="RDTextBlock"
+                                       Margin="0,0,0,5"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       Foreground="#FF30D100"
+                                       Text="Release Date : ..."
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap" />
+                            <TextBlock Name="RnTextBlock"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       Foreground="#FF86C5FF"
+                                       Text="Release Notes : ..."
+                                       TextTrimming="CharacterEllipsis"
+                                       TextWrapping="NoWrap" />
+                        </StackPanel>
+                    </StackPanel>
+                </ScrollViewer>
+            </TabItem>
+            <TabItem x:Name="Tab_About" Header="{x:Static r:Definitions.OptionsAboutTabHeader}">
+                <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
+                    <Grid>
+                        <Image Width="64"
+                               Margin="300,0,0,0"
+                               HorizontalAlignment="Right"
+                               VerticalAlignment="Top"
+                               Opacity="1"
+                               Source="/Resources/Newgen_Icon.ico" />
+                        <StackPanel Orientation="Vertical">
+                            <TextBlock Margin="10,20,5,10" Text="{x:Static r:Definitions.Text_App}" />
+                            <TextBlock Margin="10,0,5,10">
+                                <Run Text="{x:Static r:Definitions.OptionsVersion}" />
+                                <Run Name="BuildTag" Text="*.*.*.*" />
+                            </TextBlock>
+                            <TextBlock Name="SiteLink1"
+                                       Margin="10,0,5,10"
+                                       HorizontalAlignment="Left"
+                                       FontSize="{StaticResource ContentFontSizeSmall}"
+                                       MouseLeftButtonUp="SiteLinkMouseLeftButtonUp"
+                                       Text="{x:Static r:Definitions.Link_App}"
+                                       TextWrapping="Wrap">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Cursor" Value="Hand" />
+                                        <Setter Property="Foreground" Value="#0066CC" />
+                                        <Style.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter Property="TextDecorations" Value="Underline" />
+                                                <Setter Property="Foreground" Value="#3399ff" />
+                                            </Trigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                            <TextBlock Margin="10,0,5,10" Text="Copyright © 2014 NS. All rights reserved." />
+                            <lc:LicenseControl xmlns:lc="clr-namespace:iFramework.Security.Licensing.UI"
+                                               x:Name="LicenseControlInstance"
+                                               ActiveLicenseIdChanged="LicenseControlInstance_ActiveLicenseIdChanged"
+                                               Loaded="LicenseControlInstance_Loaded" />
+                        </StackPanel>
+                    </Grid>
+                </ScrollViewer>
+            </TabItem>
+        </TabControl>
+    </DockPanel>
+</Window>

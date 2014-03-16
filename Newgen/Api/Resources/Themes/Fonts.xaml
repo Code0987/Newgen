@@ -1,0 +1,13 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                    xmlns:System="clr-namespace:System;assembly=mscorlib"
+                    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+    <FontFamily x:Key="ContentFontFamily">/Newgen.Api;component/Resources/Fonts/#Segoe WP Light</FontFamily>
+
+    <System:Double x:Key="ContentFontSizeExtraSmall">14</System:Double>
+    <System:Double x:Key="ContentFontSizeSmall">16</System:Double>
+    <System:Double x:Key="ContentFontSize">18</System:Double>
+    <System:Double x:Key="ContentFontSizeLarge">26</System:Double>
+    <System:Double x:Key="ContentFontSizeExtraLarge">40</System:Double>
+    <System:Double x:Key="ContentFontSizeExtraExtraLarge">72</System:Double>
+</ResourceDictionary>
