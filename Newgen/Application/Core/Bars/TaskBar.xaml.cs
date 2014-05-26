@@ -10,7 +10,6 @@ using System.Windows.Media;
 using System.Windows.Threading;
 using libns.Native;
 using libns.UI;
-using Newgen.Controls;
 
 namespace Newgen {
 

@@ -68,7 +68,7 @@
 
 	<!--TextBlock Style-->
 	<Style x:Key="TextBlockStyle" TargetType="TextBlock">
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -79,7 +79,7 @@
 	<Style x:Key="LabelStyle" TargetType="{x:Type Label}">
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="IsTabStop" Value="False" />
 		<Setter Property="HorizontalContentAlignment" Value="Left" />
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
@@ -94,7 +94,7 @@
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type RepeatButton}">
-					<Rectangle Fill="{StaticResource TransparentBrush}" />
+					<Rectangle Fill="{StaticResource GeneralTransparentBrush}" />
 				</ControlTemplate>
 			</Setter.Value>
 		</Setter>
@@ -164,7 +164,7 @@
 	<!--Slider Style-->
 	<Style x:Key="SliderStyle" TargetType="{x:Type Slider}">
 		<Setter Property="Background" Value="Transparent" />
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="Stylus.IsPressAndHoldEnabled" Value="false" />
 		<Setter Property="Template">
 			<Setter.Value>
@@ -299,7 +299,7 @@
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="Padding" Value="10,2" />
 		<Setter Property="MinHeight" Value="30" />
 		<Setter Property="MinWidth" Value="30" />
@@ -329,7 +329,7 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBorderBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentControl">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
+											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GeneralLightForegroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -375,7 +375,7 @@
 
 	<!--GridSplitter Style-->
 	<Style x:Key="GridSplitterStyle" TargetType="{x:Type GridSplitter}">
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="Background" Value="{StaticResource GridSplitterBackgroundBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource GridSplitterBorderBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
@@ -549,7 +549,7 @@
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="Background" Value="{StaticResource TooltipBackgroundBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource TooltipBorderBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
@@ -574,7 +574,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Border Padding="{TemplateBinding Padding}">
-						<Grid Background="{StaticResource TransparentBrush}" SnapsToDevicePixels="False">
+						<Grid Background="{StaticResource GeneralTransparentBrush}" SnapsToDevicePixels="False">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="30" />
 								<RowDefinition Height="*" />
@@ -621,7 +621,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Border Padding="{TemplateBinding Padding}">
-						<Grid Background="{StaticResource TransparentBrush}" SnapsToDevicePixels="False">
+						<Grid Background="{StaticResource GeneralTransparentBrush}" SnapsToDevicePixels="False">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="30" />
 								<ColumnDefinition Width="*" />
@@ -668,7 +668,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Border Padding="{TemplateBinding Padding}">
-						<Grid Background="{StaticResource TransparentBrush}" SnapsToDevicePixels="False">
+						<Grid Background="{StaticResource GeneralTransparentBrush}" SnapsToDevicePixels="False">
 							<Grid.RowDefinitions>
 								<RowDefinition Height="30" />
 								<RowDefinition Height="*" />
@@ -715,7 +715,7 @@
 			<Setter.Value>
 				<ControlTemplate TargetType="{x:Type ToggleButton}">
 					<Border Padding="{TemplateBinding Padding}">
-						<Grid Background="{StaticResource TransparentBrush}" SnapsToDevicePixels="False">
+						<Grid Background="{StaticResource GeneralTransparentBrush}" SnapsToDevicePixels="False">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="30" />
 								<ColumnDefinition Width="*" />
@@ -751,7 +751,7 @@
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="HorizontalContentAlignment" Value="Stretch" />
 		<Setter Property="VerticalContentAlignment" Value="Stretch" />
@@ -798,7 +798,7 @@
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="Padding" Value="10,0,10,2" />
 		<Setter Property="MinHeight" Value="30" />
 		<Setter Property="MinWidth" Value="30" />
@@ -828,7 +828,7 @@
 											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBorderBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentControl">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
+											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GeneralLightForegroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -855,7 +855,7 @@
 											</DiscreteObjectKeyFrame>
 										</ObjectAnimationUsingKeyFrames>
 										<ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetProperty="Foreground" Storyboard.TargetName="ContentControl">
-											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
+											<DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GeneralLightForegroundBrush}" />
 										</ObjectAnimationUsingKeyFrames>
 									</Storyboard>
 								</VisualState>
@@ -897,7 +897,7 @@
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource GroupBoxBorderBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
 		<Setter Property="Padding" Value="5 7" />
@@ -918,7 +918,7 @@
 							<RowDefinition Height="*" />
 							<RowDefinition Height="6" />
 						</Grid.RowDefinitions>
-						<Border BorderBrush="{StaticResource TransparentBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" />
+						<Border BorderBrush="{StaticResource GeneralTransparentBrush}" BorderThickness="{TemplateBinding BorderThickness}" Background="{TemplateBinding Background}" Grid.ColumnSpan="4" Grid.Column="0" Grid.Row="1" Grid.RowSpan="3" />
 						<Border x:Name="Header" Grid.Column="1" Padding="10,5,10,0" Grid.Row="0" Grid.RowSpan="2">
 							<ContentPresenter ContentSource="Header" Height="30" RecognizesAccessKey="True" SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
 						</Border>

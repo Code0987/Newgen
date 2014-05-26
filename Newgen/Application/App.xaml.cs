@@ -132,14 +132,10 @@ namespace Newgen {
                     }));
                 });
                 notifier.ContextMenu.MenuItems.Add("Restart", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        Restart();
-                    }));
+                    App.Current.Dispatcher.BeginInvoke(new Action(Restart));
                 });
                 notifier.ContextMenu.MenuItems.Add("Close", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        Close();
-                    }));
+                    App.Current.Dispatcher.BeginInvoke(new Action(Close));
                 });
                 notifier.ShowBalloonTip(1000, "Newgen", "Loading ...", System.Windows.Forms.ToolTipIcon.Info);
             })));
@@ -161,7 +157,7 @@ namespace Newgen {
             E.HubClosing += new Action(() => {
                 if (Screen != null)
                     Screen.ZOrderHelper(true);
-                Helper.Delay(() => WinAPI.FlushMemory(), 250);
+                Helper.Delay(WinAPI.FlushMemory, 250);
             });
 
             // Load view
@@ -333,11 +329,13 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         internal static void Restart() {
-            var psi = new ProcessStartInfo();
-            psi.Arguments = "/C TIMEOUT /T 5 /NOBREAK && \"" + Assembly.GetEntryAssembly().Location + "\"";
-            psi.WindowStyle = ProcessWindowStyle.Hidden;
-            psi.CreateNoWindow = true;
-            psi.FileName = "cmd.exe";
+            var psi = new ProcessStartInfo
+            {
+                Arguments = "/C TIMEOUT /T 5 /NOBREAK && \"" + Assembly.GetEntryAssembly().Location + "\"",
+                WindowStyle = ProcessWindowStyle.Hidden,
+                CreateNoWindow = true,
+                FileName = "cmd.exe"
+            };
             Process.Start(psi);
             Close();
         }

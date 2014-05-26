@@ -14,9 +14,7 @@ using libns.Media.Imaging;
 using libns.Native;
 using libns.Threading;
 using Microsoft.Win32;
-using Newgen.Controls;
 using Newgen.Packages;
-using Newgen.Windows;
 
 namespace Newgen {
 

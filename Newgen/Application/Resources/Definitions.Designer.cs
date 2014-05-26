@@ -790,6 +790,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to TaskBar.
+        /// </summary>
+        public static string TaskBar {
+            get {
+                return ResourceManager.GetString("TaskBar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Newgen BlueShift.
         /// </summary>
         public static string Text_App {

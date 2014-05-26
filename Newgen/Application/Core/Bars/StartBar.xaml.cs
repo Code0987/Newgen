@@ -8,11 +8,8 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using libns.Native;
 using Microsoft.Win32;
-using Newgen.Controls;
-using Newgen.Hubs;
 using Newgen.Packages;
 using Newgen.Packages.AppLink;
-using Newgen.Windows;
 
 namespace Newgen {
 
@@ -278,8 +275,8 @@ namespace Newgen {
                     ((Window)window).Activate();
                     ((Window)window).Show();
                 }
-                //TODO:foreach (var c in App.Screen.TileControls)
-                //    Helper.Animate(c, OpacityProperty, 250, 0, 1);
+                foreach (var tileControl in App.Screen.TilesControl.TileControls)
+                    Helper.Animate(tileControl, OpacityProperty, 250, 0, 1);
             }
         }
 

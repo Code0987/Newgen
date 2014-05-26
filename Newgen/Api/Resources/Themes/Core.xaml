@@ -9,12 +9,20 @@
         <ResourceDictionary Source="Palette.xaml" />
         <ResourceDictionary Source="Fonts.xaml" />
     </ResourceDictionary.MergedDictionaries>
-
-    <SolidColorBrush x:Key="ForegroundBrush" Color="{StaticResource Color_001}" />
-    <SolidColorBrush x:Key="LightForegroundBrush" Color="{StaticResource Color_009}" />
-    <SolidColorBrush x:Key="TransparentBrush" Color="{StaticResource Color_016}" />
+    
+    <!--  General Brushes  -->
     <SolidColorBrush x:Key="DisabledVisualElement" Color="{StaticResource Color_012}" />
     <SolidColorBrush x:Key="ValidationErrorElement" Color="{StaticResource Color_028}" />
+    
+    <SolidColorBrush x:Key="GeneralForegroundBrush" Color="{StaticResource Color_001}" />
+    <SolidColorBrush x:Key="GeneralLightForegroundBrush" Color="{StaticResource Color_009}" />
+    <SolidColorBrush x:Key="GeneralTransparentBrush" Color="{StaticResource Color_016}" />
+    <SolidColorBrush x:Key="GeneralBackgroundBrush" Color="{StaticResource Color_008}" />
+    <SolidColorBrush x:Key="GeneralBorderBrush" Color="{StaticResource Color_004}" />
+    <SolidColorBrush x:Key="GeneralHoverBackgroundBrush" Color="{StaticResource Color_006}" />
+    <SolidColorBrush x:Key="GeneralHoverBorderBrush" Color="{StaticResource Color_003}" />
+    <SolidColorBrush x:Key="GeneralPressedBackgroundBrush" Color="{StaticResource Color_024}" />
+    <SolidColorBrush x:Key="GeneralPressedBorderBrush" Color="{StaticResource Color_024}" />
 
     <!--  Scrollbar Brushes  -->
     <SolidColorBrush x:Key="HScrollbarThumbBackgroundBrush" Color="{StaticResource Color_003}" />
@@ -196,7 +204,7 @@
             <Border CornerRadius="2">
                 <TextBlock MaxWidth="250"
                            Margin="8,4,8,4"
-                           Foreground="{StaticResource LightForegroundBrush}"
+                           Foreground="{StaticResource GeneralLightForegroundBrush}"
                            Text="{Binding (Validation.Errors)[0].ErrorContent}"
                            TextWrapping="Wrap"
                            UseLayoutRounding="false" />
@@ -211,7 +219,7 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="BorderBrush" Value="{StaticResource ComboBoxToggleButtonBorderBrush}" />
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="MinHeight" Value="30" />
@@ -271,7 +279,7 @@
                             <ColumnDefinition />
                             <ColumnDefinition Width="30" />
                         </Grid.ColumnDefinitions>
-                        <Rectangle x:Name="Bd" Grid.ColumnSpan="2" Fill="{StaticResource TransparentBrush}" />
+                        <Rectangle x:Name="Bd" Grid.ColumnSpan="2" Fill="{StaticResource GeneralTransparentBrush}" />
                         <Grid Grid.Column="1">
                             <Rectangle Width="1"
                                        Margin="-1,5,0,5"
@@ -308,8 +316,8 @@
         <Setter Property="Padding" Value="6,0" />
         <Setter Property="HorizontalContentAlignment" Value="Left" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource GeneralTransparentBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Template">
             <Setter.Value>
@@ -387,7 +395,7 @@
                                 <VisualState x:Name="BeforeUnloaded" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Fill="{StaticResource TransparentBrush}" />
+                        <Rectangle Fill="{StaticResource GeneralTransparentBrush}" />
                         <Rectangle x:Name="fillColor"
                                    Fill="{StaticResource ComboBoxItemHoverBackgroundBrush}"
                                    IsHitTestVisible="False"
@@ -411,7 +419,7 @@
                                         Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                        Foreground="{StaticResource LightForegroundBrush}"
+                                        Foreground="{StaticResource GeneralLightForegroundBrush}"
                                         Visibility="Collapsed">
                             <ContentPresenter x:Name="contentPresenter1" />
                         </ContentControl>
@@ -428,8 +436,8 @@
 
     <!--  ListBoxItem Style  -->
     <Style x:Key="ListBoxItemStyle" TargetType="ListBoxItem">
-        <Setter Property="Background" Value="{StaticResource TransparentBrush}" />
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Background" Value="{StaticResource GeneralTransparentBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -536,7 +544,7 @@
 
     <!--  CheckBoxStyle  -->
     <Style x:Key="CheckBoxStyle" TargetType="CheckBox">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -638,7 +646,7 @@
                             <ColumnDefinition Width="30" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Fill="{StaticResource TransparentBrush}" />
+                        <Rectangle Fill="{StaticResource GeneralTransparentBrush}" />
                         <Rectangle x:Name="normal"
                                    Width="18"
                                    Height="18"
@@ -715,7 +723,7 @@
 
     <!--  RadioButton Style  -->
     <Style x:Key="RadioButtonStyle" TargetType="RadioButton">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
         <Setter Property="UseLayoutRounding" Value="True" />
@@ -810,7 +818,7 @@
                             <ColumnDefinition Width="18" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Rectangle Margin="-6,0" Fill="{StaticResource TransparentBrush}" />
+                        <Rectangle Margin="-6,0" Fill="{StaticResource GeneralTransparentBrush}" />
                         <Ellipse x:Name="normal"
                                  Width="18"
                                  Height="18"
@@ -879,7 +887,7 @@
 
     <!--  ButtonStyle  -->
     <Style x:Key="ButtonStyle" TargetType="Button">
-        <Setter Property="Foreground" Value="{StaticResource ForegroundBrush}" />
+        <Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
         <Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
@@ -915,7 +923,7 @@
                                             <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource ButtonPressedBorderBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                         <ObjectAnimationUsingKeyFrames Duration="0" Storyboard.TargetName="ContentControl" Storyboard.TargetProperty="Foreground">
-                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource LightForegroundBrush}" />
+                                            <DiscreteObjectKeyFrame KeyTime="0" Value="{StaticResource GeneralLightForegroundBrush}" />
                                         </ObjectAnimationUsingKeyFrames>
                                     </Storyboard>
                                 </VisualState>

@@ -1,5 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO;
@@ -15,15 +14,13 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using iFramework.Security.Licensing;
-using iFramework.Security.Licensing.UI;
 using libns;
 using libns.Native;
 using libns.Threading;
-using libns.UI;
 using Microsoft.Win32;
 using Newgen.Resources;
 
-namespace Newgen.Windows {
+namespace Newgen {
 
     /// <summary>
     /// Interaction logic for Options.xaml

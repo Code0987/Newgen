@@ -417,4 +417,7 @@
   <data name="TileContextMenuRemoveItem" xml:space="preserve">
     <value>Remove (Restart needed !)</value>
   </data>
+  <data name="TaskBar" xml:space="preserve">
+    <value>TaskBar</value>
+  </data>
 </root>

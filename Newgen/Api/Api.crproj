@@ -1,0 +1,15 @@
+<project outputDir="D:\Projects\Workspaces\Newgen\Newgen\Api\bin\Debug\!Secure" snKey="D:\Projects\Workspaces\Newgen\Resources\Newgen.snk" debug="true" xmlns="http://confuser.codeplex.com">
+  <plugin path="D:\Data\Apps\Other\HackTools\Confuser\Plugins\MemoryOptimizer.dll" />
+  <rule pattern=".*" preset="aggressive">
+    <confusion id="anti debug" />
+    <confusion id="anti dump" />
+    <confusion id="anti ildasm" />
+    <confusion id="anti tamper" />
+    <confusion id="const encrypt" />
+    <confusion id="ctrl flow" />
+    <confusion id="memopt" />
+    <confusion id="rename" />
+  </rule>
+  <packer id="compressor" />
+  <assembly path="D:\Projects\Workspaces\Newgen\Newgen\Api\obj\Debug\Newgen.Api.dll" />
+</project>

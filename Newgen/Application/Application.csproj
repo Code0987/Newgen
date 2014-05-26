@@ -164,13 +164,10 @@
       <DependentUpon>AppLinkPackageAddressBarWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\DragScrollViewer.cs" />
-    <Compile Include="Controls\LockScreen.xaml.cs">
-      <DependentUpon>LockScreen.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Core\Screen.xaml.cs">
       <DependentUpon>Screen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Controls\SettingsHub.xaml.cs">
+    <Compile Include="Core\SettingsHub.xaml.cs">
       <DependentUpon>SettingsHub.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Bars\StartBar.xaml.cs">
@@ -392,15 +389,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\LockScreen.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Core\Screen.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Controls\SettingsHub.xaml">
+    <Page Include="Core\SettingsHub.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

@@ -1,6 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <root>
-  <!--
+  <!-- 
     Microsoft ResX Schema 
     
     Version 2.0
@@ -58,7 +58,7 @@
     value   : The object must be serialized into a byte array 
             : using a System.ComponentModel.TypeConverter
             : and then encoded with base64 encoding.
- -->
+    -->
   <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
     <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
     <xsd:element name="root" msdata:IsDataSet="true">
@@ -401,5 +401,20 @@
   </data>
   <data name="AppLinkTileOptionsHubTitle" xml:space="preserve">
     <value>एप्लिकेशन लिंक समायोजित ...</value>
+  </data>
+  <data name="PackageRemove" xml:space="preserve">
+    <value>Remove</value>
+  </data>
+  <data name="PackageDisable" xml:space="preserve">
+    <value>Disable</value>
+  </data>
+  <data name="PackageEnable" xml:space="preserve">
+    <value>Enable</value>
+  </data>
+  <data name="TileContextMenuDisableItem" xml:space="preserve">
+    <value>Unpin</value>
+  </data>
+  <data name="TileContextMenuRemoveItem" xml:space="preserve">
+    <value>Remove (Restart needed !)</value>
   </data>
 </root>

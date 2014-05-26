@@ -213,8 +213,8 @@ namespace Newgen {
         }
 
         private void Initialize() {
-            this.Source = Settings.Current;
-            this.Mode = BindingMode.TwoWay;
+            Source = Settings.Current;
+            Mode = BindingMode.TwoWay;
         }
     }
     

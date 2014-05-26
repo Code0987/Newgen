@@ -4,8 +4,8 @@
                     xmlns:m="clr-namespace:Newgen">
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Newgen.Api;component/Themes/Generic.xaml" />
-        <ResourceDictionary Source="/References/LicenseControl.Styles.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Newgen.Api;component/Themes/Generic.xaml" />
+        <ResourceDictionary Source="pack://application:,,,/Newgen;component/References/LicenseControl.Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
     
     <!--DragScrollViewer -->

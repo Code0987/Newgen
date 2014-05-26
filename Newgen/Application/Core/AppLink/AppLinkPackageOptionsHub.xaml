@@ -26,11 +26,11 @@
         <Grid DockPanel.Dock="Bottom">
             <StackPanel Margin="{StaticResource HubFooterMargin}" HorizontalAlignment="Right" Orientation="Horizontal">
                 <Button Name="OkButton"
-                        Margin="{StaticResource HubControlMargin}"
+                        Margin="5"
                         Click="OkButton_Click"
                         Content="{x:Static r:Definitions.Text_Apply}" />
                 <Button Name="CancelButton"
-                        Margin="{StaticResource HubControlMargin}"
+                        Margin="5"
                         Click="CancelButton_Click"
                         Content="{x:Static r:Definitions.Text_Cancel}" />
             </StackPanel>
@@ -54,7 +54,7 @@
                        VerticalAlignment="Top"
                        Source="/Resources/Default.png"
                        Stretch="None" />
-                <Button Margin="{StaticResource HubControlMargin}"
+                <Button Margin="5"
                         HorizontalAlignment="Stretch"
                         Click="ChangeIconButton_Click"
                         Content="change icon image ?" />

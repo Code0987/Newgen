@@ -61,11 +61,7 @@ namespace Newgen.Packages {
         /// <value>The current.</value>
         /// <remarks>...</remarks>
         public static PackageManager Current {
-            get {
-                if (current == null)
-                    current = new PackageManager();
-                return current;
-            }
+            get { return current ?? (current = new PackageManager()); }
         }
 
         /// <summary>
@@ -81,11 +77,7 @@ namespace Newgen.Packages {
         /// <value>The cache.</value>
         /// <remarks>...</remarks>
         public List<Package> Packages {
-            get {
-                if (packages == null)
-                    packages = new List<Package>();
-                return packages;
-            }
+            get { return packages ?? (packages = new List<Package>()); }
         }
 
         /// <summary>
@@ -182,7 +174,7 @@ namespace Newgen.Packages {
         /// <returns>Package.</returns>
         /// <remarks>...</remarks>
         public Package Get(string packageId) {
-            return Packages.Where(f => f.Metadata.Id.Equals(packageId)).FirstOrDefault();
+            return Packages.FirstOrDefault(f => f.Metadata.Id.Equals(packageId));
         }
 
         /// <summary>
@@ -245,7 +237,7 @@ namespace Newgen.Packages {
         /// <remarks>...</remarks>
         public bool IsEnabled(string packageId) {
             var package = Get(packageId);
-            return (package != null ? IsEnabled(package) : false);
+            return (package != null && IsEnabled(package));
         }
 
         /// <summary>
@@ -265,7 +257,7 @@ namespace Newgen.Packages {
         /// <returns><c>true</c> if the specified package identifier is cached; otherwise, <c>false</c>.</returns>
         /// <remarks>...</remarks>
         public bool IsInitialized(string packageId) {
-            return Packages.Where(f => f.Metadata.Id.Equals(packageId)).Any();
+            return Packages.Any(f => f.Metadata.Id.Equals(packageId));
         }
 
         /// <summary>
@@ -281,13 +273,9 @@ namespace Newgen.Packages {
             if (metadata == null)
                 return false;
             var feed = InternalHelper.FeedsAggregator.CachedFeeds
-                .OrderByDescending(f => f.LastUpdatedTime)
-                .Where(f => f.Id.Equals(packageId))
-                .FirstOrDefault();
-            if (feed != null)
-                if (feed.LastUpdatedTime > metadata.Version)
-                    return true;
-            return false;
+                .OrderByDescending(f => f.LastUpdatedTime).FirstOrDefault(f => f.Id.Equals(packageId));
+            if (feed == null) return false;
+            return feed.LastUpdatedTime > metadata.Version;
         }
         /// <summary>
         /// Loads the specified package identifier.
@@ -298,7 +286,7 @@ namespace Newgen.Packages {
             if (!IsInitialized(packageId))
                 return;
 
-            Load(Packages.Where(f => f.Metadata.Id.Equals(packageId)).First());
+            Load(Packages.First(f => f.Metadata.Id.Equals(packageId)));
         }
 
         /// <summary>
@@ -445,7 +433,7 @@ namespace Newgen.Packages {
             if (!IsInitialized(packageId))
                 return;
 
-            Unload(Packages.Where(f => f.Metadata.Id.Equals(packageId)).First());
+            Unload(Packages.First(f => f.Metadata.Id.Equals(packageId)));
         }
 
         /// <summary>

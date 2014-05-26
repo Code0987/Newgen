@@ -8,7 +8,6 @@ using System.Windows.Interop;
 using System.Windows.Media;
 using libns.Native;
 using libns.UI;
-using Newgen.Controls;
 
 namespace Newgen {
 

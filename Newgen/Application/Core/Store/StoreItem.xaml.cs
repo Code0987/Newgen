@@ -7,38 +7,14 @@ using System.Windows.Media.Imaging;
 using System;
 using Newgen.Packages;
 
-namespace Newgen.Controls {
+namespace Newgen {
 
     /// <summary>
     /// Interaction logic for StoreItem.xaml
     /// </summary>
     public partial class StoreItem : UserControl {
-        private SyndicationItem feedItem;
-
-        /// <summary>
-        /// Gets or sets the feed item.
-        /// </summary>
-        /// <value>The feed item.</value>
-        /// <remarks>...</remarks>
-        public SyndicationItem FeedItem {
-            get { return feedItem; }
-            set { feedItem = value; }
-        }
-
-        private PackageMetadata packageMetadata;
-
-        /// <summary>
-        /// Gets the package metadata.
-        /// </summary>
-        /// <value>The package metadata.</value>
-        /// <remarks>...</remarks>
-        public PackageMetadata PackageMetadata {
-            get {
-                if (packageMetadata == null)
-                    packageMetadata = InternalHelper.PackageFeedItemToMetadata(feedItem);
-                return packageMetadata;
-            }
-        }
+        internal readonly SyndicationItem FeedItem;
+        internal readonly PackageMetadata PackageMetadata;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StoreItem" /> class.
@@ -46,36 +22,21 @@ namespace Newgen.Controls {
         /// <param name="feedItem">The feed item.</param>
         /// <remarks>...</remarks>
         public StoreItem(SyndicationItem feedItem) {
-            this.feedItem = feedItem;
+            FeedItem = feedItem;
+            PackageMetadata = InternalHelper.PackageFeedItemToMetadata(feedItem);
 
             InitializeComponent();
-
-            IconImage.Source = FeedItem.GetPackageLogo();
-            DataContext = PackageMetadata;
         }
 
         /// <summary>
-        /// Users the control mouse left button down.
+        /// Initializes a new instance of the <see cref="StoreItem"/> class.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
+        /// <param name="packageMetadata">The package metadata.</param>
         /// <remarks>...</remarks>
-        private void UserControlMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            (base.Resources["MouseDownAnim"] as Storyboard).Begin();
-        }
+        public StoreItem(PackageMetadata packageMetadata) {
+            PackageMetadata = packageMetadata;
 
-        /// <summary>
-        /// Users the control mouse left button up.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
-        /// <remarks>...</remarks>
-        private void UserControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            (base.Resources["MouseUpAnim"] as Storyboard).Begin();
+            InitializeComponent();
         }
 
         /// <summary>
@@ -86,41 +47,111 @@ namespace Newgen.Controls {
         /// The <see cref="System.Windows.RoutedEventArgs" /> instance containing the event data.
         /// </param>
         /// <remarks>...</remarks>
-        private void UserControl_Loaded(object sender, System.Windows.RoutedEventArgs e) {
+        private void OnLoaded(object sender, System.Windows.RoutedEventArgs e) {
+            // Load UI
+            DataContext = PackageMetadata;
 
-            var isAd = false;
-            var isProgramUpdate = false;
-            var isPackage = false;
-
-            isProgramUpdate =
-                FeedItem.Categories.Any(f => f.Name.Equals("Program"))
-                &&
-                FeedItem.Categories.Any(f => f.Name.Equals("Update"))
-                ;
-            isPackage =
-                FeedItem.Categories.Any(f => f.Name.Equals("Package"))
-                ;
-
-            var getFile = FeedItem.Links.FirstOrDefault(f => f.MediaType != null && f.MediaType.Contains("application/octet-stream"));
-            var getFileUri = (Uri)null;
-            if (getFile != null)
-                getFileUri = InternalHelper.GetUpdatesUrlFor(getFile.Uri.OriginalString);
-
-            isAd = (
-                !isProgramUpdate && !isPackage
-                ||
-                isProgramUpdate && isPackage // Invalid config, so just classify as ad
-                )
-                &&
-                getFileUri != null
-                ;
-
-            if (isAd) {
+            // Load other
+            if (FeedItem == null) { // Local package
                 InstallButton.IsEnabled = false;
-                InstallButton.Visibility = System.Windows.Visibility.Hidden;
+                InstallButton.Visibility = System.Windows.Visibility.Collapsed;
                 UnInstallButton.IsEnabled = false;
-                UnInstallButton.Visibility = System.Windows.Visibility.Hidden;
+                UnInstallButton.Visibility = System.Windows.Visibility.Collapsed;
             }
+            else { // Remote package
+
+                IconImage.Source = FeedItem.GetPackageLogo();
+
+                var isAd = false;
+                var isProgramUpdate = false;
+                var isPackage = false;
+
+                isProgramUpdate =
+                    FeedItem.Categories.Any(f => f.Name.Equals("Program"))
+                    &&
+                    FeedItem.Categories.Any(f => f.Name.Equals("Update"))
+                    ;
+                isPackage =
+                    FeedItem.Categories.Any(f => f.Name.Equals("Package"))
+                    ;
+
+                var getFile = FeedItem.Links.FirstOrDefault(f => f.MediaType != null && f.MediaType.Contains("application/octet-stream"));
+                var getFileUri = (Uri)null;
+                if (getFile != null)
+                    getFileUri = InternalHelper.GetUpdatesUrlFor(getFile.Uri.OriginalString);
+
+                isAd = (
+                    !isProgramUpdate && !isPackage
+                    ||
+                    isProgramUpdate && isPackage // Invalid config, so just classify as ad
+                    )
+                    &&
+                    getFileUri != null
+                    ;
+
+                if (isAd) {
+                    InstallButton.IsEnabled = false;
+                    InstallButton.Visibility = System.Windows.Visibility.Collapsed;
+                    UnInstallButton.IsEnabled = false;
+                    UnInstallButton.Visibility = System.Windows.Visibility.Collapsed;
+                    EnDisableButton.IsEnabled = false;
+                    EnDisableButton.Visibility = System.Windows.Visibility.Collapsed;
+                }
+            }
+        }
+
+        /// <summary>
+        /// Users the control mouse left button down.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
+        /// </param>
+        /// <remarks>...</remarks>
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            (Resources["MouseDownAnimation"] as Storyboard).Begin();
+        }
+
+        /// <summary>
+        /// Users the control mouse left button up.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
+        /// </param>
+        /// <remarks>...</remarks>
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            (Resources["MouseUpAnimation"] as Storyboard).Begin();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:InstallButtonClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
+
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:UnInstallButtonClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnUnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
+
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:EnDisableButtonClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnEnDisableButtonClick(object sender, System.Windows.RoutedEventArgs e) {
+
         }
     }
 }
