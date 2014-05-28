@@ -2,6 +2,7 @@
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using libns.Media.Animation;
 
 namespace Newgen
 {
@@ -41,7 +42,7 @@ namespace Newgen
         {
             this.TextBox_Title.Text = this.tileControlsGroupBarSettings.Title;
 
-            Helper.Animate(this.Background, SolidColorBrush.OpacityProperty, 250, 0.0, true);
+            AnimationExtensions.Animate(this.Background, SolidColorBrush.OpacityProperty, 250, 0.0, true);
         }
 
         /// <summary>
@@ -51,9 +52,9 @@ namespace Newgen
         /// <param name="e">The <see cref="System.Windows.Input.MouseEventArgs"/> instance containing the event data.</param>
         private void UserControl_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Helper.Animate(this.Background, SolidColorBrush.OpacityProperty, 250, 0.5, true);
-            Helper.Animate(this.TextBlock_Add, TextBlock.OpacityProperty, 250, 1.0, true);
-            Helper.Animate(this.TextBlock_Delete, TextBlock.OpacityProperty, 250, 1.0, true);
+            AnimationExtensions.Animate(this.Background, SolidColorBrush.OpacityProperty, 250, 0.5, true);
+            AnimationExtensions.Animate(this.TextBlock_Add, TextBlock.OpacityProperty, 250, 1.0, true);
+            AnimationExtensions.Animate(this.TextBlock_Delete, TextBlock.OpacityProperty, 250, 1.0, true);
         }
 
         /// <summary>
@@ -63,9 +64,9 @@ namespace Newgen
         /// <param name="e">The <see cref="System.Windows.Input.MouseEventArgs"/> instance containing the event data.</param>
         private void UserControl_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e)
         {
-            Helper.Animate(this.Background, SolidColorBrush.OpacityProperty, 450, 0.0, true);
-            Helper.Animate(this.TextBlock_Add, TextBlock.OpacityProperty, 350, 0.0, true);
-            Helper.Animate(this.TextBlock_Delete, TextBlock.OpacityProperty, 350, 0.0, true);
+            AnimationExtensions.Animate(this.Background, SolidColorBrush.OpacityProperty, 450, 0.0, true);
+            AnimationExtensions.Animate(this.TextBlock_Add, TextBlock.OpacityProperty, 350, 0.0, true);
+            AnimationExtensions.Animate(this.TextBlock_Delete, TextBlock.OpacityProperty, 350, 0.0, true);
         }
 
         /// <summary>

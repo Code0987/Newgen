@@ -72,7 +72,7 @@ namespace Newgen {
                 if (current == null) {
                     // 1. Check settings first
                     try {
-                        current = E.Config.LoadJavascriptFromFile<Settings>();
+                        current = Api.Config.LoadJavascriptFromFile<Settings>();
                         if (current == null)
                             throw new InvalidOperationException("Loading settings failed.");
                     }
@@ -122,8 +122,8 @@ namespace Newgen {
             ProvideUsageData = true;
             StartText = Definitions.Text_DefaultTilesScreenTitle;
 
-            MinTileWidth = 180.0;
-            MinTileHeight = 180.0;
+            MinTileWidth = 90.0;
+            MinTileHeight = 90.0;
 
             TimeMode = 1;
             LockScreenTime = -1;
@@ -142,33 +142,15 @@ namespace Newgen {
 
             TaskBarProcessExclusionList = new List<string>();
         }
-
-        //public void Save(string path) {
-        //    LoadedWidgets.Clear();
-        //    foreach (var w in App.Screen.TileControls) {
-        //        if (w.WidgetProxy.Path != null && (w.WidgetProxy.Path.Contains(@"\") || w.WidgetProxy.Path.Contains(@"/")))
-        //            w.WidgetProxy.Path = w.WidgetProxy.Path.Replace(E.PackagesRoot, "");
-        //        LoadedWidgets.Add(w.WidgetProxy);
-        //    }
-        //    base.Save(path);
-        //}
-
+        
         public void Save() {
-            this.SaveJavascriptToFile(E.Config);
+            this.SaveJavascriptToFile(Api.Config);
         }
 
         internal void Update() {
             // Update
 
             if (!IsProMode) {
-                //try {
-                //    var legacyWidgets = LoadedWidgets.Where(f => f.Path != null && f.Path.EndsWith(".dll"));
-                //    var toRemove = legacyWidgets.Count() > 6 ? legacyWidgets.Take(legacyWidgets.Count() - 7) : null;
-                //    if (toRemove != null)
-                //        foreach (var widget in toRemove)
-                //            LoadedWidgets.Remove(widget);
-                //}
-                //catch { }
                 SlideShowImages.Clear();
 
                 BackgroundColor = Color.FromRgb(55, 55, 55);
@@ -193,12 +175,6 @@ namespace Newgen {
             // Update environment
 
             Definitions.Culture = Language.ResetCulture();
-
-            E.Language = Language;
-            E.TileSpacing = TileSpacing;
-            E.MinTileWidth = MinTileWidth;
-            E.MinTileHeight = MinTileHeight;
-            E.BackgroundColor = BackgroundColor;
         }
     }
 

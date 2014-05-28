@@ -48,7 +48,7 @@ namespace Newgen
     /// <summary>
     /// Newgen's runtime shared data
     /// </summary>
-    public static class E
+    public static class Api
     {
         /// <summary>
         /// Message for network related problems
@@ -69,16 +69,6 @@ namespace Newgen
         /// Internal.
         /// </summary>
         public const string MSG_ER_SRVER = "ERROR !\n\nAn error occurred while activating Newgen Local Server.\nPlease report this problem.\nThis will cause many features of Newgen to function incorrectly.";
-
-        /// <summary>
-        /// Tiles size / scale factor
-        /// </summary>
-        public const double TilesSizeFactor = 1d;
-
-        /// <summary>
-        /// Minimum size of any tile
-        /// </summary>
-        public const double MinTilesSize = 150d;
 
         /// <summary>
         /// Image formats supported by Newgen
@@ -129,73 +119,7 @@ namespace Newgen
         /// Gets the user image.
         /// </summary>
         public static string UserImage { get { return CacheRoot + "UserThumb.png"; } }
-
-        /// <summary>
-        /// Gets or sets the rows count.
-        /// </summary>
-        /// <value>
-        /// The rows count.
-        /// </value>
-        public static int RowsCount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the columns count.
-        /// </summary>
-        /// <value>
-        /// The columns count.
-        /// </value>
-        public static int ColumnsCount { get; set; }
-
-        /// <summary>
-        /// Gets or sets the margin.
-        /// </summary>
-        /// <value>
-        /// The margin.
-        /// </value>
-        public static Thickness Margin { get; set; }
-
-        /// <summary>
-        /// Gets or sets the language.
-        /// </summary>
-        /// <value>
-        /// The language.
-        /// </value>
-        public static string Language { get; set; }
-
-        /// <summary>
-        /// Gets or sets the color of the background.
-        /// </summary>
-        /// <value>
-        /// The color of the background.
-        /// </value>
-        public static Color BackgroundColor { get; set; }
-
-        /// <summary>
-        /// Gets or sets the animation time precision.
-        /// </summary>
-        /// <value>
-        /// The animation time precision.
-        /// </value>
-        public static int AnimationTimePrecision { get; set; }
-
-        /// <summary>
-        /// Gets or sets the tile spacing.
-        /// </summary>
-        /// <value>
-        /// The tile spacing.
-        /// </value>
-        public static int TileSpacing { get; set; }
-
-        /// <summary>
-        /// Gets or sets the min height of the tile.
-        /// </summary>
-        public static double MinTileHeight { get; set; }
-
-        /// <summary>
-        /// Gets or sets the min width of the tile.
-        /// </summary>
-        public static double MinTileWidth { get; set; }
-
+                
         /// <summary>
         /// Gets or sets the objects.
         /// </summary>
@@ -222,15 +146,11 @@ namespace Newgen
         public static SimpleWindowsMessaging<EMessage> Messenger { get; set; }
         
         /// <summary>
-        /// Initializes the <see cref="E"/> class.
+        /// Initializes the <see cref="Api"/> class.
         /// </summary>
-        static E()
+        static Api()
         {
             Messenger = new SimpleWindowsMessaging<EMessage>();
-
-            Margin = new Thickness(0, 0, 0, 0);
-
-            AnimationTimePrecision = 1200;
 
             Objects = new Dictionary<string, object>();
         }
@@ -262,28 +182,6 @@ namespace Newgen
                     HubClosing.Invoke();
                     break;
             }
-        }
-
-        /// <summary>
-        /// Creates the settings path for package.
-        /// </summary>
-        /// <param name="packagename">The packagename.</param>
-        /// <returns>The String.</returns>
-        /// <remarks>...</remarks>
-        public static string CreateSettingsPathForWidget(string packagename)
-        {
-            return CacheRoot + packagename + ".settings";
-        }
-
-        /// <summary>
-        /// Creates the content of the absolute path for package.
-        /// </summary>
-        /// <param name="packageId">The package identifier.</param>
-        /// <param name="relativePath">The relative path.</param>
-        /// <returns>System.String.</returns>
-        /// <remarks>...</remarks>
-        public static string CreateAbsolutePathForPackageContent(string packageId, string relativePath = "") {
-            return PackagesRoot + packageId + "\\" + relativePath;
         }
 
         /// <summary>
@@ -348,60 +246,30 @@ namespace Newgen
                 File.Delete(PackagesRoot + packagename + "\\Shared.data");
         }
 
+
         /// <summary>
-        /// Gets the bitmap.
+        /// Shows the error message.
         /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns></returns>
-        public static BitmapSource GetBitmap(string path)
-        {
-            if(!File.Exists(path))
-                return null;
-            var ms = new MemoryStream();
-            var bi = new BitmapImage();
-            try
-            {
-                var bytArray = File.ReadAllBytes(path);
-                ms.Write(bytArray, 0, bytArray.Length);
-                ms.Position = 0;
-                bi.BeginInit();
-                bi.CacheOption = BitmapCacheOption.OnLoad;
-                bi.StreamSource = ms;
-                bi.EndInit();
-                bi.Freeze();
-                return bi;
-            }
-            catch
-            {
-                return null;
-            }
-            finally
-            {
-                ms.Dispose();
-            }
+        /// <param name="message">The message.</param>
+        public static void ShowErrorMessage(string message) {
+            MessageBox.Show(message, "// Newgen / : Error", MessageBoxButton.OK, MessageBoxImage.Exclamation);
         }
 
-        private static List<MediaPlayer> mediaplayers = new List<MediaPlayer>();
+        /// <summary>
+        /// Shows the info message.
+        /// </summary>
+        /// <param name="message">The message.</param>
+        public static void ShowInfoMessage(string message) {
+            MessageBox.Show(message, "// Newgen / : Information", MessageBoxButton.OK, MessageBoxImage.Information);
+        }
 
         /// <summary>
-        /// Plays the specified media source.
+        /// Shows the QA message.
         /// </summary>
-        /// <param name="source">The source.</param>
-        public static void Play(Uri source)
-        {
-            try
-            {
-                var mp = new MediaPlayer()
-                {
-                    Volume = 1.0
-                };
-                mediaplayers.Add(mp);
-                mp.MediaEnded += (s, e) => { try { mediaplayers.Remove(mp); } catch { } };
-                mp.MediaFailed += (s, e) => { try { mediaplayers.Remove(mp); } catch { } };
-                mp.MediaOpened += (s, e) => { mp.Play(); };
-                mp.Open(source);
-            }
-            catch { }
+        /// <param name="message">The message.</param>
+        /// <returns></returns>
+        public static MessageBoxResult ShowQAMessage(string message) {
+            return MessageBox.Show(message, "// Newgen / : ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
     }
 }

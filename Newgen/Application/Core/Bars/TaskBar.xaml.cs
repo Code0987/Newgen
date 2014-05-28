@@ -8,7 +8,9 @@ using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Threading;
+using libns.Media.Animation;
 using libns.Native;
+using libns.Threading;
 using libns.UI;
 
 namespace Newgen {
@@ -77,13 +79,13 @@ namespace Newgen {
                     sbi.Handles.Add(hWnd);
                     isadded = true;
 
-                    Helper.Animate(sbi, OpacityProperty, 200, 0, 1, 0.3, 0.7);
+                    AnimationExtensions.Animate(sbi, OpacityProperty, 200, 0, 1, 0.3, 0.7);
                 }
             }
             if (!isadded) {
                 var icon = new TaskBarItem(this, hWnd);
                 ItemsContainer.Children.Add(icon);
-                Helper.Animate(icon, OpacityProperty, 200, 0, 1, 0.3, 0.7);
+                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 1, 0.3, 0.7);
             }
         }
 
@@ -94,8 +96,8 @@ namespace Newgen {
         /// <remarks>...</remarks>
         internal void RemoveIcon(TaskBarItem icon) {
             if (icon != null) {
-                Helper.Animate(icon, OpacityProperty, 200, 0, 0.3, 0.7);
-                Helper.Delay(() => { ItemsContainer.Children.Remove(icon); }, 205);
+                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 0.3, 0.7);
+                ThreadingExtensions.LazyInvokeThreadSafe(() => { ItemsContainer.Children.Remove(icon); }, 205);
             }
         }
 

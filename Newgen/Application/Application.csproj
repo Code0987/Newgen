@@ -137,6 +137,13 @@
     <Compile Include="Core\Bars\DWMPreviewPopup.xaml.cs">
       <DependentUpon>DWMPreviewPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Notifications\NotificationsPackage.cs" />
+    <Compile Include="Core\Notifications\NotificationsPackageTile.xaml.cs">
+      <DependentUpon>NotificationsPackageTile.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Notifications\NotificationsPackageTileItem.xaml.cs">
+      <DependentUpon>NotificationsPackageTileItem.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Core\Parts\WaitWindow.xaml.cs">
       <DependentUpon>WaitWindow.xaml</DependentUpon>
     </Compile>
@@ -354,6 +361,14 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Core\Bars\DWMPreviewPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Notifications\NotificationsPackageTile.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Notifications\NotificationsPackageTileItem.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

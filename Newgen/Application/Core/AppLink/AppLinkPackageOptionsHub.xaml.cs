@@ -86,7 +86,7 @@ namespace Newgen.Packages.AppLink {
         /// <remarks>...</remarks>
         private void ChangeIconButton_Click(object sender, System.Windows.RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
-            dialog.Filter = E.ImageFilter;
+            dialog.Filter = Api.ImageFilter;
             if (!(bool)dialog.ShowDialog())
                 return;
 
@@ -96,7 +96,7 @@ namespace Newgen.Packages.AppLink {
                 IconImage.Source = ((AppLinkPackageTile)package.Tile).Icon.Source;
             }
             catch (Exception) {
-                MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
             }
         }
     }

@@ -12,6 +12,7 @@ using libns;
 using libns.Applied;
 using libns.Language;
 using libns.Native;
+using libns.Threading;
 using Newgen.Packages;
 
 namespace Newgen {
@@ -90,7 +91,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public App() {
-            E.Init();
+            Api.Init();
         }
 
         /// <summary>
@@ -139,7 +140,6 @@ namespace Newgen {
                 });
                 notifier.ShowBalloonTip(1000, "Newgen", "Loading ...", System.Windows.Forms.ToolTipIcon.Info);
             })));
-            this.AddNotificationManager(new ToastNotificationManager());
 
             // Hotkey
             try {
@@ -150,14 +150,14 @@ namespace Newgen {
             catch { }
 
             // IPC messages
-            E.Messenger.MessageReceived += new Action<IntPtr, EMessage>(OnMessageReceived);
+            Api.Messenger.MessageReceived += new Action<IntPtr, EMessage>(OnMessageReceived);
 
             // Hub helpers
-            E.HubOpening += new Action(() => Screen.ZOrderHelper(false));
-            E.HubClosing += new Action(() => {
+            Api.HubOpening += new Action(() => Screen.ZOrderHelper(false));
+            Api.HubClosing += new Action(() => {
                 if (Screen != null)
                     Screen.ZOrderHelper(true);
-                Helper.Delay(WinAPI.FlushMemory, 250);
+                ThreadingExtensions.LazyInvoke(WinAPI.FlushMemory, 250);
             });
 
             // Load view
@@ -191,7 +191,7 @@ namespace Newgen {
         private void Application_Exit(object sender, ExitEventArgs e) {
             PackageServer.Current.Stop();
 
-            E.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);
+            Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);
 
             PackageManager.Current.UnloadAll();
 
@@ -329,8 +329,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         internal static void Restart() {
-            var psi = new ProcessStartInfo
-            {
+            var psi = new ProcessStartInfo {
                 Arguments = "/C TIMEOUT /T 5 /NOBREAK && \"" + Assembly.GetEntryAssembly().Location + "\"",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,

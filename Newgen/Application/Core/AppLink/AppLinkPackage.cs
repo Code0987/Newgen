@@ -11,7 +11,7 @@ using libns.Native;
 namespace Newgen.Packages.AppLink {
 
     /// <summary>
-    /// Newgen App Widget.
+    /// Newgen App Link Package (Internal/Local).
     /// </summary>
     public class AppLinkPackage : Package {
         internal AppLinkPackageCustomizedSettings customizedSettings;
@@ -124,15 +124,9 @@ namespace Newgen.Packages.AppLink {
         /// <returns>Package.</returns>
         /// <remarks>...</remarks>
         public static Package CreateFrom(string location) {
-            var package = default(Package);
-            try {
-                package = new AppLinkPackage(location);
-                if (!package.Metadata.Id.StartsWith(PackageIdPrefix))
-                    throw new Exception("Not a app link package !");
-            }
-            catch /* Eat */ {
-                return null;
-            }
+            var package = new AppLinkPackage(location);
+            if (!package.Metadata.Id.StartsWith(PackageIdPrefix))
+                throw new Exception("Not a app link package !");
             return package;
         }
 
@@ -159,7 +153,7 @@ namespace Newgen.Packages.AppLink {
                 tile.MouseLeftButtonUp += (f, g) => {
                     try {
                         if (customizedSettings.IsUrl) {
-                            E.Messenger.Send(new EMessage() {
+                            Api.Messenger.Send(new EMessage() {
                                 Key = EMessage.UrlKey,
                                 Value = customizedSettings.LinkPath
                             });

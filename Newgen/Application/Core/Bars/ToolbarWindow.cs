@@ -1,7 +1,9 @@
 ﻿using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using libns.Media.Animation;
 using libns.Native;
+using libns.Threading;
 
 namespace Newgen {
 
@@ -113,7 +115,7 @@ namespace Newgen {
 
             switch (Location) {
             case ToolbarLocation.Top:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.TopProperty,
                     DEFAULT_ANIM_TIME,
@@ -125,7 +127,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Bottom:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.TopProperty,
                     DEFAULT_ANIM_TIME,
@@ -137,7 +139,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Left:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.LeftProperty,
                     DEFAULT_ANIM_TIME,
@@ -149,7 +151,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Right:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.LeftProperty,
                     DEFAULT_ANIM_TIME,
@@ -167,7 +169,7 @@ namespace Newgen {
 
             IsOpened = false;
 
-            Helper.Delay(() => {
+            ThreadingExtensions.LazyInvokeThreadSafe(() => {
                 TouchDecorator.Opacity = 0.01;
                 ContentDecorator.Opacity = 0;
             }, DEFAULT_ANIM_TIME);
@@ -260,7 +262,7 @@ namespace Newgen {
 
             switch (Location) {
             case ToolbarLocation.Top:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.TopProperty,
                     DEFAULT_ANIM_TIME,
@@ -272,7 +274,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Bottom:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.TopProperty,
                     DEFAULT_ANIM_TIME,
@@ -284,7 +286,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Left:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.LeftProperty,
                     DEFAULT_ANIM_TIME,
@@ -296,7 +298,7 @@ namespace Newgen {
                 break;
 
             case ToolbarLocation.Right:
-                Helper.Animate(
+                AnimationExtensions.Animate(
                     this,
                     Window.LeftProperty,
                     DEFAULT_ANIM_TIME,

@@ -4,6 +4,8 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
+using libns.Media.Animation;
+using libns.Threading;
 
 namespace Newgen
 {
@@ -162,7 +164,7 @@ namespace Newgen
                 //    if (HorizontalScrollBarVisibility == ScrollBarVisibility.Disabled)
                 //        Cursor = Cursors.SizeNS;
                 if (hscroll != null)
-                { Helper.Animate(this.hscroll, OpacityProperty, 250, 1); }
+                { AnimationExtensions.Animate(this.hscroll, OpacityProperty, 250, 1); }
                 if (HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled)
                     HorizontalScrollBarVisibility = ScrollBarVisibility.Visible;
                 GeneralTransform generalTransform = this.TransformToVisual(this);
@@ -188,8 +190,8 @@ namespace Newgen
                 /*if (Momentum.Length < 0.1)
                     VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;*/
                 if (hscroll != null)
-                { Helper.Animate(hscroll, OpacityProperty, 250, 0); }
-                Helper.Delay(new Action(() => { if (HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled) HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden; }), 250);
+                { AnimationExtensions.Animate(hscroll, OpacityProperty, 250, 0); }
+                ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => { if (HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled) HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden; }), 250);
                 Cursor = Cursors.Arrow;
             }
             else
@@ -203,8 +205,8 @@ namespace Newgen
                     _dragScrollTimer = null;
                     //VerticalScrollBarVisibility = ScrollBarVisibility.Hidden;
                     if (hscroll != null)
-                    { Helper.Animate(hscroll, OpacityProperty, 250, 0); }
-                    Helper.Delay(new Action(() => { if (HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled) HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden; }), 250);
+                    { AnimationExtensions.Animate(hscroll, OpacityProperty, 250, 0); }
+                    ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => { if (HorizontalScrollBarVisibility != ScrollBarVisibility.Disabled) HorizontalScrollBarVisibility = ScrollBarVisibility.Hidden; }), 250);
                     Cursor = Cursors.Arrow;
                 }
             }

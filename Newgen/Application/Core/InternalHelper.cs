@@ -39,7 +39,7 @@ namespace Newgen {
         static InternalHelper() {
             FeedsAggregator = new FeedsAggregator(
                 App.Current.Guid,
-                new FileDataStore() { BaseDirectory = E.CacheRoot },
+                new FileDataStore() { BaseDirectory = Api.CacheRoot },
                 new List<Uri>() { GetUpdatesUrlFor("Feeds.RSS20.xml") }
                 );
 #if DEBUG

@@ -5,7 +5,9 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Interop;
 using System.Windows.Media;
+using libns.Media.Animation;
 using libns.Native;
+using libns.Threading;
 using libns.UI;
 using Newgen;
 
@@ -77,7 +79,7 @@ namespace Newgen {
             }
 
             if (isclosepending) {
-                Helper.Delay(() => {
+                ThreadingExtensions.LazyInvokeThreadSafe(() => {
                     isclosepending = false;
                     if (autoSwitchOnClose)
                         Switch();
@@ -87,8 +89,8 @@ namespace Newgen {
 
                 ThumbnailsContainer.Children.Clear();
 
-                Helper.Animate(this, OpacityProperty, 150, 0, 0.7, 0.3);
-                Helper.Animate(this, LeftProperty, 150, Left, -Left, 0.7, 0.3);
+                AnimationExtensions.Animate(this, OpacityProperty, 150, 0, 0.7, 0.3);
+                AnimationExtensions.Animate(this, LeftProperty, 150, Left, -Left, 0.7, 0.3);
 
                 e.Cancel = true;
             }
@@ -104,8 +106,8 @@ namespace Newgen {
             Focus();
             Activate();
 
-            Helper.Animate(this, OpacityProperty, 150, 1, 0.7, 0.3);
-            Helper.Animate(this, LeftProperty, 150, 2*Left, Left, 0.7, 0.3);
+            AnimationExtensions.Animate(this, OpacityProperty, 150, 1, 0.7, 0.3);
+            AnimationExtensions.Animate(this, LeftProperty, 150, 2*Left, Left, 0.7, 0.3);
 
             var index = 1;
             foreach (var hWnd in hWnds)
@@ -135,7 +137,7 @@ namespace Newgen {
 
             // Initiate auto close
             if (!autoSwitchOnClose) {
-                Helper.RunFor(() => {
+                this.Dispatcher.RunFor(() => {
                     Close();
                 }, -1, 1000);
             }

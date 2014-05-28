@@ -87,7 +87,7 @@ namespace Newgen.Packages {
         public PackageManager() {
             PackageServer.Current.Start();
 
-            Location = E.PackagesRoot;
+            Location = Api.PackagesRoot;
         }
 
         /// <summary>
@@ -200,6 +200,12 @@ namespace Newgen.Packages {
             // Scan app link
             try {
                 return AppLink.AppLinkPackage.CreateFrom(location);
+            }
+            catch { }
+
+            // Scan notifications
+            try {
+                return Notifications.NotificationsPackage.CreateFrom(location);
             }
             catch { }
 
@@ -404,8 +410,13 @@ namespace Newgen.Packages {
                     // Post functions
                     foreach (var packageFolder in packageFolders) {
                         var package = InitializeFrom(packageFolder);
+                        if (package != null)
                         Load(package);
                     }
+
+                    // Defaults
+                    if (!IsInitialized(Notifications.NotificationsPackage.PackageId))
+                        Load(Notifications.NotificationsPackage.Create());
                 });
         }
 

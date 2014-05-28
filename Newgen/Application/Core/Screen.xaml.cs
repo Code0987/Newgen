@@ -10,6 +10,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using libns;
+using libns.Media.Animation;
 using libns.Media.Imaging;
 using libns.Native;
 using libns.Threading;
@@ -51,7 +52,7 @@ namespace Newgen {
         public Screen() {
             this.InitializeComponent();
 
-            if (E.BackgroundColor.A == 255)
+            if (Settings.Current.BackgroundColor.A == 255)
                 AllowsTransparency = false;
         }
 
@@ -111,7 +112,7 @@ namespace Newgen {
             TilesBar = new TilesBar();
             TilesBar.OpenToolbar();
 
-            Helper.Delay(() => {
+            ThreadingExtensions.LazyInvokeThreadSafe(() => {
                 if (Settings.Current.UseThumbailsBar)
                     ThumbnailsBar.CloseToolbar();
                 else
@@ -131,7 +132,7 @@ namespace Newgen {
         /// </param>
         /// <remarks>...</remarks>
         private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) {
-            E.Messenger.RemoveListener(new WindowInteropHelper(this).Handle);
+            Api.Messenger.RemoveListener(new WindowInteropHelper(this).Handle);
         }
 
         /// <summary>
@@ -142,12 +143,12 @@ namespace Newgen {
         /// <remarks>...</remarks>
         private void OnLoaded(object sender, RoutedEventArgs e) {
             this.UserBadgeControl.Reload();
-            Helper.Animate(this.Header, OpacityProperty, 250, 1);
+            AnimationExtensions.Animate(this.Header, OpacityProperty, 250, 1);
 
             LoadToolbars();
 
             // Find all packages
-            Helper.Delay(PackageManager.Current.Scan, 3500);
+            ThreadingExtensions.LazyInvoke(PackageManager.Current.Scan, 3500);
         }
 
         /// <summary>
@@ -190,7 +191,7 @@ namespace Newgen {
 
             WinAPI.RemoveFromDWM(handle);
 
-            E.Messenger.AddListener(handle);
+            Api.Messenger.AddListener(handle);
 
             try {
                 IntPtr taskbar = WinAPI.FindWindow("Shell_TrayWnd", "");

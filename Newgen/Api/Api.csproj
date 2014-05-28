@@ -144,10 +144,6 @@
     <Compile Include="..\..\..\libns\libns.net\libns.net\UI\NotificationExtensions.cs">
       <Link>References\NotificationExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ToastNotification.xaml.cs">
-      <Link>References\ToastNotification.xaml.cs</Link>
-      <DependentUpon>ToastNotification.xaml</DependentUpon>
-    </Compile>
     <Compile Include="..\..\..\libns\libns.net\libns.net\Web\DownloadExtensions.cs">
       <Link>References\DownloadExtensions.cs</Link>
     </Compile>
@@ -155,8 +151,7 @@
       <Link>References\FeedsAggregator.cs</Link>
     </Compile>
     <Compile Include="Core\AnimationType.cs" />
-    <Compile Include="Core\E.cs" />
-    <Compile Include="Core\Helper.cs" />
+    <Compile Include="Core\Api.cs" />
     <Compile Include="Core\HubWindow.cs" />
     <Compile Include="Packages\PackageSettings.cs" />
     <Compile Include="Packages\Package.cs" />
@@ -248,11 +243,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\..\..\libns\libns.net\libns.net\UI\ToastNotification.xaml">
-      <Link>References\ToastNotification.xaml</Link>
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Resource Include="Resources\Themes\Fonts.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

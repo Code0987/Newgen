@@ -14,7 +14,9 @@ using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using libns.Media.Animation;
 using libns.Media.Imaging;
+using libns.Threading;
 
 namespace Newgen {
 
@@ -23,17 +25,17 @@ namespace Newgen {
         public BackgroundCanvas() {
             InitializeComponent();
 
-            Background = E.BackgroundColor.ToBrush();
+            Background = Settings.Current.BackgroundColor.ToBrush();
 
             if (Settings.Current.UseBgImage)
                 try {
-                    Background = new ImageBrush(E.GetBitmap(E.BgImage));
+                    Background = new ImageBrush(Api.BgImage.ToBitmapSource());
                 }
                 catch {
-                    MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                    MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
                 }
         }
-        
+
         private void AnimateImage() {
             var w = (int)SystemParameters.PrimaryScreenWidth;
             var h = (int)SystemParameters.PrimaryScreenHeight;
@@ -60,13 +62,13 @@ namespace Newgen {
             AnimationImage2.Width = w;
             AnimationImage2.Height = h;
 
-            Helper.Animate(
+            AnimationExtensions.Animate(
                 AnimationImage, Canvas.LeftProperty,
                 750, 0, -SystemParameters.PrimaryScreenWidth,
                 0.7, 0.3
                 );
 
-            Helper.Delay(new Action(() => {
+            ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
                 AnimationCanvas.Visibility = Visibility.Collapsed;
 
                 {
@@ -77,13 +79,13 @@ namespace Newgen {
                                                           Settings.Current.SlideShowImages[(new Random()).Next(0, Settings.Current.SlideShowImages.Count - 1)], UriKind.Absolute)
                                                           );
 
-                        Helper.RunFor(() => {
+                        ThreadingExtensions.RunFor(() => {
                             try {
                                 AnimationImage2.Source = new BitmapImage(new Uri(
                                                                   Settings.Current.SlideShowImages[(new Random()).Next(0, Settings.Current.SlideShowImages.Count - 1)], UriKind.Absolute)
                                                                   );
 
-                                Helper.Animate(
+                                AnimationExtensions.Animate(
                                     AnimationImage, Canvas.LeftProperty,
                                     750, 0, -SystemParameters.PrimaryScreenWidth, null,
                                     0.7, 0.3, false, 1, null, FillBehavior.HoldEnd,

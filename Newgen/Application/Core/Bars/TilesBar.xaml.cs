@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Linq;
 using System.Windows.Input;
+using libns.Threading;
 using Newgen.Packages;
 
 namespace Newgen {
@@ -41,7 +42,7 @@ namespace Newgen {
                 item.MouseLeftButtonUp += ItemMouseLeftButtonUp;
             }
 
-            Helper.Delay(() => ItemsContainer.Children.Clear(), 250);
+            ThreadingExtensions.LazyInvokeThreadSafe(() => ItemsContainer.Children.Clear(), 250);
 
             base.CloseToolbar();
         }
@@ -94,7 +95,7 @@ namespace Newgen {
             int timediff = (int)DateTime.Now.Subtract(mouseclicktimestamp).TotalMilliseconds;
             mouseclicktimestamp = DateTime.Now;
 
-            if (timediff < E.AnimationTimePrecision)
+            if (timediff < 1200)
                 return;
 
             if (mouseX != e.GetPosition(this).X || mouseY != e.GetPosition(this).Y)

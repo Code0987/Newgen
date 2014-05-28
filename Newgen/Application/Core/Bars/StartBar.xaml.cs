@@ -6,6 +6,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using libns.Media.Animation;
 using libns.Native;
 using Microsoft.Win32;
 using Newgen.Packages;
@@ -141,7 +142,7 @@ namespace Newgen {
             CloseToolbar();
 
             var dlg = new OpenFileDialog();
-            dlg.Filter = E.AnyFilter;
+            dlg.Filter = Api.AnyFilter;
             if (!(bool)dlg.ShowDialog())
                 return;
 
@@ -233,7 +234,7 @@ namespace Newgen {
         private void OnSearchButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             CloseToolbar();
 
-            E.Messenger.Send(new EMessage() {
+            Api.Messenger.Send(new EMessage() {
                 Key = EMessage.UrlKey,
                 Value = "http://www.google.com/search?q="
             });
@@ -276,7 +277,7 @@ namespace Newgen {
                     ((Window)window).Show();
                 }
                 foreach (var tileControl in App.Screen.TilesControl.TileControls)
-                    Helper.Animate(tileControl, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(tileControl, OpacityProperty, 250, 0, 1);
             }
         }
 

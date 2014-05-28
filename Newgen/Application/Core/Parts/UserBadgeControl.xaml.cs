@@ -16,6 +16,8 @@ using System.Windows.Shapes;
 using libns.Native;
 using libns.Threading;
 using Microsoft.Win32;
+using libns.Media.Imaging;
+using libns.Media.Animation;
 
 namespace Newgen {
 
@@ -44,12 +46,12 @@ namespace Newgen {
                 else {
                     this.Visibility = Visibility.Visible;
                     this.Opacity = 0;
-                    Helper.Animate(this, OpacityProperty, 300, 1);
+                    AnimationExtensions.Animate(this, OpacityProperty, 300, 1);
                     var userimagefile = System.IO.Path.GetTempPath() + "\\" + Environment.UserName + ".bmp";
                     if (File.Exists(userimagefile))
-                        File.Copy(userimagefile, E.UserImage, true);
+                        File.Copy(userimagefile, Api.UserImage, true);
                     UsernameText.Text = Environment.UserName;
-                    UserImage.Source = E.GetBitmap(E.UserImage) ?? UserImage.Source;
+                    UserImage.Source = (Api.UserImage).ToBitmapSource() ?? UserImage.Source;
                 }
             });
         }
@@ -62,12 +64,12 @@ namespace Newgen {
         /// <remarks>...</remarks>
         private void MenuItem_CUT_Click(object sender, RoutedEventArgs e) {
                 var dialog = new OpenFileDialog();
-                dialog.Filter = E.ImageFilter;
+                dialog.Filter = Api.ImageFilter;
                 if (!(bool)dialog.ShowDialog())
                     return;
 
                 try {
-                    File.Copy(dialog.FileName, E.UserImage, true);
+                    File.Copy(dialog.FileName, Api.UserImage, true);
                 }
                 catch /* Eat */ {
                     MessageBox.Show("Problem with user account image.", "Error");
@@ -80,9 +82,9 @@ namespace Newgen {
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnLockTextMouseLeftButtonDown(object sender, RoutedEventArgs e) {
-            Helper.Animate(LockText, OpacityProperty, 250, 0.3);
+            AnimationExtensions.Animate(LockText, OpacityProperty, 250, 0.3);
             WinAPI.LockWorkStation();
-            Helper.Animate(LockText, OpacityProperty, 500, 1);
+            AnimationExtensions.Animate(LockText, OpacityProperty, 500, 1);
         }
 
         /// <summary>

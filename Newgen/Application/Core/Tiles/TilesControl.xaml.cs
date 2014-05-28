@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using libns.Media.Animation;
 using libns.Threading;
 using Newgen.Packages;
 
@@ -39,6 +40,20 @@ namespace Newgen {
         /// <value>The tiles padding.</value>
         /// <remarks>...</remarks>
         public Thickness TilesPadding { get { return LayoutRoot.Margin; } set { LayoutRoot.Margin = value; } }
+
+        /// <summary>
+        /// Gets or sets the columns count.
+        /// </summary>
+        /// <value>The columns count.</value>
+        /// <remarks>...</remarks>
+        public int ColumnsCount { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rows count.
+        /// </summary>
+        /// <value>The rows count.</value>
+        /// <remarks>...</remarks>
+        public int RowsCount { get; set; }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="TilesControl" /> class.
@@ -96,7 +111,7 @@ namespace Newgen {
             TilesControlGroupsHost.Children.RemoveAt(index);
 
             Unload(atcolumn - g.Column, g.Column);
-            Helper.Delay(() => PushAtColumnBy(atcolumn, -g.Column), 100.0);
+            ThreadingExtensions.LazyInvokeThreadSafe(() => PushAtColumnBy(atcolumn, -g.Column), 100.0);
         }
 
         /// <summary>
@@ -121,7 +136,8 @@ namespace Newgen {
             }
 
             // - 1
-            if (!permanently) return;
+            if (!permanently)
+                return;
             tileControl.package.Settings.Column = -1;
             tileControl.package.Settings.Row = -1;
         }
@@ -137,25 +153,12 @@ namespace Newgen {
 
             for (var i = 0; i < Settings.Current.TileScreenGroups.Count; i++) {
                 atcolumn += Settings.Current.TileScreenGroups[i].Column;
-                if (Settings.Current.TileScreenGroups[i].Id != g.Id) continue;
+                if (Settings.Current.TileScreenGroups[i].Id != g.Id)
+                    continue;
                 break;
             }
 
             return atcolumn;
-        }
-
-        /// <summary>
-        /// Initializes the specified c.
-        /// </summary>
-        /// <param name="c">The c.</param>
-        /// <param name="r">The r.</param>
-        public void Initialize(int c, int r) {
-            E.ColumnsCount = c = (c == 0 || c < 5) ? 40 : c;
-            E.RowsCount = r = (r == 0 || r < 3) ? 3 : r;
-
-            // TODO: Consider adding vertical matrix features
-            //E.ColumnsCount = c = (c == 0 || c < 5) ? 14 : c; //(int)Math.Round(region.Width * 2 / E.MinTileWidth);
-            //E.RowsCount = r = (r == 0 || r < 3) ? 140 : r; //(int)(SystemParameters.PrimaryScreenHeight / (E.MinTileHeight - E.TileSpacing * 2));
         }
 
         /// <summary>
@@ -304,44 +307,42 @@ namespace Newgen {
 
             // Init matrix
 
-            Initialize(
-                (int)Math.Round((SystemParameters.PrimaryScreenWidth * 10 /* Ten screen's width :P */) / E.MinTileWidth),
-                (int)((ActualHeight - (20) /* -20 for something ... */) / (E.MinTileHeight - E.TileSpacing * 2))
-                );
+            ColumnsCount = (int)Math.Round(SystemParameters.PrimaryScreenWidth * 5 / Settings.Current.MinTileWidth);
+            RowsCount = (int)Math.Ceiling(ActualHeight / Settings.Current.MinTileHeight) + 1;
 
             // Join events
 
             PackageManager.Current.Loaded += package => Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                                                                                                                        var tileControl = new TileControl(package) {
-                                                                                                                            Order = TilesControlHost.Children.Count
-                                                                                                                        };
+                var tileControl = new TileControl(package) {
+                    Order = TilesControlHost.Children.Count
+                };
 
-                                                                                                                        tileControl.MouseLeftButtonDown += OnTileControlMouseLeftButtonDown;
-                                                                                                                        tileControl.MouseLeftButtonUp += OnTileControlMouseLeftButtonUp;
-                                                                                                                        tileControl.MouseMove += OnTileControlMouseMove;
+                tileControl.MouseLeftButtonDown += OnTileControlMouseLeftButtonDown;
+                tileControl.MouseLeftButtonUp += OnTileControlMouseLeftButtonUp;
+                tileControl.MouseMove += OnTileControlMouseMove;
 
-                                                                                                                        tileControl.Load();
+                tileControl.Load();
 
-                                                                                                                        Place(tileControl, alsoAddToHost: true);
+                Place(tileControl, alsoAddToHost: true);
             }));
 
             PackageManager.Current.Unloaded += package => Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                                                                                                                          var tileControl = TileControls.Find(x => x.package == package);
+                var tileControl = TileControls.Find(x => x.package == package);
 
-                                                                                                                          if (tileControl == null)
-                                                                                                                              return;
+                if (tileControl == null)
+                    return;
 
-                                                                                                                          Helper.Animate(tileControl, OpacityProperty, 150, 0, 0.7, 0.3);
+                AnimationExtensions.Animate(tileControl, OpacityProperty, 150, 0, 0.7, 0.3);
 
-                                                                                                                          Helper.Delay(new Action(() => {
-                                                                                                                                                            tileControl.MouseLeftButtonDown -= OnTileControlMouseLeftButtonDown;
-                                                                                                                                                            tileControl.MouseLeftButtonUp -= OnTileControlMouseLeftButtonUp;
-                                                                                                                                                            tileControl.MouseMove -= OnTileControlMouseMove;
+                ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
+                    tileControl.MouseLeftButtonDown -= OnTileControlMouseLeftButtonDown;
+                    tileControl.MouseLeftButtonUp -= OnTileControlMouseLeftButtonUp;
+                    tileControl.MouseMove -= OnTileControlMouseMove;
 
-                                                                                                                                                            DePlace(tileControl, alsoRemoveFromHost: true, permanently: false);
+                    DePlace(tileControl, alsoRemoveFromHost: true, permanently: false);
 
-                                                                                                                                                            tileControl.Unload();
-                                                                                                                          }), 180);
+                    tileControl.Unload();
+                }), 180);
             }));
 
             // Compose grid
@@ -350,15 +351,15 @@ namespace Newgen {
             TilesControlHost.ColumnDefinitions.Clear();
 
             System.Threading.Tasks.Parallel.For(
-                0, E.ColumnsCount, new Action<int>((int i) => this.InvokeAsyncThreadSafe(() => {
-                                                                                                   var column = new ColumnDefinition {Width = new GridLength(E.MinTileWidth)};
-                                                                                                   TilesControlHost.ColumnDefinitions.Add(column);
+                0, ColumnsCount, new Action<int>((int i) => this.InvokeAsyncThreadSafe(() => {
+                    var column = new ColumnDefinition { Width = new GridLength(Settings.Current.MinTileWidth) };
+                    TilesControlHost.ColumnDefinitions.Add(column);
                 })));
 
             System.Threading.Tasks.Parallel.For(
-               0, E.RowsCount, new Action<int>((int i) => this.InvokeAsyncThreadSafe(() => {
-                                                                                               var row = new RowDefinition {Height = new GridLength(E.MinTileHeight)};
-                                                                                               TilesControlHost.RowDefinitions.Add(row);
+               0, RowsCount, new Action<int>((int i) => this.InvokeAsyncThreadSafe(() => {
+                   var row = new RowDefinition { Height = new GridLength(Settings.Current.MinTileHeight) };
+                   TilesControlHost.RowDefinitions.Add(row);
                })));
 
             // Compose groups
@@ -420,8 +421,8 @@ namespace Newgen {
                 // Attach
                 PlaceAt(
                     tileControl,
-                    column: (int)Math.Truncate((dropLocation.X + E.MinTileWidth / 2) / E.MinTileWidth),
-                    row: (int)Math.Truncate((dropLocation.Y + E.MinTileHeight / 2) / E.MinTileHeight),
+                    column: (int)Math.Truncate((dropLocation.X + (Settings.Current.MinTileWidth / 8)) / Settings.Current.MinTileWidth),
+                    row: (int)Math.Truncate((dropLocation.Y + (Settings.Current.MinTileHeight / 8)) / Settings.Current.MinTileHeight),
                     alsoAddToHost: false
                     );
 
@@ -457,7 +458,8 @@ namespace Newgen {
             var tileControl = (TileControl)sender;
 
             // Recheck lock and mouse
-            if (Settings.Current.IsTilesLockEnabled || !tileControl.IsMousePressed) return;
+            if (Settings.Current.IsTilesLockEnabled || !tileControl.IsMousePressed)
+                return;
             // If already detached
             if (Mouse.Captured == sender) {
                 Canvas.SetLeft((UIElement)sender, e.GetPosition(DragCanvas).X - mouseX);
@@ -467,7 +469,8 @@ namespace Newgen {
             // Detach
             if (Mouse.Captured != null ||
                 (!(Math.Abs(e.GetPosition(tileControl).X - mouseX) >= 15) &&
-                 !(Math.Abs(e.GetPosition(tileControl).Y - mouseY) >= 15))) return;
+                 !(Math.Abs(e.GetPosition(tileControl).Y - mouseY) >= 15)))
+                return;
             // Capture
             Mouse.Capture(tileControl);
 

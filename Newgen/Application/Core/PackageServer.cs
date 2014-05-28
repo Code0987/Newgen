@@ -7,6 +7,7 @@ using System.Net.Sockets;
 using System.Reflection;
 using System.Text;
 using System.Threading;
+using libns;
 
 namespace Newgen {
     public class PackageServer {
@@ -49,7 +50,7 @@ namespace Newgen {
                     "ASD", 
                     (a) => {
                     try {
-                        E.SetSharedLocalData(a.Split(';')[0], a.Split(';')[1]);
+                        Api.SetSharedLocalData(a.Split(';')[0], a.Split(';')[1]);
                         return "true";
                     }
                     catch { return "false"; }
@@ -59,7 +60,7 @@ namespace Newgen {
                     "GSD", 
                     (a) => {
                     try { 
-                        return E.GetSharedLocalData(a.Trim()); 
+                        return Api.GetSharedLocalData(a.Trim()); 
                     }
                     catch { return "null"; }
                     }
@@ -68,7 +69,7 @@ namespace Newgen {
                     "CSD", 
                     (a) => {
                     try { 
-                        E.ClearSharedLocalData(a.Trim()); 
+                        Api.ClearSharedLocalData(a.Trim()); 
                         return "true"; 
                     }
                     catch { return "false"; }
@@ -83,7 +84,7 @@ namespace Newgen {
                 return injectScriptCached;
             }
 
-            injectScriptCached = Helper.GetResourceString(Assembly.GetAssembly(typeof(PackageServer)), "Newgen.Backend.Resources.Inject.js");
+            injectScriptCached = "Newgen.Backend.Resources.Inject.js".GetResourceStream(Assembly.GetAssembly(typeof(PackageServer))).ReadToEnd();
 
             var licenseStatus = Settings.IsProMode ? "TRIAL" : "OK";
 
@@ -112,7 +113,7 @@ namespace Newgen {
                 thread.Start();
             }
             catch { 
-                Helper.ShowErrorMessage(E.MSG_ER_SRVER); 
+                Api.ShowErrorMessage(Api.MSG_ER_SRVER); 
             }
         }
 
@@ -178,7 +179,7 @@ namespace Newgen {
 
                             if (path.Contains("Widget:")) {
                                 try {
-                                    string cf = E.PackagesRoot +
+                                    string cf = Api.PackagesRoot +
                                         System.Web.HttpUtility.UrlDecode(path.Split(':')[1].Split(';')[0]) + "\\" +
                                         System.Web.HttpUtility.UrlDecode(path.Split(':')[1].Split(';')[1]);
 

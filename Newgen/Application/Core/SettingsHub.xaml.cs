@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Xml.Linq;
 using iFramework.Security.Licensing;
 using libns;
+using libns.Media.Animation;
 using libns.Native;
 using libns.Threading;
 using Microsoft.Win32;
@@ -54,7 +55,7 @@ namespace Newgen {
                     DecelerationRatio = 0.7,
                 };
                 this.BeginAnimation(LeftProperty, leftanimation);
-                Helper.Animate(this, OpacityProperty, 10, 0, 1, 0.3, 0.7);
+                AnimationExtensions.Animate(this, OpacityProperty, 10, 0, 1, 0.3, 0.7);
             }
 
             if (this.isnolicense) {
@@ -78,9 +79,9 @@ namespace Newgen {
             CheckBox_PUD.IsChecked = Settings.Current.ProvideUsageData;
             if (!this.isnolicense) {
                 EnableUserTile.IsChecked = Settings.Current.IsUserTileEnabled;
-                NewgenBgColor.Fill = new SolidColorBrush(E.BackgroundColor);
+                NewgenBgColor.Fill = new SolidColorBrush(Settings.Current.BackgroundColor);
                 BgColorAlpha.ValueChanged += new RoutedPropertyChangedEventHandler<double>(BgColorAlpha_ValueChanged);
-                BgColorAlpha.Value = (double)(int)E.BackgroundColor.A;
+                BgColorAlpha.Value = (double)(int)Settings.Current.BackgroundColor.A;
                 EnableBgImage.IsChecked = Settings.Current.UseBgImage;
                 EnableStartBarAlways.IsChecked = Settings.Current.ShowStartbarAlways;
                 EnableAutoStartCheckBox.IsChecked = Settings.Current.Autostart = ApplicationExtensions.IsStartWithWindowsEnabled(App.Current.Title);
@@ -102,11 +103,11 @@ namespace Newgen {
                 }
 
                 double tilesheight = (App.Screen).TilesControl.ActualHeight - (20);
-                double rh = ((tilesheight - E.TileSpacing * 2) / 3);
+                double rh = ((tilesheight - Settings.Current.TileSpacing * 2) / 3);
 
                 TilesSizeScale.Maximum = (double)rh;
-                TilesSizeScale.Minimum = (double)E.MinTilesSize;
-                TilesSizeScale.Value = (double)E.MinTileHeight;
+                TilesSizeScale.Minimum = 90.0;
+                TilesSizeScale.Value = (double)Settings.Current.MinTileHeight;
                 TilesSizeScale.ValueChanged += new RoutedPropertyChangedEventHandler<double>(TilesSizeScale_ValueChanged);
                 ValTilesSpacing.Text = Settings.Current.TileSpacing.ToString();
                 ValLockTime.Text = Settings.Current.LockScreenTime.ToString();
@@ -125,7 +126,7 @@ namespace Newgen {
                 }
             }
 
-            Helper.Animate(this, OpacityProperty, 500, 0, 1);
+            AnimationExtensions.Animate(this, OpacityProperty, 500, 0, 1);
 
             UpdateTaskBarPEXL();
         }
@@ -144,7 +145,7 @@ namespace Newgen {
                     Left = -this.ActualWidth;
 
                     leftanimation = null;
-                    Helper.Delay(new Action(() => {
+                    ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
                         IsHubActive = false;
                         Topmost = false;
                         Hide();
@@ -237,7 +238,7 @@ namespace Newgen {
                 }
             }
             catch (Exception) {
-                MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
             }
 
             Settings.Current.Save();
@@ -250,18 +251,18 @@ namespace Newgen {
             }
             catch { }
 
-            Helper.Animate(this, OpacityProperty, 250, 0);
+            AnimationExtensions.Animate(this, OpacityProperty, 250, 0);
         }
 
         private void SiteLinkMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            E.Messenger.Send(new EMessage() {
+            Api.Messenger.Send(new EMessage() {
                 Key = EMessage.UrlKey,
                 Value = SiteLink1.Text
             });
         }
 
         private void ShareButton_Click(object sender, RoutedEventArgs e) {
-            E.Messenger.Send(new EMessage() {
+            Api.Messenger.Send(new EMessage() {
                 Key = EMessage.UrlKey,
                 Value = "https://mail.google.com/mail/?shva=1#compose"
             });
@@ -269,7 +270,7 @@ namespace Newgen {
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) {
             if (MessageBox.Show("Do you want to reset Newgen settings (This will not remove your widgets, but a restart is required) ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
-                try { if (File.Exists(E.Config)) File.Delete(E.Config); }
+                try { if (File.Exists(Api.Config)) File.Delete(Api.Config); }
                 catch { }
             }
         }
@@ -286,21 +287,21 @@ namespace Newgen {
                     this.ChangeBgColorButton.Visibility = Visibility.Collapsed;
                     this.TextBgTrans.Visibility = Visibility.Collapsed;
                     this.BgColorAlpha.Visibility = Visibility.Collapsed;
-                    Helper.Animate(this.ChangeBgImg, OpacityProperty, 250, 0, 1);
-                    Helper.Animate(this.NewgenBgColor, OpacityProperty, 250, 0);
-                    Helper.Animate(this.TextBgColor, OpacityProperty, 250, 0);
-                    Helper.Animate(this.ChangeBgColorButton, OpacityProperty, 250, 0);
-                    Helper.Animate(this.TextBgTrans, OpacityProperty, 250, 0);
-                    Helper.Animate(this.BgColorAlpha, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.ChangeBgImg, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.NewgenBgColor, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.TextBgColor, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.ChangeBgColorButton, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.TextBgTrans, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.BgColorAlpha, OpacityProperty, 250, 0);
                 }
                 else {
-                    Helper.Animate(this.ChangeBgImg, OpacityProperty, 250, 0);
-                    Helper.Animate(this.NewgenBgColor, OpacityProperty, 250, 0, 1);
-                    Helper.Animate(this.TextBgColor, OpacityProperty, 250, 0, 1);
-                    Helper.Animate(this.ChangeBgColorButton, OpacityProperty, 250, 0, 1);
-                    Helper.Animate(this.TextBgTrans, OpacityProperty, 250, 0, 1);
-                    Helper.Animate(this.BgColorAlpha, OpacityProperty, 250, 0, 1);
-                    Helper.Delay(new Action(() => {
+                    AnimationExtensions.Animate(this.ChangeBgImg, OpacityProperty, 250, 0);
+                    AnimationExtensions.Animate(this.NewgenBgColor, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.TextBgColor, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.ChangeBgColorButton, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.TextBgTrans, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.BgColorAlpha, OpacityProperty, 250, 0, 1);
+                    ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
                         this.ChangeBgImg.Visibility = Visibility.Collapsed;
                         this.NewgenBgColor.Visibility = Visibility.Visible;
                         this.TextBgColor.Visibility = Visibility.Visible;
@@ -313,11 +314,11 @@ namespace Newgen {
             if (sender == this.Enable_OOBE_SS) {
                 if ((bool)this.Enable_OOBE_SS.IsChecked) {
                     this.OOBE_SS.Visibility = Visibility.Visible;
-                    Helper.Animate(this.OOBE_SS, OpacityProperty, 250, 0, 1);
+                    AnimationExtensions.Animate(this.OOBE_SS, OpacityProperty, 250, 0, 1);
                 }
                 else {
-                    Helper.Animate(this.OOBE_SS, OpacityProperty, 250, 0);
-                    Helper.Delay(new Action(() => {
+                    AnimationExtensions.Animate(this.OOBE_SS, OpacityProperty, 250, 0);
+                    ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
                         this.OOBE_SS.Visibility = Visibility.Collapsed;
                     }), 200);
                 }
@@ -331,14 +332,14 @@ namespace Newgen {
         private void ChangeBgColorButtonClick(object sender, RoutedEventArgs e) {
             var c = new System.Windows.Forms.ColorDialog();
             if (c.ShowDialog() == System.Windows.Forms.DialogResult.OK) {
-                var color = Color.FromArgb(E.BackgroundColor.A, c.Color.R, c.Color.G, c.Color.B);
+                var color = Color.FromArgb(Settings.Current.BackgroundColor.A, c.Color.R, c.Color.G, c.Color.B);
                 Settings.Current.BackgroundColor = color;
-                E.BackgroundColor = color;
-                NewgenBgColor.Fill = new SolidColorBrush(E.BackgroundColor);
+                Settings.Current.BackgroundColor = color;
+                NewgenBgColor.Fill = new SolidColorBrush(Settings.Current.BackgroundColor);
                 BgColorAlpha.Value = (double)(int)color.A;
 
                 var window = App.Screen;
-                window.Background = new SolidColorBrush(E.BackgroundColor);
+                window.Background = new SolidColorBrush(Settings.Current.BackgroundColor);
             }
         }
 
@@ -359,34 +360,31 @@ namespace Newgen {
             Color c = Settings.Current.BackgroundColor;
             var color = Color.FromArgb((byte)e.NewValue, c.R, c.G, c.B);
             Settings.Current.BackgroundColor = color;
-            E.BackgroundColor = color;
-            NewgenBgColor.Fill = new SolidColorBrush(E.BackgroundColor);
+            Settings.Current.BackgroundColor = color;
+            NewgenBgColor.Fill = new SolidColorBrush(Settings.Current.BackgroundColor);
 
             var window = App.Screen;
-            window.Background = new SolidColorBrush(E.BackgroundColor);
+            window.Background = new SolidColorBrush(Settings.Current.BackgroundColor);
         }
 
         private void TilesSizeScale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            Settings.Current.MinTileWidth = TilesSizeScale.Value;
             Settings.Current.MinTileHeight = TilesSizeScale.Value;
-
-            Settings.Current.MinTileWidth = Settings.Current.MinTileHeight * E.TilesSizeFactor;
-            E.MinTileWidth = Settings.Current.MinTileWidth;
-            E.MinTileHeight = Settings.Current.MinTileHeight;
         }
 
         private void ChangeBgImgClick(object sender, RoutedEventArgs e) {
             var dialog = new OpenFileDialog();
-            dialog.Filter = E.ImageFilter;
+            dialog.Filter = Api.ImageFilter;
             if (!(bool)dialog.ShowDialog())
                 return;
 
             var window = App.Screen;
             try {
-                if (!File.Exists(E.BgImage))
-                    File.Create(E.BgImage);
+                if (!File.Exists(Api.BgImage))
+                    File.Create(Api.BgImage);
 
                 byte[] bytArray = File.ReadAllBytes(dialog.FileName);
-                File.WriteAllBytes(E.BgImage, bytArray);
+                File.WriteAllBytes(Api.BgImage, bytArray);
 
                 MemoryStream ms = new MemoryStream();
                 BitmapImage bi = new BitmapImage();
@@ -401,7 +399,7 @@ namespace Newgen {
                 Settings.Current.UseBgImage = true;
             }
             catch (Exception) {
-                MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
                 Settings.Current.UseBgImage = false;
             }
         }
@@ -418,7 +416,6 @@ namespace Newgen {
                 bool valid = anInteger > 0;
                 if (valid) {
                     Settings.Current.TileSpacing = anInteger;
-                    E.TileSpacing = Settings.Current.TileSpacing;
                 }
             }
             catch {
@@ -438,7 +435,7 @@ namespace Newgen {
         private void ChangeSSImgs_Click(object sender, RoutedEventArgs e) {
             try {
                 var dialog = new OpenFileDialog();
-                dialog.Filter = E.ImageFilter;
+                dialog.Filter = Api.ImageFilter;
                 dialog.Multiselect = true;
                 dialog.CheckPathExists = true;
                 dialog.CheckFileExists = true;
@@ -454,7 +451,7 @@ namespace Newgen {
                     restartRequired = true;
                 }
                 catch (Exception) {
-                    MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                    MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
                 }
             }
             catch { }
@@ -485,7 +482,7 @@ namespace Newgen {
                 Settings.Current.StartText = ValStartScreenTitle.Text;
             }
             catch {
-                MessageBox.Show(E.MSG_ER_FEATURE, "Error");
+                MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
             }
         }
 
@@ -591,7 +588,7 @@ namespace Newgen {
             //    ListBox_ItemsToExclude.SelectedItems.Add(data);
             //}
             //catch (Exception) {
-            //    Helper.ShowErrorMessage("Cannot process your request.");
+            //    Api.ShowErrorMessage("Cannot process your request.");
             //}
         }
 
@@ -687,7 +684,7 @@ namespace Newgen {
                             UpdateButton.Content = Definitions.OptionsUNA;
                         }
                     }
-                    catch { Helper.ShowErrorMessage(E.MSG_NE); }
+                    catch { Api.ShowErrorMessage(Api.MSG_NE); }
 
                     return;
                 }
@@ -706,7 +703,7 @@ namespace Newgen {
                             try {
                                 UpdateButton.Content = Definitions.OptionsUNA;
                                 UpdateButton.IsEnabled = false;
-                                if (Helper.ShowQAMessage("Do you want copy of downloaded update file, in case the update installation failed ?\n\n(Note: File will be copied to your desktop.)").HasFlag(MessageBoxResult.Yes)) {
+                                if (Api.ShowQAMessage("Do you want copy of downloaded update file, in case the update installation failed ?\n\n(Note: File will be copied to your desktop.)").HasFlag(MessageBoxResult.Yes)) {
                                     FileInfo fi = new FileInfo(tempdown);
                                     string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.DoNotVerify);
                                     this.InvokeAsync(() => File.Copy(tempdown, desktop + "\\" + fi.Name)).Wait();
@@ -724,7 +721,7 @@ namespace Newgen {
                         };
                         client.DownloadFileAsync(new Uri(url), tempdown);
                     }
-                    catch { Helper.ShowErrorMessage(E.MSG_NE); }
+                    catch { Api.ShowErrorMessage(Api.MSG_NE); }
 
                     ProgressBar.IsIndeterminate = false;
                 }
@@ -737,9 +734,9 @@ namespace Newgen {
 
         internal static void ShowHub(bool nlic = false, bool isupdatemode = false) {
             var window = new SettingsHub(nlic, isupdatemode);
-            E.CallEvent("HubOpening");
+            Api.CallEvent("HubOpening");
             window.ShowDialog();
-            E.CallEvent("HubClosing");
+            Api.CallEvent("HubClosing");
         }
     }
 }

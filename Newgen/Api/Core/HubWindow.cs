@@ -3,6 +3,8 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using libns.Media.Animation;
+using libns.Threading;
 
 namespace Newgen
 {
@@ -47,7 +49,7 @@ namespace Newgen
         /// </summary>
         public void InitializeComponent()
         {
-            E.CallEvent("HubOpening");
+            Api.CallEvent("HubOpening");
 
             try {
                 this.Style = (Style)Application.Current.Resources["ResetWindowStyle"];
@@ -72,7 +74,7 @@ namespace Newgen
             this.VisualTextRenderingMode = TextRenderingMode.Auto;
             this.VisualEdgeMode = EdgeMode.Unspecified;
 
-            Helper.Delay(new Action(this.AnimateStart), 180);
+            ThreadingExtensions.LazyInvokeThreadSafe(() => AnimateStart(), TimeSpan.FromMilliseconds(180));
         }
 
         private void HubWindow_KeyUp(object sender, KeyEventArgs e)
@@ -82,7 +84,7 @@ namespace Newgen
 
         private void HubWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            E.CallEvent("HubClosing");
+            Api.CallEvent("HubClosing");
 
             if (!this.IsHubActive) return;
             e.Cancel = true;
@@ -121,7 +123,7 @@ namespace Newgen
                             DecelerationRatio = 0.7,
                         };
                         this.BeginAnimation(LeftProperty, leftanimation);
-                        Helper.Animate(this, OpacityProperty, 3, 0, 1, 0.3, 0.7);
+                        AnimationExtensions.Animate(this, OpacityProperty, 3, 0, 1, 0.3, 0.7);
                     }
                     break;
             }
@@ -154,10 +156,10 @@ namespace Newgen
                             this.Left = -this.ActualWidth;
 
                             leftanimation = null;
-                            Helper.Delay(new Action(() =>
+                            ThreadingExtensions.LazyInvokeThreadSafe(new Action(() =>
                             {
                                 IsHubActive = false; Topmost = false; Hide(); Close();
-                            }), 1);
+                            }), TimeSpan.FromMilliseconds(1));
                         };
                         this.BeginAnimation(LeftProperty, leftanimation);
                     }

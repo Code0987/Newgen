@@ -81,10 +81,18 @@ namespace Newgen.Packages {
         /// </summary>
         /// <remarks>...</remarks>
         public void AdjustDimensions() {
-            Margin = new Thickness(E.TileSpacing);
+            Margin = new Thickness(Settings.Current.TileSpacing);
 
-            Width = E.MinTileWidth * package.ColumnSpan - E.TileSpacing * 2 * package.ColumnSpan;
-            Height = E.MinTileHeight * package.RowSpan - E.TileSpacing * 2 * package.RowSpan;
+            Width =
+                Settings.Current.MinTileWidth * package.ColumnSpan
+                - Settings.Current.TileSpacing * 2 * package.ColumnSpan
+                + (package.ColumnSpan > 1 ? (2 * Settings.Current.TileSpacing * (package.ColumnSpan - 1)) : 0)
+                ;
+            Height =
+                Settings.Current.MinTileHeight * package.RowSpan
+                - Settings.Current.TileSpacing * 2 * package.RowSpan
+                + (package.RowSpan > 1 ? (2 * Settings.Current.TileSpacing * (package.RowSpan - 1)) : 0)
+                ;
 
             Grid.SetColumnSpan(this, package.ColumnSpan);
             Grid.SetRowSpan(this, package.RowSpan);
