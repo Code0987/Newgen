@@ -8,6 +8,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using libns.Media.Animation;
 using libns.Native;
+using libns.Threading;
 using Microsoft.Win32;
 using Newgen.Packages;
 using Newgen.Packages.AppLink;
@@ -210,7 +211,9 @@ namespace Newgen {
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnRefreshItemClick(object sender, RoutedEventArgs e) {
-            WinAPI.FlushMemory();
+            App.Screen.ToggleWaitDialog();
+            ThreadingExtensions.LazyInvokeThreadSafe(() => App.Screen.ToggleWaitDialog(), 250);
+            ThreadingExtensions.LazyInvoke(() => WinAPI.FlushMemory(), 300);
         }
 
         /// <summary>

@@ -46,6 +46,11 @@ namespace Newgen {
         internal TilesBar TilesBar;
 
         /// <summary>
+        /// The wait window
+        /// </summary>
+        internal WaitWindow WaitDialog;
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="Screen" /> class.
         /// </summary>
         /// <remarks>...</remarks>
@@ -54,6 +59,31 @@ namespace Newgen {
 
             if (Settings.Current.BackgroundColor.A == 255)
                 AllowsTransparency = false;
+        }
+
+        /// <summary>
+        /// Shows the hide animation window.
+        /// </summary>
+        /// <param name="circles">if set to <c>true</c> [circles].</param>
+        /// <param name="text">The text.</param>
+        /// <remarks>...</remarks>
+        internal void ToggleWaitDialog(bool circles = true, string text = null) {
+            if (WaitDialog == null || !WaitDialog.IsLoaded) {
+                WaitDialog = new WaitWindow();
+                WaitDialog.Show();
+                if (!string.IsNullOrWhiteSpace(text))
+                    WaitDialog.Text.Text = text;
+                WaitDialog.Start(circles);
+            }
+            else {
+                WaitDialog.Stop();
+                ThreadingExtensions.LazyInvokeThreadSafe(() => {
+                    WaitDialog.Hide();
+                    WaitDialog.Close();
+                    WaitDialog = null;
+                }, 600);
+                WinAPI.FlushMemory();
+            }
         }
 
         /// <summary>

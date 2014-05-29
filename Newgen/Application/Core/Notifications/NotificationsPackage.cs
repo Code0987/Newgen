@@ -60,7 +60,7 @@ namespace Newgen.Packages.Notifications {
                 Author = Environment.UserName,
                 License = string.Format("© 2014 NS, {0} for Newgen", PackageId),
                 Name = PackageId,
-                AuthorEMailAddress = string.Format("Newgen+Support+{0}", PackageId),
+                AuthorEMailAddress = string.Format("Newgen+Support+{0}@nsapps.net", PackageId),
                 AuthorWebsite = string.Format("{0}/Apps/NewgenStore?Package={1}", WebShared.MainSiteUri, PackageId),
                 Description = "Notification package (Internal/Local) shows notification right infont of your eyes across Newgen."
             };

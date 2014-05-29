@@ -172,13 +172,14 @@ namespace Newgen {
                 );
 
             // Run tracker under non-dispatcher context.
-            ThreadingExtensions.RunFor(async () => {
+            this.Dispatcher.RunFor(async () => {
                 var uri = new Uri(Newgen.Resources.Resources.Link_App);
 
                 await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "Packages", "Loaded", Settings.Current.LoadedWidgets.Count);
                 await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "Packages", "Installed", PackageManager.Current.Packages.Count);
                 await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "License", Settings.IsProMode ? "Full" : "Free", 1);
             }, -1, TimeSpan.FromMinutes(45).TotalMilliseconds);
+
 #endif
         }
 
@@ -280,17 +281,17 @@ namespace Newgen {
                     if (currentKeyState == 2 && (
                         objKeyInfo.vkCode == KeyInterop.VirtualKeyFromKey(Key.LWin))) {
                         foreach (Window window in Application.Current.Windows) {
-                            //TODO:if (window.GetType() == typeof(Windows.MainWindow)) {
-                            //    Application.Current.Dispatcher.Invoke(new Action(() => {
-                            //        if (window.IsVisible) {
-                            //            window.Hide();
-                            //        }
-                            //        else {
-                            //            window.Show();
-                            //            window.Activate();
-                            //        }
-                            //    }));
-                            //}
+                            if (window.GetType() == typeof(Screen)) {
+                                Application.Current.Dispatcher.Invoke(new Action(() => {
+                                    if (window.IsVisible) {
+                                        window.Hide();
+                                    }
+                                    else {
+                                        window.Show();
+                                        window.Activate();
+                                    }
+                                }));
+                            }
                         }
 
                         return (IntPtr)1;
@@ -337,6 +338,6 @@ namespace Newgen {
             };
             Process.Start(psi);
             Close();
-        }
+        }        
     }
 }

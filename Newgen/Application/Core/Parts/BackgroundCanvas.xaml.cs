@@ -79,7 +79,7 @@ namespace Newgen {
                                                           Settings.Current.SlideShowImages[(new Random()).Next(0, Settings.Current.SlideShowImages.Count - 1)], UriKind.Absolute)
                                                           );
 
-                        ThreadingExtensions.RunFor(() => {
+                        this.Dispatcher.RunFor(() => {
                             try {
                                 AnimationImage2.Source = new BitmapImage(new Uri(
                                                                   Settings.Current.SlideShowImages[(new Random()).Next(0, Settings.Current.SlideShowImages.Count - 1)], UriKind.Absolute)

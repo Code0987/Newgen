@@ -187,25 +187,22 @@ namespace Newgen {
             tileControl.AdjustDimensions();
 
             // Add dummy transparent rectangles to spanned rows and columns
-            for (var cs = 1; cs < tileControl.package.RowSpan; cs++) {
-                var element = new Rectangle() {
-                    Fill = Brushes.Transparent,
-                    StrokeThickness = 0,
-                    Tag = tileControl
-                };
-                Grid.SetColumn(element, tileControl.package.Settings.Column + cs);
-                Grid.SetRow(element, tileControl.package.Settings.Row);
-                TilesControlHost.Children.Add(element);
-            }
-            for (var rs = 1; rs < tileControl.package.ColumnSpan - 1; rs++) {
-                var element = new Rectangle() {
-                    Fill = Brushes.Transparent,
-                    StrokeThickness = 0,
-                    Tag = tileControl
-                };
-                Grid.SetColumn(element, tileControl.package.Settings.Column);
-                Grid.SetRow(element, tileControl.package.Settings.Row + rs);
-                TilesControlHost.Children.Add(element);
+            // Vertical
+            for (var cs = 0; cs < tileControl.package.ColumnSpan; cs++) {
+                // Horizontal
+                for (var rs = 0; rs < tileControl.package.RowSpan; rs++) {
+                    // Except at 1st place
+                    if (cs != 0 || rs != 0) {
+                        var element = new Rectangle() {
+                            Fill = Brushes.Transparent,
+                            StrokeThickness = 0,
+                            Tag = tileControl
+                        };
+                        Grid.SetColumn(element, tileControl.package.Settings.Column + cs);
+                        Grid.SetRow(element, tileControl.package.Settings.Row + rs);
+                        TilesControlHost.Children.Add(element);
+                    }
+                }
             }
         }
 
