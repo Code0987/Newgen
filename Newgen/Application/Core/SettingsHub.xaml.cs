@@ -39,7 +39,7 @@ namespace Newgen {
 
         private bool IsHubActive { get; set; }
 
-        private void WindowSourceInitialized(object sender, EventArgs e) {
+        private void OnSourceInitialized(object sender, EventArgs e) {
             {
                 this.IsHubActive = true;
                 this.Left = -SystemParameters.PrimaryScreenWidth;
@@ -131,7 +131,7 @@ namespace Newgen {
             UpdateTaskBarPEXL();
         }
 
-        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e) {
+        private void OnClosing(object sender, System.ComponentModel.CancelEventArgs e) {
             if (IsHubActive) {
                 e.Cancel = true;
                 DoubleAnimation leftanimation = new DoubleAnimation() {
@@ -156,18 +156,18 @@ namespace Newgen {
             }
         }
 
-        private void Window_Closed(object sender, EventArgs e) {
+        private void OnClosed(object sender, EventArgs e) {
             if (restartRequired) {
                 App.Restart();
             }
         }
 
-        private void OkButtonClick(object sender, RoutedEventArgs e) {
+        private void OnOkButtonClick(object sender, RoutedEventArgs e) {
             ApplySettings();
             this.Close();
         }
 
-        private void CancelButtonClick(object sender, RoutedEventArgs e) {
+        private void OnCancelButtonClick(object sender, RoutedEventArgs e) {
             this.Close();
         }
 
@@ -325,7 +325,7 @@ namespace Newgen {
             }
         }
 
-        private void BackButton_Click(object sender, RoutedEventArgs e) {
+        private void OnBackButtonClick(object sender, RoutedEventArgs e) {
             this.Close();
         }
 
@@ -638,7 +638,7 @@ namespace Newgen {
 
         private void UpdateButton_Click(object sender, RoutedEventArgs e) {
             try {
-                if (UpdateButton.Content.ToString() == Definitions.OptionsCFU) {
+                if (UpdateButton.Content.ToString() == Definitions.CFU) {
                     ProgressBar.IsIndeterminate = true;
                     XElement xml = null;
                     try {
@@ -678,10 +678,10 @@ namespace Newgen {
 
                             SizeTextBlock.Text = size;
                             ProgressBar.IsIndeterminate = false;
-                            UpdateButton.Content = Definitions.OptionsULV;
+                            UpdateButton.Content = Definitions.ULV;
                         }
                         else {
-                            UpdateButton.Content = Definitions.OptionsUNA;
+                            UpdateButton.Content = Definitions.UNA;
                         }
                     }
                     catch { Api.ShowErrorMessage(Api.MSG_NE); }
@@ -689,7 +689,7 @@ namespace Newgen {
                     return;
                 }
 
-                if (UpdateButton.Content.ToString() == Definitions.OptionsULV) {
+                if (UpdateButton.Content.ToString() == Definitions.ULV) {
                     try {
                         UpdateButton.IsEnabled = false;
                         ProgressBar.IsIndeterminate = true;
@@ -701,7 +701,7 @@ namespace Newgen {
 
                         client.DownloadFileCompleted += (a, b) => {
                             try {
-                                UpdateButton.Content = Definitions.OptionsUNA;
+                                UpdateButton.Content = Definitions.UNA;
                                 UpdateButton.IsEnabled = false;
                                 if (Api.ShowQAMessage("Do you want copy of downloaded update file, in case the update installation failed ?\n\n(Note: File will be copied to your desktop.)").HasFlag(MessageBoxResult.Yes)) {
                                     FileInfo fi = new FileInfo(tempdown);

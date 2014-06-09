@@ -40,7 +40,7 @@ namespace Newgen {
         /// <param name="e">
         /// The <see cref="System.Windows.RoutedEventArgs" /> instance containing the event data.
         /// </param>
-        private void BackButton_Click(object sender, System.Windows.RoutedEventArgs e) {
+        private void OnBackButtonClick(object sender, System.Windows.RoutedEventArgs e) {
             this.Close();
         }
 

@@ -197,18 +197,6 @@ namespace Newgen.Packages {
         /// <remarks>...</remarks>
         public Package InitializeFrom(string location) {
 
-            // Scan app link
-            try {
-                return AppLink.AppLinkPackage.CreateFrom(location);
-            }
-            catch { }
-
-            // Scan notifications
-            try {
-                return Notifications.NotificationsPackage.CreateFrom(location);
-            }
-            catch { }
-
             // Scan .net compiled packages
             try {
                 var filePaths = Directory.GetFiles(location, "*.dll", SearchOption.TopDirectoryOnly);
@@ -229,6 +217,18 @@ namespace Newgen.Packages {
                     // Done !
                     return package; // Only one widgets per package !
                 }
+            }
+            catch { }
+            
+            // Scan app link
+            try {
+                return AppLink.AppLinkPackage.CreateFrom(location);
+            }
+            catch { }
+
+            // Scan notifications
+            try {
+                return Notifications.NotificationsPackage.CreateFrom(location);
             }
             catch { }
 

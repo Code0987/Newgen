@@ -5,6 +5,7 @@ using System.Windows.Media;
 using System.Windows.Media.Animation;
 using libns.Media.Animation;
 using libns.Threading;
+using libns.UI;
 
 namespace Newgen
 {
@@ -73,6 +74,8 @@ namespace Newgen
             this.VisualTextHintingMode = TextHintingMode.Auto;
             this.VisualTextRenderingMode = TextRenderingMode.Auto;
             this.VisualEdgeMode = EdgeMode.Unspecified;
+
+            this.ResetUICulture();
 
             ThreadingExtensions.LazyInvokeThreadSafe(() => AnimateStart(), TimeSpan.FromMilliseconds(180));
         }

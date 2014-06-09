@@ -14,6 +14,7 @@ using libns.Language;
 using libns.Native;
 using libns.Threading;
 using Newgen.Packages;
+using Newgen.Packages.Notifications;
 
 namespace Newgen {
 
@@ -138,10 +139,10 @@ namespace Newgen {
                 notifier.ContextMenu.MenuItems.Add("Close", (a, b) => {
                     App.Current.Dispatcher.BeginInvoke(new Action(Close));
                 });
-                notifier.ShowBalloonTip(1000, "Newgen", "Loading ...", System.Windows.Forms.ToolTipIcon.Info);
+                // OBSOLETE: notifier.ShowBalloonTip(1000, "Newgen", "Loading ...", System.Windows.Forms.ToolTipIcon.Info);
             })));
 
-            // Hotkey
+            // Hot key
             try {
                 var objCurrentModule = Process.GetCurrentProcess().MainModule;
                 objKeyboardProcess = new WinAPI.HookProc(CaptureKey);
@@ -236,6 +237,15 @@ namespace Newgen {
                     PackageManager.Current.Get(EMessage.InternetKey).OnMessageReceived(message);
                 else
                     WinAPI.ShellExecute(IntPtr.Zero, "open", message.Value, string.Empty, string.Empty, 0);
+
+                break;
+
+            // Notification
+            case EMessage.NotificationKey:
+                App.Current.ShowNotification(
+                    new Notification(message.Value.Substring(0, System.Math.Min(10, message.Value.Length)) + "...", message.Value),
+                    NotificationProviderType.Custom | NotificationProviderType.Native
+                    );
 
                 break;
 
@@ -338,6 +348,6 @@ namespace Newgen {
             };
             Process.Start(psi);
             Close();
-        }        
+        }
     }
 }

@@ -125,7 +125,7 @@ namespace Newgen.Packages.AppLink {
         /// <remarks>...</remarks>
         public static Package CreateFrom(string location) {
             var package = new AppLinkPackage(location);
-            if (!package.Metadata.Id.StartsWith(PackageIdPrefix))
+            if (package.Metadata == null || !package.Metadata.Id.StartsWith(PackageIdPrefix))
                 throw new Exception("Not a app link package !");
             return package;
         }

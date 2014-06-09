@@ -17,31 +17,24 @@
     <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\</SolutionDir>
     <RestorePackages>true</RestorePackages>
     <TargetFrameworkProfile />
+    <OutputPath>..\..\Resources\bin\$(Configuration)\</OutputPath>
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>TRACE;DEBUG;Native;Net4;Net45</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>TRACE;DEBUG;Native;Net4;Net45</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DefineConstants>TRACE;Native;Net4;Net45</DefineConstants>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE;Native;Net4;Net45</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <UseVSHostingProcess>false</UseVSHostingProcess>
-    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup>
     <StartupObject>Newgen.App</StartupObject>
@@ -106,6 +99,9 @@
     </Compile>
     <Compile Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Internal%29.cs">
       <Link>References\WebShared%28Internal%29.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Newgen.Api%29.cs">
+      <Link>References\WebShared%28Newgen.Api%29.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\libns.net\Applied\GoogleAnalyticsTracker.cs">
       <Link>References\GA\GoogleAnalyticsTracker.cs</Link>
@@ -212,12 +208,12 @@
     <Compile Include="Core\InternalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\PackageServer.cs" />
+    <Compile Include="Core\Settings.cs" />
     <Compile Include="Resources\Definitions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Definitions.resx</DependentUpon>
     </Compile>
-    <Compile Include="Core\Settings.cs" />
     <None Include="packages.config" />
     <Reference Include="Facebook">
       <HintPath>..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Facebook.6.4.2\lib\net45\Facebook.dll</HintPath>
@@ -342,11 +338,10 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Resources\Definitions.hi-IN.resx" />
     <EmbeddedResource Include="Resources\Definitions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
-      <LastGenOutput>Definitions.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Definitions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
     <EmbeddedResource Include="Resources\Inject.js" />
   </ItemGroup>

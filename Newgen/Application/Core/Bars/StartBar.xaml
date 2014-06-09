@@ -126,7 +126,7 @@
             </app:StartBarItem.Icon>
         </app:StartBarItem>
         <app:StartBarItem x:Name="SettingsButton"
-                         Title="{x:Static r:Definitions.OptionsItem}"
+                         Title="{x:Static r:Definitions.StartBarSettingsItem}"
                          MouseLeftButtonUp="OnSettingsButtonMouseLeftButtonUp"
                          Order="4">
             <app:StartBarItem.Icon>

@@ -9,7 +9,7 @@
   </SpellChecker>
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
-    <OutputPath>.\Help</OutputPath>
+    <OutputPath>..\Resources\Documentation</OutputPath>
     <ImageFolderPath />
     <HtmlFormats>
       <HtmlHelp>true</HtmlHelp>
@@ -27,9 +27,11 @@
       <TagList />
     </IncludeScopes>
     <ResolveCrefLinks>true</ResolveCrefLinks>
-    <HeaderText />
-    <FooterText />
-    <SelectedProjects />
+    <HeaderText>Documentation</HeaderText>
+    <FooterText>© 2014 NS.</FooterText>
+    <SelectedProjects>
+      <SelectedProject>Api</SelectedProject>
+    </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>
 </GhostDoc>

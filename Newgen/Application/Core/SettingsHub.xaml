@@ -7,9 +7,9 @@
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:r="clr-namespace:Newgen.Resources"
         Background="White"
-        Closed="Window_Closed"
-        Closing="Window_Closing"
-        SourceInitialized="WindowSourceInitialized"
+        Closed="OnClosed"
+        Closing="OnClosing"
+        SourceInitialized="OnSourceInitialized"
         Style="{StaticResource ResetWindowStyle}"
         d:DesignHeight="1366"
         d:DesignWidth="1366"
@@ -25,20 +25,20 @@
     -->
     <DockPanel Name="Root">
         <Grid DockPanel.Dock="Top">
-            <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource HubBackButton}" />
-            <TextBlock Style="{StaticResource HubTitleStyle}" Text="Settings" />
+            <Button Name="BackButton" Click="OnBackButtonClick" Style="{StaticResource HubBackButton}" />
+            <TextBlock Style="{StaticResource HubTitleStyle}" Text="{x:Static r:Definitions.SettingsHub}" />
         </Grid>
         <Grid DockPanel.Dock="Bottom">
             <StackPanel Margin="{StaticResource HubFooterMargin}" HorizontalAlignment="Right" Orientation="Horizontal">
-                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource ContentFontSizeSmall}" Text="{x:Static r:Definitions.OptionsRestart}" />
+                <TextBlock VerticalAlignment="Center" FontSize="{StaticResource ContentFontSizeSmall}" Text="{x:Static r:Definitions.Restart}" />
                 <Button Name="OkButton"
                         Margin="5"
-                        Click="OkButtonClick"
-                        Content="{x:Static r:Definitions.OptionsOkButton}" />
+                        Click="OnOkButtonClick"
+                        Content="{x:Static r:Definitions.OkButton}" />
                 <Button Name="CancelButton"
                         Margin="5"
-                        Click="CancelButtonClick"
-                        Content="{x:Static r:Definitions.OptionsCancelButton}" />
+                        Click="OnCancelButtonClick"
+                        Content="{x:Static r:Definitions.CancelButton}" />
             </StackPanel>
         </Grid>
         <TabControl x:Name="Tabs"
@@ -48,21 +48,21 @@
             <TabItem x:Name="Tab_UI"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Header="{x:Static r:Definitions.OptionsUITabHeader}">
+                     Header="{x:Static r:Definitions.UITabHeader}">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <CheckBox Name="EnableShowTaskbarACheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowTaskbarA}" />
-                        <CheckBox Name="EnableShowTaskbarCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowTaskbar}" />
-                        <CheckBox Name="EnableUseTBCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableTB}" />
-                        <CheckBox Name="EnableUserTile" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableUserTile}" />
-                        <CheckBox Name="EnableBgImage" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsBgImgUse}" />
+                        <CheckBox Name="EnableShowTaskbarACheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowTaskbarA}" />
+                        <CheckBox Name="EnableShowTaskbarCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowTaskbar}" />
+                        <CheckBox Name="EnableUseTBCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableTB}" />
+                        <CheckBox Name="EnableUserTile" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableUserTile}" />
+                        <CheckBox Name="EnableBgImage" Click="CheckBoxClick" Content="{x:Static r:Definitions.BgImgUse}" />
                         <DockPanel Margin="30,0,0,0">
                             <Button Name="ChangeBgImg"
                                     HorizontalAlignment="Left"
                                     Click="ChangeBgImgClick"
-                                    Content="{x:Static r:Definitions.OptionsBgImgSelect}" />
+                                    Content="{x:Static r:Definitions.BgImgSelect}" />
                         </DockPanel>
-                        <TextBlock x:Name="TextBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsBg}" />
+                        <TextBlock x:Name="TextBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.Bg}" />
                         <DockPanel Margin="30,0,0,0">
                             <Rectangle Name="NewgenBgColor"
                                        Width="40"
@@ -74,19 +74,19 @@
                             <Button Name="ChangeBgColorButton"
                                     HorizontalAlignment="Left"
                                     Click="ChangeBgColorButtonClick"
-                                    Content="{x:Static r:Definitions.OptionsChangeBg}" />
+                                    Content="{x:Static r:Definitions.ChangeBg}" />
                         </DockPanel>
-                        <CheckBox Name="Enable_OOBE_SS" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsStartScreenSSEnable}" />
+                        <CheckBox Name="Enable_OOBE_SS" Click="CheckBoxClick" Content="{x:Static r:Definitions.StartScreenSSEnable}" />
                         <StackPanel x:Name="OOBE_SS" Margin="30,0,0,0">
                             <Button Name="ChangeSSImgs"
                                     HorizontalAlignment="Left"
                                     Click="ChangeSSImgs_Click"
-                                    Content="{x:Static r:Definitions.OptionsStartScreenSSImgSelect}" />
-                            <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartScreenSSTimeFrame}" />
+                                    Content="{x:Static r:Definitions.StartScreenSSImgSelect}" />
+                            <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.StartScreenSSTimeFrame}" />
                             <TextBox Name="ValStartScreenSSTimeFrame" Margin="0,0,0,0" Text="15" />
                         </StackPanel>
 
-                        <TextBlock x:Name="TextBgTrans" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsBgAlpha}" />
+                        <TextBlock x:Name="TextBgTrans" Margin="0,5,0,0" Text="{x:Static r:Definitions.BgAlpha}" />
                         <Slider Name="BgColorAlpha"
                                 Margin="30,0,0,10"
                                 LargeChange="5"
@@ -94,8 +94,8 @@
                                 Minimum="1"
                                 SmallChange="1"
                                 Value="255" />
-                        <CheckBox Name="EnableStartBarAlways" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableShowStartbarA}" />
-                        <TextBlock x:Name="TextStartBatBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartBarBg}" />
+                        <CheckBox Name="EnableStartBarAlways" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowStartbarA}" />
+                        <TextBlock x:Name="TextStartBatBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.StartBarBg}" />
                         <DockPanel Margin="30,0,0,0">
                             <Rectangle Name="StartBarBgColor"
                                        Width="40"
@@ -107,9 +107,9 @@
                             <Button Name="ChangeStartBarBgColorButton"
                                     HorizontalAlignment="Left"
                                     Click="ChangeStartBarBgColorButton_Click"
-                                    Content="{x:Static r:Definitions.OptionsStartBarBgChange}" />
+                                    Content="{x:Static r:Definitions.StartBarBgChange}" />
                         </DockPanel>
-                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsStartScreenTitle}" />
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.StartScreenTitle}" />
                         <TextBox Name="ValStartScreenTitle" Margin="30,0,0,0" />
                     </StackPanel>
                 </ScrollViewer>
@@ -117,13 +117,13 @@
             <TabItem x:Name="Tab_Tiles"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Header="{x:Static r:Definitions.OptionsWidgetsTabHeader}">
+                     Header="{x:Static r:Definitions.WidgetsTabHeader}">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <CheckBox Name="EnableWidgetLock" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsLockWidgets}" />
-                        <TextBlock x:Name="TextTilesSizeScale" Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTilesSize}" />
+                        <CheckBox Name="EnableWidgetLock" Click="CheckBoxClick" Content="{x:Static r:Definitions.LockWidgets}" />
+                        <TextBlock x:Name="TextTilesSizeScale" Margin="0,5,0,0" Text="{x:Static r:Definitions.TilesSize}" />
                         <Slider Name="TilesSizeScale" Margin="30,0,0,0" SmallChange="1" />
-                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTilesSpacing}" />
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TilesSpacing}" />
                         <TextBox Name="ValTilesSpacing" Margin="30,0,0,0" />
                     </StackPanel>
                 </ScrollViewer>
@@ -131,28 +131,28 @@
             <TabItem x:Name="Tab_General"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Header="{x:Static r:Definitions.OptionsGeneralTabHeader}">
+                     Header="{x:Static r:Definitions.GeneralTabHeader}">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
-                        <CheckBox Name="EnableAutoStartCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.OptionsEnableAutoStart}" />
-                        <TextBlock Margin="0,15,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsKeyboard}" />
+                        <CheckBox Name="EnableAutoStartCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableAutoStart}" />
+                        <TextBlock Margin="0,15,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Keyboard}" />
                         <CheckBox Name="EnableHK"
                                   Margin="0,5,0,0"
                                   Click="CheckBoxClick"
-                                  Content="{x:Static r:Definitions.OptionsEnableHK}" />
-                        <TextBlock Margin="0,10,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsTime}" />
-                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.OptionsTimeFormat}" />
+                                  Content="{x:Static r:Definitions.EnableHK}" />
+                        <TextBlock Margin="0,10,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Time}" />
+                        <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TimeFormat}" />
                         <WrapPanel Margin="30,0,0,0" Orientation="Horizontal">
                             <RadioButton Name="Time12HRadioButton"
                                          Margin="0,0,20,0"
                                          Click="CheckBoxClick"
-                                         Content="{x:Static r:Definitions.Options12H}"
+                                         Content="{x:Static r:Definitions.TimeFormat12H}"
                                          IsChecked="True" />
-                            <RadioButton Name="Time24HRadioButton" Click="CheckBoxClick" Content="{x:Static r:Definitions.Options24H}" />
+                            <RadioButton Name="Time24HRadioButton" Click="CheckBoxClick" Content="{x:Static r:Definitions.TimeFormat24H}" />
                         </WrapPanel>
-                        <TextBlock Margin="0,10,0,0" Text="{x:Static r:Definitions.OptionsLockScreenTime}" />
+                        <TextBlock Margin="0,10,0,0" Text="{x:Static r:Definitions.LockScreenTime}" />
                         <TextBox Name="ValLockTime" Margin="30,0,0,0" TextChanged="ValLockTime_TextChanged" />
-                        <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.OptionsLanguage}" />
+                        <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Language}" />
                         <ComboBox Name="LanguageComboBox" Margin="0,5,0,0" SelectionChanged="ComboBoxSelectionChanged" />
                         <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Text_Settings_ProvideUsageData}" />
                         <StackPanel Margin="0,5,0,0">
@@ -217,7 +217,7 @@
             <TabItem x:Name="Tab_Updates"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Header="{x:Static r:Definitions.OptionsUpdatesTabHeader}">
+                     Header="{x:Static r:Definitions.UpdatesTabHeader}">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                     <StackPanel>
                         <Grid>
@@ -229,7 +229,7 @@
                                     Grid.Column="0"
                                     HorizontalAlignment="Left"
                                     Click="UpdateButton_Click"
-                                    Content="{x:Static r:Definitions.OptionsCFU}" />
+                                    Content="{x:Static r:Definitions.CFU}" />
                             <ProgressBar Name="ProgressBar"
                                          Grid.Column="1"
                                          Height="40"
@@ -274,7 +274,7 @@
             <TabItem x:Name="Tab_About"
                      HorizontalAlignment="Stretch"
                      VerticalAlignment="Stretch"
-                     Header="{x:Static r:Definitions.OptionsAboutTabHeader}">
+                     Header="{x:Static r:Definitions.AboutTabHeader}">
                 <ScrollViewer HorizontalScrollBarVisibility="Hidden" VerticalScrollBarVisibility="Auto">
                     <Grid>
                         <Image Width="64"
@@ -286,7 +286,7 @@
                         <StackPanel Orientation="Vertical">
                             <TextBlock Margin="10,20,5,10" Text="{x:Static r:Definitions.Text_App}" />
                             <TextBlock Margin="10,0,5,10">
-                                <Run Text="{x:Static r:Definitions.OptionsVersion}" />
+                                <Run Text="{x:Static r:Definitions.Version}" />
                                 <Run Name="BuildTag" Text="*.*.*.*" />
                             </TextBlock>
                             <TextBlock Name="SiteLink1"

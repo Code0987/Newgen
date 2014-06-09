@@ -178,7 +178,7 @@ namespace Newgen {
             var bar = new AppLinkPackageAddressBarWindow();
             bar.ShowDialog();
             var uri = default(Uri);
-            if (!Uri.TryCreate(bar.AddressBox.Text, UriKind.RelativeOrAbsolute, out uri))
+            if (!Uri.TryCreate(bar.AddressBox.Text, UriKind.RelativeOrAbsolute, out uri) || string.IsNullOrWhiteSpace(uri.OriginalString))
                 return;
 
             PackageManager.Current.Load(AppLinkPackage.CreateFor(uri.OriginalString));

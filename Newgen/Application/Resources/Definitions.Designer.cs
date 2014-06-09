@@ -61,11 +61,38 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to About Newgen.
+        /// </summary>
+        public static string About {
+            get {
+                return ResourceManager.GetString("About", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to about.
+        /// </summary>
+        public static string AboutTabHeader {
+            get {
+                return ResourceManager.GetString("AboutTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Adjust app link ....
         /// </summary>
         public static string AppLinkTileOptionsHubTitle {
             get {
                 return ResourceManager.GetString("AppLinkTileOptionsHubTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to apply.
+        /// </summary>
+        public static string ApplyButton {
+            get {
+                return ResourceManager.GetString("ApplyButton", resourceCulture);
             }
         }
         
@@ -79,11 +106,101 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Background color:.
+        /// </summary>
+        public static string Bg {
+            get {
+                return ResourceManager.GetString("Bg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background color transparency:.
+        /// </summary>
+        public static string BgAlpha {
+            get {
+                return ResourceManager.GetString("BgAlpha", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Background image:.
+        /// </summary>
+        public static string BgImg {
+            get {
+                return ResourceManager.GetString("BgImg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select image.
+        /// </summary>
+        public static string BgImgSelect {
+            get {
+                return ResourceManager.GetString("BgImgSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use image in backgound.
+        /// </summary>
+        public static string BgImgUse {
+            get {
+                return ResourceManager.GetString("BgImgUse", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to cancel.
+        /// </summary>
+        public static string CancelButton {
+            get {
+                return ResourceManager.GetString("CancelButton", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to check for updates.
+        /// </summary>
+        public static string CFU {
+            get {
+                return ResourceManager.GetString("CFU", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to change.
+        /// </summary>
+        public static string ChangeBg {
+            get {
+                return ResourceManager.GetString("ChangeBg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to change.
+        /// </summary>
+        public static string ChangeStaticAppWidgetBgColor {
+            get {
+                return ResourceManager.GetString("ChangeStaticAppWidgetBgColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Change tile color.
         /// </summary>
         public static string ChangeTileColor {
             get {
                 return ResourceManager.GetString("ChangeTileColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Licensed under Type 2 License of NS. ( http://NSApps.net/License ).
+        /// </summary>
+        public static string Copyright {
+            get {
+                return ResourceManager.GetString("Copyright", resourceCulture);
             }
         }
         
@@ -97,11 +214,110 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Disable StartBar Clock.
+        /// </summary>
+        public static string DisableStartBarClock {
+            get {
+                return ResourceManager.GetString("DisableStartBarClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Start Newgen when Windows loads.
+        /// </summary>
+        public static string EnableAutoStart {
+            get {
+                return ResourceManager.GetString("EnableAutoStart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable hot keys ( global keyboard support ) (*).
+        /// </summary>
+        public static string EnableHK {
+            get {
+                return ResourceManager.GetString("EnableHK", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable logging of errors.
+        /// </summary>
+        public static string EnableLog {
+            get {
+                return ResourceManager.GetString("EnableLog", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable Out Of Box Experience (*).
+        /// </summary>
+        public static string EnableOOBE {
+            get {
+                return ResourceManager.GetString("EnableOOBE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Startbar always.
+        /// </summary>
+        public static string EnableShowStartbarA {
+            get {
+                return ResourceManager.GetString("EnableShowStartbarA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show taskbar ( in fullscreen mode ).
+        /// </summary>
+        public static string EnableShowTaskbar {
+            get {
+                return ResourceManager.GetString("EnableShowTaskbar", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show taskbar always.
+        /// </summary>
+        public static string EnableShowTaskbarA {
+            get {
+                return ResourceManager.GetString("EnableShowTaskbarA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use thumbnails bar (*).
+        /// </summary>
+        public static string EnableTB {
+            get {
+                return ResourceManager.GetString("EnableTB", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable UserBadgeControl (User name and Picture) on main screen. (*).
+        /// </summary>
+        public static string EnableUserTile {
+            get {
+                return ResourceManager.GetString("EnableUserTile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit Newgen.
         /// </summary>
         public static string ExitItem {
             get {
                 return ResourceManager.GetString("ExitItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to general.
+        /// </summary>
+        public static string GeneralTabHeader {
+            get {
+                return ResourceManager.GetString("GeneralTabHeader", resourceCulture);
             }
         }
         
@@ -124,6 +340,33 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string Item {
+            get {
+                return ResourceManager.GetString("Item", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Keyboard.
+        /// </summary>
+        public static string Keyboard {
+            get {
+                return ResourceManager.GetString("Keyboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to http://NSApps.net/Apps/Newgen.
         /// </summary>
         public static string Link_App {
@@ -133,497 +376,38 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 12-hour time.
-        /// </summary>
-        public static string Options12H {
-            get {
-                return ResourceManager.GetString("Options12H", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to 24-hour time.
-        /// </summary>
-        public static string Options24H {
-            get {
-                return ResourceManager.GetString("Options24H", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to About Newgen.
-        /// </summary>
-        public static string OptionsAbout {
-            get {
-                return ResourceManager.GetString("OptionsAbout", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to about.
-        /// </summary>
-        public static string OptionsAboutTabHeader {
-            get {
-                return ResourceManager.GetString("OptionsAboutTabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to apply.
-        /// </summary>
-        public static string OptionsApplyButton {
-            get {
-                return ResourceManager.GetString("OptionsApplyButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Background color:.
-        /// </summary>
-        public static string OptionsBg {
-            get {
-                return ResourceManager.GetString("OptionsBg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Background color transparency:.
-        /// </summary>
-        public static string OptionsBgAlpha {
-            get {
-                return ResourceManager.GetString("OptionsBgAlpha", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Background image:.
-        /// </summary>
-        public static string OptionsBgImg {
-            get {
-                return ResourceManager.GetString("OptionsBgImg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select image.
-        /// </summary>
-        public static string OptionsBgImgSelect {
-            get {
-                return ResourceManager.GetString("OptionsBgImgSelect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use image in backgound.
-        /// </summary>
-        public static string OptionsBgImgUse {
-            get {
-                return ResourceManager.GetString("OptionsBgImgUse", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to cancel.
-        /// </summary>
-        public static string OptionsCancelButton {
-            get {
-                return ResourceManager.GetString("OptionsCancelButton", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to check for updates.
-        /// </summary>
-        public static string OptionsCFU {
-            get {
-                return ResourceManager.GetString("OptionsCFU", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to change.
-        /// </summary>
-        public static string OptionsChangeBg {
-            get {
-                return ResourceManager.GetString("OptionsChangeBg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to change.
-        /// </summary>
-        public static string OptionsChangeStaticAppWidgetBgColor {
-            get {
-                return ResourceManager.GetString("OptionsChangeStaticAppWidgetBgColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Licensed under Type 2 License of NS. ( http://NSApps.net/License ).
-        /// </summary>
-        public static string OptionsCopyright {
-            get {
-                return ResourceManager.GetString("OptionsCopyright", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Disable StartBar Clock.
-        /// </summary>
-        public static string OptionsDisableStartBarClock {
-            get {
-                return ResourceManager.GetString("OptionsDisableStartBarClock", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Start Newgen when Windows loads.
-        /// </summary>
-        public static string OptionsEnableAutoStart {
-            get {
-                return ResourceManager.GetString("OptionsEnableAutoStart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable hot keys ( global keyboard support ) (*).
-        /// </summary>
-        public static string OptionsEnableHK {
-            get {
-                return ResourceManager.GetString("OptionsEnableHK", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable logging of errors.
-        /// </summary>
-        public static string OptionsEnableLog {
-            get {
-                return ResourceManager.GetString("OptionsEnableLog", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable Out Of Box Experience (*).
-        /// </summary>
-        public static string OptionsEnableOOBE {
-            get {
-                return ResourceManager.GetString("OptionsEnableOOBE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show Startbar always.
-        /// </summary>
-        public static string OptionsEnableShowStartbarA {
-            get {
-                return ResourceManager.GetString("OptionsEnableShowStartbarA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show taskbar ( in fullscreen mode ).
-        /// </summary>
-        public static string OptionsEnableShowTaskbar {
-            get {
-                return ResourceManager.GetString("OptionsEnableShowTaskbar", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Show taskbar always.
-        /// </summary>
-        public static string OptionsEnableShowTaskbarA {
-            get {
-                return ResourceManager.GetString("OptionsEnableShowTaskbarA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Use thumbnails bar (*).
-        /// </summary>
-        public static string OptionsEnableTB {
-            get {
-                return ResourceManager.GetString("OptionsEnableTB", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable UserBadgeControl (User name and Picture) on main screen. (*).
-        /// </summary>
-        public static string OptionsEnableUserTile {
-            get {
-                return ResourceManager.GetString("OptionsEnableUserTile", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to general.
-        /// </summary>
-        public static string OptionsGeneralTabHeader {
-            get {
-                return ResourceManager.GetString("OptionsGeneralTabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Settings.
-        /// </summary>
-        public static string OptionsItem {
-            get {
-                return ResourceManager.GetString("OptionsItem", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Keyboard.
-        /// </summary>
-        public static string OptionsKeyboard {
-            get {
-                return ResourceManager.GetString("OptionsKeyboard", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Language.
-        /// </summary>
-        public static string OptionsLanguage {
-            get {
-                return ResourceManager.GetString("OptionsLanguage", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Lock screen time (in minutes) (use blank or -1 for no screen):.
         /// </summary>
-        public static string OptionsLockScreenTime {
+        public static string LockScreenTime {
             get {
-                return ResourceManager.GetString("OptionsLockScreenTime", resourceCulture);
+                return ResourceManager.GetString("LockScreenTime", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to Lock widgets in their places, i.e. disable re-arrangment of widgets.
         /// </summary>
-        public static string OptionsLockWidgets {
+        public static string LockWidgets {
             get {
-                return ResourceManager.GetString("OptionsLockWidgets", resourceCulture);
+                return ResourceManager.GetString("LockWidgets", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to ok.
         /// </summary>
-        public static string OptionsOkButton {
+        public static string OkButton {
             get {
-                return ResourceManager.GetString("OptionsOkButton", resourceCulture);
+                return ResourceManager.GetString("OkButton", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to oobe.
         /// </summary>
-        public static string OptionsOOBETabHeader {
+        public static string OOBETabHeader {
             get {
-                return ResourceManager.GetString("OptionsOOBETabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to * Some Changes will be applied after restarting Newgen..
-        /// </summary>
-        public static string OptionsRestart {
-            get {
-                return ResourceManager.GetString("OptionsRestart", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Toolbar Background color:.
-        /// </summary>
-        public static string OptionsStartBarBg {
-            get {
-                return ResourceManager.GetString("OptionsStartBarBg", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to change.
-        /// </summary>
-        public static string OptionsStartBarBgChange {
-            get {
-                return ResourceManager.GetString("OptionsStartBarBgChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StartBar Logo:.
-        /// </summary>
-        public static string OptionsStartBarLogo {
-            get {
-                return ResourceManager.GetString("OptionsStartBarLogo", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to change.
-        /// </summary>
-        public static string OptionsStartBarLogoChange {
-            get {
-                return ResourceManager.GetString("OptionsStartBarLogoChange", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StartScreen slide-show images (*):.
-        /// </summary>
-        public static string OptionsStartScreenSS {
-            get {
-                return ResourceManager.GetString("OptionsStartScreenSS", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Enable StartScreen slide-show (*).
-        /// </summary>
-        public static string OptionsStartScreenSSEnable {
-            get {
-                return ResourceManager.GetString("OptionsStartScreenSSEnable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to select images.
-        /// </summary>
-        public static string OptionsStartScreenSSImgSelect {
-            get {
-                return ResourceManager.GetString("OptionsStartScreenSSImgSelect", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StartScreen slide-show interval (in seconds) (*):.
-        /// </summary>
-        public static string OptionsStartScreenSSTimeFrame {
-            get {
-                return ResourceManager.GetString("OptionsStartScreenSSTimeFrame", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to StartScreen Title:.
-        /// </summary>
-        public static string OptionsStartScreenTitle {
-            get {
-                return ResourceManager.GetString("OptionsStartScreenTitle", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Tiles size (*):.
-        /// </summary>
-        public static string OptionsTilesSize {
-            get {
-                return ResourceManager.GetString("OptionsTilesSize", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Space between tiles (*):.
-        /// </summary>
-        public static string OptionsTilesSpacing {
-            get {
-                return ResourceManager.GetString("OptionsTilesSpacing", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Time.
-        /// </summary>
-        public static string OptionsTime {
-            get {
-                return ResourceManager.GetString("OptionsTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Time format:.
-        /// </summary>
-        public static string OptionsTimeFormat {
-            get {
-                return ResourceManager.GetString("OptionsTimeFormat", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to ui.
-        /// </summary>
-        public static string OptionsUITabHeader {
-            get {
-                return ResourceManager.GetString("OptionsUITabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to update to latest version !.
-        /// </summary>
-        public static string OptionsULV {
-            get {
-                return ResourceManager.GetString("OptionsULV", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to :) updated.
-        /// </summary>
-        public static string OptionsUNA {
-            get {
-                return ResourceManager.GetString("OptionsUNA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to updates.
-        /// </summary>
-        public static string OptionsUpdatesTabHeader {
-            get {
-                return ResourceManager.GetString("OptionsUpdatesTabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Version.
-        /// </summary>
-        public static string OptionsVersion {
-            get {
-                return ResourceManager.GetString("OptionsVersion", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Fallback color for tiles background (*) (This only works when you don&apos;t set color):.
-        /// </summary>
-        public static string OptionsWidgetBgColor {
-            get {
-                return ResourceManager.GetString("OptionsWidgetBgColor", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to widgets.
-        /// </summary>
-        public static string OptionsWidgetsTabHeader {
-            get {
-                return ResourceManager.GetString("OptionsWidgetsTabHeader", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Newgen options.
-        /// </summary>
-        public static string OptionsWindowTitle {
-            get {
-                return ResourceManager.GetString("OptionsWindowTitle", resourceCulture);
+                return ResourceManager.GetString("OOBETabHeader", resourceCulture);
             }
         }
         
@@ -709,6 +493,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * Some Changes will be applied after restarting Newgen..
+        /// </summary>
+        public static string Restart {
+            get {
+                return ResourceManager.GetString("Restart", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save Config.
         /// </summary>
         public static string SaveItem {
@@ -745,6 +538,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string SettingsHub {
+            get {
+                return ResourceManager.GetString("SettingsHub", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select friends that you want to pin on a start screen.
         /// </summary>
         public static string ShareHubTip {
@@ -763,6 +565,51 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Toolbar Background color:.
+        /// </summary>
+        public static string StartBarBg {
+            get {
+                return ResourceManager.GetString("StartBarBg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to change.
+        /// </summary>
+        public static string StartBarBgChange {
+            get {
+                return ResourceManager.GetString("StartBarBgChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StartBar Logo:.
+        /// </summary>
+        public static string StartBarLogo {
+            get {
+                return ResourceManager.GetString("StartBarLogo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to change.
+        /// </summary>
+        public static string StartBarLogoChange {
+            get {
+                return ResourceManager.GetString("StartBarLogoChange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settings.
+        /// </summary>
+        public static string StartBarSettingsItem {
+            get {
+                return ResourceManager.GetString("StartBarSettingsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Start.
         /// </summary>
         public static string StartItem {
@@ -772,7 +619,52 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Newgen Store.
+        ///   Looks up a localized string similar to StartScreen slide-show images (*):.
+        /// </summary>
+        public static string StartScreenSS {
+            get {
+                return ResourceManager.GetString("StartScreenSS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enable StartScreen slide-show (*).
+        /// </summary>
+        public static string StartScreenSSEnable {
+            get {
+                return ResourceManager.GetString("StartScreenSSEnable", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to select images.
+        /// </summary>
+        public static string StartScreenSSImgSelect {
+            get {
+                return ResourceManager.GetString("StartScreenSSImgSelect", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StartScreen slide-show interval (in seconds) (*):.
+        /// </summary>
+        public static string StartScreenSSTimeFrame {
+            get {
+                return ResourceManager.GetString("StartScreenSSTimeFrame", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to StartScreen Title:.
+        /// </summary>
+        public static string StartScreenTitle {
+            get {
+                return ResourceManager.GetString("StartScreenTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Store.
         /// </summary>
         public static string StoreHub {
             get {
@@ -934,11 +826,101 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Tiles size (*):.
+        /// </summary>
+        public static string TilesSize {
+            get {
+                return ResourceManager.GetString("TilesSize", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Space between tiles (*):.
+        /// </summary>
+        public static string TilesSpacing {
+            get {
+                return ResourceManager.GetString("TilesSpacing", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time.
+        /// </summary>
+        public static string Time {
+            get {
+                return ResourceManager.GetString("Time", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Time format:.
+        /// </summary>
+        public static string TimeFormat {
+            get {
+                return ResourceManager.GetString("TimeFormat", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 12-hour time.
+        /// </summary>
+        public static string TimeFormat12H {
+            get {
+                return ResourceManager.GetString("TimeFormat12H", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 24-hour time.
+        /// </summary>
+        public static string TimeFormat24H {
+            get {
+                return ResourceManager.GetString("TimeFormat24H", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to ui.
+        /// </summary>
+        public static string UITabHeader {
+            get {
+                return ResourceManager.GetString("UITabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to update to latest version !.
+        /// </summary>
+        public static string ULV {
+            get {
+                return ResourceManager.GetString("ULV", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to :) updated.
+        /// </summary>
+        public static string UNA {
+            get {
+                return ResourceManager.GetString("UNA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Un-Lock ( Enable Dragging ).
         /// </summary>
         public static string UnLockItem {
             get {
                 return ResourceManager.GetString("UnLockItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to updates.
+        /// </summary>
+        public static string UpdatesTabHeader {
+            get {
+                return ResourceManager.GetString("UpdatesTabHeader", resourceCulture);
             }
         }
         
@@ -952,6 +934,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Version.
+        /// </summary>
+        public static string Version {
+            get {
+                return ResourceManager.GetString("Version", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to what&apos;s new?.
         /// </summary>
         public static string WhatsNew {
@@ -961,11 +952,38 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Fallback color for tiles background (*) (This only works when you don&apos;t set color):.
+        /// </summary>
+        public static string WidgetBgColor {
+            get {
+                return ResourceManager.GetString("WidgetBgColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Widgets.
         /// </summary>
         public static string WidgetsItem {
             get {
                 return ResourceManager.GetString("WidgetsItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to widgets.
+        /// </summary>
+        public static string WidgetsTabHeader {
+            get {
+                return ResourceManager.GetString("WidgetsTabHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Newgen options.
+        /// </summary>
+        public static string WindowTitle {
+            get {
+                return ResourceManager.GetString("WindowTitle", resourceCulture);
             }
         }
     }

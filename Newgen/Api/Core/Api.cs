@@ -20,6 +20,11 @@ namespace Newgen
         /// All key
         /// </summary>
         public const string AllKey = "[*]";
+
+        /// <summary>
+        /// The notifications key
+        /// </summary>
+        public const string NotificationKey = "[Notification]";
         
         /// <summary>
         /// The internet key

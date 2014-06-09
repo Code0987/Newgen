@@ -117,107 +117,137 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="About" xml:space="preserve">
+    <value>About Newgen</value>
+  </data>
+  <data name="AboutTabHeader" xml:space="preserve">
+    <value>about</value>
+  </data>
+  <data name="AppLinkTileOptionsHubTitle" xml:space="preserve">
+    <value>Adjust app link ...</value>
+  </data>
+  <data name="ApplyButton" xml:space="preserve">
+    <value>apply</value>
+  </data>
   <data name="BackItem" xml:space="preserve">
     <value>Back</value>
+  </data>
+  <data name="Bg" xml:space="preserve">
+    <value>Background color:</value>
+  </data>
+  <data name="BgAlpha" xml:space="preserve">
+    <value>Background color transparency:</value>
+  </data>
+  <data name="BgImg" xml:space="preserve">
+    <value>Background image:</value>
+  </data>
+  <data name="BgImgSelect" xml:space="preserve">
+    <value>select image</value>
+  </data>
+  <data name="BgImgUse" xml:space="preserve">
+    <value>Use image in backgound</value>
+  </data>
+  <data name="CancelButton" xml:space="preserve">
+    <value>cancel</value>
+  </data>
+  <data name="CFU" xml:space="preserve">
+    <value>check for updates</value>
+  </data>
+  <data name="ChangeBg" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="ChangeStaticAppWidgetBgColor" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="ChangeTileColor" xml:space="preserve">
+    <value>Change tile color</value>
+  </data>
+  <data name="Copyright" xml:space="preserve">
+    <value>Licensed under Type 2 License of NS. ( http://NSApps.net/License )</value>
+  </data>
+  <data name="DevicesItem" xml:space="preserve">
+    <value>Devices</value>
+  </data>
+  <data name="DisableStartBarClock" xml:space="preserve">
+    <value>Disable StartBar Clock</value>
+  </data>
+  <data name="EnableAutoStart" xml:space="preserve">
+    <value>Start Newgen when Windows loads</value>
+  </data>
+  <data name="EnableHK" xml:space="preserve">
+    <value>Enable hot keys ( global keyboard support ) (*)</value>
+  </data>
+  <data name="EnableLog" xml:space="preserve">
+    <value>Enable logging of errors</value>
+  </data>
+  <data name="EnableOOBE" xml:space="preserve">
+    <value>Enable Out Of Box Experience (*)</value>
+  </data>
+  <data name="EnableShowStartbarA" xml:space="preserve">
+    <value>Show Startbar always</value>
+  </data>
+  <data name="EnableShowTaskbar" xml:space="preserve">
+    <value>Show taskbar ( in fullscreen mode )</value>
+  </data>
+  <data name="EnableShowTaskbarA" xml:space="preserve">
+    <value>Show taskbar always</value>
+  </data>
+  <data name="EnableTB" xml:space="preserve">
+    <value>Use thumbnails bar (*)</value>
+  </data>
+  <data name="EnableUserTile" xml:space="preserve">
+    <value>Enable UserBadgeControl (User name and Picture) on main screen. (*)</value>
   </data>
   <data name="ExitItem" xml:space="preserve">
     <value>Exit Newgen</value>
   </data>
-  <data name="UnLockItem" xml:space="preserve">
-    <value>Un-Lock ( Enable Dragging )</value>
-  </data>
-  <data name="Options12H" xml:space="preserve">
-    <value>12-hour time</value>
-  </data>
-  <data name="Options24H" xml:space="preserve">
-    <value>24-hour time</value>
-  </data>
-  <data name="OptionsAbout" xml:space="preserve">
-    <value>About Newgen</value>
-  </data>
-  <data name="OptionsAboutTabHeader" xml:space="preserve">
-    <value>about</value>
-  </data>
-  <data name="OptionsApplyButton" xml:space="preserve">
-    <value>apply</value>
-  </data>
-  <data name="OptionsBg" xml:space="preserve">
-    <value>Background color:</value>
-  </data>
-  <data name="OptionsBgAlpha" xml:space="preserve">
-    <value>Background color transparency:</value>
-  </data>
-  <data name="OptionsBgImg" xml:space="preserve">
-    <value>Background image:</value>
-  </data>
-  <data name="OptionsBgImgSelect" xml:space="preserve">
-    <value>select image</value>
-  </data>
-  <data name="OptionsBgImgUse" xml:space="preserve">
-    <value>Use image in backgound</value>
-  </data>
-  <data name="OptionsCancelButton" xml:space="preserve">
-    <value>cancel</value>
-  </data>
-  <data name="OptionsChangeBg" xml:space="preserve">
-    <value>change</value>
-  </data>
-  <data name="OptionsChangeStaticAppWidgetBgColor" xml:space="preserve">
-    <value>change</value>
-  </data>
-  <data name="OptionsCopyright" xml:space="preserve">
-    <value>Licensed under Type 2 License of NS. ( http://NSApps.net/License )</value>
-  </data>
-  <data name="OptionsEnableAutoStart" xml:space="preserve">
-    <value>Start Newgen when Windows loads</value>
-  </data>
-  <data name="OptionsEnableUserTile" xml:space="preserve">
-    <value>Enable UserBadgeControl (User name and Picture) on main screen. (*)</value>
-  </data>
-  <data name="OptionsGeneralTabHeader" xml:space="preserve">
+  <data name="GeneralTabHeader" xml:space="preserve">
     <value>general</value>
   </data>
-  <data name="OptionsItem" xml:space="preserve">
+  <data name="GuideFirst_Welcome_Msg1" xml:space="preserve">
+    <value>* This is your first time, so we've prepared a tour for you. This'll take you to the whole map of Newgen. Click the 'Continue' button below to start.</value>
+  </data>
+  <data name="GuideFirst_Welcome_Msg2" xml:space="preserve">
+    <value>A product by NS. © 2014 NS. All rights reserved.</value>
+  </data>
+  <data name="Item" xml:space="preserve">
     <value>Settings</value>
   </data>
-  <data name="OptionsLanguage" xml:space="preserve">
+  <data name="Keyboard" xml:space="preserve">
+    <value>Keyboard</value>
+  </data>
+  <data name="Language" xml:space="preserve">
     <value>Language</value>
   </data>
-  <data name="OptionsLockScreenTime" xml:space="preserve">
+  <data name="Link_App" xml:space="preserve">
+    <value>http://NSApps.net/Apps/Newgen</value>
+  </data>
+  <data name="LockScreenTime" xml:space="preserve">
     <value>Lock screen time (in minutes) (use blank or -1 for no screen):</value>
   </data>
-  <data name="OptionsOkButton" xml:space="preserve">
+  <data name="LockWidgets" xml:space="preserve">
+    <value>Lock widgets in their places, i.e. disable re-arrangment of widgets</value>
+  </data>
+  <data name="OkButton" xml:space="preserve">
     <value>ok</value>
   </data>
-  <data name="OptionsRestart" xml:space="preserve">
-    <value>* Some Changes will be applied after restarting Newgen.</value>
+  <data name="OOBETabHeader" xml:space="preserve">
+    <value>oobe</value>
   </data>
-  <data name="OptionsWidgetBgColor" xml:space="preserve">
-    <value>Fallback color for tiles background (*) (This only works when you don't set color):</value>
+  <data name="PackageDisable" xml:space="preserve">
+    <value>Disable</value>
   </data>
-  <data name="OptionsTilesSize" xml:space="preserve">
-    <value>Tiles size (*):</value>
+  <data name="PackageEnable" xml:space="preserve">
+    <value>Enable</value>
   </data>
-  <data name="OptionsTilesSpacing" xml:space="preserve">
-    <value>Space between tiles (*):</value>
-  </data>
-  <data name="OptionsTime" xml:space="preserve">
-    <value>Time</value>
-  </data>
-  <data name="OptionsTimeFormat" xml:space="preserve">
-    <value>Time format:</value>
-  </data>
-  <data name="OptionsVersion" xml:space="preserve">
-    <value>Version</value>
-  </data>
-  <data name="OptionsWindowTitle" xml:space="preserve">
-    <value>Newgen options</value>
-  </data>
-  <data name="ShareHubTip" xml:space="preserve">
-    <value>Select friends that you want to pin on a start screen</value>
+  <data name="PackageRemove" xml:space="preserve">
+    <value>Remove</value>
   </data>
   <data name="PinAppItem" xml:space="preserve">
     <value>Pin application / file</value>
+  </data>
+  <data name="PinDirItem" xml:space="preserve">
+    <value>Pin folder</value>
   </data>
   <data name="PinWebItem" xml:space="preserve">
     <value>Pin website / url</value>
@@ -231,119 +261,71 @@
   <data name="RemoveItem" xml:space="preserve">
     <value>Unpin</value>
   </data>
+  <data name="Restart" xml:space="preserve">
+    <value>* Some Changes will be applied after restarting Newgen.</value>
+  </data>
   <data name="SaveItem" xml:space="preserve">
     <value>Save Config</value>
-  </data>
-  <data name="SearchItem" xml:space="preserve">
-    <value>Search</value>
-  </data>
-  <data name="ShareItem" xml:space="preserve">
-    <value>Share</value>
-  </data>
-  <data name="StartItem" xml:space="preserve">
-    <value>Start</value>
-  </data>
-  <data name="TilesItem" xml:space="preserve">
-    <value>Pin widgets / tiles</value>
-  </data>
-  <data name="WhatsNew" xml:space="preserve">
-    <value>what's new?</value>
-  </data>
-  <data name="WidgetsItem" xml:space="preserve">
-    <value>Widgets</value>
-  </data>
-  <data name="DevicesItem" xml:space="preserve">
-    <value>Devices</value>
-  </data>
-  <data name="OptionsEnableShowTaskbar" xml:space="preserve">
-    <value>Show taskbar ( in fullscreen mode )</value>
-  </data>
-  <data name="OptionsEnableHK" xml:space="preserve">
-    <value>Enable hot keys ( global keyboard support ) (*)</value>
-  </data>
-  <data name="OptionsKeyboard" xml:space="preserve">
-    <value>Keyboard</value>
-  </data>
-  <data name="OptionsEnableShowTaskbarA" xml:space="preserve">
-    <value>Show taskbar always</value>
-  </data>
-  <data name="OptionsEnableTB" xml:space="preserve">
-    <value>Use thumbnails bar (*)</value>
-  </data>
-  <data name="OptionsEnableOOBE" xml:space="preserve">
-    <value>Enable Out Of Box Experience (*)</value>
-  </data>
-  <data name="OptionsStartBarBg" xml:space="preserve">
-    <value>Toolbar Background color:</value>
-  </data>
-  <data name="OptionsStartBarBgChange" xml:space="preserve">
-    <value>change</value>
-  </data>
-  <data name="OptionsStartBarLogo" xml:space="preserve">
-    <value>StartBar Logo:</value>
-  </data>
-  <data name="OptionsStartBarLogoChange" xml:space="preserve">
-    <value>change</value>
-  </data>
-  <data name="OptionsOOBETabHeader" xml:space="preserve">
-    <value>oobe</value>
-  </data>
-  <data name="OptionsUITabHeader" xml:space="preserve">
-    <value>ui</value>
-  </data>
-  <data name="OptionsWidgetsTabHeader" xml:space="preserve">
-    <value>widgets</value>
-  </data>
-  <data name="OptionsStartScreenSS" xml:space="preserve">
-    <value>StartScreen slide-show images (*):</value>
-  </data>
-  <data name="OptionsStartScreenSSEnable" xml:space="preserve">
-    <value>Enable StartScreen slide-show (*)</value>
-  </data>
-  <data name="OptionsStartScreenSSImgSelect" xml:space="preserve">
-    <value>select images</value>
-  </data>
-  <data name="OptionsStartScreenSSTimeFrame" xml:space="preserve">
-    <value>StartScreen slide-show interval (in seconds) (*):</value>
-  </data>
-  <data name="OptionsUpdatesTabHeader" xml:space="preserve">
-    <value>updates</value>
-  </data>
-  <data name="OptionsCFU" xml:space="preserve">
-    <value>check for updates</value>
-  </data>
-  <data name="OptionsULV" xml:space="preserve">
-    <value>update to latest version !</value>
-  </data>
-  <data name="OptionsUNA" xml:space="preserve">
-    <value>:) updated</value>
-  </data>
-  <data name="SearchHub" xml:space="preserve">
-    <value>Search Files &amp; Folders</value>
-  </data>
-  <data name="OptionsStartScreenTitle" xml:space="preserve">
-    <value>StartScreen Title:</value>
-  </data>
-  <data name="OptionsLockWidgets" xml:space="preserve">
-    <value>Lock widgets in their places, i.e. disable re-arrangment of widgets</value>
   </data>
   <data name="SaveSettingsItem" xml:space="preserve">
     <value>Save curent settings</value>
   </data>
-  <data name="GuideFirst_Welcome_Msg1" xml:space="preserve">
-    <value>* This is your first time, so we've prepared a tour for you. This'll take you to the whole map of Newgen. Click the 'Continue' button below to start.</value>
+  <data name="SearchHub" xml:space="preserve">
+    <value>Search Files &amp; Folders</value>
   </data>
-  <data name="Text_Continue" xml:space="preserve">
-    <value>continue ...</value>
+  <data name="SearchItem" xml:space="preserve">
+    <value>Search</value>
   </data>
-  <data name="Text_Skip" xml:space="preserve">
-    <value>skip ...</value>
+  <data name="SettingsHub" xml:space="preserve">
+    <value>Settings</value>
   </data>
-  <data name="OptionsEnableShowStartbarA" xml:space="preserve">
-    <value>Show Startbar always</value>
+  <data name="ShareHubTip" xml:space="preserve">
+    <value>Select friends that you want to pin on a start screen</value>
   </data>
-  <data name="OptionsEnableLog" xml:space="preserve">
-    <value>Enable logging of errors</value>
+  <data name="ShareItem" xml:space="preserve">
+    <value>Share</value>
+  </data>
+  <data name="StartBarBg" xml:space="preserve">
+    <value>Toolbar Background color:</value>
+  </data>
+  <data name="StartBarBgChange" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="StartBarLogo" xml:space="preserve">
+    <value>StartBar Logo:</value>
+  </data>
+  <data name="StartBarLogoChange" xml:space="preserve">
+    <value>change</value>
+  </data>
+  <data name="StartItem" xml:space="preserve">
+    <value>Start</value>
+  </data>
+  <data name="StartScreenSS" xml:space="preserve">
+    <value>StartScreen slide-show images (*):</value>
+  </data>
+  <data name="StartScreenSSEnable" xml:space="preserve">
+    <value>Enable StartScreen slide-show (*)</value>
+  </data>
+  <data name="StartScreenSSImgSelect" xml:space="preserve">
+    <value>select images</value>
+  </data>
+  <data name="StartScreenSSTimeFrame" xml:space="preserve">
+    <value>StartScreen slide-show interval (in seconds) (*):</value>
+  </data>
+  <data name="StartScreenTitle" xml:space="preserve">
+    <value>StartScreen Title:</value>
+  </data>
+  <data name="StoreHub" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="StoreItem" xml:space="preserve">
+    <value>Store</value>
+  </data>
+  <data name="TaskBar" xml:space="preserve">
+    <value>TaskBar</value>
+  </data>
+  <data name="Text_App" xml:space="preserve">
+    <value>Newgen BlueShift</value>
   </data>
   <data name="Text_Apply" xml:space="preserve">
     <value>apply ...</value>
@@ -351,35 +333,20 @@
   <data name="Text_Cancel" xml:space="preserve">
     <value>cancel ...</value>
   </data>
-  <data name="Text_Help_NH" xml:space="preserve">
-    <value>Newgen Help</value>
-  </data>
-  <data name="Text_Previous" xml:space="preserve">
-    <value>previous ...</value>
-  </data>
-  <data name="Text_Next" xml:space="preserve">
-    <value>next ...</value>
-  </data>
-  <data name="GuideFirst_Welcome_Msg2" xml:space="preserve">
-    <value>A product by NS. © 2014 NS. All rights reserved.</value>
-  </data>
-  <data name="Text_Welcome" xml:space="preserve">
-    <value>welcome</value>
-  </data>
-  <data name="PinDirItem" xml:space="preserve">
-    <value>Pin folder</value>
-  </data>
-  <data name="Text_App" xml:space="preserve">
-    <value>Newgen BlueShift</value>
+  <data name="Text_Continue" xml:space="preserve">
+    <value>continue ...</value>
   </data>
   <data name="Text_DefaultTilesScreenTitle" xml:space="preserve">
     <value>Newgen BlueShift</value>
   </data>
-  <data name="Url_BuyLicense" xml:space="preserve">
-    <value>http://NSApps.net/Apps/Newgen</value>
+  <data name="Text_Help_NH" xml:space="preserve">
+    <value>Newgen Help</value>
   </data>
-  <data name="OptionsDisableStartBarClock" xml:space="preserve">
-    <value>Disable StartBar Clock</value>
+  <data name="Text_Next" xml:space="preserve">
+    <value>next ...</value>
+  </data>
+  <data name="Text_Previous" xml:space="preserve">
+    <value>previous ...</value>
   </data>
   <data name="Text_Settings_ProvideUsageData" xml:space="preserve">
     <value>Provide Usage Data</value>
@@ -387,29 +354,11 @@
   <data name="Text_Settings_ProvideUsageDataInfo" xml:space="preserve">
     <value>Help us by providing application usage data for beter application experience and services. No private or personal data will be collected, neither will be shared.</value>
   </data>
-  <data name="Link_App" xml:space="preserve">
-    <value>http://NSApps.net/Apps/Newgen</value>
+  <data name="Text_Skip" xml:space="preserve">
+    <value>skip ...</value>
   </data>
-  <data name="StoreHub" xml:space="preserve">
-    <value>Newgen Store</value>
-  </data>
-  <data name="StoreItem" xml:space="preserve">
-    <value>Store</value>
-  </data>
-  <data name="ChangeTileColor" xml:space="preserve">
-    <value>Change tile color</value>
-  </data>
-  <data name="AppLinkTileOptionsHubTitle" xml:space="preserve">
-    <value>Adjust app link ...</value>
-  </data>
-  <data name="PackageRemove" xml:space="preserve">
-    <value>Remove</value>
-  </data>
-  <data name="PackageDisable" xml:space="preserve">
-    <value>Disable</value>
-  </data>
-  <data name="PackageEnable" xml:space="preserve">
-    <value>Enable</value>
+  <data name="Text_Welcome" xml:space="preserve">
+    <value>welcome</value>
   </data>
   <data name="TileContextMenuDisableItem" xml:space="preserve">
     <value>Unpin</value>
@@ -417,7 +366,64 @@
   <data name="TileContextMenuRemoveItem" xml:space="preserve">
     <value>Remove (Restart needed !)</value>
   </data>
-  <data name="TaskBar" xml:space="preserve">
-    <value>TaskBar</value>
+  <data name="TilesItem" xml:space="preserve">
+    <value>Pin widgets / tiles</value>
+  </data>
+  <data name="TilesSize" xml:space="preserve">
+    <value>Tiles size (*):</value>
+  </data>
+  <data name="TilesSpacing" xml:space="preserve">
+    <value>Space between tiles (*):</value>
+  </data>
+  <data name="Time" xml:space="preserve">
+    <value>Time</value>
+  </data>
+  <data name="TimeFormat" xml:space="preserve">
+    <value>Time format:</value>
+  </data>
+  <data name="TimeFormat12H" xml:space="preserve">
+    <value>12-hour time</value>
+  </data>
+  <data name="TimeFormat24H" xml:space="preserve">
+    <value>24-hour time</value>
+  </data>
+  <data name="UITabHeader" xml:space="preserve">
+    <value>ui</value>
+  </data>
+  <data name="ULV" xml:space="preserve">
+    <value>update to latest version !</value>
+  </data>
+  <data name="UNA" xml:space="preserve">
+    <value>:) updated</value>
+  </data>
+  <data name="UnLockItem" xml:space="preserve">
+    <value>Un-Lock ( Enable Dragging )</value>
+  </data>
+  <data name="UpdatesTabHeader" xml:space="preserve">
+    <value>updates</value>
+  </data>
+  <data name="Url_BuyLicense" xml:space="preserve">
+    <value>http://NSApps.net/Apps/Newgen</value>
+  </data>
+  <data name="Version" xml:space="preserve">
+    <value>Version</value>
+  </data>
+  <data name="WhatsNew" xml:space="preserve">
+    <value>what's new?</value>
+  </data>
+  <data name="WidgetBgColor" xml:space="preserve">
+    <value>Fallback color for tiles background (*) (This only works when you don't set color):</value>
+  </data>
+  <data name="WidgetsItem" xml:space="preserve">
+    <value>Widgets</value>
+  </data>
+  <data name="WidgetsTabHeader" xml:space="preserve">
+    <value>widgets</value>
+  </data>
+  <data name="WindowTitle" xml:space="preserve">
+    <value>Newgen options</value>
+  </data>
+  <data name="StartBarSettingsItem" xml:space="preserve">
+    <value>Settings</value>
   </data>
 </root>

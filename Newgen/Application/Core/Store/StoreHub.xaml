@@ -34,7 +34,7 @@
     </Window.Background>
     <DockPanel Name="LayoutRoot">
         <Grid DockPanel.Dock="Top">
-            <Button Name="BackButton" Click="BackButton_Click" Style="{StaticResource HubBackButton}" />
+            <Button Name="BackButton" Click="OnBackButtonClick" Style="{StaticResource HubBackButton}" />
             <TextBlock Style="{StaticResource HubTitleStyle}" Text="{x:Static r:Definitions.StoreHub}" />
         </Grid>
         <Grid Margin="{StaticResource HubContentMargin}">

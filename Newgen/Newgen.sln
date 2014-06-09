@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2013
-VisualStudioVersion = 12.0.30324.0
+VisualStudioVersion = 12.0.30501.0
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{1119EDC1-147F-4604-9EBF-FB028B0C1125}"
 	ProjectSection(SolutionItems) = preProject
@@ -23,6 +23,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Api", "Api", "{B43C4E9C-358
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Application", "Application\Application.csproj", "{79B4C045-E7E8-4C24-B3F0-D991C6B2779B}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{C6022E3A-D499-4067-908B-ED7A69F03086}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherPackage", "Packages\WeatherPackage\WeatherPackage.csproj", "{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -37,6 +41,10 @@ Global
 		{79B4C045-E7E8-4C24-B3F0-D991C6B2779B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{79B4C045-E7E8-4C24-B3F0-D991C6B2779B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{79B4C045-E7E8-4C24-B3F0-D991C6B2779B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -44,5 +52,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{74CB342D-3D96-42D5-8B13-76306FE35380} = {B43C4E9C-358E-4A5C-B1DA-235AB5077169}
 		{79B4C045-E7E8-4C24-B3F0-D991C6B2779B} = {F1606E8A-3BED-43D0-8C1D-DC8DF23CE29F}
+		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6} = {C6022E3A-D499-4067-908B-ED7A69F03086}
 	EndGlobalSection
 EndGlobal

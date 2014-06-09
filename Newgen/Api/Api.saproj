@@ -13,7 +13,7 @@
             <Debugging CreatePDB="1" />
         </Options>
         <ApplicationName />
-        <Destination DestinationFileName=".\bin\Debug\!Secure\Newgen.Api.dll" />
+        <Destination DestinationFileName="..\..\Resources\bin\Debug\!Secure\Newgen.Api.dll" />
         <Assemblies>
             <Assembly AssemblyName="Newgen.Api, Culture=neutral, PublicKeyToken=null">
                 <Merging>

@@ -60,8 +60,8 @@ namespace Newgen.Packages.Notifications {
                 Author = Environment.UserName,
                 License = string.Format("© 2014 NS, {0} for Newgen", PackageId),
                 Name = PackageId,
-                AuthorEMailAddress = string.Format("Newgen+Support+{0}@nsapps.net", PackageId),
-                AuthorWebsite = string.Format("{0}/Apps/NewgenStore?Package={1}", WebShared.MainSiteUri, PackageId),
+                AuthorEMailAddress = string.Format(WebShared.Newgen_Api_AuthorEMailFormat, PackageId),
+                AuthorWebsite = string.Format(WebShared.Newgen_Api_AuthorWebsiteUriFormat, PackageId),
                 Description = "Notification package (Internal/Local) shows notification right infont of your eyes across Newgen."
             };
         }
@@ -74,7 +74,7 @@ namespace Newgen.Packages.Notifications {
         /// <remarks>...</remarks>
         public static Package CreateFrom(string location) {
             var package = new NotificationsPackage(location);
-            if (!package.Metadata.Id.Equals(PackageId))
+            if (package.Metadata == null || !package.Metadata.Id.Equals(PackageId))
                 throw new Exception("Not a notifications package !");
             return package;
         }
