@@ -126,6 +126,10 @@ namespace Newgen.Packages {
             else
                 ContextMenu = contextMenu = new ContextMenu();
 
+            // Separator
+            if (contextMenu.Items.Count != 0)
+                contextMenu.Items.Add(new Separator());
+
             // Change tile color
             var changeTileColorItem = new MenuItem();
             changeTileColorItem.Header = Definitions.ChangeTileColor;
@@ -138,6 +142,16 @@ namespace Newgen.Packages {
                 }
             });
             contextMenu.Items.Add(changeTileColorItem);
+
+            // Reset tile color
+            var resetTileColorItem = new MenuItem();
+            resetTileColorItem.Header = Definitions.ResetTileColor;
+            resetTileColorItem.Click += new RoutedEventHandler((sender, e) => {
+                if (package.Settings.ObjectData.ContainsKey(TileBgColorKey)) {
+                    package.Settings.ObjectData.Remove(TileBgColorKey);
+                }
+            });
+            contextMenu.Items.Add(resetTileColorItem);
 
             // Separator
             contextMenu.Items.Add(new Separator());

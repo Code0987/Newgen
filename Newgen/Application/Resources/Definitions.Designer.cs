@@ -493,6 +493,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Reset tile color (Restart needed !).
+        /// </summary>
+        public static string ResetTileColor {
+            get {
+                return ResourceManager.GetString("ResetTileColor", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * Some Changes will be applied after restarting Newgen..
         /// </summary>
         public static string Restart {

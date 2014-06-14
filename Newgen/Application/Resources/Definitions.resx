@@ -426,4 +426,7 @@
   <data name="StartBarSettingsItem" xml:space="preserve">
     <value>Settings</value>
   </data>
+  <data name="ResetTileColor" xml:space="preserve">
+    <value>Reset tile color (Restart needed !)</value>
+  </data>
 </root>

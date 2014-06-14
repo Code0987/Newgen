@@ -27,6 +27,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Packages", "Packages", "{C6
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WeatherPackage", "Packages\WeatherPackage\WeatherPackage.csproj", "{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InternetPackage", "Packages\InternetPackage\InternetPackage.csproj", "{CFAEFA4F-6D32-476C-A379-FD5006200928}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -45,6 +47,10 @@ Global
 		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CFAEFA4F-6D32-476C-A379-FD5006200928}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CFAEFA4F-6D32-476C-A379-FD5006200928}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CFAEFA4F-6D32-476C-A379-FD5006200928}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CFAEFA4F-6D32-476C-A379-FD5006200928}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -53,5 +59,6 @@ Global
 		{74CB342D-3D96-42D5-8B13-76306FE35380} = {B43C4E9C-358E-4A5C-B1DA-235AB5077169}
 		{79B4C045-E7E8-4C24-B3F0-D991C6B2779B} = {F1606E8A-3BED-43D0-8C1D-DC8DF23CE29F}
 		{ADADAE80-72EA-4E8C-B5B5-4EFBEB1FAAF6} = {C6022E3A-D499-4067-908B-ED7A69F03086}
+		{CFAEFA4F-6D32-476C-A379-FD5006200928} = {C6022E3A-D499-4067-908B-ED7A69F03086}
 	EndGlobalSection
 EndGlobal
