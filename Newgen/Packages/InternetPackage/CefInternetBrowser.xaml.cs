@@ -18,34 +18,28 @@ namespace InternetPackage {
 
         private Package package;
 
-        public IWpfWebBrowser WebBrowser {
-            get { return WebView; }
-        }
-
         public CefInternetBrowser(Package package, string address)
             : base() {
             this.package = package;
 
             InitializeComponent();
 
-            DataContext = this;
-
             // Configure it
-            WebView.PreviewKeyDown += OnBrowserPreviewKeyDown;
+            WebBrowser.PreviewKeyDown += OnWebBrowserPreviewKeyDown;
 
-            WebView.ConsoleMessage += OnBrowserConsoleMessage;
-            WebView.LoadCompleted += OnBrowserLoadCompleted;
-            WebView.LoadError += OnBrowserLoadError;
+            WebBrowser.ConsoleMessage += OnWebBrowserConsoleMessage;
+            WebBrowser.FrameLoadEnd += OnWebBrowserFrameLoadEnd;
+            WebBrowser.LoadError += OnWebBrowserLoadError;
 
             ThreadingExtensions.Delay(() => Navigate(address), 1500, ThreadingOptions.OnDispatcherThread);
         }
 
         ~CefInternetBrowser() {
-            WebView.PreviewKeyDown -= OnBrowserPreviewKeyDown;
+            WebBrowser.PreviewKeyDown -= OnWebBrowserPreviewKeyDown;
 
-            WebView.ConsoleMessage -= OnBrowserConsoleMessage;
-            WebView.LoadCompleted -= OnBrowserLoadCompleted;
-            WebView.LoadError -= OnBrowserLoadError;
+            WebBrowser.ConsoleMessage -= OnWebBrowserConsoleMessage;
+            WebBrowser.FrameLoadEnd -= OnWebBrowserFrameLoadEnd;
+            WebBrowser.LoadError -= OnWebBrowserLoadError;
         }
 
         public void Navigate(string address) {
@@ -75,10 +69,10 @@ namespace InternetPackage {
             }
         }
 
-        private void OnBrowserConsoleMessage(object sender, ConsoleMessageEventArgs e) {
+        private void OnWebBrowserConsoleMessage(object sender, ConsoleMessageEventArgs e) {
         }
 
-        private void OnBrowserLoadCompleted(object sender, LoadCompletedEventArgs url) {
+        private void OnWebBrowserFrameLoadEnd(object sender, FrameLoadEndEventArgs url) {
             this.InvokeAsyncThreadSafe(() => {
                 try {
                     URLBox.Text = url.Url;
@@ -89,10 +83,11 @@ namespace InternetPackage {
             });
         }
 
-        private void OnBrowserLoadError(string failedUrl, CefErrorCode errorCode, string errorText) {
+        private void OnWebBrowserLoadError(object sender, LoadErrorEventArgs e) {
+
         }
 
-        private void OnBrowserPreviewKeyDown(object sender, KeyEventArgs e) {
+        private void OnWebBrowserPreviewKeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.Escape) {
                 try {
                     package.CustomizedSettings.LastSearchLocation = URLBox.Text;
@@ -148,7 +143,7 @@ namespace InternetPackage {
 
         private void OnURLBoxPreviewKeyDown(object sender, KeyEventArgs e) {
             if (e.Key == Key.Enter) {
-
+                Navigate(URLBox.Text);
             }
         }
     }

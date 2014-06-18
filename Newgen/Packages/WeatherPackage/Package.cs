@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Windows;
-using Newgen.Packages;
-using libns;
 using NS.Web;
 
 namespace WeatherPackage {
+
     /// <summary>
     /// Class Package.
     /// </summary>
@@ -19,6 +18,7 @@ namespace WeatherPackage {
         internal WeatherSettings WeatherOptions;
 
         private Tile tile;
+
         /// <summary>
         /// Gets the column span.
         /// </summary>
@@ -29,14 +29,6 @@ namespace WeatherPackage {
                 return 3;
             }
         }
-
-        /// <summary>
-        /// Path to widget icon. Return null if there is no icon.
-        /// </summary>
-        public override Uri IconPath {
-            get { return new Uri("pack://application:,,,/" + PackageId + ";component/Resources/icon.png", UriKind.RelativeOrAbsolute); }
-        }
-
 
         /// <summary>
         /// Gets the row span.
@@ -72,7 +64,6 @@ namespace WeatherPackage {
                     Code = WeatherOptions.LocationCode
                 };
             }, Package.SettingsCustomizerKeyForCurrentWeather);
-
 
             Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                 tile = new Tile(this);

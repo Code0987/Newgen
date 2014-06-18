@@ -38,33 +38,20 @@
             <TextBlock Style="{StaticResource HubTitleStyle}" Text="{x:Static r:Definitions.StoreHub}" />
         </Grid>
         <Grid Margin="{StaticResource HubContentMargin}">
-            <TabControl Margin="-80,0,0,0"
-                        HorizontalAlignment="Stretch"
-                        VerticalAlignment="Stretch"
-                        TabStripPlacement="Left">
-                <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="New Packages">
-                    <ScrollViewer HorizontalAlignment="Stretch"
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="200" />
+            </Grid.ColumnDefinitions>
+            <ScrollViewer HorizontalAlignment="Stretch"
                                   VerticalAlignment="Stretch"
                                   HorizontalScrollBarVisibility="Disabled"
                                   VerticalScrollBarVisibility="Auto">
-                        <ScrollViewer.Background>
-                            <SolidColorBrush Opacity="0.1" Color="{StaticResource Color_037}" />
-                        </ScrollViewer.Background>
-                        <WrapPanel Name="ItemsContainerForNewPackages" Orientation="Horizontal" />
-                    </ScrollViewer>
-                </TabItem>
-                <TabItem HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Header="Local Packages">
-                    <ScrollViewer HorizontalAlignment="Stretch"
-                                  VerticalAlignment="Stretch"
-                                  HorizontalScrollBarVisibility="Disabled"
-                                  VerticalScrollBarVisibility="Auto">
-                        <ScrollViewer.Background>
-                            <SolidColorBrush Opacity="0.1" Color="{StaticResource Color_047}" />
-                        </ScrollViewer.Background>
-                        <WrapPanel Name="ItemsContainerForLocalPackages" Orientation="Horizontal" />
-                    </ScrollViewer>
-                </TabItem>
-            </TabControl>
+                <ScrollViewer.Background>
+                    <SolidColorBrush Opacity="0.1" Color="{StaticResource Color_047}" />
+                </ScrollViewer.Background>
+                <WrapPanel Name="ItemsContainerForPackages" Orientation="Horizontal" />
+            </ScrollViewer>
+            <StackPanel Grid.Column="1" Margin="10,-100,0,0" />
         </Grid>
     </DockPanel>
 </api:HubWindow>

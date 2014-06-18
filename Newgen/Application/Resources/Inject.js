@@ -1,5 +1,5 @@
 ﻿/*
-Newgen Runtime Shared Data @ Widget API
+Newgen Runtime Shared Data @ Package API
 ---------------------------------------
 © 2014 NS, Neeraj.
 ---------------------------------------

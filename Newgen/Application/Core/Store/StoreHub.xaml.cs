@@ -16,7 +16,7 @@ namespace Newgen {
         /// <summary>
         /// Initializes a new instance of the <see cref="WelcomeHub" /> class.
         /// </summary>
-        /// <param name="appwidget">The appwidget.</param>
+        /// <remarks>...</remarks>
         public StoreHub()
             : base() {
             InitializeComponent();
@@ -65,7 +65,7 @@ namespace Newgen {
             foreach (var feed in fa.CachedFeeds)
                 foreach (var item in feed.Items) {
                     var method = new Action(() => {
-                        ItemsContainerForNewPackages.Children.Add(new StoreItem(item));
+                        ItemsContainerForPackages.Children.Add(new StoreItem(item));
                     });
                     this.InvokeAsyncThreadSafe(method);
                 }
@@ -78,7 +78,7 @@ namespace Newgen {
         private void OnLocalDataReady() {
             foreach (var package in PackageManager.Current.Packages) {
                 var method = new Action(() => {
-                    ItemsContainerForLocalPackages.Children.Add(new StoreItem(package.Metadata));
+                    ItemsContainerForPackages.Children.Add(new StoreItem(package.Metadata));
                 });
                 this.InvokeAsyncThreadSafe(method);
             }
@@ -89,12 +89,16 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         private void SyncContent() {
-            var fa = InternalHelper.FeedsAggregator;
+            try {
+                var fa = InternalHelper.FeedsAggregator;
 
-            fa.Get();
+                fa.Get();
+
+                OnDataReady();
+            }
+            catch /* Eat */ { }
 
             OnLocalDataReady();
-            OnDataReady();
         }
     }
 }

@@ -9,7 +9,7 @@
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>WeatherPackage</RootNamespace>
-    <AssemblyName>Weather</AssemblyName>
+    <AssemblyName>WeatherPackage</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -150,7 +150,7 @@
     <Resource Include="Resources\weather_8.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icon.png" />
+    <Resource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Api\Api.csproj">

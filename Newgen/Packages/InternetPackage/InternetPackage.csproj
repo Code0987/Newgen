@@ -9,7 +9,7 @@
     <OutputType>library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>InternetPackage</RootNamespace>
-    <AssemblyName>Internet</AssemblyName>
+    <AssemblyName>InternetPackage</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <TargetFrameworkProfile>
     </TargetFrameworkProfile>
@@ -124,7 +124,7 @@
     <Resource Include="Resources\search.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\icon.png" />
+    <Resource Include="Resources\Logo.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\internet.png" />

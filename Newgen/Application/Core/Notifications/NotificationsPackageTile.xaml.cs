@@ -24,6 +24,7 @@ namespace Newgen.Packages.Notifications {
         /// The nm
         /// </summary>
         internal DynamicNotificationManager nm;
+        internal DynamicLog logger;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="NotificationsPackageTile"/> class.
@@ -37,6 +38,21 @@ namespace Newgen.Packages.Notifications {
                 NotificationProviderType.Custom,
                 OnNotificationCompleteLogic
                 );
+
+            logger = new DynamicLog(OnLoggerLog);
+        }
+
+        /// <summary>
+        /// Called when [logger log].
+        /// </summary>
+        /// <param name="logger">The logger.</param>
+        /// <param name="level">The level.</param>
+        /// <param name="message">The message.</param>
+        /// <param name="exception">The exception.</param>
+        /// <param name="args">The arguments.</param>
+        /// <remarks>...</remarks>
+        protected void OnLoggerLog(DynamicLog logger, LogLevel level, object message, System.Exception exception, object[] args) {
+            nm.ShowNotification(new Notification(level.ToString(), message.ToString()));
         }
 
         /// <summary>

@@ -20,34 +20,39 @@
         </ContextMenu>
     </Border.ContextMenu>
     <Border.Background>
-        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
-            <GradientStop Color="#E5000000"/>
-            <GradientStop Color="#E5573400" Offset="1"/>
+        <LinearGradientBrush MappingMode="RelativeToBoundingBox" StartPoint="0.5,0" EndPoint="0.5,1">
+            <GradientStop Color="#E5FFB900" />
+            <GradientStop Color="#E59C5E00" Offset="1" />
         </LinearGradientBrush>
     </Border.Background>
     <Grid ClipToBounds="True">
         <Image Name="WeatherIcon"
+               Margin="-10,25,-25,-10"
                HorizontalAlignment="Left"
                VerticalAlignment="Top"
-               Source="/Weather;component/Resources/weather_23.png"
-               Stretch="Uniform" Margin="-15,15,-15,-15">
+               RenderOptions.BitmapScalingMode="HighQuality"
+               Source="/WeatherPackage;component/Resources/weather_30.png"
+               Stretch="Uniform">
             <Image.RenderTransform>
-                <RotateTransform Angle="-7.5" />
+                <RotateTransform Angle="-7.3" />
             </Image.RenderTransform>
         </Image>
         <Grid ClipToBounds="True">
+            <Grid.Effect>
+                <DropShadowEffect ShadowDepth="1" BlurRadius="3" Opacity=".3" />
+            </Grid.Effect>
             <StackPanel Margin="10" HorizontalAlignment="Right" VerticalAlignment="Top">
                 <TextBlock Name="Location"
                            Margin="0,0,0,10"
                            HorizontalAlignment="Right"
                            FontSize="{StaticResource ContentFontSizeLarge}"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{}{Location}"
                            TextTrimming="CharacterEllipsis" />
                 <TextBlock Name="Temperture"
                            HorizontalAlignment="Right"
                            FontSize="{StaticResource ContentFontSizeLarge}"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{}{Today}"
                            TextTrimming="CharacterEllipsis" />
             </StackPanel>
@@ -55,19 +60,19 @@
                 <TextBlock Name="FirstDay"
                            HorizontalAlignment="Right"
                            FontSize="{StaticResource ContentFontSize}"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{}{First day}"
                            TextTrimming="CharacterEllipsis" />
                 <TextBlock Name="SecondDay"
                            HorizontalAlignment="Right"
                            FontSize="{StaticResource ContentFontSize}"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{}{Second day}"
                            TextTrimming="CharacterEllipsis" />
                 <TextBlock Name="ThirdDay"
                            HorizontalAlignment="Right"
                            FontSize="{StaticResource ContentFontSize}"
-                           Foreground="White"
+                           Foreground="Black"
                            Text="{}{Third day}"
                            TextTrimming="CharacterEllipsis" />
             </StackPanel>

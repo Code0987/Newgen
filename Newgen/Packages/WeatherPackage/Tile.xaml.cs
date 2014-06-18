@@ -102,7 +102,7 @@ namespace WeatherPackage {
             SecondDay.Text = package.CurrentWeather.ForecastList[1].Day + " → " + package.CurrentWeather.ForecastList[1].HighTemperature + "° " + package.CurrentWeather.ForecastList[1].Text;
             ThirdDay.Text = package.CurrentWeather.ForecastList[2].Day + " → " + package.CurrentWeather.ForecastList[2].HighTemperature + "° " + package.CurrentWeather.ForecastList[2].Text;
             
-            WeatherIcon.Source = new BitmapImage(new Uri(string.Format("/Weather;Component/Resources/weather_{0}.png", package.CurrentWeather.Curent.SkyCode), UriKind.Relative));
+            WeatherIcon.Source = new BitmapImage(new Uri(string.Format("/WeatherPackage;Component/Resources/weather_{0}.png", package.CurrentWeather.Curent.SkyCode), UriKind.Relative));
             
             Location.Text = package.CurrentWeather.Location.City;
         }

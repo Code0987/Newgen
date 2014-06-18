@@ -55,7 +55,7 @@ namespace Newgen {
             TitleTextBlock.Text = Package.Metadata.Name ?? Package.Metadata.Id;
             var source = IconImage.ImageSource;
             try {
-                source = (new BitmapImage(Package.IconPath)).GetAsFrozen() as BitmapImage;
+                source = package.Metadata.GetLogo(package.Settings.Location).GetAsFrozen() as BitmapImage;
             }
             catch /* Eat */ { }
             if (source != null && source != IconImage.ImageSource)

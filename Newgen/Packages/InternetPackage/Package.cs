@@ -22,12 +22,6 @@ namespace InternetPackage {
         }
 
         /// <summary>
-        /// Path to widget icon. Return null if there is no icon.
-        /// </summary>
-        public override Uri IconPath {
-            get { return new Uri("pack://application:,,,/" + PackageId + ";component/Resources/icon.png", UriKind.RelativeOrAbsolute); }
-        }
-        /// <summary>
         /// Returns widget control
         /// </summary>
         public override FrameworkElement Tile {
@@ -36,7 +30,7 @@ namespace InternetPackage {
 
 
         /// <summary>
-        /// Widget initialization (e.g.variables initialization, reading settings, loading resources) must be here.
+        /// Package initialization (e.g.variables initialization, reading settings, loading resources) must be here.
         /// This method calls when user clicks on widget icon in Newgen menu or at Newgen launch if widget was added earlier
         /// </summary>
         public override void Load() {

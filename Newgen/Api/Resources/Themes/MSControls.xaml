@@ -45,8 +45,9 @@
 	</LinearGradientBrush>
 
 	<!--Tooltip Brushes-->
-	<SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{StaticResource Color_009}" />
-	<SolidColorBrush x:Key="TooltipBorderBrush" Color="{StaticResource Color_004}" />
+	<SolidColorBrush x:Key="TooltipForegroundBrush" Color="{StaticResource Color_008}" />
+	<SolidColorBrush x:Key="TooltipBackgroundBrush" Color="{StaticResource Color_001}" />
+	<SolidColorBrush x:Key="TooltipBorderBrush" Color="{StaticResource Color_000}" />
 
 	<!--Expander Brushes-->
 	<SolidColorBrush x:Key="ExpanderButtonBackgroundBrush" Color="{StaticResource Color_009}" />
@@ -545,15 +546,16 @@
 	<!--ToolTip Style-->
 	<Style x:Key="{x:Type ToolTip}" TargetType="ToolTip">
 		<Setter Property="OverridesDefaultStyle" Value="true" />
-		<Setter Property="FontSize" Value="{DynamicResource ContentFontSize}" />
+		<Setter Property="FontSize" Value="{DynamicResource ContentFontSizeSmall}" />
 		<Setter Property="FontFamily" Value="{DynamicResource ContentFontFamily}" />
 		<Setter Property="UseLayoutRounding" Value="True"/>
 		<Setter Property="SnapsToDevicePixels" Value="True"/>
-		<Setter Property="Foreground" Value="{StaticResource GeneralForegroundBrush}" />
+		<Setter Property="Foreground" Value="{StaticResource TooltipForegroundBrush}" />
 		<Setter Property="Background" Value="{StaticResource TooltipBackgroundBrush}" />
 		<Setter Property="BorderBrush" Value="{StaticResource TooltipBorderBrush}" />
 		<Setter Property="BorderThickness" Value="1" />
-		<Setter Property="Padding" Value="10,7" />
+		<Setter Property="Padding" Value="8,5" />
+        <Setter Property="HasDropShadow" Value="True" />
 		<Setter Property="Template">
 			<Setter.Value>
 				<ControlTemplate TargetType="ToolTip">

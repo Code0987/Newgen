@@ -1,0 +1,58 @@
+﻿<UserControl x:Class="ClockPackage.Tile"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:Properties="clr-namespace:ClockPackage.Properties"
+             MouseLeftButtonUp="UserControlMouseLeftButtonUp">
+    <UserControl.Background>
+        <LinearGradientBrush StartPoint="1,0" EndPoint="0,0">
+            <GradientStop Offset="0" Color="Green" />
+            <GradientStop Offset="1" Color="#007200" />
+        </LinearGradientBrush>
+    </UserControl.Background>
+    <UserControl.ContextMenu>
+        <ContextMenu>
+            <MenuItem Name="OptionsItem"
+                      Click="OptionsItemClick"
+                      Header="{x:Static Properties:Resources.OptionsItem}" />
+            <Separator />
+            <MenuItem Header="{x:Static Properties:Resources.WidgetInfo}" />
+        </ContextMenu>
+    </UserControl.ContextMenu>
+    <Grid>
+        <StackPanel HorizontalAlignment="Center"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
+            <Image Name="BatteryIcon"
+                   Width="12"
+                   Margin="0,24,15,0"
+                   Source="Resources/batt10.png" />
+            <TextBlock Name="Hours"
+                       FontSize="56"
+                       Foreground="White"
+                       Text="02" />
+            <TextBlock FontSize="56"
+                       Foreground="White"
+                       Text=":" />
+            <TextBlock Name="Minutes"
+                       FontSize="56"
+                       Foreground="White"
+                       Text="54" />
+            <TextBlock Name="AmPm"
+                       Margin="0,0,0,8"
+                       VerticalAlignment="Bottom"
+                       FontSize="24"
+                       Foreground="White"
+                       Text="Am" />
+            <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
+                <TextBlock Name="Day"
+                           FontSize="24"
+                           Foreground="White"
+                           Text="Thursday" />
+                <TextBlock Name="Date"
+                           FontSize="20"
+                           Foreground="White"
+                           Text="June 01" />
+            </StackPanel>
+        </StackPanel>        
+    </Grid>
+</UserControl>

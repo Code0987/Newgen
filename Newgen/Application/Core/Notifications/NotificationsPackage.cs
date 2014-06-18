@@ -100,6 +100,7 @@ namespace Newgen.Packages.Notifications {
                 tile = new NotificationsPackageTile();
 
                 App.Current.AddNotificationManager(tile.nm);
+                Api.Logger.Loggers.Add(tile.logger);
             }));
         }
 
@@ -110,6 +111,7 @@ namespace Newgen.Packages.Notifications {
         public override void Unload() {
             Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                 App.Current.RemoveNotificationManager(tile.nm);
+                Api.Logger.Loggers.Remove(tile.logger);
             }));
 
             base.Unload();

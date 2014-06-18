@@ -53,6 +53,8 @@ namespace Newgen {
 
             // Load other
             if (FeedItem == null) { // Local package
+                IconImage.Source = PackageMetadata.GetLogo().GetAsFrozen() as BitmapSource;
+
                 InstallButton.IsEnabled = false;
                 InstallButton.Visibility = System.Windows.Visibility.Collapsed;
                 UnInstallButton.IsEnabled = false;
@@ -151,7 +153,7 @@ namespace Newgen {
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnEnDisableButtonClick(object sender, System.Windows.RoutedEventArgs e) {
-
+            PackageManager.Current.ToggleEnabled(PackageManager.Current.Get(PackageMetadata.Id));
         }
     }
 }

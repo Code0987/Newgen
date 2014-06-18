@@ -48,7 +48,7 @@
                    Width="30"
                    Margin="5"
                    MouseLeftButtonUp="Control_BackButton_MouseLeftButtonUp"
-                   Source="/Internet;component/Resources/back.png" />
+                   Source="/InternetPackage;component/Resources/back.png" />
             <TextBox Name="Control_URLBox"
                      Grid.Column="1"
                      Margin="5"
@@ -66,25 +66,25 @@
                    Width="30"
                    Margin="5"
                    MouseLeftButtonUp="Control_RefButton_MouseLeftButtonUp"
-                   Source="/Internet;component/Resources/refresh.png" />
+                   Source="/InternetPackage;component/Resources/refresh.png" />
             <Image Name="Control_HomeButton"
                    Grid.Column="3"
                    Width="30"
                    Margin="5"
                    MouseLeftButtonUp="Control_HomeButton_MouseLeftButtonUp"
-                   Source="/Internet;component/Resources/home.png" />
+                   Source="/InternetPackage;component/Resources/home.png" />
             <Image Name="Control_CloseButton"
                    Grid.Column="4"
                    Width="30"
                    Margin="5"
                    MouseDown="Control_CloseButton_MouseDown"
-                   Source="/Internet;component/Resources/close.png" />
+                   Source="/InternetPackage;component/Resources/close.png" />
             <Image Name="Control_FwButton"
                    Grid.Column="5"
                    Width="30"
                    Margin="5"
                    MouseLeftButtonUp="Control_FwButton_MouseLeftButtonUp"
-                   Source="/Internet;component/Resources/forward.png" />
+                   Source="/InternetPackage;component/Resources/forward.png" />
         </Grid>
     </Grid>
 </api:HubWindow>

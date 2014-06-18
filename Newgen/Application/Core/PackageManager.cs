@@ -5,6 +5,11 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 using Ionic.Zip;
+using libns;
+using libns.Applied;
+using libns.Language;
+using libns.Native;
+using libns.Threading;
 
 /// <summary>
 /// The Core namespace.
@@ -19,9 +24,16 @@ namespace Newgen.Packages {
     public class PackageManager {
 
         /// <summary>
-        /// The current application domain
+        /// Occurs when [loaded].
         /// </summary>
-        public AppDomain CurrentAppDomain;
+        /// <remarks>...</remarks>
+        public event Action<Package> Loaded;
+
+        /// <summary>
+        /// Occurs when [unloaded].
+        /// </summary>
+        /// <remarks>...</remarks>
+        public event Action<Package> Unloaded;
 
         /// <summary>
         /// The post remove mark
@@ -39,6 +51,10 @@ namespace Newgen.Packages {
         public const string PostUpdateFilename = "Package.Update";
 
         /// <summary>
+        /// The current application domain
+        /// </summary>
+        public AppDomain CurrentAppDomain;
+        /// <summary>
         /// The current
         /// </summary>
         private static PackageManager current;
@@ -47,19 +63,6 @@ namespace Newgen.Packages {
         /// The cache
         /// </summary>
         private List<Package> packages;
-
-        /// <summary>
-        /// Occurs when [loaded].
-        /// </summary>
-        /// <remarks>...</remarks>
-        public event Action<Package> Loaded;
-
-        /// <summary>
-        /// Occurs when [unloaded].
-        /// </summary>
-        /// <remarks>...</remarks>
-        public event Action<Package> Unloaded;
-
         /// <summary>
         /// Gets the current.
         /// </summary>
@@ -123,6 +126,8 @@ namespace Newgen.Packages {
             package.Settings.IsEnabled = false;
 
             Unload(package, true);
+
+            Api.Logger.LogInformation(string.Format("Package [{0}] disabled.", package.Metadata.Id));
         }
 
         /// <summary>
@@ -139,6 +144,8 @@ namespace Newgen.Packages {
             Load(package, true);
 
             package.Settings.IsEnabled = true;
+
+            Api.Logger.LogInformation(string.Format("Package [{0}] enabled.", package.Metadata.Id));
         }
 
         /// <summary>
@@ -253,6 +260,8 @@ namespace Newgen.Packages {
             }
             catch { }
 
+            Api.Logger.LogError(string.Format("Invalid directory [{0}] found in packages cache.", location));
+
             return null;
         }
 
@@ -324,6 +333,8 @@ namespace Newgen.Packages {
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
         public void Load(Package package, bool force = false) {
+            package.PreLoad(force || true);
+
             if (!force && !package.Settings.IsEnabled)
                 return;
 
@@ -334,6 +345,8 @@ namespace Newgen.Packages {
 
             if (Loaded != null)
                 Loaded(package);
+
+            Api.Logger.LogInformation(string.Format("Package [{0}] loaded.", package.Metadata.Id));
         }
 
         /// <summary>
@@ -351,6 +364,8 @@ namespace Newgen.Packages {
         /// <returns>PackageManager.</returns>
         /// <remarks>...</remarks>
         public void PostProcess() {
+            Api.Logger.LogInformation(string.Format("Cleaning-up all packages."));
+
             // Scan
             var packageFolders = Directory.GetDirectories(Location);
 
@@ -381,6 +396,8 @@ namespace Newgen.Packages {
                 }
                 catch { }
             }
+
+            Api.Logger.LogInformation(string.Format("Cleaning-up all packages done!"));
         }
 
         /// <summary>
@@ -394,9 +411,13 @@ namespace Newgen.Packages {
                 packages.Remove(package);
 
                 Directory.Delete(CreateAbsolutePathFor(package.Metadata.Id), true);
+
+                Api.Logger.LogInformation(string.Format("Package [{0}] removed.", package.Metadata.Id));
             }
             catch {
                 File.Create(CreateAbsolutePathFor(package.Metadata.Id, PostRemoveFilename));
+
+                Api.Logger.LogInformation(string.Format("Package [{0}] will be removed after restart.", package.Metadata.Id));
             }
         }
 
@@ -421,6 +442,8 @@ namespace Newgen.Packages {
             await Task
                 .Run((Action)PostProcess)
                 .ContinueWith(t => {
+                    Api.Logger.LogInformation(string.Format("Scanning all packages."));
+
                     // Clear cache
                     Packages.Clear();
 
@@ -437,6 +460,8 @@ namespace Newgen.Packages {
                     // Defaults
                     if (!IsInitialized(Notifications.NotificationsPackage.PackageId))
                         Load(Notifications.NotificationsPackage.Create());
+
+                    Api.Logger.LogInformation(string.Format("Scanned all packages."));
                 });
         }
 
@@ -479,6 +504,8 @@ namespace Newgen.Packages {
                 Unloaded(package);
 
             package.Unload();
+
+            Api.Logger.LogInformation(string.Format("Package [{0}] un-loaded.", package.Metadata.Id));
         }
 
         /// <summary>

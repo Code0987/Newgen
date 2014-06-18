@@ -3,9 +3,9 @@ using System.Runtime.InteropServices;
 using System.Windows;
 
 [assembly: ComVisible(false)]
-[assembly: AssemblyTitle("Weather")]
+[assembly: AssemblyTitle("Today")]
 [assembly: AssemblyCompany("NS")]
-[assembly: AssemblyProduct("Weather")]
+[assembly: AssemblyProduct("Today")]
 [assembly: AssemblyCopyright("Copyright © 2014 NS")]
 [assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]

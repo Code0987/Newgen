@@ -71,7 +71,8 @@
                    Foreground="#FF000000"
                    Text="{Binding Path=Name,
                                   Mode=OneWay,
-                                  FallbackValue=Name}" />
+                                  FallbackValue=Name}"
+                   TextWrapping="WrapWithOverflow" />
         <Button Name="InstallButton"
                 Margin="5"
                 HorizontalAlignment="Stretch"
@@ -101,36 +102,42 @@
                    Foreground="#FF0080C9"
                    Text="{Binding Path=Id,
                                   Mode=OneWay,
-                                  FallbackValue=Id}" />
+                                  FallbackValue=Id}"
+                   TextWrapping="WrapWithOverflow" />
         <TextBlock Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSize}"
                    Foreground="#FFF98800"
                    Text="{Binding Path=Version,
                                   Mode=OneWay,
-                                  FallbackValue=Version}" />
+                                  FallbackValue=Version}"
+                   TextWrapping="WrapWithOverflow" />
         <TextBlock Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSizeSmall}"
                    Foreground="#FF6300DA"
                    Text="{Binding Path=Author,
                                   Mode=OneWay,
-                                  FallbackValue=Author}" />
+                                  FallbackValue=Author}"
+                   TextWrapping="WrapWithOverflow" />
         <TextBlock Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSizeSmall}"
                    Foreground="#FF0046FF"
                    Text="{Binding Path=AuthorWebsite,
                                   Mode=OneWay,
-                                  FallbackValue=AuthorWebsite}" />
+                                  FallbackValue=AuthorWebsite}"
+                   TextWrapping="WrapWithOverflow" />
         <TextBlock Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSizeSmall}"
                    Foreground="#FF0046FF"
                    Text="{Binding Path=AuthorEMailAddress,
                                   Mode=OneWay,
-                                  FallbackValue=AuthorEMailAddress}" />
+                                  FallbackValue=AuthorEMailAddress}"
+                   TextWrapping="WrapWithOverflow" />
         <TextBlock Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSize}"
                    Foreground="#FF000000"
                    Text="{Binding Path=Description,
                                   Mode=OneWay,
-                                  FallbackValue=Description}" />
+                                  FallbackValue=Description}"
+                   TextWrapping="WrapWithOverflow" />
     </VirtualizingStackPanel>
 </UserControl>

@@ -177,7 +177,7 @@ namespace Newgen {
                             headers = this.GetHeaders(stream);
                             path = ((string)headers["Path"]);
 
-                            if (path.Contains("Widget:")) {
+                            if (path.Contains("Package:")) {
                                 try {
                                     string cf = Api.PackagesRoot +
                                         System.Web.HttpUtility.UrlDecode(path.Split(':')[1].Split(';')[0]) + "\\" +
@@ -186,7 +186,7 @@ namespace Newgen {
                                     if (cf.Contains(".html") || cf.Contains(".htm")) {
                                         ctype = "text/html; charset=utf-8";
                                         response = File.ReadAllText(cf);
-                                        response = response.Replace("./", "./Widget:" + System.Web.HttpUtility.UrlDecode(path.Split(':')[1].Split(';')[0]) + ";");
+                                        response = response.Replace("./", "./Package:" + System.Web.HttpUtility.UrlDecode(path.Split(':')[1].Split(';')[0]) + ";");
                                         response = response.Replace("<head>", "<head>\n" + GetServerInjectScript());
                                     }
                                     if (cf.Contains(".png") || cf.Contains(".jpg") || cf.Contains(".jpeg") || cf.Contains(".gif")) {

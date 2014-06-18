@@ -8,27 +8,30 @@ namespace Newgen.Packages {
     /// <summary>
     /// Abstract for package definition
     /// </summary>
+    /// <remarks>Use this class to mark a assembly as package.</remarks>
     public abstract class Package {
+
+        /// <summary>
+        /// The is pre loaded
+        /// </summary>
+        private bool isPreLoaded;
+
+        /// <summary>
+        /// The metadata
+        /// </summary>
         private PackageMetadata metadata;
 
+        /// <summary>
+        /// The settings
+        /// </summary>
         private PackageSettings settings;
 
         /// <summary>
         /// Gets the column span.
         /// </summary>
+        /// <value>The column span.</value>
+        /// <remarks>It defines the vertical span of tile.</remarks>
         public virtual int ColumnSpan { get { return 1; } }
-
-        /// <summary>
-        /// Gets the row span.
-        /// </summary>
-        /// <value>The row span.</value>
-        /// <remarks>...</remarks>
-        public virtual int RowSpan { get { return 1; } }
-
-        /// <summary>
-        /// Gets the icon path.
-        /// </summary>
-        public virtual Uri IconPath { get { return new Uri("pack://application:,,,/Newgen;component/Resources/NWP_Icon.ico", UriKind.RelativeOrAbsolute); } }
 
         /// <summary>
         /// Gets the metadata.
@@ -51,6 +54,13 @@ namespace Newgen.Packages {
         }
 
         /// <summary>
+        /// Gets the row span.
+        /// </summary>
+        /// <value>The row span.</value>
+        /// <remarks>It defines the horizontal span of tile.</remarks>
+        public virtual int RowSpan { get { return 1; } }
+
+        /// <summary>
         /// Gets or sets the settings.
         /// </summary>
         /// <value>The settings.</value>
@@ -67,8 +77,10 @@ namespace Newgen.Packages {
         }
 
         /// <summary>
-        /// Gets the package control.
+        /// Gets the package tile control.
         /// </summary>
+        /// <value>The tile.</value>
+        /// <remarks>Return a valid XAML control for display.</remarks>
         public abstract FrameworkElement Tile { get; }
 
         /// <summary>
@@ -78,10 +90,20 @@ namespace Newgen.Packages {
         /// <remarks>...</remarks>
         public Package(string location) {
             Settings.Location = location;
+
+            isPreLoaded = false;
         }
 
         /// <summary>
-        /// Called when [message received].
+        /// Called whenever the package is loaded into user context.
+        /// </summary>
+        /// <remarks>Do all loading steps here ! (e.g. loading settings, preparing UI)</remarks>
+        public virtual void Load() {
+            PreLoad();
+        }
+
+        /// <summary>
+        /// Called whenever a message is received.
         /// </summary>
         /// <param name="message">The message.</param>
         /// <remarks>...</remarks>
@@ -89,9 +111,14 @@ namespace Newgen.Packages {
         }
 
         /// <summary>
-        /// Loads this instance.
+        /// Called whenever the package is loaded into user context before <see cref="Load">Load</see>.
         /// </summary>
-        public virtual void Load() {
+        /// <exception cref="System.Exception"></exception>
+        /// <remarks>...</remarks>
+        public void PreLoad(bool force = false) {
+            if (isPreLoaded && !force)
+                return;
+
             var location = settings.Location;
             try {
                 if (string.IsNullOrWhiteSpace(location))
@@ -101,15 +128,17 @@ namespace Newgen.Packages {
                 settings.ObjectData = oldObjectData.MergeWith(settings.ObjectData);
             }
             catch /* Eat */ {
-
                 // Tasty ?
             }
             settings.Location = location;
+
+            isPreLoaded = true;
         }
 
         /// <summary>
-        /// Unloads this instance.
+        /// Called whenever the package is un-loaded from user context.
         /// </summary>
+        /// <remarks>Do all finalization steps here ! (e.g. saving settings)</remarks>
         public virtual void Unload() {
             try {
                 if (!Directory.Exists(settings.Location))
@@ -118,7 +147,6 @@ namespace Newgen.Packages {
                 settings.SaveJavascriptToFile(Path.Combine(settings.Location, PackageSettings.CacheFilename));
             }
             catch /* Eat */ {
-
                 // Tasty ?
             }
         }

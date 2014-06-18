@@ -5,65 +5,39 @@ using System.Reflection;
 using System.Windows;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
+using libns;
 using libns.Communication.IPC;
 
-namespace Newgen
-{
-
-    /// <summary>
-    /// Class EMessage.
-    /// </summary>
-    /// <remarks>...</remarks>
-    [Serializable]
-    public class EMessage {
-        /// <summary>
-        /// All key
-        /// </summary>
-        public const string AllKey = "[*]";
-
-        /// <summary>
-        /// The notifications key
-        /// </summary>
-        public const string NotificationKey = "[Notification]";
-        
-        /// <summary>
-        /// The internet key
-        /// </summary>
-        public const string InternetKey = "Internet";
-
-        /// <summary>
-        /// The URL key
-        /// </summary>
-        public const string UrlKey = "[Url]";
-
-        /// <summary>
-        /// Gets or sets the key.
-        /// </summary>
-        /// <value>The key.</value>
-        /// <remarks>...</remarks>
-        public string Key { get; set; }
-        /// <summary>
-        /// Gets or sets the value.
-        /// </summary>
-        /// <value>The value.</value>
-        /// <remarks>...</remarks>
-        public string Value { get; set; }
-    }
+namespace Newgen {
 
     /// <summary>
     /// Newgen's runtime shared data
     /// </summary>
-    public static class Api
-    {
+    public static class Api {
         /// <summary>
-        /// Message for network related problems
+        /// Occurs when [hub closing].
         /// </summary>
-        public const string MSG_NE = "Oops !\n\nSomething went wrong ! We can't get information from server. Please report it to NS or try again next time.";
+        public static event Action HubClosing;
 
         /// <summary>
-        /// Message for asking user confirmation
+        /// Occurs when [hub opening].
         /// </summary>
-        public const string MSG_QA_INSTALLWIDGET = "Do you want to install this package ?";
+        public static event Action HubOpening;
+
+        /// <summary>
+        /// Image formats supported by Newgen
+        /// </summary>
+        public const string AnyFilter = "Anything|*.*";
+
+        /// <summary>
+        /// Image formats supported by Newgen
+        /// </summary>
+        public const string ImageFilter = "Image files|*.png;*.jpg;*.jpeg";
+
+        /// <summary>
+        /// The logger name
+        /// </summary>
+        public const string LoggerName = "Api";
 
         /// <summary>
         /// Message for error on any feature
@@ -76,15 +50,14 @@ namespace Newgen
         public const string MSG_ER_SRVER = "ERROR !\n\nAn error occurred while activating Newgen Local Server.\nPlease report this problem.\nThis will cause many features of Newgen to function incorrectly.";
 
         /// <summary>
-        /// Image formats supported by Newgen
+        /// Message for network related problems
         /// </summary>
-        public const string ImageFilter = "Image files|*.png;*.jpg;*.jpeg";
+        public const string MSG_NE = "Oops !\n\nSomething went wrong ! We can't get information from server. Please report it to NS or try again next time.";
 
         /// <summary>
-        /// Image formats supported by Newgen
+        /// Message for asking user confirmation
         /// </summary>
-        public const string AnyFilter = "Anything|*.*";
-
+        public const string MSG_QA_INSTALLWIDGET = "Do you want to install this package ?";
         /// <summary>
         /// The HTML package mark
         /// </summary>
@@ -92,14 +65,9 @@ namespace Newgen
 
         private static string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         /// <summary>
-        /// Gets the root.
+        /// Gets the bg image.
         /// </summary>
-        public static string Root { get { return root; } }
-
-        /// <summary>
-        /// Gets the packages root.
-        /// </summary>
-        public static string PackagesRoot { get { return Root + "\\Packages\\"; } }
+        public static string BgImage { get { return CacheRoot + "BgImage.png"; } }
 
         /// <summary>
         /// Gets the cache root.
@@ -112,20 +80,24 @@ namespace Newgen
         public static string Config { get { return CacheRoot + "Settings.settings"; } }
 
         /// <summary>
-        /// Gets the bg image.
-        /// </summary>
-        public static string BgImage { get { return CacheRoot + "BgImage.png"; } }
-
-        /// <summary>
         /// Gets the extern data.
         /// </summary>
         public static string ExternData { get { return CacheRoot + "Shared.data"; } }
 
         /// <summary>
-        /// Gets the user image.
+        /// Gets the logger.
         /// </summary>
-        public static string UserImage { get { return CacheRoot + "UserThumb.png"; } }
-                
+        /// <value>The logger.</value>
+        /// <remarks>...</remarks>
+        public static Logger Logger { get; private set; }
+
+        /// <summary>
+        /// Gets or sets the messenger.
+        /// </summary>
+        /// <value>The messenger.</value>
+        /// <remarks>...</remarks>
+        public static SimpleWindowsMessaging<EMessage> Messenger { get; set; }
+
         /// <summary>
         /// Gets or sets the objects.
         /// </summary>
@@ -135,59 +107,29 @@ namespace Newgen
         public static Dictionary<string, object> Objects { get; set; }
 
         /// <summary>
-        /// Occurs when [hub opening].
+        /// Gets the packages root.
         /// </summary>
-        public static event Action HubOpening;
+        public static string PackagesRoot { get { return Root + "\\Packages\\"; } }
 
         /// <summary>
-        /// Occurs when [hub closing].
+        /// Gets the root.
         /// </summary>
-        public static event Action HubClosing;
-
+        public static string Root { get { return root; } }
         /// <summary>
-        /// Gets or sets the messenger.
+        /// Gets the user image.
         /// </summary>
-        /// <value>The messenger.</value>
-        /// <remarks>...</remarks>
-        public static SimpleWindowsMessaging<EMessage> Messenger { get; set; }
-        
+        public static string UserImage { get { return CacheRoot + "UserThumb.png"; } }
         /// <summary>
         /// Initializes the <see cref="Api"/> class.
         /// </summary>
-        static Api()
-        {
+        static Api() {
+            Logger = Logger.CreateFileLogger(LoggerName, Api.CacheRoot);
+
             Messenger = new SimpleWindowsMessaging<EMessage>();
 
             Objects = new Dictionary<string, object>();
-        }
 
-        /// <summary>
-        /// Init.
-        /// </summary>
-        public static void Init()
-        {
-            if(!Directory.Exists(PackagesRoot))
-                Directory.CreateDirectory(PackagesRoot);
-            if(!Directory.Exists(CacheRoot))
-                Directory.CreateDirectory(CacheRoot);
-        }
-
-        /// <summary>
-        /// Calls the event.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        public static void CallEvent(string name)
-        {
-            switch(name)
-            {
-                case "HubOpening":
-                    HubOpening.Invoke();
-                    break;
-
-                case "HubClosing":
-                    HubClosing.Invoke();
-                    break;
-            }
+            Application.Current.Exit += (s, e) => Logger.Close();
         }
 
         /// <summary>
@@ -195,25 +137,39 @@ namespace Newgen
         /// </summary>
         /// <param name="key">The key.</param>
         /// <param name="value">The value.</param>
-        public static void AddorUpdateData(string key, object value)
-        {
-            if(Objects.ContainsKey(key))
-            {
+        public static void AddorUpdateData(string key, object value) {
+            if (Objects.ContainsKey(key)) {
                 Objects[key] = value;
             }
             else { Objects.Add(key, value); }
         }
 
         /// <summary>
-        /// Removes the data.
+        /// Calls the event.
         /// </summary>
-        /// <param name="key">The key.</param>
-        public static void RemoveData(string key)
-        {
-            if(Objects.ContainsKey(key))
-            {
-                Objects.Remove(key);
+        /// <param name="name">The name.</param>
+        public static void CallEvent(string name) {
+            switch (name) {
+            case "HubOpening":
+                HubOpening.Invoke();
+                break;
+
+            case "HubClosing":
+                HubClosing.Invoke();
+                break;
             }
+
+            Api.Logger.LogInformation(string.Format("Api call on event [{0}] from [Api.CallEvent(string)]", name));
+        }
+
+        /// <summary>
+        /// Clears the shared local data.
+        /// </summary>
+        /// <param name="packagename">The packagename.</param>
+        /// <param name="data">The data.</param>
+        public static void ClearSharedLocalData(string packagename) {
+            if (File.Exists(PackagesRoot + packagename + "\\Shared.data"))
+                File.Delete(PackagesRoot + packagename + "\\Shared.data");
         }
 
         /// <summary>
@@ -221,9 +177,8 @@ namespace Newgen
         /// </summary>
         /// <param name="packagename">The packagename.</param>
         /// <returns>System.String.</returns>
-        public static string GetSharedLocalData(string packagename)
-        {
-            if(!File.Exists(PackagesRoot + packagename + "\\Shared.data"))
+        public static string GetSharedLocalData(string packagename) {
+            if (!File.Exists(PackagesRoot + packagename + "\\Shared.data"))
                 return string.Empty;
 
             string content = File.ReadAllText(string.Format("{0}{1}\\Shared.data", PackagesRoot, packagename));
@@ -232,27 +187,31 @@ namespace Newgen
         }
 
         /// <summary>
+        /// Init.
+        /// </summary>
+        public static void Init() {
+            if (!Directory.Exists(PackagesRoot))
+                Directory.CreateDirectory(PackagesRoot);
+            if (!Directory.Exists(CacheRoot))
+                Directory.CreateDirectory(CacheRoot);
+        }
+        /// <summary>
+        /// Removes the data.
+        /// </summary>
+        /// <param name="key">The key.</param>
+        public static void RemoveData(string key) {
+            if (Objects.ContainsKey(key)) {
+                Objects.Remove(key);
+            }
+        }
+        /// <summary>
         /// Gets the shared local data.
         /// </summary>
         /// <param name="packagename">The packagename.</param>
         /// <param name="data">The data.</param>
-        public static void SetSharedLocalData(string packagename, string data)
-        {
+        public static void SetSharedLocalData(string packagename, string data) {
             File.WriteAllText(PackagesRoot + packagename + "\\Shared.data", data);
         }
-
-        /// <summary>
-        /// Clears the shared local data.
-        /// </summary>
-        /// <param name="packagename">The packagename.</param>
-        /// <param name="data">The data.</param>
-        public static void ClearSharedLocalData(string packagename)
-        {
-            if(File.Exists(PackagesRoot + packagename + "\\Shared.data"))
-                File.Delete(PackagesRoot + packagename + "\\Shared.data");
-        }
-
-
         /// <summary>
         /// Shows the error message.
         /// </summary>
@@ -277,5 +236,44 @@ namespace Newgen
         public static MessageBoxResult ShowQAMessage(string message) {
             return MessageBox.Show(message, "// Newgen / : ?", MessageBoxButton.YesNo, MessageBoxImage.Question);
         }
+    }
+
+    /// <summary>
+    /// Class EMessage.
+    /// </summary>
+    /// <remarks>...</remarks>
+    [Serializable]
+    public class EMessage {
+        /// <summary>
+        /// All key
+        /// </summary>
+        public const string AllKey = "[*]";
+
+        /// <summary>
+        /// The internet key
+        /// </summary>
+        public const string InternetKey = "Internet";
+
+        /// <summary>
+        /// The notifications key
+        /// </summary>
+        public const string NotificationKey = "[Notification]";
+        /// <summary>
+        /// The URL key
+        /// </summary>
+        public const string UrlKey = "[Url]";
+
+        /// <summary>
+        /// Gets or sets the key.
+        /// </summary>
+        /// <value>The key.</value>
+        /// <remarks>...</remarks>
+        public string Key { get; set; }
+        /// <summary>
+        /// Gets or sets the value.
+        /// </summary>
+        /// <value>The value.</value>
+        /// <remarks>...</remarks>
+        public string Value { get; set; }
     }
 }

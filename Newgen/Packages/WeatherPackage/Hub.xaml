@@ -14,12 +14,7 @@
         </LinearGradientBrush>
     </Window.Background>
     <Grid Name="Root">
-        <Button Name="BackButton"
-                HorizontalAlignment="Left"
-                VerticalAlignment="Top"
-                Click="OnBackButtonClick"
-                Style="{StaticResource HubBackButton}" />
-        <Grid Margin="118,30">
+        <Grid Margin="30">
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
                 <RowDefinition Height="*" />
@@ -91,5 +86,10 @@
                 <ctl:ForecastItem Grid.Column="4" Background="#3F002459" />
             </Grid>
         </Grid>
+        <Button Name="BackButton"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="OnBackButtonClick"
+                Style="{StaticResource HubBackButton}" />
     </Grid>
 </api:HubWindow>

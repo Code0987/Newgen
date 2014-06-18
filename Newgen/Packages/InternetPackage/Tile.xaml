@@ -16,12 +16,12 @@
         <ContextMenu>
             <MenuItem x:Name="CMRM_IE" Click="CMRM_IE_Click" Header="{x:Static Properties:Resources.RM_IE}">
                 <MenuItem.Icon>
-                    <Image Width="18" Height="18" Source="/Internet;component/Resources/icon.png" />
+                    <Image Width="18" Height="18" Source="/InternetPackage;component/Resources/Logo.png" />
                 </MenuItem.Icon>
             </MenuItem>
             <MenuItem x:Name="CMRM_WK" Click="CMRM_WK_Click" Header="{x:Static Properties:Resources.RM_WK}">
                 <MenuItem.Icon>
-                    <Image Width="18" Height="18" Source="/Internet;component/Resources/Webkit.png" />
+                    <Image Width="18" Height="18" Source="/InternetPackage;component/Resources/Webkit.png" />
                 </MenuItem.Icon>
             </MenuItem>
         </ContextMenu>
@@ -29,12 +29,12 @@
     <Grid>
         <Image HorizontalAlignment="Center"
                VerticalAlignment="Center"
-               Source="/Internet;component/Resources/internet.png"
+               Source="/InternetPackage;component/Resources/internet.png"
                Stretch="Uniform" />
         <TextBlock Margin="10"
                    HorizontalAlignment="Center"
                    VerticalAlignment="Bottom"
-                   FontSize="{StaticResource ContentFontSizeSmall}"
+                   FontSize="{StaticResource ContentFontSizeExtraSmall}"
                    Foreground="White"
                    Text="{x:Static Properties:Resources.Internet}" />
     </Grid>

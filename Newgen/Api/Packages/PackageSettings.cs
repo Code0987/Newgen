@@ -87,7 +87,7 @@ namespace Newgen.Packages {
             try {
                 value = ObjectData[key].DeserializeFromJavascript<T>();
             }
-            catch { }
+            catch (Exception ex) { Api.Logger.LogError("Unable to read previous settings !", ex); }
             if (customizer != null) {
                 customizer(value);
                 ObjectData[key] = value.SerializeToJavascript<T>();

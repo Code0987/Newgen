@@ -50,7 +50,7 @@ namespace WeatherPackage {
                 ((ForecastItem)this.ForecastItems.Children[i]).Day.Text =
                     DateTime.Now.AddDays((double)i).ToString("dddd") + " " + DateTime.Now.AddDays((double)i).Day;
                 ((ForecastItem)this.ForecastItems.Children[i]).WeatherIcon.Source =
-                    new BitmapImage(new Uri(string.Format("/Weather;Component/Resources/weather_{0}.png", package.CurrentWeather.ForecastList[i].SkyCode), UriKind.Relative));
+                    new BitmapImage(new Uri(string.Format("/WeatherPackage;Component/Resources/weather_{0}.png", package.CurrentWeather.ForecastList[i].SkyCode), UriKind.Relative));
                 ((ForecastItem)this.ForecastItems.Children[i]).Temperature.Text =
                     package.CurrentWeather.ForecastList[i].HighTemperature + "°";
                 ((ForecastItem)this.ForecastItems.Children[i]).Sky.Text =
