@@ -18,7 +18,6 @@ namespace WeatherPackage {
         internal WeatherData CurrentWeather;
         internal WeatherSettings WeatherOptions;
 
-        private PackageMetadata metadata;
         private Tile tile;
         /// <summary>
         /// Gets the column span.

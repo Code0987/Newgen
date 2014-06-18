@@ -33,11 +33,15 @@ namespace Newgen {
         /// The object keyboard process
         /// </summary>
         private WinAPI.HookProc objKeyboardProcess;
+        
+#if !DEBUG
 
         /// <summary>
         /// The tracker
         /// </summary>
         internal static ExtendedTracker tracker;
+
+#endif
 
         /// <summary>
         /// Gets the app icon.
@@ -174,11 +178,11 @@ namespace Newgen {
 
             // Run tracker under non-dispatcher context.
             this.Dispatcher.RunFor(async () => {
-                var uri = new Uri(Newgen.Resources.Resources.Link_App);
+                var uri = new Uri(Newgen.Resources.Definitions.Link_App);
 
-                await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "Packages", "Loaded", Settings.Current.LoadedWidgets.Count);
-                await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "Packages", "Installed", PackageManager.Current.Packages.Count);
-                await tracker.TrackEventAsync(Newgen.Resources.Resources.Text_App, "License", Settings.IsProMode ? "Full" : "Free", 1);
+                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "Packages", "Loaded", Settings.Current.LoadedWidgets.Count);
+                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "Packages", "Installed", PackageManager.Current.Packages.Count);
+                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "License", Settings.IsProMode ? "Full" : "Free", 1);
             }, -1, TimeSpan.FromMinutes(45).TotalMilliseconds);
 
 #endif

@@ -19,6 +19,11 @@ namespace Newgen.Packages {
     public class PackageManager {
 
         /// <summary>
+        /// The current application domain
+        /// </summary>
+        public AppDomain CurrentAppDomain;
+
+        /// <summary>
         /// The post remove mark
         /// </summary>
         public const string PostRemoveFilename = "Package.Remove";
@@ -88,6 +93,8 @@ namespace Newgen.Packages {
             PackageServer.Current.Start();
 
             Location = Api.PackagesRoot;
+
+            CurrentAppDomain = AppDomain.CurrentDomain;
         }
 
         /// <summary>
@@ -112,10 +119,10 @@ namespace Newgen.Packages {
         public void Disable(Package package) {
             if (!package.Settings.IsEnabled)
                 return;
-
-            Unload(package);
-
+            
             package.Settings.IsEnabled = false;
+
+            Unload(package, true);
         }
 
         /// <summary>
@@ -126,10 +133,12 @@ namespace Newgen.Packages {
         public void Enable(Package package) {
             if (package.Settings.IsEnabled)
                 return;
-
+            
             package.Settings.IsEnabled = true;
 
-            Load(package);
+            Load(package, true);
+
+            package.Settings.IsEnabled = true;
         }
 
         /// <summary>
@@ -196,16 +205,16 @@ namespace Newgen.Packages {
         /// <returns>Package.</returns>
         /// <remarks>...</remarks>
         public Package InitializeFrom(string location) {
-
             // Scan .net compiled packages
-            try {
-                var filePaths = Directory.GetFiles(location, "*.dll", SearchOption.TopDirectoryOnly);
-                foreach (var filePath in filePaths) {
+            var filePaths = Directory.GetFiles(location, "*.dll", SearchOption.TopDirectoryOnly);
+            foreach (var filePath in filePaths)
+                try {
+                    // Load package assembly
+                    var packageAssembly = Assembly.LoadFrom(filePath);
 
                     // Create instance
                     var package = Activator.CreateInstance(
-                        Assembly
-                        .LoadFrom(filePath)
+                        packageAssembly
                         .GetTypes()
                         .FirstOrDefault(f => typeof(Package).IsAssignableFrom(f)),
                         (object)location
@@ -214,12 +223,24 @@ namespace Newgen.Packages {
                     // Cache
                     package = InitializeFrom(package);
 
+                    // Load all references
+                    // Loop through the array of referenced assembly names.
+                    //foreach (AssemblyName packageAssemblyReference in packageAssembly.GetReferencedAssemblies())
+                    //    try {
+                    //        // Load the assembly from the specified path.
+                    //        CurrentAppDomain.Load(
+                    //            Path.Combine(
+                    //            location,
+                    //            packageAssemblyReference.FullName.Substring(0, packageAssemblyReference.FullName.IndexOf(",")) + ".dll"
+                    //            ));
+                    //    }
+                    //    catch /* Eat */ { }
+
                     // Done !
                     return package; // Only one widgets per package !
                 }
-            }
-            catch { }
-            
+                catch /* Eat */ { }
+
             // Scan app link
             try {
                 return AppLink.AppLinkPackage.CreateFrom(location);
@@ -280,9 +301,11 @@ namespace Newgen.Packages {
                 return false;
             var feed = InternalHelper.FeedsAggregator.CachedFeeds
                 .OrderByDescending(f => f.LastUpdatedTime).FirstOrDefault(f => f.Id.Equals(packageId));
-            if (feed == null) return false;
+            if (feed == null)
+                return false;
             return feed.LastUpdatedTime > metadata.Version;
         }
+
         /// <summary>
         /// Loads the specified package identifier.
         /// </summary>
@@ -300,8 +323,8 @@ namespace Newgen.Packages {
         /// </summary>
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
-        public void Load(Package package) {
-            if (!package.Settings.IsEnabled)
+        public void Load(Package package, bool force = false) {
+            if (!force && !package.Settings.IsEnabled)
                 return;
 
             if (!IsInitialized(package.Metadata.Id))
@@ -328,14 +351,12 @@ namespace Newgen.Packages {
         /// <returns>PackageManager.</returns>
         /// <remarks>...</remarks>
         public void PostProcess() {
-
             // Scan
             var packageFolders = Directory.GetDirectories(Location);
 
             // Post functions
             foreach (var packageFolder in packageFolders) {
                 try {
-
                     // Get all files
                     var filePaths = Directory.GetFiles(packageFolder, "*", SearchOption.TopDirectoryOnly);
                     foreach (var filePath in filePaths) {
@@ -400,7 +421,6 @@ namespace Newgen.Packages {
             await Task
                 .Run((Action)PostProcess)
                 .ContinueWith(t => {
-
                     // Clear cache
                     Packages.Clear();
 
@@ -411,7 +431,7 @@ namespace Newgen.Packages {
                     foreach (var packageFolder in packageFolders) {
                         var package = InitializeFrom(packageFolder);
                         if (package != null)
-                        Load(package);
+                            Load(package);
                     }
 
                     // Defaults
@@ -432,7 +452,6 @@ namespace Newgen.Packages {
             else {
                 Disable(package);
             }
-
         }
 
         /// <summary>
@@ -452,8 +471,8 @@ namespace Newgen.Packages {
         /// </summary>
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
-        public void Unload(Package package) {
-            if (!package.Settings.IsEnabled)
+        public void Unload(Package package, bool force = false) {
+            if (!force && !package.Settings.IsEnabled)
                 return;
 
             if (Unloaded != null)

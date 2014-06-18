@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Widget</Configuration>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>8.0.30703</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
@@ -21,21 +21,36 @@
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <CheckForOverflowUnderflow>true</CheckForOverflowUnderflow>
     <UseVSHostingProcess>false</UseVSHostingProcess>
+    <SolutionDir Condition="$(SolutionDir) == '' Or $(SolutionDir) == '*Undefined*'">..\..\</SolutionDir>
+    <RestorePackages>true</RestorePackages>
+    <NuGetPackageImportStamp>dd1ddde4</NuGetPackageImportStamp>
+    <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Debug'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Debug|x86'">
     <DefineConstants>TRACE;DEBUG;Native;Net4;Net45</DefineConstants>
-    <Optimize>false</Optimize>
     <DebugType>full</DebugType>
-    <Prefer32Bit>false</Prefer32Bit>
+    <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition="'$(Configuration)' == 'Release'">
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)' == 'Release|x86'">
     <DefineConstants>Native;Net4;Net45</DefineConstants>
     <Optimize>true</Optimize>
     <DebugType>pdbonly</DebugType>
-    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CefSharp">
+      <HintPath>..\..\..\Resources\bin\Debug\CefSharp.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp.Core">
+      <HintPath>..\..\..\Resources\bin\Debug\CefSharp.Core.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
+    <Reference Include="CefSharp.Wpf">
+      <HintPath>..\..\..\Resources\bin\Debug\CefSharp.Wpf.dll</HintPath>
+      <Private>False</Private>
+    </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
     <Reference Include="System.Xml" />
@@ -46,18 +61,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
-    <Reference Include="WebKitBrowser">
-      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitBrowser.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
-    <Reference Include="WebKitCore">
-      <HintPath>..\..\..\..\..\..\Data\Apps\Ref\Webkit.Net\bin\Release\WebKitCore.dll</HintPath>
-      <Private>False</Private>
-    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
-    <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="..\..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Internal%29.cs">
@@ -66,8 +72,8 @@
     <Compile Include="..\..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Newgen.Api%29.cs">
       <Link>References\WebShared%28Newgen.Api%29.cs</Link>
     </Compile>
-    <Compile Include="WebkitInternetBrowser.xaml.cs">
-      <DependentUpon>WebkitInternetBrowser.xaml</DependentUpon>
+    <Compile Include="CefInternetBrowser.xaml.cs">
+      <DependentUpon>CefInternetBrowser.xaml</DependentUpon>
     </Compile>
     <Compile Include="IEInternetBrowser.xaml.cs">
       <DependentUpon>IEInternetBrowser.xaml</DependentUpon>
@@ -93,7 +99,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="WebkitInternetBrowser.xaml">
+    <Page Include="CefInternetBrowser.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -140,6 +146,17 @@
     </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(SolutionDir)\.nuget\NuGet.targets" Condition="Exists('$(SolutionDir)\.nuget\NuGet.targets')" />
+  <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
+    <PropertyGroup>
+      <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
+    </PropertyGroup>
+    <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
+  </Target>
+  <PropertyGroup>
+    <PreBuildEvent>
+    </PreBuildEvent>
+  </PropertyGroup>
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

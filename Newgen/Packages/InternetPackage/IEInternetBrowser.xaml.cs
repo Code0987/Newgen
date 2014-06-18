@@ -57,14 +57,14 @@ namespace InternetPackage
             {
                 if (!(string.IsNullOrEmpty(this.lurl) || string.IsNullOrWhiteSpace(this.lurl)))
                 {
-                    package.CustomizedSettings.LastSearchURL = this.lurl;
+                    package.CustomizedSettings.LastSearchLocation = this.lurl;
                 }
-                Control_URLBox.Text = package.CustomizedSettings.LastSearchURL;
+                Control_URLBox.Text = package.CustomizedSettings.LastSearchLocation;
             }
             catch
             {
-                package.CustomizedSettings.LastSearchURL = "http://www.bing.com/?scope=web";
-                Control_URLBox.Text = package.CustomizedSettings.LastSearchURL;
+                package.CustomizedSettings.LastSearchLocation = "http://www.bing.com/?scope=web";
+                Control_URLBox.Text = package.CustomizedSettings.LastSearchLocation;
             }
 
             try { Browser.Navigate(Control_URLBox.Text); }
@@ -73,7 +73,7 @@ namespace InternetPackage
 
         private void BackButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
-            package.CustomizedSettings.LastSearchURL = Control_URLBox.Text;
+            package.CustomizedSettings.LastSearchLocation = Control_URLBox.Text;
 
             Close();
         }
@@ -134,7 +134,7 @@ namespace InternetPackage
             {
                 try
                 {
-                    package.CustomizedSettings.LastSearchURL = Control_URLBox.Text;
+                    package.CustomizedSettings.LastSearchLocation = Control_URLBox.Text;
 
                     Close();
                 }
@@ -235,7 +235,7 @@ namespace InternetPackage
         {
             try
             {
-                package.CustomizedSettings.LastSearchURL = Control_URLBox.Text;
+                package.CustomizedSettings.LastSearchLocation = Control_URLBox.Text;
 
                 Close();
             }

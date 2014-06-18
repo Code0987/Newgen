@@ -38,7 +38,7 @@ public void Navigate(string url)
                 }
                 else
                 {
-                    WebkitInternetBrowser browser = (WebkitInternetBrowser)hub;
+                    CefInternetBrowser browser = (CefInternetBrowser)hub;
                     if (browser.IsVisible) { browser.Activate(); }
                     browser.Navigate(url);
                 }
@@ -55,8 +55,8 @@ public void Navigate(string url)
                 }
                 else
                 {
-                    hub = new WebkitInternetBrowser(package, url);
-                    WebkitInternetBrowser browser = (WebkitInternetBrowser)hub;
+                    hub = new CefInternetBrowser(package, url);
+                    CefInternetBrowser browser = (CefInternetBrowser)hub;
                     browser.AllowsTransparency = false;
                     browser.ShowDialog();
                     browser.Navigate(url);
@@ -108,7 +108,7 @@ private void CMRM_WK_Click(object sender, System.Windows.RoutedEventArgs e)
         {
             try
             {
-                package.CustomizedSettings.RenderingMode = RenderingMode.Webkit;
+                package.CustomizedSettings.RenderingMode = RenderingMode.CEF;
                 UpdateColor();
             }
             catch { }
@@ -118,7 +118,7 @@ private void UpdateColor()
 {
             try
             {
-                if (package.CustomizedSettings.RenderingMode == RenderingMode.Webkit)
+                if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
                 {
                     this.CMRM_WK.Background = new SolidColorBrush(Colors.DarkGray);
                     this.CMRM_IE.Background = new SolidColorBrush(Colors.Transparent);
@@ -135,7 +135,7 @@ private void UpdateColor()
 
 private void UserControlMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
         {
-            Navigate(package.CustomizedSettings.LastSearchURL);
+            Navigate(package.CustomizedSettings.LastSearchLocation);
         }
     }
 }

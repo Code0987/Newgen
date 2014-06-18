@@ -90,10 +90,11 @@ namespace Newgen
         /// </summary>
         public static readonly string HTMLWidgetMetadataFile = "HTMLWidget.xml";
 
+        private static string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
         /// <summary>
         /// Gets the root.
         /// </summary>
-        public static string Root { get { return Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location); } }
+        public static string Root { get { return root; } }
 
         /// <summary>
         /// Gets the packages root.
