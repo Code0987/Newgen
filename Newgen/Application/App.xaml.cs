@@ -96,7 +96,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public App() {
-            Api.Init();
+            Api.OnPreInitialization();
         }
 
         /// <summary>
@@ -195,6 +195,8 @@ namespace Newgen {
         /// <param name="e">The <see cref="ExitEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void Application_Exit(object sender, ExitEventArgs e) {
+            Api.OnPreFinalization();
+
             PackageServer.Current.Stop();
 
             Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);

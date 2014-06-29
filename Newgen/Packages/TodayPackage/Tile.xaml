@@ -73,7 +73,7 @@
             <TextBlock x:Name="TextBlock_Quote"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Top"
-                       FontSize="19"
+                       FontSize="{StaticResource ContentFontSize}"
                        Foreground="White"
                        Text="..."
                        TextWrapping="Wrap" />
@@ -81,15 +81,15 @@
             <TextBlock x:Name="TextBlock_Author"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Bottom"
-                       FontSize="14"
+                       FontSize="{StaticResource ContentFontSizeExtraSmall}"
                        Foreground="#FFD8D8D8"
                        Text="" />
         </StackPanel>
         <TextBlock Margin="10,0,0,10"
                    HorizontalAlignment="Left"
                    VerticalAlignment="Bottom"
-                   FontSize="14"
+                   FontSize="{StaticResource ContentFontSizeExtraSmall}"
                    Foreground="White"
-                   Text="{x:Static p:Resources.Text_Quotes}" />
+                   Text="Today" />
     </Grid>
 </Border>

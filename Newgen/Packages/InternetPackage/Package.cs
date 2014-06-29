@@ -5,13 +5,28 @@ using Newgen;
 using NS.Web;
 
 namespace InternetPackage {
+    /// <summary>
+    /// Class Package.
+    /// </summary>
+    /// <remarks>...</remarks>
     public class Package : Newgen.Packages.Package {
+        /// <summary>
+        /// The package identifier
+        /// </summary>
         internal const string PackageId = "Internet";
 
+        /// <summary>
+        /// The customized settings
+        /// </summary>
         internal Settings CustomizedSettings;
 
         private Tile tile;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Package" /> class.
+        /// </summary>
+        /// <param name="location">The location.</param>
+        /// <remarks>...</remarks>
         public Package(string location)
             : base(location) {
             Metadata = WebShared.CreateMetadataFor(

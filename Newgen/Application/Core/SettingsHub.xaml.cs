@@ -94,7 +94,7 @@ namespace Newgen {
                     Enable_OOBE_SS.IsChecked = true;
                 ValStartScreenSSTimeFrame.Text = Settings.Current.SlideShowTime.ToString();
                 ValStartScreenSSTimeFrame.TextChanged += new TextChangedEventHandler(ValStartScreenSSTimeFrame_TextChanged);
-                if (Settings.Current.TimeMode == 1)
+                if (Api.Settings.TimeMode == TimeMode.H24)
                     Time24HRadioButton.IsChecked = true;
                 try {
                     StartBarBgColor.Fill = new SolidColorBrush(Settings.Current.ToolbarBackgroundColor);
@@ -182,9 +182,9 @@ namespace Newgen {
             Settings.Current.IsTilesLockEnabled = (bool)EnableWidgetLock.IsChecked;
 
             if (Time24HRadioButton.IsChecked == true)
-                Settings.Current.TimeMode = 1;
+                Api.Settings.TimeMode = TimeMode.H24;
             else
-                Settings.Current.TimeMode = 0;
+                Api.Settings.TimeMode = TimeMode.H24;
 
             try {
                 if (Settings.Current.Autostart)

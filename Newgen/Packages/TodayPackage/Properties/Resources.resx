@@ -117,15 +117,6 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Text_Quotes" xml:space="preserve">
-    <value>Today</value>
-  </data>
-  <data name="WidgetInfo" xml:space="preserve">
-    <value>Quotes, Life hacks, much more ...</value>
-  </data>
-  <data name="Text_About" xml:space="preserve">
-    <value>about</value>
-  </data>
   <data name="ContentChangeInterval" xml:space="preserve">
     <value>Content change interval</value>
   </data>

@@ -70,20 +70,20 @@ namespace InternetPackage.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Internet Explorer.
+        ///   Looks up a localized string similar to CEF (Chromium, Chrome, Webkit, ...).
         /// </summary>
-        public static string RM_IE {
+        public static string TileContextMenuItemCEF {
             get {
-                return ResourceManager.GetString("RM_IE", resourceCulture);
+                return ResourceManager.GetString("TileContextMenuItemCEF", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Webkit (Chrome).
+        ///   Looks up a localized string similar to Internet Explorer.
         /// </summary>
-        public static string RM_WK {
+        public static string TileContextMenuItemIE {
             get {
-                return ResourceManager.GetString("RM_WK", resourceCulture);
+                return ResourceManager.GetString("TileContextMenuItemIE", resourceCulture);
             }
         }
     }

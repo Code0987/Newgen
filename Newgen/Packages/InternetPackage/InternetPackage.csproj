@@ -72,11 +72,9 @@
     <Compile Include="..\..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Newgen.Api%29.cs">
       <Link>References\WebShared%28Newgen.Api%29.cs</Link>
     </Compile>
-    <Compile Include="CefInternetBrowser.xaml.cs">
-      <DependentUpon>CefInternetBrowser.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="IEInternetBrowser.xaml.cs">
-      <DependentUpon>IEInternetBrowser.xaml</DependentUpon>
+    <Compile Include="Browser.cs" />
+    <Compile Include="InternetBrowserHub.xaml.cs">
+      <DependentUpon>InternetBrowserHub.xaml</DependentUpon>
     </Compile>
     <Compile Include="Settings.cs" />
     <Compile Include="Tile.xaml.cs">
@@ -99,11 +97,7 @@
     <AppDesigner Include="Properties\" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CefInternetBrowser.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="IEInternetBrowser.xaml">
+    <Page Include="InternetBrowserHub.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -134,9 +128,6 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\close.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="Resources\Webkit.png" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Api\Api.csproj">

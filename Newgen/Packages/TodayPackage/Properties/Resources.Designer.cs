@@ -86,32 +86,5 @@ namespace TodayPackage.Properties {
                 return ResourceManager.GetString("ContentUpdateInterval", resourceCulture);
             }
         }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to about.
-        /// </summary>
-        public static string Text_About {
-            get {
-                return ResourceManager.GetString("Text_About", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Today.
-        /// </summary>
-        public static string Text_Quotes {
-            get {
-                return ResourceManager.GetString("Text_Quotes", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Quotes, Life hacks, much more ....
-        /// </summary>
-        public static string WidgetInfo {
-            get {
-                return ResourceManager.GetString("WidgetInfo", resourceCulture);
-            }
-        }
     }
 }

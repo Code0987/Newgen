@@ -55,7 +55,7 @@ namespace Newgen
             try {
                 this.Style = (Style)Application.Current.Resources["ResetWindowStyle"];
             }
-            catch { }
+            catch /* Eat */ { /* Tasty ? */ }
 
             this.Left = 0;
             this.Top = 0;

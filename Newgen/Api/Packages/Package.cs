@@ -12,9 +12,9 @@ namespace Newgen.Packages {
     public abstract class Package {
 
         /// <summary>
-        /// The is pre loaded
+        /// The is settings file loaded
         /// </summary>
-        private bool isPreLoaded;
+        private bool isSettingsFileLoaded;
 
         /// <summary>
         /// The metadata
@@ -91,7 +91,7 @@ namespace Newgen.Packages {
         public Package(string location) {
             Settings.Location = location;
 
-            isPreLoaded = false;
+            isSettingsFileLoaded = false;
         }
 
         /// <summary>
@@ -99,15 +99,7 @@ namespace Newgen.Packages {
         /// </summary>
         /// <remarks>Do all loading steps here ! (e.g. loading settings, preparing UI)</remarks>
         public virtual void Load() {
-            PreLoad();
-        }
-
-        /// <summary>
-        /// Called whenever a message is received.
-        /// </summary>
-        /// <param name="message">The message.</param>
-        /// <remarks>...</remarks>
-        public virtual void OnMessageReceived(EMessage message) {
+            LoadSettings();
         }
 
         /// <summary>
@@ -115,8 +107,8 @@ namespace Newgen.Packages {
         /// </summary>
         /// <exception cref="System.Exception"></exception>
         /// <remarks>...</remarks>
-        public void PreLoad(bool force = false) {
-            if (isPreLoaded && !force)
+        public void LoadSettings(bool force = false) {
+            if (isSettingsFileLoaded && !force)
                 return;
 
             var location = settings.Location;
@@ -132,14 +124,25 @@ namespace Newgen.Packages {
             }
             settings.Location = location;
 
-            isPreLoaded = true;
+            isSettingsFileLoaded = true;
         }
 
         /// <summary>
-        /// Called whenever the package is un-loaded from user context.
+        /// Called whenever a message is received.
         /// </summary>
-        /// <remarks>Do all finalization steps here ! (e.g. saving settings)</remarks>
-        public virtual void Unload() {
+        /// <param name="message">The message.</param>
+        /// <remarks>...</remarks>
+        public virtual void OnMessageReceived(EMessage message) {
+        }
+
+        /// <summary>
+        /// Saves the settings.
+        /// </summary>
+        /// <remarks>
+        /// This functions is automatically called on un-load. Call it only when needed
+        /// exceptionally !
+        /// </remarks>
+        public void SaveSettings() {
             try {
                 if (!Directory.Exists(settings.Location))
                     Directory.CreateDirectory(settings.Location);
@@ -149,6 +152,14 @@ namespace Newgen.Packages {
             catch /* Eat */ {
                 // Tasty ?
             }
+        }
+
+        /// <summary>
+        /// Called whenever the package is un-loaded from user context.
+        /// </summary>
+        /// <remarks>Do all finalization steps here ! (e.g. saving settings)</remarks>
+        public virtual void Unload() {
+            SaveSettings();
         }
     }
 }

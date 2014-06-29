@@ -117,46 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <data name="Options12H" xml:space="preserve">
-    <value>12-hour time</value>
-  </data>
-  <data name="Options24H" xml:space="preserve">
-    <value>24-hour time</value>
-  </data>
-  <data name="OptionsAbout" xml:space="preserve">
-    <value>About Clock widget</value>
-  </data>
-  <data name="OptionsAboutTabHeader" xml:space="preserve">
-    <value>about</value>
-  </data>
-  <data name="OptionsApplyButton" xml:space="preserve">
-    <value>Apply</value>
-  </data>
-  <data name="OptionsCancelButton" xml:space="preserve">
-    <value>Cancel</value>
-  </data>
-  <data name="OptionsGeneralTabHeader" xml:space="preserve">
-    <value>general</value>
-  </data>
-  <data name="OptionsItem" xml:space="preserve">
-    <value>Options</value>
-  </data>
-  <data name="OptionsOkButton" xml:space="preserve">
-    <value>ok</value>
-  </data>
-  <data name="OptionsTime" xml:space="preserve">
-    <value>Time</value>
-  </data>
-  <data name="OptionsTimeFormat" xml:space="preserve">
-    <value>Time format:</value>
-  </data>
-  <data name="OptionsVersion" xml:space="preserve">
-    <value>Version</value>
-  </data>
-  <data name="OptionsWindowTitle" xml:space="preserve">
-    <value>Clock options</value>
-  </data>
-  <data name="WidgetInfo" xml:space="preserve">
-    <value>Clock Package 1.0 by Newgen</value>
-  </data>
 </root>

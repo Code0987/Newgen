@@ -10,9 +10,8 @@ using Newgen;
 
 namespace WeatherPackage {
     public partial class Tile : Border {
-        private Package package;
-
         private OptionsHub optionsHub;
+        private Package package;
         private DispatcherTimer weatherTimer;
 
         public Tile(Package package) {
@@ -54,14 +53,6 @@ namespace WeatherPackage {
             optionsHub.ShowDialog();
         }
 
-        private void OnRefreshItemClick(object sender, RoutedEventArgs e) {
-            Refresh();
-        }
-        
-        private void OnweatherTimerTick(object sender, EventArgs e) {
-            Refresh();
-        }
-
         private void OnOptionsWindowUpdateSettings(object sender, EventArgs e) {
             optionsHub.UpdateSettings -= OnOptionsWindowUpdateSettings;
 
@@ -72,6 +63,13 @@ namespace WeatherPackage {
             weatherTimer.Start();
         }
 
+        private void OnRefreshItemClick(object sender, RoutedEventArgs e) {
+            Refresh();
+        }
+        
+        private void OnweatherTimerTick(object sender, EventArgs e) {
+            Refresh();
+        }
         private void Refresh() {
             ThreadStart threadStarter = () => {
                 try {

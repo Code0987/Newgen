@@ -1,45 +1,72 @@
 ﻿using System;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
 using Newgen;
-using KeyEventArgs = System.Windows.Input.KeyEventArgs;
-using UserControl = System.Windows.Controls.UserControl;
 
 namespace ClockPackage
 {
     /// <summary>
     /// Interaction logic for Tile.xaml
     /// </summary>
-    public partial class Tile : UserControl {
+    public partial class Tile : Border {
+
+        /// <summary>
+        /// The package
+        /// </summary>
         private Package package;
 
+        /// <summary>
+        /// The timer
+        /// </summary>
         private DispatcherTimer timer;
-        private Options optionsWindow;
-        private HubWindow hub;
-        private Hub hubContent;
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tile" /> class.
+        /// </summary>
+        /// <param name="package">The package.</param>
+        /// <remarks>...</remarks>
         public Tile(Package package) {
             this.package = package;
 
             InitializeComponent();
         }
 
+        /// <summary>
+        /// Loads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public void Load()
         {
             timer = new DispatcherTimer();
             timer.Interval = TimeSpan.FromSeconds(1);
-            timer.Tick += TimerTick;
+            timer.Tick += OntimerTick;
             timer.Start();
-            TimerTick(null, EventArgs.Empty);
+            OntimerTick(null, EventArgs.Empty);
         }
 
-        private void TimerTick(object sender, EventArgs e)
+        /// <summary>
+        /// Unloads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public void Unload() {
+            timer.Tick -= OntimerTick;
+            timer.Stop();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:Tick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="EventArgs" /> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OntimerTick(object sender, EventArgs e)
         {
-            if (Package.Settings.TimeMode == 1)
+            if (Api.Settings.TimeMode == TimeMode.H24)
             {
                 Hours.Text = DateTime.Now.ToString("HH");
                 Minutes.Text = DateTime.Now.ToString("mm");
@@ -68,90 +95,6 @@ namespace ClockPackage
             Day.Text = DateTime.Now.ToString("dddd");
             Day.Text = char.ToUpper(Day.Text[0]) + Day.Text.Substring(1);
             Date.Text = DateTime.Now.ToString("MMMM") + " " + DateTime.Now.Day;
-        }
-
-        private void OptionsItemClick(object sender, RoutedEventArgs e)
-        {
-            if (optionsWindow != null && optionsWindow.IsVisible)
-            {
-                optionsWindow.Activate();
-                return;
-            }
-
-            optionsWindow = new Options();
-            optionsWindow.UpdateSettings += OptionsWindowUpdateSettings;
-
-            optionsWindow.ShowDialog();
-        }
-
-        private void OptionsWindowUpdateSettings(object sender, EventArgs e)
-        {
-            optionsWindow.UpdateSettings -= OptionsWindowUpdateSettings;
-            if (Package.Settings.TimeMode == 1)
-            {
-                Hours.Text = DateTime.Now.ToString("HH");
-                Minutes.Text = DateTime.Now.ToString("mm");
-                AmPm.Text = "";
-            }
-            else
-            {
-                Hours.Text = DateTime.Now.ToString(" h");
-                Minutes.Text = DateTime.Now.ToString("mm");
-                AmPm.Text = DateTime.Now.ToString("tt");
-            }
-        }
-
-        public void Unload()
-        {
-            timer.Tick -= TimerTick;
-            timer.Stop();
-        }
-
-        private void UserControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
-            if (hub != null && hub.IsVisible)
-            {
-                hub.Activate();
-                return;
-            }
-
-            hub = new HubWindow();
-
-            hub.Animation = AnimationType.Internal;
-
-            hub.Topmost = true;
-            hub.AllowsTransparency = true;
-            hub.Background = new SolidColorBrush((Color)ColorConverter.ConvertFromString("#00000000"));
-            hubContent = new Hub();
-            hubContent.Unlocked += HubContentUnlocked;
-            hub.Content = hubContent;
-            hub.KeyUp += HubKeyUp;
-
-            if (E.Language == "he-IL" || E.Language == "ar-SA")
-            {
-                hub.FlowDirection = System.Windows.FlowDirection.RightToLeft;
-            }
-            else
-            {
-                hub.FlowDirection = System.Windows.FlowDirection.LeftToRight;
-            }
-
-            hub.ShowDialog();
-        }
-
-        private void HubKeyUp(object sender, KeyEventArgs e)
-        {
-            if (e.Key == Key.Up)
-            {
-                hub.KeyUp -= HubKeyUp;
-                hubContent.Unlock();
-            }
-        }
-
-        private void HubContentUnlocked(object sender, EventArgs e)
-        {
-            hubContent.Unlocked -= HubContentUnlocked;
-            hub.Close();
         }
     }
 }

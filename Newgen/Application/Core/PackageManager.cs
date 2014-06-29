@@ -333,7 +333,7 @@ namespace Newgen.Packages {
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
         public void Load(Package package, bool force = false) {
-            package.PreLoad(force || true);
+            package.LoadSettings(force || true);
 
             if (!force && !package.Settings.IsEnabled)
                 return;

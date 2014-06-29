@@ -3,17 +3,33 @@ using System.Collections.Generic;
 using System.IO;
 using System.Reflection;
 using System.Windows;
-using System.Windows.Media;
-using System.Windows.Media.Imaging;
 using libns;
 using libns.Communication.IPC;
 
 namespace Newgen {
 
     /// <summary>
+    /// Enum TimeMode
+    /// </summary>
+    /// <remarks>...</remarks>
+    public enum TimeMode {
+
+        /// <summary>
+        /// The H12
+        /// </summary>
+        H12 = 12,
+
+        /// <summary>
+        /// The H24
+        /// </summary>
+        H24 = 24
+    }
+
+    /// <summary>
     /// Newgen's runtime shared data
     /// </summary>
     public static class Api {
+
         /// <summary>
         /// Occurs when [hub closing].
         /// </summary>
@@ -58,12 +74,24 @@ namespace Newgen {
         /// Message for asking user confirmation
         /// </summary>
         public const string MSG_QA_INSTALLWIDGET = "Do you want to install this package ?";
+
         /// <summary>
         /// The HTML package mark
         /// </summary>
         public static readonly string HTMLWidgetMetadataFile = "HTMLWidget.xml";
 
+        private const string ApiSettingsFile = "Api.settings";
+
+        /// <summary>
+        /// The root
+        /// </summary>
         private static string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+
+        /// <summary>
+        /// The settings
+        /// </summary>
+        private static ApiSettings settings;
+
         /// <summary>
         /// Gets the bg image.
         /// </summary>
@@ -101,9 +129,7 @@ namespace Newgen {
         /// <summary>
         /// Gets or sets the objects.
         /// </summary>
-        /// <value>
-        /// The objects.
-        /// </value>
+        /// <value>The objects.</value>
         public static Dictionary<string, object> Objects { get; set; }
 
         /// <summary>
@@ -115,12 +141,34 @@ namespace Newgen {
         /// Gets the root.
         /// </summary>
         public static string Root { get { return root; } }
+
+        /// <summary>
+        /// Gets the settings.
+        /// </summary>
+        /// <value>The settings.</value>
+        /// <exception cref="System.InvalidOperationException">Loading api settings failed.</exception>
+        /// <remarks>...</remarks>
+        public static ApiSettings Settings {
+            get {
+                if (settings == null) {
+                    try {
+                        settings = Path.Combine(CacheRoot, ApiSettingsFile).LoadJavascriptFromFile<ApiSettings>();
+                        if (settings == null)
+                            throw new InvalidOperationException("Loading api settings failed.");
+                    }
+                    catch { settings = new ApiSettings(); }
+                }
+                return settings;
+            }
+        }
+
         /// <summary>
         /// Gets the user image.
         /// </summary>
         public static string UserImage { get { return CacheRoot + "UserThumb.png"; } }
+
         /// <summary>
-        /// Initializes the <see cref="Api"/> class.
+        /// Initializes the <see cref="Api" /> class.
         /// </summary>
         static Api() {
             Logger = Logger.CreateFileLogger(LoggerName, Api.CacheRoot);
@@ -187,14 +235,27 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Init.
+        /// Called when [pre finalization].
         /// </summary>
-        public static void Init() {
+        /// <remarks>...</remarks>
+        public static void OnPreFinalization() {
+            try {
+                settings.SaveJavascriptToFile(Path.Combine(CacheRoot, ApiSettingsFile));
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+        }
+
+        /// <summary>
+        /// Called when [pre initialization].
+        /// </summary>
+        /// <remarks>...</remarks>
+        public static void OnPreInitialization() {
             if (!Directory.Exists(PackagesRoot))
                 Directory.CreateDirectory(PackagesRoot);
             if (!Directory.Exists(CacheRoot))
                 Directory.CreateDirectory(CacheRoot);
         }
+
         /// <summary>
         /// Removes the data.
         /// </summary>
@@ -204,6 +265,7 @@ namespace Newgen {
                 Objects.Remove(key);
             }
         }
+
         /// <summary>
         /// Gets the shared local data.
         /// </summary>
@@ -212,6 +274,7 @@ namespace Newgen {
         public static void SetSharedLocalData(string packagename, string data) {
             File.WriteAllText(PackagesRoot + packagename + "\\Shared.data", data);
         }
+
         /// <summary>
         /// Shows the error message.
         /// </summary>
@@ -239,11 +302,35 @@ namespace Newgen {
     }
 
     /// <summary>
+    /// Class ApiSettings.
+    /// </summary>
+    /// <remarks>...</remarks>
+    [Serializable]
+    public class ApiSettings {
+
+        /// <summary>
+        /// Gets or sets the time mode.
+        /// </summary>
+        /// <value>The time mode.</value>
+        /// <remarks>...</remarks>
+        public TimeMode TimeMode { get; set; }
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="ApiSettings"/> class.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public ApiSettings() {
+            TimeMode = TimeMode.H12;
+        }
+    }
+
+    /// <summary>
     /// Class EMessage.
     /// </summary>
     /// <remarks>...</remarks>
     [Serializable]
     public class EMessage {
+
         /// <summary>
         /// All key
         /// </summary>
@@ -258,6 +345,7 @@ namespace Newgen {
         /// The notifications key
         /// </summary>
         public const string NotificationKey = "[Notification]";
+
         /// <summary>
         /// The URL key
         /// </summary>
@@ -269,6 +357,7 @@ namespace Newgen {
         /// <value>The key.</value>
         /// <remarks>...</remarks>
         public string Key { get; set; }
+
         /// <summary>
         /// Gets or sets the value.
         /// </summary>

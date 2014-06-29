@@ -120,10 +120,10 @@
   <data name="Internet" xml:space="preserve">
     <value>Internet</value>
   </data>
-  <data name="RM_IE" xml:space="preserve">
+  <data name="TileContextMenuItemIE" xml:space="preserve">
     <value>Internet Explorer</value>
   </data>
-  <data name="RM_WK" xml:space="preserve">
-    <value>Webkit (Chrome)</value>
+  <data name="TileContextMenuItemCEF" xml:space="preserve">
+    <value>CEF (Chromium, Chrome, Webkit, ...)</value>
   </data>
 </root>

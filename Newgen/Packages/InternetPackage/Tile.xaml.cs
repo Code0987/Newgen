@@ -1,141 +1,123 @@
-﻿using System.IO;
-using System.Windows.Controls;
+﻿using System.Windows.Controls;
 using System.Windows.Media;
-using Newgen;
 
-namespace InternetPackage
-{
-    public partial class Tile : Border
-    {
+namespace InternetPackage {
+
+    /// <summary>
+    /// Class Tile.
+    /// </summary>
+    /// <remarks>...</remarks>
+    public partial class Tile : Border {
+
+        /// <summary>
+        /// The hub
+        /// </summary>
+        private InternetBrowserHub hub;
+
+        /// <summary>
+        /// The package
+        /// </summary>
         private Package package;
 
-        //let's add a hub. You can remove this variables if you don't want to make a hub for this widget
-        private object hub; //a window with hub
-
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Tile"/> class.
+        /// </summary>
+        /// <param name="package">The package.</param>
+        /// <remarks>...</remarks>
         public Tile(Package package) {
             this.package = package;
 
             InitializeComponent();
         }
 
-        public void Load()
-        {
-            //place here all initializations
+        /// <summary>
+        /// Loads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public void Load() {
             UpdateColor();
         }
 
-public void Navigate(string url)
-        {
-            hub = null;
-
-            if (hub != null)
-            {
-                if (hub.GetType() == typeof(IEInternetBrowser))
-                {
-                    IEInternetBrowser browser = (IEInternetBrowser)hub;
-                    if (browser.IsVisible) { browser.Activate(); }
-                    browser.Navigate(url);
-                }
-                else
-                {
-                    CefInternetBrowser browser = (CefInternetBrowser)hub;
-                    if (browser.IsVisible) { browser.Activate(); }
-                    browser.Navigate(url);
-                }
+        /// <summary>
+        /// Navigates the specified URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <remarks>...</remarks>
+        public void Navigate(string url) {
+            if (hub != null) {
+                if (hub.IsVisible)
+                    hub.Activate();
+                hub.Navigate(url);
             }
-            else
-            {
-                if (package.CustomizedSettings.RenderingMode == RenderingMode.IE)
-                {
-                    hub = new IEInternetBrowser(package, url);
-                    IEInternetBrowser browser = (IEInternetBrowser)hub;
-                    browser.AllowsTransparency = false;
-                    browser.ShowDialog();
-                    browser.Navigate(url);
-                }
-                else
-                {
-                    hub = new CefInternetBrowser(package, url);
-                    CefInternetBrowser browser = (CefInternetBrowser)hub;
-                    browser.AllowsTransparency = false;
-                    browser.ShowDialog();
-                    browser.Navigate(url);
-                }
+            else {
+                hub = new InternetBrowserHub(package, url);
+                hub.AllowsTransparency = false;
+                hub.ShowDialog();
+                hub.Navigate(url);
             }
         }
 
-public void Unload()
-        {
-            //release resources here
-        }
-        private static void CopyTo(DirectoryInfo source, string destDirectory)
-        {
-            try
-            {
-                DirectoryInfo target = new DirectoryInfo(destDirectory);
-                if (!target.Exists) target.Create();
-                foreach (FileInfo file in source.GetFiles())
-                {
-                    try
-                    {
-                        file.CopyTo(Path.Combine(target.FullName, file.Name), true);
-                    }
-                    catch { }
-                }
-                foreach (DirectoryInfo directory in source.GetDirectories())
-                {
-                    try
-                    {
-                        CopyTo(directory, Path.Combine(target.FullName, directory.Name));
-                    }
-                    catch { }
-                }
-            }
-            catch { }
+        /// <summary>
+        /// Unloads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public void Unload() {
         }
 
-private void CMRM_IE_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            try
-            {
-                package.CustomizedSettings.RenderingMode = RenderingMode.IE;
-                UpdateColor();
-            }
-            catch { }
-        }
-
-private void CMRM_WK_Click(object sender, System.Windows.RoutedEventArgs e)
-        {
-            try
-            {
+        /// <summary>
+        /// Handles the <see cref="E:MenuItemCEFClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMenuItemCEFClick(object sender, System.Windows.RoutedEventArgs e) {
+            try {
                 package.CustomizedSettings.RenderingMode = RenderingMode.CEF;
                 UpdateColor();
             }
-            catch { }
+            catch /* Eat */ { /* Tasty ? */ }
         }
 
-private void UpdateColor()
-{
-            try
-            {
-                if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
-                {
-                    this.CMRM_WK.Background = new SolidColorBrush(Colors.DarkGray);
-                    this.CMRM_IE.Background = new SolidColorBrush(Colors.Transparent);
-                }
+        /// <summary>
+        /// Handles the <see cref="E:MenuItemIEClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMenuItemIEClick(object sender, System.Windows.RoutedEventArgs e) {
+            try {
+                package.CustomizedSettings.RenderingMode = RenderingMode.IE;
+                UpdateColor();
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+        }
 
-                else
-                {
-                    this.CMRM_IE.Background = new SolidColorBrush(Colors.DarkGray);
-                    this.CMRM_WK.Background = new SolidColorBrush(Colors.Transparent);
+        /// <summary>
+        /// Users the control mouse left button up.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            Navigate(package.CustomizedSettings.LastSearchLocation);
+        }
+
+        /// <summary>
+        /// Updates the color.
+        /// </summary>
+        /// <remarks>...</remarks>
+        private void UpdateColor() {
+            try {
+                if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF) {
+                    this.MenuItemCEF.Background = new SolidColorBrush(Colors.DarkGray);
+                    this.MenuItemIE.Background = new SolidColorBrush(Colors.Transparent);
+                }
+                else {
+                    this.MenuItemIE.Background = new SolidColorBrush(Colors.DarkGray);
+                    this.MenuItemCEF.Background = new SolidColorBrush(Colors.Transparent);
                 }
             }
-            catch { }
-        }
-
-private void UserControlMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e)
-        {
-            Navigate(package.CustomizedSettings.LastSearchLocation);
+            catch /* Eat */ { /* Tasty ? */ }
         }
     }
 }

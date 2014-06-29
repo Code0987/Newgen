@@ -1,11 +1,4 @@
-﻿// ***********************************************************************
-// Assembly : Newgen Author : Code0987 Created : 05-14-2014
-//
-// <copyright file="Settings.cs" company="NS">Copyright (c) NS. All rights reserved.</copyright>
-// <summary>
-// </summary>
-
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
@@ -182,13 +175,6 @@ namespace Newgen {
         public int TileSpacing { get; set; }
 
         /// <summary>
-        /// Gets or sets the time mode.
-        /// </summary>
-        /// <value>The time mode.</value>
-        /// <remarks>...</remarks>
-        public int TimeMode { get; set; }
-
-        /// <summary>
         /// Gets or sets the color of the toolbar background.
         /// </summary>
         /// <value>The color of the toolbar background.</value>
@@ -266,7 +252,6 @@ namespace Newgen {
             MinTileWidth = 90.0;
             MinTileHeight = 90.0;
 
-            TimeMode = 1;
             LockScreenTime = -1;
             TileSpacing = 8;
             SlideShowTime = 30;
@@ -328,7 +313,6 @@ namespace Newgen {
 
                 StartText = Definitions.Text_DefaultTilesScreenTitle;
 
-                TimeMode = 1;
                 LockScreenTime = -1;
                 TileSpacing = 8;
                 SlideShowTime = 30;
