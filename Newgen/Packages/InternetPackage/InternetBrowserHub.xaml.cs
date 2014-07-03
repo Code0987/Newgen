@@ -1,15 +1,16 @@
 ﻿using System;
 using System.ComponentModel;
 using System.IO;
+using System.Net.NetworkInformation;
 using System.Threading;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Navigation;
 using CefSharp;
 using CefSharp.Wpf;
-using Newgen;
 using libns.Threading;
-using System.Windows.Controls;
-using System.Windows.Navigation;
+using Newgen;
 
 namespace InternetPackage {
 
@@ -19,14 +20,19 @@ namespace InternetPackage {
     public partial class InternetBrowserHub : HubWindow {
 
         /// <summary>
-        /// The package
-        /// </summary>
-        private Package package;
-
-        /// <summary>
         /// The browser
         /// </summary>
         private Browser browser;
+
+        /// <summary>
+        /// The home page cache
+        /// </summary>
+        private string homePageCache;
+
+        /// <summary>
+        /// The package
+        /// </summary>
+        private Package package;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="InternetBrowserHub"/> class.
@@ -44,7 +50,18 @@ namespace InternetPackage {
                 browser = new IEBasedBrowser(new WebBrowser());
             }
             else {
-                browser = new CefBasedBrowser(new ChromiumWebBrowser());
+                try {
+                    // CEF
+                    if (Cef.Initialize(new CefSharp.CefSettings {
+                        PackLoadingDisabled = true,
+                        LogFile = package.Settings.CreateAbsolutePathFor("CEF.log"),
+                        LogSeverity = LogSeverity.Verbose
+                    })) {
+                        // Init
+                        browser = new CefBasedBrowser(new ChromiumWebBrowser());
+                    }
+                }
+                catch /* Eat */ { browser = new IEBasedBrowser(new WebBrowser()); }
             }
 
             SearchPanel.Children.Add(browser.Provider as UIElement);
@@ -83,18 +100,37 @@ namespace InternetPackage {
 
                 // Do absolute search
                 if (uri != null && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)) {
-                    browser.Navigate(uri.OriginalString, "<p>Loading ...</p>");
+                    browser.Navigate(uri.OriginalString);
                 }
                 // Do relative search
                 else {
-                    browser.Navigate(string.Format(package.CustomizedSettings.RelativeSearchAddressFormat, URLBox.Text), "<p>Loading ...</p>");
+                    browser.Navigate(string.Format(package.CustomizedSettings.RelativeSearchAddressFormat, URLBox.Text));
                 }
 
                 LoadProgressBar.IsIndeterminate = true;
             }
             catch /* Eat */ {
-                Api.ShowErrorMessage("Error locating web resource ! The Address Url / Uri must be absolute !");
+                //Api.ShowErrorMessage("Error locating web resource ! The Address Url / Uri must be absolute !");
+                OnHomeButtonMouseLeftButtonUp(null, null);
             }
+        }
+        
+        /// <summary>
+        /// Gets the content of the home page.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        /// <remarks>...</remarks>
+        private string GetHomePageContent() {
+            if (string.IsNullOrWhiteSpace(homePageCache))
+                try {
+                    homePageCache = File.ReadAllText(package.Settings.CreateAbsolutePathFor("Resources/HomePage.html"));
+                    homePageCache = homePageCache
+                        .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
+                        .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))
+                        ;
+                }
+                catch /* Eat */ { homePageCache = string.Empty; }
+            return homePageCache;
         }
 
         /// <summary>
@@ -118,6 +154,7 @@ namespace InternetPackage {
         /// <param name="e">The e.</param>
         /// <remarks>...</remarks>
         private void OnBrowserError(object sender, dynamic e) {
+            OnHomeButtonMouseLeftButtonUp(null, null);
         }
 
         /// <summary>
@@ -130,10 +167,10 @@ namespace InternetPackage {
         private void OnBrowserLoadCompleted(object sender, Uri uri, dynamic e) {
             this.InvokeAsyncThreadSafe(() => {
                 try {
+                    LoadProgressBar.IsIndeterminate = false;
+
                     URLBox.Text = uri.OriginalString;
                     URLBox.CaretIndex = URLBox.Text.Length;
-
-                    LoadProgressBar.IsIndeterminate = false;
                 }
                 catch /* Eat */ {
                 }
@@ -148,7 +185,7 @@ namespace InternetPackage {
         /// <param name="e">The e.</param>
         /// <remarks>...</remarks>
         private void OnBrowserLoadError(object sender, Uri uri, dynamic e) {
-
+            OnHomeButtonMouseLeftButtonUp(null, null);
         }
 
         /// <summary>
@@ -158,15 +195,7 @@ namespace InternetPackage {
         /// <param name="e">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnBrowserProviderPreviewKeyDown(object sender, KeyEventArgs e) {
-            if (e.Key == Key.Escape) {
-                try {
-                    package.CustomizedSettings.LastSearchLocation = URLBox.Text;
-
-                    Close();
-                }
-                catch /* Eat */ {
-                }
-            }
+            OnPreviewKeyUp(sender, e);
         }
 
         /// <summary>
@@ -206,7 +235,7 @@ namespace InternetPackage {
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnHomeButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            Navigate(Settings.DefaultLocation);
+            browser.Navigate(Settings.DefaultLocation, GetHomePageContent());
         }
 
         /// <summary>
@@ -216,14 +245,19 @@ namespace InternetPackage {
         /// <param name="e">The <see cref="KeyEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnPreviewKeyUp(object sender, KeyEventArgs e) {
-            if (e.Key == Key.Escape) {
-                try {
-                    package.CustomizedSettings.LastSearchLocation = URLBox.Text;
+            switch (e.Key) {
+            case Key.Escape:
+                OnCloseButtonMouseDown(sender, null);
+                break;
 
-                    Close();
-                }
-                catch /* Eat */ {
-                }
+            case Key.BrowserBack:
+            case Key.OemBackTab:
+                OnBackButtonMouseLeftButtonUp(sender, null);
+                break;
+
+            case Key.BrowserForward:
+                OnFwButtonMouseLeftButtonUp(sender, null);
+                break;
             }
         }
 

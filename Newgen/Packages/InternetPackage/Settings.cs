@@ -1,25 +1,62 @@
-﻿namespace InternetPackage
-{
+﻿namespace InternetPackage {
+
+    /// <summary>
+    /// Enum RenderingMode
+    /// </summary>
+    /// <remarks>...</remarks>
     public enum RenderingMode {
-        IE,
-        CEF
+
+        /// <summary>
+        /// The ie
+        /// </summary>
+        IE = 0x0E,
+
+        /// <summary>
+        /// The cef
+        /// </summary>
+        CEF = 0xCEF
     }
 
-    public class Settings 
-    {
-        internal const string DefaultLocation = "about:credits";
+    /// <summary>
+    /// Class Settings.
+    /// </summary>
+    /// <remarks>...</remarks>
+    public class Settings {
 
-        public string RelativeSearchAddressFormat { get; set; }
+        /// <summary>
+        /// The default location
+        /// </summary>
+        internal const string DefaultLocation = "about:blank";
 
+        /// <summary>
+        /// Gets or sets the last search location.
+        /// </summary>
+        /// <value>The last search location.</value>
+        /// <remarks>...</remarks>
         public string LastSearchLocation { get; set; }
 
+        /// <summary>
+        /// Gets or sets the relative search address format.
+        /// </summary>
+        /// <value>The relative search address format.</value>
+        /// <remarks>...</remarks>
+        public string RelativeSearchAddressFormat { get; set; }
+
+        /// <summary>
+        /// Gets or sets the rendering mode.
+        /// </summary>
+        /// <value>The rendering mode.</value>
+        /// <remarks>...</remarks>
         public RenderingMode RenderingMode { get; set; }
 
-        public Settings()
-        {
+        /// <summary>
+        /// Initializes a new instance of the <see cref="Settings"/> class.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public Settings() {
             RelativeSearchAddressFormat = "http://www.google.com/search?q={0}";
-            LastSearchLocation = "http://www.bing.com";
-            RenderingMode = RenderingMode.CEF;
+            LastSearchLocation = Settings.DefaultLocation;
+            RenderingMode = RenderingMode.IE;
         }
     }
 }

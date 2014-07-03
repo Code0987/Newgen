@@ -58,15 +58,6 @@ namespace InternetPackage {
                 tile = new Tile(this);
                 tile.Load();
             }));
-
-            // CEF
-            if (Cef.Initialize(new CefSharp.CefSettings {
-                PackLoadingDisabled = true,
-                LogFile = Settings.CreateAbsolutePathFor("CEF.log"),
-                LogSeverity = LogSeverity.Verbose
-            })) {
-                // Init
-            }
         }
 
         public override void OnMessageReceived(EMessage message) {

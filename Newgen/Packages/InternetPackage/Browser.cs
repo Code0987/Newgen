@@ -144,15 +144,32 @@ namespace InternetPackage {
         }
     }
 
+    /// <summary>
+    /// Class CefBasedBrowser.
+    /// </summary>
+    /// <remarks>...</remarks>
     public class CefBasedBrowser : Browser {
+        /// <summary>
+        /// The provider
+        /// </summary>
         private ChromiumWebBrowser provider;
 
+        /// <summary>
+        /// Gets or sets the provider.
+        /// </summary>
+        /// <value>The provider.</value>
+        /// <remarks>...</remarks>
         public override object Provider {
             get {
                 return provider;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CefBasedBrowser"/> class.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <remarks>...</remarks>
         public CefBasedBrowser(ChromiumWebBrowser provider) {
             this.provider = provider;
 
@@ -161,24 +178,46 @@ namespace InternetPackage {
             provider.LoadError += OnProviderLoadError;
         }
 
+        /// <summary>
+        /// Finalizes an instance of the <see cref="CefBasedBrowser"/> class.
+        /// </summary>
+        /// <remarks>...</remarks>
         ~CefBasedBrowser() {
             provider.ConsoleMessage -= OnProviderConsoleMessage;
             provider.FrameLoadEnd -= OnProviderFrameLoadEnd;
             provider.LoadError -= OnProviderLoadError;
         }
 
+        /// <summary>
+        /// Backs this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Back() {
             provider.ReloadCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Clear() {
             Navigate("about:blank");
         }
 
+        /// <summary>
+        /// Forwards this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Forward() {
             provider.ForwardCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Navigates the specified URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="html">The HTML.</param>
+        /// <remarks>...</remarks>
         public override void Navigate(string url, string html = "") {
             if (string.IsNullOrWhiteSpace(html))
                 provider.Load(url);
@@ -186,25 +225,55 @@ namespace InternetPackage {
                 provider.LoadHtml(html, url);
         }
 
+        /// <summary>
+        /// Reloads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Reload() {
             provider.ReloadCommand.Execute(null);
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderConsoleMessage" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="ConsoleMessageEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderConsoleMessage(object sender, ConsoleMessageEventArgs e) {
             OnError(sender, e);
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderFrameLoadEnd" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="url">The <see cref="FrameLoadEndEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderFrameLoadEnd(object sender, FrameLoadEndEventArgs url) {
             OnLoadCompleted(sender, new Uri(url.Url), url);
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderLoadError" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="LoadErrorEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderLoadError(object sender, LoadErrorEventArgs e) {
             OnLoadError(sender, new Uri(e.FailedUrl), e);
         }
     }
 
+    /// <summary>
+    /// Class IEBasedBrowser.
+    /// </summary>
+    /// <remarks>...</remarks>
     public class IEBasedBrowser : Browser {
 
+        /// <summary>
+        /// Interface IOleServiceProvider
+        /// </summary>
+        /// <remarks>...</remarks>
         [ComImport, Guid("6D5140C1-7436-11CE-8034-00AA006009FA"), InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
         private interface IOleServiceProvider {
 
@@ -212,14 +281,27 @@ namespace InternetPackage {
             int QueryService([In] ref Guid guidService, [In] ref Guid riid, [MarshalAs(UnmanagedType.IDispatch)] out object ppvObject);
         }
 
+        /// <summary>
+        /// The provider
+        /// </summary>
         private WebBrowser provider;
 
+        /// <summary>
+        /// Gets or sets the provider.
+        /// </summary>
+        /// <value>The provider.</value>
+        /// <remarks>...</remarks>
         public override object Provider {
             get {
                 return provider;
             }
         }
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="IEBasedBrowser"/> class.
+        /// </summary>
+        /// <param name="provider">The provider.</param>
+        /// <remarks>...</remarks>
         public IEBasedBrowser(WebBrowser provider) {
             this.provider = provider;
 
@@ -228,6 +310,13 @@ namespace InternetPackage {
             provider.Navigating += OnProviderNavigating;
         }
 
+        /// <summary>
+        /// Sets the silent.
+        /// </summary>
+        /// <param name="browser">The browser.</param>
+        /// <param name="silent">if set to <c>true</c> [silent].</param>
+        /// <exception cref="System.ArgumentNullException">browser</exception>
+        /// <remarks>...</remarks>
         public static void SetSilent(WebBrowser browser, bool silent) {
             if (browser == null)
                 throw new ArgumentNullException("browser");
@@ -246,30 +335,67 @@ namespace InternetPackage {
             }
         }
 
+        /// <summary>
+        /// Backs this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Back() {
             provider.GoBack();
         }
 
+        /// <summary>
+        /// Clears this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Clear() {
             Navigate("about:blank");
         }
 
+        /// <summary>
+        /// Forwards this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Forward() {
             provider.GoForward();
         }
 
+        /// <summary>
+        /// Navigates the specified URL.
+        /// </summary>
+        /// <param name="url">The URL.</param>
+        /// <param name="html">The HTML.</param>
+        /// <remarks>...</remarks>
         public override void Navigate(string url, string html = "") {
-            provider.Navigate(url);
+            if (string.IsNullOrWhiteSpace(html))
+                provider.Navigate(url);
+            else
+                provider.NavigateToString(html);
         }
 
+        /// <summary>
+        /// Reloads this instance.
+        /// </summary>
+        /// <remarks>...</remarks>
         public override void Reload() {
             provider.Refresh();
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderLoadCompleted" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Navigation.NavigationEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderLoadCompleted(object sender, System.Windows.Navigation.NavigationEventArgs e) {
-            OnLoadCompleted(sender, e.Uri , e);
+            OnLoadCompleted(sender, e.Uri, e);
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderNavigated" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Navigation.NavigationEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderNavigated(object sender, System.Windows.Navigation.NavigationEventArgs e) {
             try {
                 SetSilent(Provider as WebBrowser, true);
@@ -279,6 +405,12 @@ namespace InternetPackage {
             }
         }
 
+        /// <summary>
+        /// Handles the <see cref="E:ProviderNavigating" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.Navigation.NavigatingCancelEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
         private void OnProviderNavigating(object sender, System.Windows.Navigation.NavigatingCancelEventArgs e) {
             OnNavigating(sender, e.Uri, e);
         }
