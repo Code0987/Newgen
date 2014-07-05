@@ -105,7 +105,7 @@ namespace Newgen.Packages {
         public void Load() {
             FocusManager.SetIsFocusScope(this, true);
 
-            Content = package.Tile;
+            LayoutRoot.Child = package.Tile;
 
             // Math
             AdjustDimensions();
@@ -181,7 +181,7 @@ namespace Newgen.Packages {
         /// <remarks>...</remarks>
         public void Unload() {
             PackageManager.Current.Unload(package.Metadata.Id);
-            Content = null;
+            LayoutRoot.Child = null;
         }
 
         /// <summary>

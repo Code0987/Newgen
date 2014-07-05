@@ -52,11 +52,13 @@ namespace InternetPackage {
             else {
                 try {
                     // CEF
-                    if (Cef.Initialize(new CefSharp.CefSettings {
+                    var cefSettings = new CefSharp.CefSettings {
                         PackLoadingDisabled = true,
                         LogFile = package.Settings.CreateAbsolutePathFor("CEF.log"),
                         LogSeverity = LogSeverity.Verbose
-                    })) {
+                    };
+                    cefSettings.CefCommandLineArgs.Add("no-proxy-server", "1");
+                    if (Cef.Initialize(cefSettings)) {
                         // Init
                         browser = new CefBasedBrowser(new ChromiumWebBrowser());
                     }

@@ -31,12 +31,12 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="Auto" />
             </Grid.ColumnDefinitions>
-            <Image Name="BackButton"
+            <Image Name="HomeButton"
                    Grid.Column="0"
                    Width="30"
                    Margin="5"
-                   MouseLeftButtonUp="OnBackButtonMouseLeftButtonUp"
-                   Source="/InternetPackage;component/Resources/back.png" />
+                   MouseLeftButtonUp="OnHomeButtonMouseLeftButtonUp"
+                   Source="/InternetPackage;component/Resources/home.png" />
             <ProgressBar x:Name="LoadProgressBar"
                          Grid.Column="1"
                          Height="7"
@@ -63,12 +63,12 @@
                    Margin="5"
                    MouseLeftButtonUp="OnRefButtonMouseLeftButtonUp"
                    Source="/InternetPackage;component/Resources/refresh.png" />
-            <Image Name="HomeButton"
+            <Image Name="BackButton"
                    Grid.Column="3"
                    Width="30"
                    Margin="5"
-                   MouseLeftButtonUp="OnHomeButtonMouseLeftButtonUp"
-                   Source="/InternetPackage;component/Resources/home.png" />
+                   MouseLeftButtonUp="OnBackButtonMouseLeftButtonUp"
+                   Source="/InternetPackage;component/Resources/back.png" />
             <Image Name="CloseButton"
                    Grid.Column="4"
                    Width="30"

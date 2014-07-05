@@ -51,5 +51,9 @@
             <ScaleTransform x:Name="Scale" ScaleX="1" ScaleY="{Binding ElementName=Scale, Path=ScaleX, FallbackValue=1}" />
             <TranslateTransform x:Name="Translate" />
         </TransformGroup>
-    </Control.RenderTransform>    
+    </Control.RenderTransform>
+        <Border BorderThickness="10" Margin="-1" BorderBrush="Transparent">
+        <Border x:Name="LayoutRoot" Margin="-9" BorderThickness="0" BorderBrush="Transparent">
+        </Border>
+    </Border>
 </ContentControl>
