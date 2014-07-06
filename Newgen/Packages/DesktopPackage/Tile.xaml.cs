@@ -8,8 +8,7 @@ using libns.Threading;
 using libns.Media.Imaging;
 using System.Windows;
 
-namespace DesktopPackage
-{
+namespace DesktopPackage {
     /// <summary>
     /// Interaction logic for Tile.xaml
     /// </summary>
@@ -63,8 +62,7 @@ namespace DesktopPackage
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnUserControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
-        {
+        private void OnUserControlMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                 foreach (var window in Application.Current.Windows) {
                     ((Window)window).Hide();
@@ -75,16 +73,12 @@ namespace DesktopPackage
         /// Updates the preview image.
         /// </summary>
         /// <remarks>...</remarks>
-        private void UpdatePreviewImage()
-        {
-            try {
-
-                if (!File.Exists(wallpaperPath))
-                    return;
-
+        private void UpdatePreviewImage() {
+            if (!File.Exists(wallpaperPath))
+                return;
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => {
                 PreviewImage.Source = wallpaperPath.ToBitmapSource();
-            }
-            catch /* Eat */ { /* Tasty ? */ }
+            }));
         }
     }
 }

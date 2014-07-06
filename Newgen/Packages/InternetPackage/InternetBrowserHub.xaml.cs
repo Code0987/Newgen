@@ -44,8 +44,6 @@ namespace InternetPackage {
             : base() {
             this.package = package;
 
-            InitializeComponent();
-
             if (package.CustomizedSettings.RenderingMode == RenderingMode.IE) {
                 browser = new IEBasedBrowser(new WebBrowser());
             }
@@ -55,7 +53,7 @@ namespace InternetPackage {
                     var cefSettings = new CefSharp.CefSettings {
                         PackLoadingDisabled = true,
                         LogFile = package.Settings.CreateAbsolutePathFor("CEF.log"),
-                        LogSeverity = LogSeverity.Verbose
+                        LogSeverity = LogSeverity.Warning
                     };
                     cefSettings.CefCommandLineArgs.Add("no-proxy-server", "1");
                     if (Cef.Initialize(cefSettings)) {
@@ -65,7 +63,9 @@ namespace InternetPackage {
                 }
                 catch /* Eat */ { browser = new IEBasedBrowser(new WebBrowser()); }
             }
-
+            
+            InitializeComponent();
+            
             SearchPanel.Children.Add(browser.Provider as UIElement);
 
             // Configure it
