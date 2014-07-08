@@ -7,6 +7,7 @@ using libns;
 using libns.Threading;
 using libns.Media.Imaging;
 using System.Windows;
+using System.Windows.Media;
 
 namespace DesktopPackage {
     /// <summary>
@@ -17,11 +18,6 @@ namespace DesktopPackage {
         /// The package
         /// </summary>
         private Package package;
-
-        /// <summary>
-        /// The wallpaper path
-        /// </summary>
-        private string wallpaperPath;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="Tile"/> class.
@@ -38,15 +34,8 @@ namespace DesktopPackage {
         /// </summary>
         /// <remarks>...</remarks>
         public void Load() {
-            try {
-                var wpReg = Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop", false);
-                wallpaperPath = wpReg.GetValue("WallPaper").ToString();
-                wpReg.Close();
-            }
-            catch /* Eat */ { /* Tasty ? */ }
-
             UpdatePreviewImage();
-            ThreadingExtensions.RunFor(new Action(UpdatePreviewImage), -1, 2000);
+            ThreadingExtensions.RunFor(new Action(UpdatePreviewImage), -1, 15000);
         }
 
         /// <summary>
@@ -74,11 +63,23 @@ namespace DesktopPackage {
         /// </summary>
         /// <remarks>...</remarks>
         private void UpdatePreviewImage() {
-            if (!File.Exists(wallpaperPath))
-                return;
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                PreviewImage.Source = wallpaperPath.ToBitmapSource();
-            }));
+            var wallpaperPath = string.Empty;
+            try {
+                var wpReg = Registry.CurrentUser.OpenSubKey("Control Panel\\Desktop", false);
+                wallpaperPath = wpReg.GetValue("WallPaper").ToString();
+                wpReg.Close();
+                if (!File.Exists(wallpaperPath))
+                    return;
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+            if (Application.Current != null && !string.IsNullOrWhiteSpace(wallpaperPath))
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                    Background = new ImageBrush(wallpaperPath.ToBitmapSource()) {
+                        AlignmentX = AlignmentX.Center,
+                        AlignmentY = AlignmentY.Center,
+                        Stretch = Stretch.UniformToFill
+                    };
+                }));
         }
     }
 }

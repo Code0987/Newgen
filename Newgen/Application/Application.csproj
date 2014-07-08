@@ -174,7 +174,7 @@
     <Compile Include="Core\Screen.xaml.cs">
       <DependentUpon>Screen.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\SettingsHub.xaml.cs">
+    <Compile Include="Core\Settings\SettingsHub.xaml.cs">
       <DependentUpon>SettingsHub.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Bars\StartBar.xaml.cs">
@@ -212,7 +212,7 @@
     <Compile Include="Core\InternalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Core\PackageServer.cs" />
-    <Compile Include="Core\Settings.cs" />
+    <Compile Include="Core\Settings\Settings.cs" />
     <Compile Include="Resources\Definitions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -412,7 +412,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Core\SettingsHub.xaml">
+    <Page Include="Core\Settings\SettingsHub.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

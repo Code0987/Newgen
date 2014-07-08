@@ -11,8 +11,4 @@
         MouseLeftButtonUp="OnUserControlMouseLeftButtonUp"
         d:DesignHeight="90"
         d:DesignWidth="270"
-        mc:Ignorable="d">
-    <Grid>
-        <Image Name="PreviewImage" Stretch="Fill" />
-    </Grid>
-</Border>
+        mc:Ignorable="d" />
