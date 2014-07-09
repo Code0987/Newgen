@@ -429,4 +429,13 @@
   <data name="ResetTileColor" xml:space="preserve">
     <value>Reset tile color (Restart needed !)</value>
   </data>
+  <data name="TileContextMenuItemCEF" xml:space="preserve">
+    <value>CEF (Chromium, Chrome, Webkit, ...)</value>
+  </data>
+  <data name="TileContextMenuItemIE" xml:space="preserve">
+    <value>Internet Explorer</value>
+  </data>
+  <data name="Internet" xml:space="preserve">
+    <value>Internet</value>
+  </data>
 </root>

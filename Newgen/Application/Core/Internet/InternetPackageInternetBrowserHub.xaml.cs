@@ -12,12 +12,12 @@ using CefSharp.Wpf;
 using libns.Threading;
 using Newgen;
 
-namespace InternetPackage {
+namespace Newgen.Packages.Internet {
 
     /// <summary>
-    /// Interaction logic for InternetBrowserHub.xaml
+    /// Interaction logic for InternetPackageInternetBrowserHub.xaml
     /// </summary>
-    public partial class InternetBrowserHub : HubWindow {
+    public partial class InternetPackageInternetBrowserHub : HubWindow {
 
         /// <summary>
         /// The browser
@@ -32,40 +32,32 @@ namespace InternetPackage {
         /// <summary>
         /// The package
         /// </summary>
-        private Package package;
+        private InternetPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="InternetBrowserHub"/> class.
+        /// Initializes a new instance of the <see cref="InternetPackageInternetBrowserHub"/> class.
         /// </summary>
         /// <param name="package">The package.</param>
         /// <param name="address">The address.</param>
         /// <remarks>...</remarks>
-        public InternetBrowserHub(Package package, string address)
+        public InternetPackageInternetBrowserHub(InternetPackage package, string address)
             : base() {
             this.package = package;
 
-            if (package.CustomizedSettings.RenderingMode == RenderingMode.IE) {
+            InitializeComponent();
+
+            if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
+                try {
+                    CefBasedBrowser.CefStart();
+                    browser = new CefBasedBrowser(new WebView());
+                }
+                catch /* Eat */ {
+                    browser = new IEBasedBrowser(new WebBrowser());
+                }
+            else {
                 browser = new IEBasedBrowser(new WebBrowser());
             }
-            else {
-                try {
-                    // CEF
-                    var cefSettings = new CefSharp.CefSettings {
-                        PackLoadingDisabled = true,
-                        LogFile = package.Settings.CreateAbsolutePathFor("CEF.log"),
-                        LogSeverity = LogSeverity.Warning
-                    };
-                    cefSettings.CefCommandLineArgs.Add("no-proxy-server", "1");
-                    if (Cef.Initialize(cefSettings)) {
-                        // Init
-                        browser = new CefBasedBrowser(new ChromiumWebBrowser());
-                    }
-                }
-                catch /* Eat */ { browser = new IEBasedBrowser(new WebBrowser()); }
-            }
-            
-            InitializeComponent();
-            
+
             SearchPanel.Children.Add(browser.Provider as UIElement);
 
             // Configure it
@@ -79,10 +71,13 @@ namespace InternetPackage {
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="InternetBrowserHub"/> class.
+        /// Finalizes an instance of the <see cref="InternetPackageInternetBrowserHub"/> class.
         /// </summary>
         /// <remarks>...</remarks>
-        ~InternetBrowserHub() {
+        ~InternetPackageInternetBrowserHub() {
+            if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
+                CefBasedBrowser.CefStop();
+
             (browser.Provider as UIElement).PreviewKeyDown -= OnBrowserProviderPreviewKeyDown;
 
             browser.Error -= OnBrowserError;
@@ -116,7 +111,7 @@ namespace InternetPackage {
                 OnHomeButtonMouseLeftButtonUp(null, null);
             }
         }
-        
+
         /// <summary>
         /// Gets the content of the home page.
         /// </summary>
@@ -125,7 +120,7 @@ namespace InternetPackage {
         private string GetHomePageContent() {
             if (string.IsNullOrWhiteSpace(homePageCache))
                 try {
-                    homePageCache = File.ReadAllText(package.Settings.CreateAbsolutePathFor("Resources/HomePage.html"));
+                    homePageCache = File.ReadAllText("Resources/HomeApp/HomePage.html");
                     homePageCache = homePageCache
                         .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
                         .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))
@@ -237,7 +232,7 @@ namespace InternetPackage {
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnHomeButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            browser.Navigate(Settings.DefaultLocation, GetHomePageContent());
+            browser.Navigate(InternetPackageSettings.DefaultLocation, GetHomePageContent());
         }
 
         /// <summary>

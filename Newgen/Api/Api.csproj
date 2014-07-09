@@ -69,85 +69,85 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Collection\DictionaryExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Collection\DictionaryExtensions.cs">
       <Link>References\DictionaryExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Communication\IPC\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs">
+    <Compile Include="..\..\..\libns\libns.net\Communication\IPC\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs">
       <Link>References\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\EventExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Core\EventExtensions.cs">
       <Link>References\EventExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\NotifyPropertyExtension.cs">
+    <Compile Include="..\..\..\libns\libns.net\Core\NotifyPropertyExtension.cs">
       <Link>References\NotifyPropertyExtension.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\StringExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Core\StringExtensions.cs">
       <Link>References\StringExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Core\TypeExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Core\TypeExtensions.cs">
       <Link>References\TypeExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Exception\Logger.cs">
+    <Compile Include="..\..\..\libns\libns.net\Exception\Logger.cs">
       <Link>References\Logger.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\DataStoreHelper.cs">
+    <Compile Include="..\..\..\libns\libns.net\IO\DataStoreHelper.cs">
       <Link>References\DataStoreHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\SerializationExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\IO\SerializationExtensions.cs">
       <Link>References\SerializationExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\StorageExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\IO\StorageExtensions.cs">
       <Link>References\StorageExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\IO\StreamExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\IO\StreamExtensions.cs">
       <Link>References\StreamExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Language\Parsers\ArgumentsParser.cs">
+    <Compile Include="..\..\..\libns\libns.net\Language\Parsers\ArgumentsParser.cs">
       <Link>References\ArgumentsParser.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Animation\AnimationExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Media\Animation\AnimationExtensions.cs">
       <Link>References\AnimationExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Imaging\ImagingBase.cs">
+    <Compile Include="..\..\..\libns\libns.net\Media\Imaging\ImagingBase.cs">
       <Link>References\ImagingBase.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Media\Imaging\ImagingExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Media\Imaging\ImagingExtensions.cs">
       <Link>References\ImagingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Native\WinAPI.cs">
+    <Compile Include="..\..\..\libns\libns.net\Native\WinAPI.cs">
       <Link>References\WinAPI.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Native\WinAPIManagedHelper.cs">
+    <Compile Include="..\..\..\libns\libns.net\Native\WinAPIManagedHelper.cs">
       <Link>References\WinAPIManagedHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\DispatcherThreading.cs">
+    <Compile Include="..\..\..\libns\libns.net\Threading\DispatcherThreading.cs">
       <Link>References\DispatcherThreading.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\SingleInstanceHelper.cs">
+    <Compile Include="..\..\..\libns\libns.net\Threading\SingleInstanceHelper.cs">
       <Link>References\SingleInstanceHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\Singleton.cs">
+    <Compile Include="..\..\..\libns\libns.net\Threading\Singleton.cs">
       <Link>References\Singleton.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Threading\ThreadingExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Threading\ThreadingExtensions.cs">
       <Link>References\ThreadingExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ApplicationExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\ApplicationExtensions.cs">
       <Link>References\ApplicationExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\ControlsExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\ControlsExtensions.cs">
       <Link>References\ControlsExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\MarkupExtension.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\MarkupExtension.cs">
       <Link>References\MarkupExtension.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\NotificationExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\NotificationExtensions.cs">
       <Link>References\NotificationExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Web\DownloadExtensions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Web\DownloadExtensions.cs">
       <Link>References\DownloadExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Web\FeedsAggregator.cs">
+    <Compile Include="..\..\..\libns\libns.net\Web\FeedsAggregator.cs">
       <Link>References\FeedsAggregator.cs</Link>
     </Compile>
     <Compile Include="Core\AnimationType.cs" />

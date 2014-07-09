@@ -340,6 +340,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Internet.
+        /// </summary>
+        public static string Internet {
+            get {
+                return ResourceManager.GetString("Internet", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Settings.
         /// </summary>
         public static string Item {
@@ -813,6 +822,24 @@ namespace Newgen.Resources {
         public static string TileContextMenuDisableItem {
             get {
                 return ResourceManager.GetString("TileContextMenuDisableItem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CEF (Chromium, Chrome, Webkit, ...).
+        /// </summary>
+        public static string TileContextMenuItemCEF {
+            get {
+                return ResourceManager.GetString("TileContextMenuItemCEF", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Internet Explorer.
+        /// </summary>
+        public static string TileContextMenuItemIE {
+            get {
+                return ResourceManager.GetString("TileContextMenuItemIE", resourceCulture);
             }
         }
         

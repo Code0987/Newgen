@@ -228,3 +228,13 @@ FakesAssemblies/
 # Repo specific
 *.settings
 *.data
+
+# Workspace files are user-specific
+*.sublime-workspace
+
+# Project files should be checked into the repository, unless a significant
+# Proportion of contributors will probably not be using SublimeText
+# *.sublime-project
+
+# Sftp configuration file
+sftp-config.json

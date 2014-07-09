@@ -254,6 +254,12 @@ namespace Newgen.Packages {
             }
             catch { }
 
+            // Scan Internet
+            try {
+                return Internet.InternetPackage.CreateFrom(location);
+            }
+            catch { }
+
             // Scan notifications
             try {
                 return Notifications.NotificationsPackage.CreateFrom(location);
@@ -458,6 +464,8 @@ namespace Newgen.Packages {
                     }
 
                     // Defaults
+                    if (!IsInitialized(Internet.InternetPackage.PackageId))
+                        Load(Internet.InternetPackage.Create());
                     if (!IsInitialized(Notifications.NotificationsPackage.PackageId))
                         Load(Notifications.NotificationsPackage.Create());
 

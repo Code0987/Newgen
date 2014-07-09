@@ -11,7 +11,7 @@ using CefSharp;
 using CefSharp.Wpf;
 using libns;
 
-namespace InternetPackage {
+namespace Newgen {
 
     /// <summary>
     /// Class Browser.
@@ -24,6 +24,7 @@ namespace InternetPackage {
         /// </summary>
         /// <remarks>...</remarks>
         public event Action<object, dynamic> Error;
+
         /// <summary>
         /// Occurs when [load completed].
         /// </summary>
@@ -97,6 +98,7 @@ namespace InternetPackage {
             if (Error != null)
                 Error(sender, e);
         }
+
         /// <summary>
         /// Handles the <see cref="E:LoadCompleted" /> event.
         /// </summary>
@@ -120,6 +122,7 @@ namespace InternetPackage {
             if (LoadError != null)
                 LoadError(sender, uri, e);
         }
+
         /// <summary>
         /// Handles the <see cref="E:Navigated" /> event.
         /// </summary>
@@ -131,6 +134,7 @@ namespace InternetPackage {
             if (Navigated != null)
                 Navigated(sender, uri, e);
         }
+
         /// <summary>
         /// Handles the <see cref="E:Navigating" /> event.
         /// </summary>
@@ -149,10 +153,11 @@ namespace InternetPackage {
     /// </summary>
     /// <remarks>...</remarks>
     public class CefBasedBrowser : Browser {
+
         /// <summary>
         /// The provider
         /// </summary>
-        private ChromiumWebBrowser provider;
+        private WebView provider;
 
         /// <summary>
         /// Gets or sets the provider.
@@ -170,11 +175,11 @@ namespace InternetPackage {
         /// </summary>
         /// <param name="provider">The provider.</param>
         /// <remarks>...</remarks>
-        public CefBasedBrowser(ChromiumWebBrowser provider) {
+        public CefBasedBrowser(WebView provider) {
             this.provider = provider;
 
             provider.ConsoleMessage += OnProviderConsoleMessage;
-            provider.FrameLoadEnd += OnProviderFrameLoadEnd;
+            provider.LoadCompleted += OnProviderLoadCompleted;
             provider.LoadError += OnProviderLoadError;
         }
 
@@ -184,10 +189,33 @@ namespace InternetPackage {
         /// <remarks>...</remarks>
         ~CefBasedBrowser() {
             provider.ConsoleMessage -= OnProviderConsoleMessage;
-            provider.FrameLoadEnd -= OnProviderFrameLoadEnd;
+            provider.LoadCompleted -= OnProviderLoadCompleted;
             provider.LoadError -= OnProviderLoadError;
         }
 
+        /// <summary>
+        /// Cefs the initialize.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public static void CefStart() {
+            // Load CEF
+            var settings = new CefSettings() {
+                LogFile = "CEF.log",
+                LogSeverity = LogSeverity.Verbose,
+                PackLoadingDisabled = true
+            };
+            if (!Cef.Initialize(settings)) {
+                Api.Logger.LogWarning("Loading CEF falied !");
+            }
+        }
+
+        /// <summary>
+        /// Cefs the stop.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public static void CefStop() {
+            Cef.Shutdown();
+        }
         /// <summary>
         /// Backs this instance.
         /// </summary>
@@ -249,7 +277,7 @@ namespace InternetPackage {
         /// <param name="sender">The sender.</param>
         /// <param name="url">The <see cref="FrameLoadEndEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnProviderFrameLoadEnd(object sender, FrameLoadEndEventArgs url) {
+        private void OnProviderLoadCompleted(object sender, LoadCompletedEventArgs url) {
             OnLoadCompleted(sender, new Uri(url.Url), url);
         }
 
@@ -259,8 +287,8 @@ namespace InternetPackage {
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="LoadErrorEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnProviderLoadError(object sender, LoadErrorEventArgs e) {
-            OnLoadError(sender, new Uri(e.FailedUrl), e);
+        private void OnProviderLoadError(string failedUrl, CefErrorCode errorCode, string errorText) {
+            OnLoadError(null, new Uri(failedUrl), errorText);
         }
     }
 

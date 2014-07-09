@@ -1,30 +1,34 @@
-﻿using System.Windows.Controls;
+﻿using System;
+using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Media;
+using CefSharp;
+using CefSharp.Wpf;
 
-namespace InternetPackage {
+namespace Newgen.Packages.Internet {
 
     /// <summary>
-    /// Class Tile.
+    /// Class InternetPackageTile.
     /// </summary>
     /// <remarks>...</remarks>
-    public partial class Tile : Border {
-
+    public partial class InternetPackageTile : Border {
+        
         /// <summary>
         /// The hub
         /// </summary>
-        private InternetBrowserHub hub;
+        private InternetPackageInternetBrowserHub hub;
 
         /// <summary>
         /// The package
         /// </summary>
-        private Package package;
+        private InternetPackage package;
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="Tile"/> class.
+        /// Initializes a new instance of the <see cref="InternetPackageTile"/> class.
         /// </summary>
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
-        public Tile(Package package) {
+        public InternetPackageTile(InternetPackage package) {
             this.package = package;
 
             InitializeComponent();
@@ -44,17 +48,19 @@ namespace InternetPackage {
         /// <param name="url">The URL.</param>
         /// <remarks>...</remarks>
         public void Navigate(string url) {
-            if (hub != null) {
-                if (hub.IsVisible)
-                    hub.Activate();
-                hub.Navigate(url);
-            }
-            else {
-                hub = new InternetBrowserHub(package, url);
-                hub.AllowsTransparency = false;
-                hub.ShowDialog();
-                hub.Navigate(url);
-            }
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                if (hub != null) {
+                    if (hub.IsVisible)
+                        hub.Activate();
+                    hub.Navigate(url);
+                }
+                else {
+                    hub = new InternetPackageInternetBrowserHub(package, url);
+                    hub.AllowsTransparency = false;
+                    hub.ShowDialog();
+                    hub.Navigate(url);
+                }
+            }));
         }
 
         /// <summary>

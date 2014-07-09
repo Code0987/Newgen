@@ -8,6 +8,7 @@ using System.Threading;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using CefSharp;
 using libns;
 using libns.Applied;
 using libns.Language;
@@ -33,7 +34,7 @@ namespace Newgen {
         /// The object keyboard process
         /// </summary>
         private WinAPI.HookProc objKeyboardProcess;
-        
+
 #if !DEBUG
 
         /// <summary>

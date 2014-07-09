@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-unofficial\build\CefSharp.Wpf.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-unofficial\build\CefSharp.Wpf.props')" />
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.props')" />
+  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" />
+  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,7 +26,7 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
-    <NuGetPackageImportStamp>174a1232</NuGetPackageImportStamp>
+    <NuGetPackageImportStamp>72d1b3be</NuGetPackageImportStamp>
     <PlatformTarget>x86</PlatformTarget>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
@@ -107,28 +107,28 @@
     <Compile Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Newgen.Api%29.cs">
       <Link>References\WebShared%28Newgen.Api%29.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Applied\GoogleAnalyticsTracker.cs">
+    <Compile Include="..\..\..\libns\libns.net\Applied\GoogleAnalyticsTracker.cs">
       <Link>References\GA\GoogleAnalyticsTracker.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Licensing\ClientManager.cs">
+    <Compile Include="..\..\..\libns\libns.net\Licensing\ClientManager.cs">
       <Link>References\ClientManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Licensing\Exceptions.cs">
+    <Compile Include="..\..\..\libns\libns.net\Licensing\Exceptions.cs">
       <Link>References\Exceptions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Licensing\License.cs">
+    <Compile Include="..\..\..\libns\libns.net\Licensing\License.cs">
       <Link>References\License.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Licensing\LicenseManager.cs">
+    <Compile Include="..\..\..\libns\libns.net\Licensing\LicenseManager.cs">
       <Link>References\LicenseManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\Licensing\Proof.cs">
+    <Compile Include="..\..\..\libns\libns.net\Licensing\Proof.cs">
       <Link>References\Proof.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\DWMThumbnailControl.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\DWMThumbnailControl.cs">
       <Link>References\DWMThumbnailControl.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\libns.net\UI\LicenseControl.cs">
+    <Compile Include="..\..\..\libns\libns.net\UI\LicenseControl.cs">
       <Link>References\LicenseControl.cs</Link>
     </Compile>
     <Compile Include="App.xaml.cs">
@@ -136,6 +136,18 @@
     </Compile>
     <Compile Include="Core\Bars\DWMPreviewPopup.xaml.cs">
       <DependentUpon>DWMPreviewPopup.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Browser.cs" />
+    <Compile Include="Core\HtmlApp\HtmlAppPackage.cs" />
+    <Compile Include="Core\Parts\BrowserControl.xaml.cs">
+      <DependentUpon>BrowserControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Internet\InternetPackageInternetBrowserHub.xaml.cs">
+      <DependentUpon>InternetPackageInternetBrowserHub.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Internet\InternetPackage.cs" />
+    <Compile Include="Core\Internet\InternetPackageTile.xaml.cs">
+      <DependentUpon>InternetPackageTile.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Notifications\NotificationsPackage.cs" />
     <Compile Include="Core\Notifications\NotificationsPackageTile.xaml.cs">
@@ -355,7 +367,7 @@
     <EmbeddedResource Include="Resources\Inject.js" />
   </ItemGroup>
   <ItemGroup>
-    <Page Include="..\..\..\libns\libns.net\libns.net\UI\LicenseControl.Styles.xaml">
+    <Page Include="..\..\..\libns\libns.net\UI\LicenseControl.Styles.xaml">
       <Link>References\LicenseControl.Styles.xaml</Link>
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -365,6 +377,18 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Core\Bars\DWMPreviewPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Parts\BrowserControl.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Core\Internet\InternetPackageInternetBrowserHub.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Internet\InternetPackageTile.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -462,13 +486,13 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\Ad.png" />
+    <Resource Include="Resources\Ads\Ad.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Default.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\FreeVersionAd.png" />
+    <Resource Include="Resources\Ads\FreeVersionAd.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Resources\Icons\batt1.png" />
@@ -501,9 +525,20 @@
     <Resource Include="Resources\Icons\batt9.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Resources\UpdateAd.png" />
+    <Resource Include="Resources\Ads\UpdateAd.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\HomeApp\HomePage.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Resource Include="Resources\Icons\Search.png" />
+    <Resource Include="Resources\Icons\Refresh.png" />
+    <Resource Include="Resources\Icons\Logo.png" />
+    <Resource Include="Resources\Icons\Internet.png" />
+    <Resource Include="Resources\Icons\Home.png" />
+    <Resource Include="Resources\Icons\Forward.png" />
+    <Resource Include="Resources\Icons\Close.png" />
+    <Resource Include="Resources\Icons\Back.png" />
     <EmbeddedResource Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\PublicKey.5.xml">
       <Link>Resources\PublicKey.5.xml</Link>
     </EmbeddedResource>
@@ -528,9 +563,9 @@
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
     <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-unofficial\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-unofficial\build\CefSharp.Wpf.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props'))" />
+    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets'))" />
+    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props'))" />
   </Target>
   <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
@@ -538,7 +573,7 @@
     <Error Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
   <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" />
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-unofficial\build\CefSharp.Common.targets')" />
+  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">
