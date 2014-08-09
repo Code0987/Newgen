@@ -223,14 +223,20 @@
     </Compile>
     <Compile Include="Core\InternalHelper.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Core\PackageServer.cs" />
     <Compile Include="Core\Settings\Settings.cs" />
     <Compile Include="Resources\Definitions.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Definitions.resx</DependentUpon>
     </Compile>
+    <Compile Include="Resources\Edge\EdgeJs.cs" />
     <None Include="packages.config" />
+    <None Include="Resources\Edge\x64\edge.node">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Edge\x86\edge.node">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Reference Include="Facebook">
       <HintPath>..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Facebook.6.4.2\lib\net45\Facebook.dll</HintPath>
     </Reference>
@@ -364,7 +370,6 @@
       <SubType>Designer</SubType>
       <LastGenOutput>Definitions.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EmbeddedResource Include="Resources\Inject.js" />
   </ItemGroup>
   <ItemGroup>
     <Page Include="..\..\..\libns\libns.net\UI\LicenseControl.Styles.xaml">
@@ -528,6 +533,22 @@
     <Resource Include="Resources\Ads\UpdateAd.png" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Resources\Edge\double_edge.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\Edge\edge.js">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\HtmlApp\Server.js" />
+    <None Include="Resources\Edge\LICENSE.txt">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Edge\x64\node.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+    <None Include="Resources\Edge\x86\node.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
     <Content Include="Resources\HomeApp\HomePage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

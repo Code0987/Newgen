@@ -50,3 +50,23 @@ _Bug fixes_
     Reduce features not needed
     Update Webkit
 
+## Ideas
+
+Use node-webkit as HTML apps engine with edge.js as bridge b/w HTML apps and C# core app. 
+
+## Runtime/Working Structure
+
+App
+|---- GUI Thread 
+    |---- StartScreen, StartBar, Other UI ...
+
+|---- Package Server for HTML apps Thread
+    |---- node+edge
+
+## Resources Structure
+
+App Root Directory
+|---- F: Main executable 
+|---- F: #r .Net Libraries
+|---- D: Packages
+    |---- *: All packages are installed here

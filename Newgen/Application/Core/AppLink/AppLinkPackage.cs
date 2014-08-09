@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media.Imaging;
 using libns;
+using libns.Applied;
 using libns.Media.Imaging;
 using libns.Native;
 

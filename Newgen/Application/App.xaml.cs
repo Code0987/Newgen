@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
 using CefSharp;
+using EdgeJs;
 using libns;
 using libns.Applied;
 using libns.Language;
@@ -85,7 +86,7 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public override bool SignalExternalCommandLineArgs(IList<string> args) {
             var parser = CommandLineArgumentsParser.Parse(args.ToArray());
-
+            
             if (Settings.IsProMode) {
             }
 
