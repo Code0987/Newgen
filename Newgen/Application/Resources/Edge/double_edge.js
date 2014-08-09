@@ -28,4 +28,4 @@ initialize(compileFunc, function (error, data) {
 });
 
 // prevent the V8 thread from exiting for the lifetime of the CLR application
-setInterval(function () {}, 3600000); 
+setInterval(function () { }, 3600000);

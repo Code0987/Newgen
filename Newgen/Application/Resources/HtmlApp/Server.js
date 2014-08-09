@@ -1,38 +1,86 @@
-﻿var http = require("http"),
-    url = require("url"),
-    path = require("path"),
-    fs = require("fs")
+﻿// Server.js for Newgen HtmlApp package.
+// © 2014 NS, Newgen.
+// DO NOT DELETE/MODIFY THIS SCRIPT.
 
-port = process.argv[2] || 44311;
+module.exports = function (data, callback) {
+    try { // <-- For preventing app from crashing !
 
-http.createServer(function (request, response) {
+        // Imports.
+        var edge = require("./../Edge/edge.js"),
+            http = require("http"),
+            url = require("url"),
+            path = require("path"),
+            fs = require("fs");
 
-    var uri = url.parse(request.url).pathname
-      , filename = path.join(process.cwd(), uri);
+        // Create http server.
+        var server = http.createServer(function (request, response) {
+            try {
 
-    path.exists(filename, function (exists) {
-        if (!exists) {
-            response.writeHead(404, { "Content-Type": "text/plain" });
-            response.write("404 Not Found\n");
-            response.end();
-            return;
-        }
+                response.end("Hello from edge (node inside .Net CLR) ! It's " + new Date() + ".");
 
-        if (fs.statSync(filename).isDirectory()) filename += '/index.html';
+                // Current url and file.
+                var currentUrl = url.parse(request.url)
+                  , filename = path.join(data.location, currentUrl.pathname);
 
-        fs.readFile(filename, "binary", function (err, file) {
-            if (err) {
-                response.writeHead(500, { "Content-Type": "text/plain" });
-                response.write(err + "\n");
-                response.end();
-                return;
+                // Handle requests.
+                if (currentUrl.path.search(data.metaKey) > -1) {
+                    // Handle meta requests.
+
+                    // For /Test
+                    if (currentUrl.path.search("/Test") > -1)
+                        response.end("Hello from edge (node inside .Net CLR) ! It's " + new Date() + ".");
+
+                    // For /CloseHub
+                    if (currentUrl.path.search("/CloseHub") > -1)
+                        data.appCloseHub(currentUrl.href, function (error, result) {
+                        });
+
+                } else
+                    // Handle static file requests.
+                    path.exists(filename, function (exists) {
+                        if (!exists) {
+                            response.writeHead(404, { "Content-Type": "text/plain" });
+                            response.write("404 Not Found\n");
+                            response.end();
+                            return;
+                        }
+
+                        fs.readFile(filename, "binary", function (error, file) {
+                            if (error) {
+                                response.writeHead(500, { "Content-Type": "text/plain" });
+                                response.write(error + "\n");
+                                response.end();
+                                return;
+                            }
+
+                            response.writeHead(200);
+                            response.write(file, "binary");
+                            response.end();
+                        });
+                    });
+
+            } catch (e) {
+                // Eat
             }
+        }).listen(data.port, function () {
+            try {
 
-            response.writeHead(200);
-            response.write(file, "binary");
-            response.end();
+                // Stop callback.
+                /* // Call below is crashing app !
+                callback(null, function (data, callback) {
+                    server.close();
+                    callback();
+                });
+                */
+
+            } catch (e) {
+                // Eat
+            }
         });
-    });
-}).listen(parseInt(port, 10));
 
-console.log("Static file server running at\n  => http://localhost:" + port + "/\nCTRL + C to shutdown");
+    } catch (e) {
+        // Eat
+    }
+
+    return server;
+};

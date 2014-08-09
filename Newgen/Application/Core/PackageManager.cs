@@ -93,8 +93,6 @@ namespace Newgen.Packages {
         /// </summary>
         /// <remarks>...</remarks>
         public PackageManager() {
-            PackageServer.Current.Start();
-
             Location = Api.PackagesRoot;
 
             CurrentAppDomain = AppDomain.CurrentDomain;
@@ -247,6 +245,12 @@ namespace Newgen.Packages {
                     return package; // Only one widgets per package !
                 }
                 catch /* Eat */ { }
+
+            // Scan html app package
+            try {
+                return HtmlApp.HtmlAppPackage.CreateFrom(location);
+            }
+            catch { }
 
             // Scan app link
             try {

@@ -73,29 +73,35 @@ namespace EdgeJs {
             if (!initialized) {
                 lock (syncRoot) {
                     if (!initialized) {
-                        if (IntPtr.Size == 4) {
-                            LoadLibrary(Location + @"\x86\node.dll");
-                        }
-                        else if (IntPtr.Size == 8) {
-                            LoadLibrary(Location + @"\x64\node.dll");
-                        }
-                        else {
-                            throw new InvalidOperationException(
-                                "Unsupported architecture. Only x86 and x64 are supported.");
-                        }
+                        try {
+                            if (IntPtr.Size == 4) {
+                                LoadLibrary(Location + @"\x86\node.dll");
+                            }
+                            else if (IntPtr.Size == 8) {
+                                LoadLibrary(Location + @"\x64\node.dll");
+                            }
+                            else {
+                                throw new InvalidOperationException(
+                                    "Unsupported architecture. Only x86 and x64 are supported.");
+                            }
 
-                        Thread v8Thread = new Thread(() => {
-                            NodeStart(2, new string[] { "node", Location + "\\double_edge.js" });
-                            waitHandle.Set();
-                        });
+                            Thread v8Thread = new Thread(() => {
+                                try {
+                                    NodeStart(2, new string[] { "node", Location + "\\double_edge.js" });
+                                }
+                                catch (Exception ex) { Api.Logger.LogError("Node Error !", ex); }
+                                waitHandle.Set();
+                            });
 
-                        v8Thread.IsBackground = true;
-                        v8Thread.Start();
-                        waitHandle.WaitOne();
+                            v8Thread.IsBackground = true;
+                            v8Thread.Start();
+                            waitHandle.WaitOne();
 
-                        if (!initialized) {
-                            throw new InvalidOperationException("Unable to initialize Node.js runtime.");
+                            if (!initialized) {
+                                throw new InvalidOperationException("Unable to initialize Node.js runtime.");
+                            }
                         }
+                        catch (Exception ex) { Api.Logger.LogError("Edge Error !", ex); }
                     }
                 }
             }

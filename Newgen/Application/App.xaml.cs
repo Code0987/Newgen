@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
@@ -16,6 +17,7 @@ using libns.Language;
 using libns.Native;
 using libns.Threading;
 using Newgen.Packages;
+using Newgen.Packages.HtmlApp;
 using Newgen.Packages.Notifications;
 
 namespace Newgen {
@@ -86,7 +88,7 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public override bool SignalExternalCommandLineArgs(IList<string> args) {
             var parser = CommandLineArgumentsParser.Parse(args.ToArray());
-            
+
             if (Settings.IsProMode) {
             }
 
@@ -170,6 +172,12 @@ namespace Newgen {
             // Load view
             StartupUri = new Uri("Core/Screen.xaml", UriKind.Relative);
 
+            // Start server.
+            try {
+                HtmlAppPackage.StartServer().ConfigureAwait(false);
+            }
+            catch (Exception ex) { Api.Logger.LogError("Can't start HtmlApp server.", ex); }
+
 #if !DEBUG
 
             // Tracker
@@ -199,7 +207,11 @@ namespace Newgen {
         private void Application_Exit(object sender, ExitEventArgs e) {
             Api.OnPreFinalization();
 
-            PackageServer.Current.Stop();
+            // Stop server.
+            try {
+                HtmlAppPackage.StopServer().ConfigureAwait(false);
+            }
+            catch (Exception ex) { Api.Logger.LogError("Can't stop HtmlApp server.", ex); }
 
             Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);
 

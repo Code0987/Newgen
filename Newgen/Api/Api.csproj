@@ -135,6 +135,9 @@
     <Compile Include="..\..\..\libns\libns.net\Threading\Singleton.cs">
       <Link>References\Singleton.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\TaskExtensions.cs">
+      <Link>References\TaskExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\libns\libns.net\Threading\ThreadingExtensions.cs">
       <Link>References\ThreadingExtensions.cs</Link>
     </Compile>
