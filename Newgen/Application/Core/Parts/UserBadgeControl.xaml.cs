@@ -49,9 +49,9 @@ namespace Newgen {
                     AnimationExtensions.Animate(this, OpacityProperty, 300, 1);
                     var userimagefile = System.IO.Path.GetTempPath() + "\\" + Environment.UserName + ".bmp";
                     if (File.Exists(userimagefile))
-                        File.Copy(userimagefile, Api.UserImage, true);
+                        File.Copy(userimagefile, Settings.Current.StartScreenUserImage, true);
                     UsernameText.Text = Environment.UserName;
-                    UserImage.Source = (Api.UserImage).ToBitmapSource() ?? UserImage.Source;
+                    UserImage.Source = (Settings.Current.StartScreenUserImage).ToBitmapSource() ?? UserImage.Source;
                 }
             });
         }
@@ -69,7 +69,7 @@ namespace Newgen {
                     return;
 
                 try {
-                    File.Copy(dialog.FileName, Api.UserImage, true);
+                    File.Copy(dialog.FileName, Settings.Current.StartScreenUserImage, true);
                 }
                 catch /* Eat */ {
                     MessageBox.Show("Problem with user account image.", "Error");

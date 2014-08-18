@@ -49,7 +49,6 @@ namespace Newgen.Packages.AppLink {
                 s.ScreenshotPath = Settings.CreateAbsolutePathFor("Screenshot.png");
             });
 
-
             // Create icons and texts
             Uri uri;
             if (Uri.TryCreate(customizedSettings.LinkPath, UriKind.RelativeOrAbsolute, out uri)

@@ -120,7 +120,7 @@ namespace Newgen.Packages.Internet {
         private string GetHomePageContent() {
             if (string.IsNullOrWhiteSpace(homePageCache))
                 try {
-                    homePageCache = File.ReadAllText("Resources/HomeApp/HomePage.html");
+                    homePageCache = File.ReadAllText("Resources/HtmlApp/HomePage.html");
                     homePageCache = homePageCache
                         .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
                         .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))

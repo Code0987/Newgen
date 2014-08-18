@@ -50,7 +50,7 @@ namespace Newgen
         /// </summary>
         public void InitializeComponent()
         {
-            Api.CallEvent("HubOpening");
+            Api.CallHubOpening();
 
             try {
                 this.Style = (Style)Application.Current.Resources["ResetWindowStyle"];
@@ -87,7 +87,7 @@ namespace Newgen
 
         private void HubWindow_Closing(object sender, System.ComponentModel.CancelEventArgs e)
         {
-            Api.CallEvent("HubClosing");
+            Api.CallHubClosing();
 
             if (!this.IsHubActive) return;
             e.Cancel = true;

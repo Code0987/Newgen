@@ -5,8 +5,10 @@ using System.Net;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 using EdgeJs;
 using libns;
+using libns.Media.Imaging;
 
 namespace Newgen.Packages.HtmlApp {
 
@@ -16,19 +18,33 @@ namespace Newgen.Packages.HtmlApp {
     public class HtmlAppPackage : Package {
 
         /// <summary>
-        /// The tile page
-        /// </summary>
-        internal static readonly string TilePage = "Tile.html";
-
-        /// <summary>
         /// The meta resource identifier
         /// </summary>
         internal static readonly string MetaResourceIdentifier = "Api";
 
         /// <summary>
+        /// The customized settings
+        /// </summary>
+        internal HtmlAppPackageCustomizedSettings customizedSettings;
+
+        /// <summary>
         /// The tile
         /// </summary>
         internal BrowserControl tile;
+
+        /// <summary>
+        /// The tile image
+        /// </summary>
+        internal Image tileImage;
+
+        /// <summary>
+        /// The current hub
+        /// </summary>
+        internal static HubWindow currentHub;
+        /// <summary>
+        /// The hub
+        /// </summary>
+        internal static BrowserControl hub;
 
         /// <summary>
         /// The server task
@@ -43,9 +59,37 @@ namespace Newgen.Packages.HtmlApp {
         public static string ServerHost { get; set; }
 
         /// <summary>
+        /// Gets the column span.
+        /// </summary>
+        /// <value>The column span.</value>
+        /// <remarks>It defines the vertical span of tile.</remarks>
+        public override int ColumnSpan {
+            get {
+                return customizedSettings.ColumnSpan;
+            }
+        }
+
+        /// <summary>
+        /// Gets the row span.
+        /// </summary>
+        /// <value>The row span.</value>
+        /// <remarks>It defines the horizontal span of tile.</remarks>
+        public override int RowSpan {
+            get {
+                return customizedSettings.RowSpan;
+            }
+        }
+
+        /// <summary>
         /// Gets the widget control.
         /// </summary>
-        public override FrameworkElement Tile { get { return tile; } }
+        public override FrameworkElement Tile {
+            get {
+                if (tile != null)
+                    return tile;
+                return tileImage;
+            }
+        }
 
         /// <summary>
         /// Initializes static members of the <see cref="HtmlAppPackage"/> class.
@@ -62,6 +106,14 @@ namespace Newgen.Packages.HtmlApp {
         /// <remarks>...</remarks>
         private HtmlAppPackage(string location)
             : base(location) {
+            // Pre-load settings for html apps.
+            // This prevent abnormal behavious as Row/Column span for html apps are included in settings file
+            // while app expects them as compiled defaults.
+            LoadSettings(true);
+
+            // Update html app settings.
+            customizedSettings = Settings.Customize<HtmlAppPackageCustomizedSettings>(s => {
+            });
         }
 
         /// <summary>
@@ -69,9 +121,49 @@ namespace Newgen.Packages.HtmlApp {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
+        /// <remarks>...</remarks>        
         public static async Task<object> CloseCurrentHub() {
-            // TODO: Impl. this.
+            await Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+
+                if (currentHub == null)
+                    return;
+
+                currentHub.Close();
+
+                currentHub = null;
+
+            }));
+
+            return null;
+        }
+
+        /// <summary>
+        /// Sets the current hub.
+        /// </summary>
+        /// <returns>Task&lt;System.Object&gt;.</returns>
+        /// <remarks>...</remarks>
+        public static async Task<object> SetCurrentHub(dynamic input) {
+            await Application.Current.Dispatcher.BeginInvoke(new Action(async () => {
+
+                if (currentHub != null)
+                    await CloseCurrentHub();
+
+                var wb = new WebBrowser();
+                var b = new IEBasedBrowser(wb);
+                hub = new BrowserControl(b);
+
+                hub.Browser.Navigate(
+                    input as string
+                    );
+
+                currentHub = new HubWindow() {
+                    Content = hub
+                };
+
+                currentHub.Show();
+
+            }));
+
             return null;
         }
 
@@ -85,7 +177,11 @@ namespace Newgen.Packages.HtmlApp {
             var package = new HtmlAppPackage(location);
             if (package.Metadata == null || string.IsNullOrWhiteSpace(package.Metadata.Id))
                 throw new Exception("Not a html app package !");
-            if (!File.Exists(package.Settings.CreateAbsolutePathFor(TilePage)))
+            if (
+                !File.Exists(package.Settings.CreateAbsolutePathFor(package.customizedSettings.TilePage))
+                &&
+                !File.Exists(package.Settings.CreateAbsolutePathFor(package.customizedSettings.TilePageImage))
+                )
                 throw new Exception("Not a valid html app package !");
             return package;
         }
@@ -103,6 +199,20 @@ namespace Newgen.Packages.HtmlApp {
                 ServerHost,
                 path
                 );
+        }
+
+        /// <summary>
+        /// Gets the server URI of meta resource for.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns>System.String.</returns>
+        /// <remarks>...</remarks>
+        public static string GetServerUriOfMetaResourceFor(string path) {
+            return GetServerUriFor(string.Join(
+                "/",
+                MetaResourceIdentifier,
+                path
+                ));
         }
 
         /// <summary>
@@ -136,20 +246,6 @@ namespace Newgen.Packages.HtmlApp {
         }
 
         /// <summary>
-        /// Gets the server URI of meta resource for.
-        /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns>System.String.</returns>
-        /// <remarks>...</remarks>
-        public static string GetServerUriOfMetaResourceFor(string path) {
-            return GetServerUriFor(string.Join(
-                "/",
-                MetaResourceIdentifier,
-                path
-                ));
-        }
-
-        /// <summary>
         /// Runs the server.
         /// </summary>
         /// <returns>Task&lt;System.Object&gt;.</returns>
@@ -175,10 +271,14 @@ namespace Newgen.Packages.HtmlApp {
 
                 appCloseCurrentHub = (Func<object, Task<object>>)(async (message) => {
                     return await CloseCurrentHub();
+                }),
+                appSetCurrentHub = (Func<object, Task<object>>)(async (message) => {
+                    return await SetCurrentHub(message);
                 })
             });
 
 #if DEBUG
+            // TEST: Detect edge issues here.
             Debug.WriteLine((new WebClient()).DownloadString(new Uri(GetServerUriOfMetaResourceFor("Test"))));
 #endif
 
@@ -192,7 +292,10 @@ namespace Newgen.Packages.HtmlApp {
         /// <remarks>...</remarks>
         public static async Task<object> StopServer() {
             // Stop.
-            return await serverTask(null);
+            try {
+                return await serverTask(null);
+            }
+            catch { return null; }
         }
 
         /// <summary>
@@ -214,14 +317,50 @@ namespace Newgen.Packages.HtmlApp {
 
             // Load UI
             Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                var wb = new WebBrowser();
-                var b = new IEBasedBrowser(wb);
-                tile = new BrowserControl(b);
+                tileImage = new Image() {
+                    Source = Settings.CreateAbsolutePathFor(customizedSettings.TilePageImage).ToBitmapSource(),
+                    Stretch = Stretch.Fill,
+                    VerticalAlignment = VerticalAlignment.Stretch,
+                    HorizontalAlignment = HorizontalAlignment.Center
+                };
 
-                tile.Browser.Navigate(
-                    GetServerUriOfPackageResourceFor(TilePage)
-                    );
+                if (File.Exists(Settings.CreateAbsolutePathFor(customizedSettings.TilePage))) {
+                    var wb = new WebBrowser();
+                    var b = new IEBasedBrowser(wb);
+                    tile = new BrowserControl(b);
+
+                    tile.Browser.Navigate(
+                        GetServerUriOfPackageResourceFor(customizedSettings.TilePage)
+                        );
+                }
             }));
         }
+    }
+
+    /// <summary>
+    /// Class HtmlAppPackageCustomizedSettings.
+    /// </summary>
+    /// <remarks>...</remarks>
+    public class HtmlAppPackageCustomizedSettings {
+
+        /// <summary>
+        /// The column span
+        /// </summary>
+        public int ColumnSpan = 2;
+
+        /// <summary>
+        /// The row span
+        /// </summary>
+        public int RowSpan = 2;
+
+        /// <summary>
+        /// The tile page
+        /// </summary>
+        public string TilePage = "Tile.html";
+
+        /// <summary>
+        /// The tile page image
+        /// </summary>
+        public string TilePageImage = "Tile.png";
     }
 }

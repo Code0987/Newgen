@@ -270,7 +270,7 @@ namespace Newgen {
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) {
             if (MessageBox.Show("Do you want to reset Newgen settings (This will not remove your widgets, but a restart is required) ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
-                try { if (File.Exists(Api.Config)) File.Delete(Api.Config); }
+                try { if (File.Exists(Settings.FilePath)) File.Delete(Settings.FilePath); }
                 catch { }
             }
         }
@@ -380,11 +380,11 @@ namespace Newgen {
 
             var window = App.Screen;
             try {
-                if (!File.Exists(Api.BgImage))
-                    File.Create(Api.BgImage);
+                if (!File.Exists(Settings.Current.StartScreenBackgroundImage))
+                    File.Create(Settings.Current.StartScreenBackgroundImage);
 
                 byte[] bytArray = File.ReadAllBytes(dialog.FileName);
-                File.WriteAllBytes(Api.BgImage, bytArray);
+                File.WriteAllBytes(Settings.Current.StartScreenBackgroundImage, bytArray);
 
                 MemoryStream ms = new MemoryStream();
                 BitmapImage bi = new BitmapImage();
@@ -734,9 +734,9 @@ namespace Newgen {
 
         internal static void ShowHub(bool nlic = false, bool isupdatemode = false) {
             var window = new SettingsHub(nlic, isupdatemode);
-            Api.CallEvent("HubOpening");
+            Api.CallHubOpening();
             window.ShowDialog();
-            Api.CallEvent("HubClosing");
+            Api.CallHubClosing();
         }
     }
 }

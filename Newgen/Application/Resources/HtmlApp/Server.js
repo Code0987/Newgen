@@ -16,8 +16,6 @@ module.exports = function (data, callback) {
         var server = http.createServer(function (request, response) {
             try {
 
-                response.end("Hello from edge (node inside .Net CLR) ! It's " + new Date() + ".");
-
                 // Current url and file.
                 var currentUrl = url.parse(request.url)
                   , filename = path.join(data.location, currentUrl.pathname);
@@ -32,8 +30,7 @@ module.exports = function (data, callback) {
 
                     // For /CloseHub
                     if (currentUrl.path.search("/CloseHub") > -1)
-                        data.appCloseHub(currentUrl.href, function (error, result) {
-                        });
+                        data.appCloseHub(currentUrl.href, function (error, result) { });
 
                 } else
                     // Handle static file requests.
@@ -66,12 +63,10 @@ module.exports = function (data, callback) {
             try {
 
                 // Stop callback.
-                /* // Call below is crashing app !
                 callback(null, function (data, callback) {
                     server.close();
                     callback();
                 });
-                */
 
             } catch (e) {
                 // Eat

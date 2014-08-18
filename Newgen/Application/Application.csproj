@@ -551,7 +551,7 @@
     <None Include="Resources\Edge\x86\node.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Resources\HomeApp\HomePage.html">
+    <Content Include="Resources\HtmlApp\HomePage.html">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Resource Include="Resources\Icons\Search.png" />
@@ -565,7 +565,7 @@
     <EmbeddedResource Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\PublicKey.5.xml">
       <Link>Resources\PublicKey.5.xml</Link>
     </EmbeddedResource>
-    <Content Include="Cache\BgImage.png">
+    <Content Include="Resources\StartScreen\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>

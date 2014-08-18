@@ -28,9 +28,9 @@ namespace Newgen {
         /// <remarks>...</remarks>
         internal static void ShowHub() {
             var window = new StoreHub();
-            Api.CallEvent("HubOpening");
+            Api.CallHubOpening();
             window.ShowDialog();
-            Api.CallEvent("HubClosing");
+            Api.CallHubClosing();
         }
 
         /// <summary>

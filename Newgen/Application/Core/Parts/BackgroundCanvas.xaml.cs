@@ -29,7 +29,7 @@ namespace Newgen {
 
             if (Settings.Current.UseBgImage)
                 try {
-                    Background = new ImageBrush(Api.BgImage.ToBitmapSource());
+                    Background = new ImageBrush(Settings.Current.StartScreenBackgroundImage.ToBitmapSource());
                 }
                 catch {
                     MessageBox.Show(Api.MSG_ER_FEATURE, "Error");

@@ -100,7 +100,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public App() {
-            Api.OnPreInitialization();
+            Api.OnPreInitialization(this);
         }
 
         /// <summary>

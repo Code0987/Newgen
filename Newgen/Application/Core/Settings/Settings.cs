@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Threading;
 using System.Windows.Data;
@@ -23,6 +24,10 @@ namespace Newgen {
     /// </summary>
     /// <remarks>...</remarks>
     public class Settings {
+        /// <summary>
+        /// The file path
+        /// </summary>
+        internal static readonly string FilePath = Path.Combine(App.Current.Location, "Resources\\Settings.settings");
 
         /// <summary>
         /// The cultures
@@ -182,11 +187,21 @@ namespace Newgen {
         public Color ToolbarBackgroundColor { get; set; }
 
         /// <summary>
+        /// The start screen user image
+        /// </summary>
+        internal string StartScreenUserImage = Path.Combine(App.Current.Location, "Resources\\StartScreen\\User.png");
+
+        /// <summary>
         /// Gets or sets a value indicating whether [use bg image].
         /// </summary>
         /// <value><c>true</c> if [use bg image]; otherwise, <c>false</c>.</value>
         /// <remarks>...</remarks>
         public bool UseBgImage { get; set; }
+
+        /// <summary>
+        /// The start screen background image
+        /// </summary>
+        internal string StartScreenBackgroundImage = Path.Combine(App.Current.Location, "Resources\\StartScreen\\Background.png");
 
         /// <summary>
         /// Gets or sets a value indicating whether [use thumbails bar].
@@ -206,7 +221,7 @@ namespace Newgen {
                 if (current == null) {
                     // 1. Check settings first
                     try {
-                        current = Api.Config.LoadJavascriptFromFile<Settings>();
+                        current = FilePath.LoadJavascriptFromFile<Settings>();
                         if (current == null)
                             throw new InvalidOperationException("Loading settings failed.");
                     }
@@ -274,7 +289,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public void Save() {
-            this.SaveJavascriptToFile(Api.Config);
+            this.SaveJavascriptToFile(FilePath);
         }
 
         /// <summary>

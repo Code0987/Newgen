@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.IO;
-using System.Reflection;
 using System.Windows;
 using libns;
 using libns.Communication.IPC;
@@ -48,7 +46,7 @@ namespace Newgen {
         /// <summary>
         /// Image formats supported by Newgen
         /// </summary>
-        public const string ImageFilter = "Image files|*.png;*.jpg;*.jpeg";
+        public const string ImageFilter = "Images|*.png;*.jpg;*.jpeg";
 
         /// <summary>
         /// The logger name
@@ -73,19 +71,12 @@ namespace Newgen {
         /// <summary>
         /// Message for asking user confirmation
         /// </summary>
-        public const string MSG_QA_INSTALLWIDGET = "Do you want to install this package ?";
+        public const string MSG_QA_INSTALLPACKAGE = "Do you want to install this package ?";
 
         /// <summary>
-        /// The HTML package mark
+        /// The API settings file
         /// </summary>
-        public static readonly string HTMLWidgetMetadataFile = "HTMLWidget.xml";
-
-        private const string ApiSettingsFile = "Api.settings";
-
-        /// <summary>
-        /// The root
-        /// </summary>
-        private static string root = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
+        private const string FilePath = "Api.settings";
 
         /// <summary>
         /// The settings
@@ -93,24 +84,20 @@ namespace Newgen {
         private static ApiSettings settings;
 
         /// <summary>
-        /// Gets the bg image.
-        /// </summary>
-        public static string BgImage { get { return CacheRoot + "BgImage.png"; } }
-
-        /// <summary>
         /// Gets the cache root.
         /// </summary>
-        public static string CacheRoot { get { return Root + "\\Cache\\"; } }
+        public static string CacheRoot {
+            get {
+                return Path.Combine(ResourcesRoot, "[Cache]");
+            }
+        }
 
         /// <summary>
-        /// Gets the config.
+        /// Gets the host.
         /// </summary>
-        public static string Config { get { return CacheRoot + "Settings.settings"; } }
-
-        /// <summary>
-        /// Gets the extern data.
-        /// </summary>
-        public static string ExternData { get { return CacheRoot + "Shared.data"; } }
+        /// <value>The host.</value>
+        /// <remarks>...</remarks>
+        public static ExtendedApplication Host { get; internal set; }
 
         /// <summary>
         /// Gets the logger.
@@ -127,20 +114,22 @@ namespace Newgen {
         public static SimpleWindowsMessaging<EMessage> Messenger { get; set; }
 
         /// <summary>
-        /// Gets or sets the objects.
-        /// </summary>
-        /// <value>The objects.</value>
-        public static Dictionary<string, object> Objects { get; set; }
-
-        /// <summary>
         /// Gets the packages root.
         /// </summary>
-        public static string PackagesRoot { get { return Root + "\\Packages\\"; } }
+        public static string PackagesRoot {
+            get {
+                return Path.Combine(Host.Location, "Packages");
+            }
+        }
 
         /// <summary>
-        /// Gets the root.
+        /// Gets the cache root.
         /// </summary>
-        public static string Root { get { return root; } }
+        public static string ResourcesRoot {
+            get {
+                return Path.Combine(Host.Location, "Resources");
+            }
+        }
 
         /// <summary>
         /// Gets the settings.
@@ -152,7 +141,7 @@ namespace Newgen {
             get {
                 if (settings == null) {
                     try {
-                        settings = Path.Combine(CacheRoot, ApiSettingsFile).LoadJavascriptFromFile<ApiSettings>();
+                        settings = Path.Combine(ResourcesRoot, FilePath).LoadJavascriptFromFile<ApiSettings>();
                         if (settings == null)
                             throw new InvalidOperationException("Loading api settings failed.");
                     }
@@ -161,77 +150,23 @@ namespace Newgen {
                 return settings;
             }
         }
-
+        
         /// <summary>
-        /// Gets the user image.
+        /// Calls the hub closing.
         /// </summary>
-        public static string UserImage { get { return CacheRoot + "UserThumb.png"; } }
-
-        /// <summary>
-        /// Initializes the <see cref="Api" /> class.
-        /// </summary>
-        static Api() {
-            Logger = Logger.CreateFileLogger(LoggerName, Api.CacheRoot);
-
-            Messenger = new SimpleWindowsMessaging<EMessage>();
-
-            Objects = new Dictionary<string, object>();
-
-            Application.Current.Exit += (s, e) => Logger.Close();
+        /// <remarks>...</remarks>
+        public static void CallHubClosing() {
+            HubClosing.Invoke();
+            Api.Logger.LogInformation("Api call on event [HubClosing] from [Api.CallHubClosing]");
         }
 
         /// <summary>
-        /// Add or the update data.
+        /// Calls the hub opening.
         /// </summary>
-        /// <param name="key">The key.</param>
-        /// <param name="value">The value.</param>
-        public static void AddorUpdateData(string key, object value) {
-            if (Objects.ContainsKey(key)) {
-                Objects[key] = value;
-            }
-            else { Objects.Add(key, value); }
-        }
-
-        /// <summary>
-        /// Calls the event.
-        /// </summary>
-        /// <param name="name">The name.</param>
-        public static void CallEvent(string name) {
-            switch (name) {
-            case "HubOpening":
-                HubOpening.Invoke();
-                break;
-
-            case "HubClosing":
-                HubClosing.Invoke();
-                break;
-            }
-
-            Api.Logger.LogInformation(string.Format("Api call on event [{0}] from [Api.CallEvent(string)]", name));
-        }
-
-        /// <summary>
-        /// Clears the shared local data.
-        /// </summary>
-        /// <param name="packagename">The packagename.</param>
-        /// <param name="data">The data.</param>
-        public static void ClearSharedLocalData(string packagename) {
-            if (File.Exists(PackagesRoot + packagename + "\\Shared.data"))
-                File.Delete(PackagesRoot + packagename + "\\Shared.data");
-        }
-
-        /// <summary>
-        /// Gets the shared local data.
-        /// </summary>
-        /// <param name="packagename">The packagename.</param>
-        /// <returns>System.String.</returns>
-        public static string GetSharedLocalData(string packagename) {
-            if (!File.Exists(PackagesRoot + packagename + "\\Shared.data"))
-                return string.Empty;
-
-            string content = File.ReadAllText(string.Format("{0}{1}\\Shared.data", PackagesRoot, packagename));
-
-            return content;
+        /// <remarks>...</remarks>
+        public static void CallHubOpening() {
+            HubOpening.Invoke();
+            Api.Logger.LogInformation("Api call on event [HubOpening] from [Api.CallHubOpening]");
         }
 
         /// <summary>
@@ -240,7 +175,7 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public static void OnPreFinalization() {
             try {
-                settings.SaveJavascriptToFile(Path.Combine(CacheRoot, ApiSettingsFile));
+                settings.SaveJavascriptToFile(Path.Combine(ResourcesRoot, FilePath));
             }
             catch /* Eat */ { /* Tasty ? */ }
         }
@@ -248,31 +183,25 @@ namespace Newgen {
         /// <summary>
         /// Called when [pre initialization].
         /// </summary>
+        /// <param name="host">The host.</param>
         /// <remarks>...</remarks>
-        public static void OnPreInitialization() {
+        public static void OnPreInitialization(ExtendedApplication host) {
+            Host = host;
+
+            Logger = Logger.CreateFileLogger(LoggerName, CacheRoot);
+
+            Messenger = new SimpleWindowsMessaging<EMessage>();
+
+            Host.Exit += (s, e) => Logger.Close();
+
             if (!Directory.Exists(PackagesRoot))
                 Directory.CreateDirectory(PackagesRoot);
+
+            if (!Directory.Exists(ResourcesRoot))
+                Directory.CreateDirectory(ResourcesRoot);
+
             if (!Directory.Exists(CacheRoot))
                 Directory.CreateDirectory(CacheRoot);
-        }
-
-        /// <summary>
-        /// Removes the data.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        public static void RemoveData(string key) {
-            if (Objects.ContainsKey(key)) {
-                Objects.Remove(key);
-            }
-        }
-
-        /// <summary>
-        /// Gets the shared local data.
-        /// </summary>
-        /// <param name="packagename">The packagename.</param>
-        /// <param name="data">The data.</param>
-        public static void SetSharedLocalData(string packagename, string data) {
-            File.WriteAllText(PackagesRoot + packagename + "\\Shared.data", data);
         }
 
         /// <summary>
