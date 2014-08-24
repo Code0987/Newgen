@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Windows;
-using CefSharp;
 using Newgen;
 using NS.Web;
 using System.Diagnostics;
@@ -26,7 +25,7 @@ namespace Newgen.Packages.Internet {
         /// <summary>
         /// The cef
         /// </summary>
-        CEF = 0xCEF
+        External = 0xFF
     }
 
     /// <summary>
@@ -175,6 +174,13 @@ namespace Newgen.Packages.Internet {
         public RenderingMode RenderingMode { get; set; }
 
         /// <summary>
+        /// Gets or sets the external browser command.
+        /// </summary>
+        /// <value>The external browser command.</value>
+        /// <remarks>...</remarks>
+        public string ExternalBrowserCommand { get; set; }
+
+        /// <summary>
         /// Initializes a new instance of the <see cref="InternetPackageSettings"/> class.
         /// </summary>
         /// <remarks>...</remarks>
@@ -182,6 +188,7 @@ namespace Newgen.Packages.Internet {
             RelativeSearchAddressFormat = "http://www.google.com/search?q={0}";
             LastSearchLocation = InternetPackageSettings.DefaultLocation;
             RenderingMode = RenderingMode.IE;
+            ExternalBrowserCommand = string.Empty;
         }
     }
 

@@ -1,9 +1,8 @@
 ﻿using System;
+using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using CefSharp;
-using CefSharp.Wpf;
 
 namespace Newgen.Packages.Internet {
 
@@ -12,7 +11,7 @@ namespace Newgen.Packages.Internet {
     /// </summary>
     /// <remarks>...</remarks>
     public partial class InternetPackageTile : Border {
-        
+
         /// <summary>
         /// The hub
         /// </summary>
@@ -48,19 +47,33 @@ namespace Newgen.Packages.Internet {
         /// <param name="url">The URL.</param>
         /// <remarks>...</remarks>
         public void Navigate(string url) {
-            Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                if (hub != null) {
-                    if (hub.IsVisible)
-                        hub.Activate();
-                    hub.Navigate(url);
+            if (package.CustomizedSettings.RenderingMode == RenderingMode.External) {
+                try {
+                    var p = new Process();
+                    p.StartInfo.Arguments = url;
+                    p.StartInfo.FileName = package.CustomizedSettings.ExternalBrowserCommand;
+                    p.StartInfo.UseShellExecute = true;
+                    p.Start();
                 }
-                else {
-                    hub = new InternetPackageInternetBrowserHub(package, url);
-                    hub.AllowsTransparency = false;
-                    hub.ShowDialog();
-                    hub.Navigate(url);
+                catch (Exception ex) {
+                    Api.Logger.LogError("Unable to launch external browser !.", ex);
                 }
-            }));
+            }
+            else {
+                Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                    if (hub != null) {
+                        if (hub.IsVisible)
+                            hub.Activate();
+                        hub.Navigate(url);
+                    }
+                    else {
+                        hub = new InternetPackageInternetBrowserHub(package, url);
+                        hub.AllowsTransparency = false;
+                        hub.ShowDialog();
+                        hub.Navigate(url);
+                    }
+                }));
+            }
         }
 
         /// <summary>
@@ -76,9 +89,9 @@ namespace Newgen.Packages.Internet {
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnMenuItemCEFClick(object sender, System.Windows.RoutedEventArgs e) {
+        private void OnMenuItemExternalClick(object sender, System.Windows.RoutedEventArgs e) {
             try {
-                package.CustomizedSettings.RenderingMode = RenderingMode.CEF;
+                package.CustomizedSettings.RenderingMode = RenderingMode.External;
                 UpdateColor();
             }
             catch /* Eat */ { /* Tasty ? */ }
@@ -114,13 +127,13 @@ namespace Newgen.Packages.Internet {
         /// <remarks>...</remarks>
         private void UpdateColor() {
             try {
-                if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF) {
-                    this.MenuItemCEF.Background = new SolidColorBrush(Colors.DarkGray);
+                if (package.CustomizedSettings.RenderingMode == RenderingMode.External) {
+                    this.MenuItemExternal.Background = new SolidColorBrush(Colors.DarkGray);
                     this.MenuItemIE.Background = new SolidColorBrush(Colors.Transparent);
                 }
                 else {
                     this.MenuItemIE.Background = new SolidColorBrush(Colors.DarkGray);
-                    this.MenuItemCEF.Background = new SolidColorBrush(Colors.Transparent);
+                    this.MenuItemExternal.Background = new SolidColorBrush(Colors.Transparent);
                 }
             }
             catch /* Eat */ { /* Tasty ? */ }

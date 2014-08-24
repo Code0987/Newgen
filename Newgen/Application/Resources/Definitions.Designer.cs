@@ -826,16 +826,16 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CEF (Chromium, Chrome, Webkit, ...).
+        ///   Looks up a localized string similar to External.
         /// </summary>
-        public static string TileContextMenuItemCEF {
+        public static string TileContextMenuItemExternal {
             get {
-                return ResourceManager.GetString("TileContextMenuItemCEF", resourceCulture);
+                return ResourceManager.GetString("TileContextMenuItemExternal", resourceCulture);
             }
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Internet Explorer.
+        ///   Looks up a localized string similar to Internet Explorer (embedded).
         /// </summary>
         public static string TileContextMenuItemIE {
             get {

@@ -7,8 +7,6 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
 using System.Windows.Navigation;
-using CefSharp;
-using CefSharp.Wpf;
 using libns;
 
 namespace Newgen {
@@ -147,7 +145,8 @@ namespace Newgen {
                 Navigating(sender, uri, e);
         }
     }
-
+    
+    /* REVIEW: Implement CEF support if possible.
     /// <summary>
     /// Class CefBasedBrowser.
     /// </summary>
@@ -290,7 +289,8 @@ namespace Newgen {
         private void OnProviderLoadError(string failedUrl, CefErrorCode errorCode, string errorText) {
             OnLoadError(null, new Uri(failedUrl), errorText);
         }
-    }
+    } 
+    */
 
     /// <summary>
     /// Class IEBasedBrowser.

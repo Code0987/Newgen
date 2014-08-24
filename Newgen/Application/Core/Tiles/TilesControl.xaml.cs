@@ -177,24 +177,24 @@ namespace Newgen {
             Grid.SetColumn(tileControl, tileControl.package.Settings.Column);
             Grid.SetRow(tileControl, tileControl.package.Settings.Row);
 
-            // Add
-            if (alsoAddToHost)
-                TilesControlHost.Children.Add(tileControl);
-            if (!TileControls.Contains(tileControl))
-                TileControls.Add(tileControl);
-
-            // Adjust
-            tileControl.AdjustDimensions();
-
             // Add dummy transparent rectangles to spanned rows and columns
             // Vertical
+#if DEBUG
+            var debugBrush = (new SolidColorBrush(Color.FromArgb(64, 255, 50, 50))).GetAsFrozen() as SolidColorBrush;
+#endif
             for (var cs = 0; cs < tileControl.package.ColumnSpan; cs++) {
                 // Horizontal
                 for (var rs = 0; rs < tileControl.package.RowSpan; rs++) {
                     // Except at 1st place
                     if (cs != 0 || rs != 0) {
                         var element = new Rectangle() {
-                            Fill = Brushes.Transparent,
+                            Fill = 
+#if DEBUG
+                            debugBrush
+#else
+                            Brushes.Transparent
+#endif
+                            ,
                             StrokeThickness = 0,
                             Tag = tileControl
                         };
@@ -204,6 +204,15 @@ namespace Newgen {
                     }
                 }
             }
+            
+            // Add
+            if (alsoAddToHost)
+                TilesControlHost.Children.Add(tileControl);
+            if (!TileControls.Contains(tileControl))
+                TileControls.Add(tileControl);
+
+            // Adjust
+            tileControl.AdjustDimensions();
         }
 
         /// <summary>

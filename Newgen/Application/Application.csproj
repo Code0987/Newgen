@@ -1,7 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" />
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
@@ -26,16 +24,16 @@
     <UseVSHostingProcess>false</UseVSHostingProcess>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <Prefer32Bit>false</Prefer32Bit>
-    <NuGetPackageImportStamp>72d1b3be</NuGetPackageImportStamp>
-    <PlatformTarget>x86</PlatformTarget>
+    <NuGetPackageImportStamp>fd88db1c</NuGetPackageImportStamp>
+    <NoWarn>0108</NoWarn>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Debug' ">
     <DefineConstants>TRACE;DEBUG;Native;Net4;Net45</DefineConstants>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+  <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
     <DefineConstants>TRACE;Native;Net4;Net45</DefineConstants>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -585,18 +583,12 @@
       <ErrorText>This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=322105. The missing file is {0}.</ErrorText>
     </PropertyGroup>
     <Error Condition="!Exists('$(SolutionDir)\.nuget\NuGet.targets')" Text="$([System.String]::Format('$(ErrorText)', '$(SolutionDir)\.nuget\NuGet.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.props'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets'))" />
-    <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props')" Text="$([System.String]::Format('$(ErrorText)', '..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Wpf.31.0.0-pre1\build\CefSharp.Wpf.props'))" />
   </Target>
   <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" />
   <Target Name="EnsureBclBuildImported" BeforeTargets="BeforeBuild" Condition="'$(BclBuildImported)' == ''">
     <Error Condition="!Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="This project references NuGet package(s) that are missing on this computer. Enable NuGet Package Restore to download them.  For more information, see http://go.microsoft.com/fwlink/?LinkID=317567." HelpKeyword="BCLBUILD2001" />
     <Error Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Microsoft.Bcl.Build.1.0.14\tools\Microsoft.Bcl.Build.targets')" Text="The build restored NuGet packages. Build the project again to include these packages in the build. For more information, see http://go.microsoft.com/fwlink/?LinkID=317568." HelpKeyword="BCLBUILD2002" />
   </Target>
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\cef.redist.3.1650.1562-pre3\build\cef.redist.targets')" />
-  <Import Project="..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets" Condition="Exists('..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\CefSharp.Common.31.0.0-pre1\build\CefSharp.Common.targets')" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it.
        Other similar extension points exist, see Microsoft.Common.targets.
   <Target Name="BeforeBuild">

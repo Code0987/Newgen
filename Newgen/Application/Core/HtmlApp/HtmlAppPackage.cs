@@ -9,6 +9,7 @@ using System.Windows.Media;
 using EdgeJs;
 using libns;
 using libns.Media.Imaging;
+using Microsoft.Win32;
 
 namespace Newgen.Packages.HtmlApp {
 
@@ -21,6 +22,16 @@ namespace Newgen.Packages.HtmlApp {
         /// The meta resource identifier
         /// </summary>
         internal static readonly string MetaResourceIdentifier = "Api";
+
+        /// <summary>
+        /// The current hub
+        /// </summary>
+        internal static HubWindow currentHub;
+
+        /// <summary>
+        /// The hub
+        /// </summary>
+        internal static BrowserControl hub;
 
         /// <summary>
         /// The customized settings
@@ -36,15 +47,6 @@ namespace Newgen.Packages.HtmlApp {
         /// The tile image
         /// </summary>
         internal Image tileImage;
-
-        /// <summary>
-        /// The current hub
-        /// </summary>
-        internal static HubWindow currentHub;
-        /// <summary>
-        /// The hub
-        /// </summary>
-        internal static BrowserControl hub;
 
         /// <summary>
         /// The server task
@@ -121,47 +123,15 @@ namespace Newgen.Packages.HtmlApp {
         /// </summary>
         /// <param name="input">The input.</param>
         /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>        
+        /// <remarks>...</remarks>
         public static async Task<object> CloseCurrentHub() {
             await Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-
                 if (currentHub == null)
                     return;
 
                 currentHub.Close();
 
                 currentHub = null;
-
-            }));
-
-            return null;
-        }
-
-        /// <summary>
-        /// Sets the current hub.
-        /// </summary>
-        /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
-        public static async Task<object> SetCurrentHub(dynamic input) {
-            await Application.Current.Dispatcher.BeginInvoke(new Action(async () => {
-
-                if (currentHub != null)
-                    await CloseCurrentHub();
-
-                var wb = new WebBrowser();
-                var b = new IEBasedBrowser(wb);
-                hub = new BrowserControl(b);
-
-                hub.Browser.Navigate(
-                    input as string
-                    );
-
-                currentHub = new HubWindow() {
-                    Content = hub
-                };
-
-                currentHub.Show();
-
             }));
 
             return null;
@@ -246,6 +216,53 @@ namespace Newgen.Packages.HtmlApp {
         }
 
         /// <summary>
+        /// Sets/removes the registry hacks.
+        /// </summary>
+        /// <remarks>...</remarks>
+        public static void RegistryHacks(bool clear = false) {
+            var app = new FileInfo(typeof(HtmlAppPackage).Assembly.Location).Name;
+
+            var regkey = Registry.LocalMachine.OpenSubKey(
+                "SOFTWARE\\Microsoft\\Internet Explorer\\Main\\FeatureControl\\FEATURE_BROWSER_EMULATION",
+                true
+                );
+            if (regkey.GetValue(app, null) == null) {
+                regkey.SetValue(app, 1);
+            }
+            else if (clear) {
+                regkey.DeleteValue(app);
+            }
+        }
+
+        /// <summary>
+        /// Sets the current hub.
+        /// </summary>
+        /// <returns>Task&lt;System.Object&gt;.</returns>
+        /// <remarks>...</remarks>
+        public static async Task<object> SetCurrentHub(dynamic input) {
+            await Application.Current.Dispatcher.BeginInvoke(new Action(async () => {
+                if (currentHub != null)
+                    await CloseCurrentHub();
+
+                var wb = new WebBrowser();
+                var b = new IEBasedBrowser(wb);
+                hub = new BrowserControl(b);
+
+                hub.Browser.Navigate(
+                    input as string
+                    );
+
+                currentHub = new HubWindow() {
+                    Content = hub
+                };
+
+                currentHub.Show();
+            }));
+
+            return null;
+        }
+
+        /// <summary>
         /// Runs the server.
         /// </summary>
         /// <returns>Task&lt;System.Object&gt;.</returns>
@@ -324,6 +341,8 @@ namespace Newgen.Packages.HtmlApp {
                     HorizontalAlignment = HorizontalAlignment.Center
                 };
 
+                tileImage.MouseLeftButtonUp += tileImage_MouseLeftButtonUp;
+
                 if (File.Exists(Settings.CreateAbsolutePathFor(customizedSettings.TilePage))) {
                     var wb = new WebBrowser();
                     var b = new IEBasedBrowser(wb);
@@ -334,6 +353,28 @@ namespace Newgen.Packages.HtmlApp {
                         );
                 }
             }));
+        }
+
+        /// <summary>
+        /// Called whenever the package is un-loaded from user context.
+        /// </summary>
+        /// <remarks>Do all finalization steps here ! (e.g. saving settings)</remarks>
+        public override void Unload() {
+            Application.Current.Dispatcher.BeginInvoke(new Action(() => {
+                tileImage.MouseLeftButtonUp -= tileImage_MouseLeftButtonUp;
+            }));
+
+            base.Unload();
+        }
+
+        /// <summary>
+        /// Handles the MouseLeftButtonUp event of the tileImage control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void tileImage_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            SetCurrentHub(GetServerUriOfPackageResourceFor(customizedSettings.HubPage));
         }
     }
 
@@ -347,6 +388,11 @@ namespace Newgen.Packages.HtmlApp {
         /// The column span
         /// </summary>
         public int ColumnSpan = 2;
+
+        /// <summary>
+        /// The hub page
+        /// </summary>
+        public string HubPage = "Hub.html";
 
         /// <summary>
         /// The row span

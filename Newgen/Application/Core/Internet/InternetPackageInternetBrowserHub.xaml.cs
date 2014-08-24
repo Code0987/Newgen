@@ -7,8 +7,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Navigation;
-using CefSharp;
-using CefSharp.Wpf;
 using libns.Threading;
 using Newgen;
 
@@ -46,18 +44,8 @@ namespace Newgen.Packages.Internet {
 
             InitializeComponent();
 
-            if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
-                try {
-                    CefBasedBrowser.CefStart();
-                    browser = new CefBasedBrowser(new WebView());
-                }
-                catch /* Eat */ {
-                    browser = new IEBasedBrowser(new WebBrowser());
-                }
-            else {
-                browser = new IEBasedBrowser(new WebBrowser());
-            }
-
+            browser = new IEBasedBrowser(new WebBrowser());
+            
             SearchPanel.Children.Add(browser.Provider as UIElement);
 
             // Configure it
@@ -75,9 +63,6 @@ namespace Newgen.Packages.Internet {
         /// </summary>
         /// <remarks>...</remarks>
         ~InternetPackageInternetBrowserHub() {
-            if (package.CustomizedSettings.RenderingMode == RenderingMode.CEF)
-                CefBasedBrowser.CefStop();
-
             (browser.Provider as UIElement).PreviewKeyDown -= OnBrowserProviderPreviewKeyDown;
 
             browser.Error -= OnBrowserError;
