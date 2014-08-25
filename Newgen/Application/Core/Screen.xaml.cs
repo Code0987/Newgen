@@ -223,31 +223,7 @@ namespace Newgen {
 
             Api.Messenger.AddListener(handle);
 
-            try {
-                IntPtr taskbar = WinAPI.FindWindow("Shell_TrayWnd", "");
-                IntPtr hwndOrb = WinAPI.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
-                Width = SystemParameters.PrimaryScreenWidth;
-
-                if (Settings.Current.ShowTaskbarAlways) {
-                    Height = SystemParameters.WorkArea.Height;
-                    Top = SystemParameters.WorkArea.Top;
-                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Show);
-                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Show);
-                }
-                else if (Settings.Current.ShowTaskbar) {
-                    Height = SystemParameters.PrimaryScreenHeight;
-                    Top = 0;
-                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Show);
-                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Show);
-                }
-                else {
-                    Height = SystemParameters.PrimaryScreenHeight;
-                    Top = 0;
-                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Hide);
-                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Hide);
-                }
-            }
-            catch { }
+            InternalHelper.FixWindowsTaskbar();
 
             this.Left = 0;
         }

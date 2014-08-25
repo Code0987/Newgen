@@ -27,11 +27,7 @@ module.exports = function (data, callback) {
                     // For /Test
                     if (currentUrl.path.search("/Test") > -1)
                         response.end("Hello from edge (node inside .Net CLR) ! It's " + new Date() + ".");
-
-                    // For /CloseHub
-                    if (currentUrl.path.search("/CloseHub") > -1)
-                        data.appCloseHub(currentUrl.href, function (error, result) { });
-
+                    
                 } else
                     // Handle static file requests.
                     path.exists(filename, function (exists) {

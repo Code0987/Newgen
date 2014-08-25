@@ -111,17 +111,14 @@
     <Compile Include="..\..\..\libns\libns.net\Licensing\ClientManager.cs">
       <Link>References\ClientManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\Licensing\Exceptions.cs">
-      <Link>References\Exceptions.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\libns\libns.net\Licensing\License.cs">
       <Link>References\License.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\Licensing\LicenseManager.cs">
       <Link>References\LicenseManager.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\Licensing\Proof.cs">
-      <Link>References\Proof.cs</Link>
+    <Compile Include="..\..\..\libns\libns.net\Native\DeviceExtensions.cs">
+      <Link>References\DeviceExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\UI\DWMThumbnailControl.cs">
       <Link>References\DWMThumbnailControl.cs</Link>
@@ -172,6 +169,24 @@
     <Compile Include="Core\Bars\ThumbnailsBar.xaml.cs">
       <DependentUpon>ThumbnailsBar.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor5.xaml.cs">
+      <DependentUpon>SettingsEditor5.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor4.xaml.cs">
+      <DependentUpon>SettingsEditor4.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor3.xaml.cs">
+      <DependentUpon>SettingsEditor3.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor2.xaml.cs">
+      <DependentUpon>SettingsEditor2.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor0.xaml.cs">
+      <DependentUpon>SettingsEditor0.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Core\Settings\SettingsEditor1.xaml.cs">
+      <DependentUpon>SettingsEditor1.xaml</DependentUpon>
     </Compile>
     <Compile Include="Core\Tiles\TilesControl.xaml.cs">
       <DependentUpon>TilesControl.xaml</DependentUpon>
@@ -228,6 +243,7 @@
       <DependentUpon>Definitions.resx</DependentUpon>
     </Compile>
     <Compile Include="Resources\Edge\EdgeJs.cs" />
+    <Compile Include="Resources\NodeWebkit\NodeWebkit.cs" />
     <None Include="packages.config" />
     <None Include="Resources\Edge\x64\edge.node">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
@@ -235,6 +251,21 @@
     <None Include="Resources\Edge\x86\edge.node">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
+    <Content Include="Resources\HtmlApp\HomePage-template.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\icudtl.dat">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\LICENSE">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\nw.pak">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\package-template.json">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Reference Include="Facebook">
       <HintPath>..\..\..\..\..\Data\Apps\Ref\NuGetCache\packages\Facebook.6.4.2\lib\net45\Facebook.dll</HintPath>
     </Reference>
@@ -427,6 +458,30 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Core\Settings\SettingsEditor5.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Settings\SettingsEditor4.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Settings\SettingsEditor3.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Settings\SettingsEditor2.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Settings\SettingsEditor0.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Core\Settings\SettingsEditor1.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Core\Tiles\TilesControl.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -549,9 +604,6 @@
     <None Include="Resources\Edge\x86\node.dll">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </None>
-    <Content Include="Resources\HtmlApp\HomePage.html">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Resource Include="Resources\Icons\Search.png" />
     <Resource Include="Resources\Icons\Refresh.png" />
     <Resource Include="Resources\Icons\Logo.png" />
@@ -563,6 +615,30 @@
     <EmbeddedResource Include="..\..\..\..\..\Data\Apps\Sandbox\Keys\PublicKey.5.xml">
       <Link>Resources\PublicKey.5.xml</Link>
     </EmbeddedResource>
+    <Content Include="Resources\NodeWebkit\credits.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\ffmpegsumo.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\icon.png">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\index-template.html">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\libEGL.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\libGLESv2.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\nw.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Resources\NodeWebkit\nwsnapshot.exe">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
     <Content Include="Resources\StartScreen\Background.png">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>

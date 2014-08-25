@@ -11,13 +11,6 @@
                   d:DesignHeight="800"
                   d:DesignWidth="1200"
                   mc:Ignorable="d">
-    <Window.Resources>
-        <ResourceDictionary>
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="/Themes/Generic.xaml" />
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </Window.Resources>
     <DockPanel Name="Root">
         <Grid DockPanel.Dock="Top">
             <Button Name="BackButton" Click="OnBackButtonClick" Style="{StaticResource HubBackButton}" />

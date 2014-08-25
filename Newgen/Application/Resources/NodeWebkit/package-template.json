@@ -1,0 +1,28 @@
+{
+  "name": "Newgen-HtmlApp-Platform",
+  "main": "index.html",
+  "single-instance": true,
+  "chromium-args": "--disable-extensions",
+  "js-flags": "--harmony_proxies --harmony_collections",
+  "window": {
+    "title": "Newgen HtmlApp Platform",
+    "icon": "icon.png",
+    "toolbar": false,
+    "frame": false,
+    "width": {{Width}},
+    "height": {{Height}},
+    "position": "center",
+    "min_width": 800,
+    "min_height": 400,
+    "fullscreen": true,
+    "show_in_taskbar": true,
+    "resizable": false,
+    "kiosk": true,
+    "show": false
+  },
+  "webkit": {
+    "plugin": true,
+    "java": false,
+    "page-cache": false
+  }
+}

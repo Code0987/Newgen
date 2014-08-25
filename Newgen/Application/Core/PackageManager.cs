@@ -120,7 +120,7 @@ namespace Newgen.Packages {
         public void Disable(Package package) {
             if (!package.Settings.IsEnabled)
                 return;
-            
+
             package.Settings.IsEnabled = false;
 
             Unload(package, true);
@@ -136,7 +136,7 @@ namespace Newgen.Packages {
         public void Enable(Package package) {
             if (package.Settings.IsEnabled)
                 return;
-            
+
             package.Settings.IsEnabled = true;
 
             Load(package, true);
@@ -210,6 +210,8 @@ namespace Newgen.Packages {
         /// <returns>Package.</returns>
         /// <remarks>...</remarks>
         public Package InitializeFrom(string location) {
+            var package = default(Package);
+
             // Scan .net compiled packages
             var filePaths = Directory.GetFiles(location, "*.dll", SearchOption.TopDirectoryOnly);
             foreach (var filePath in filePaths)
@@ -218,15 +220,12 @@ namespace Newgen.Packages {
                     var packageAssembly = Assembly.LoadFrom(filePath);
 
                     // Create instance
-                    var package = Activator.CreateInstance(
+                    package = Activator.CreateInstance(
                         packageAssembly
                         .GetTypes()
                         .FirstOrDefault(f => typeof(Package).IsAssignableFrom(f)),
                         (object)location
                         ) as Package;
-
-                    // Cache
-                    package = InitializeFrom(package);
 
                     // Load all references
                     // Loop through the array of referenced assembly names.
@@ -239,40 +238,45 @@ namespace Newgen.Packages {
                     //            packageAssemblyReference.FullName.Substring(0, packageAssemblyReference.FullName.IndexOf(",")) + ".dll"
                     //            ));
                     //    }
-                    //    catch /* Eat */ { }
-
-                    // Done !
-                    return package; // Only one widgets per package !
+                    //    catch /* Eat */ { /* Tasty ? */ }
                 }
-                catch /* Eat */ { }
+                catch /* Eat */ { /* Tasty ? */ }
 
             // Scan html app package
-            try {
-                return HtmlApp.HtmlAppPackage.CreateFrom(location);
-            }
-            catch { }
+            if (package == null)
+                try {
+                    package = HtmlApp.HtmlAppPackage.CreateFrom(location);
+                }
+                catch /* Eat */ { /* Tasty ? */ }
 
             // Scan app link
-            try {
-                return AppLink.AppLinkPackage.CreateFrom(location);
-            }
-            catch { }
+            if (package == null)
+                try {
+                    package = AppLink.AppLinkPackage.CreateFrom(location);
+                }
+                catch /* Eat */ { /* Tasty ? */ }
 
             // Scan Internet
-            try {
-                return Internet.InternetPackage.CreateFrom(location);
-            }
-            catch { }
+            if (package == null)
+                try {
+                    package = Internet.InternetPackage.CreateFrom(location);
+                }
+                catch /* Eat */ { /* Tasty ? */ }
 
             // Scan notifications
-            try {
-                return Notifications.NotificationsPackage.CreateFrom(location);
-            }
-            catch { }
+            if (package == null)
+                try {
+                    package = Notifications.NotificationsPackage.CreateFrom(location);
+                }
+                catch /* Eat */ { /* Tasty ? */ }
 
-            Api.Logger.LogError(string.Format("Invalid directory [{0}] found in packages cache.", location));
+            // Cache
+            if (package != null)
+                package = InitializeFrom(package);
+            else
+                Api.Logger.LogError(string.Format("Invalid directory [{0}] found in packages cache.", location));
 
-            return null;
+            return package;
         }
 
         /// <summary>

@@ -10,6 +10,7 @@ using EdgeJs;
 using libns;
 using libns.Media.Imaging;
 using Microsoft.Win32;
+using NodeWebkit;
 
 namespace Newgen.Packages.HtmlApp {
 
@@ -22,17 +23,7 @@ namespace Newgen.Packages.HtmlApp {
         /// The meta resource identifier
         /// </summary>
         internal static readonly string MetaResourceIdentifier = "Api";
-
-        /// <summary>
-        /// The current hub
-        /// </summary>
-        internal static HubWindow currentHub;
-
-        /// <summary>
-        /// The hub
-        /// </summary>
-        internal static BrowserControl hub;
-
+        
         /// <summary>
         /// The customized settings
         /// </summary>
@@ -117,26 +108,7 @@ namespace Newgen.Packages.HtmlApp {
             customizedSettings = Settings.Customize<HtmlAppPackageCustomizedSettings>(s => {
             });
         }
-
-        /// <summary>
-        /// Closes the current hub.
-        /// </summary>
-        /// <param name="input">The input.</param>
-        /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
-        public static async Task<object> CloseCurrentHub() {
-            await Application.Current.Dispatcher.BeginInvoke(new Action(() => {
-                if (currentHub == null)
-                    return;
-
-                currentHub.Close();
-
-                currentHub = null;
-            }));
-
-            return null;
-        }
-
+        
         /// <summary>
         /// Creates from.
         /// </summary>
@@ -233,35 +205,7 @@ namespace Newgen.Packages.HtmlApp {
                 regkey.DeleteValue(app);
             }
         }
-
-        /// <summary>
-        /// Sets the current hub.
-        /// </summary>
-        /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
-        public static async Task<object> SetCurrentHub(dynamic input) {
-            await Application.Current.Dispatcher.BeginInvoke(new Action(async () => {
-                if (currentHub != null)
-                    await CloseCurrentHub();
-
-                var wb = new WebBrowser();
-                var b = new IEBasedBrowser(wb);
-                hub = new BrowserControl(b);
-
-                hub.Browser.Navigate(
-                    input as string
-                    );
-
-                currentHub = new HubWindow() {
-                    Content = hub
-                };
-
-                currentHub.Show();
-            }));
-
-            return null;
-        }
-
+        
         /// <summary>
         /// Runs the server.
         /// </summary>
@@ -284,14 +228,7 @@ namespace Newgen.Packages.HtmlApp {
                 host = ServerHost,
                 location = App.Current.Location.ToUriPath(),
 
-                metaKey = MetaResourceIdentifier,
-
-                appCloseCurrentHub = (Func<object, Task<object>>)(async (message) => {
-                    return await CloseCurrentHub();
-                }),
-                appSetCurrentHub = (Func<object, Task<object>>)(async (message) => {
-                    return await SetCurrentHub(message);
-                })
+                metaKey = MetaResourceIdentifier
             });
 
 #if DEBUG
@@ -374,7 +311,7 @@ namespace Newgen.Packages.HtmlApp {
         /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void tileImage_MouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
-            SetCurrentHub(GetServerUriOfPackageResourceFor(customizedSettings.HubPage));
+            NW.Run(GetServerUriOfPackageResourceFor(customizedSettings.HubPage));
         }
     }
 

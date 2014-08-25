@@ -403,6 +403,24 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Press Alt+F4 to quit this HtmlApp..
+        /// </summary>
+        public static string NWRunHelpContent {
+            get {
+                return ResourceManager.GetString("NWRunHelpContent", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Newgen HtmlApp Platform.
+        /// </summary>
+        public static string NWRunHelpTitle {
+            get {
+                return ResourceManager.GetString("NWRunHelpTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to ok.
         /// </summary>
         public static string OkButton {
@@ -835,11 +853,29 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to External Browser App Command.
+        /// </summary>
+        public static string TileContextMenuItemExternalCommand {
+            get {
+                return ResourceManager.GetString("TileContextMenuItemExternalCommand", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Internet Explorer (embedded).
         /// </summary>
         public static string TileContextMenuItemIE {
             get {
                 return ResourceManager.GetString("TileContextMenuItemIE", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Node Webkit.
+        /// </summary>
+        public static string TileContextMenuItemNW {
+            get {
+                return ResourceManager.GetString("TileContextMenuItemNW", resourceCulture);
             }
         }
         

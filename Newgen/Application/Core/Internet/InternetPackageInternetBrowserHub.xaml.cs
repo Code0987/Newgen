@@ -23,11 +23,6 @@ namespace Newgen.Packages.Internet {
         private Browser browser;
 
         /// <summary>
-        /// The home page cache
-        /// </summary>
-        private string homePageCache;
-
-        /// <summary>
         /// The package
         /// </summary>
         private InternetPackage package;
@@ -45,7 +40,7 @@ namespace Newgen.Packages.Internet {
             InitializeComponent();
 
             browser = new IEBasedBrowser(new WebBrowser());
-            
+
             SearchPanel.Children.Add(browser.Provider as UIElement);
 
             // Configure it
@@ -96,25 +91,6 @@ namespace Newgen.Packages.Internet {
                 OnHomeButtonMouseLeftButtonUp(null, null);
             }
         }
-
-        /// <summary>
-        /// Gets the content of the home page.
-        /// </summary>
-        /// <returns>System.String.</returns>
-        /// <remarks>...</remarks>
-        private string GetHomePageContent() {
-            if (string.IsNullOrWhiteSpace(homePageCache))
-                try {
-                    homePageCache = File.ReadAllText("Resources/HtmlApp/HomePage.html");
-                    homePageCache = homePageCache
-                        .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
-                        .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))
-                        ;
-                }
-                catch /* Eat */ { homePageCache = string.Empty; }
-            return homePageCache;
-        }
-
         /// <summary>
         /// Handles the <see cref="E:BackButtonMouseLeftButtonUp" /> event.
         /// </summary>
@@ -217,7 +193,7 @@ namespace Newgen.Packages.Internet {
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnHomeButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            browser.Navigate(InternetPackageSettings.DefaultLocation, GetHomePageContent());
+            browser.Navigate(InternetPackageSettings.DefaultLocation, File.ReadAllText(InternetPackage.GetDefaultPagePath()));
         }
 
         /// <summary>

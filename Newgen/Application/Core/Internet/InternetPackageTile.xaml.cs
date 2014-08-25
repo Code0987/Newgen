@@ -3,6 +3,7 @@ using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using NodeWebkit;
 
 namespace Newgen.Packages.Internet {
 
@@ -31,6 +32,8 @@ namespace Newgen.Packages.Internet {
             this.package = package;
 
             InitializeComponent();
+
+            MenuItemExternalCommand.Text = package.CustomizedSettings.ExternalBrowserCommand;
         }
 
         /// <summary>
@@ -56,7 +59,15 @@ namespace Newgen.Packages.Internet {
                     p.Start();
                 }
                 catch (Exception ex) {
-                    Api.Logger.LogError("Unable to launch external browser !.", ex);
+                    Api.Logger.LogError("Unable to launch external browser !", ex);
+                }
+            }
+            else if (package.CustomizedSettings.RenderingMode == RenderingMode.NW) {
+                try {
+                    NW.Run(InternetPackage.GetDefaultPagePath()); // HACK: Pass default url to NW.
+                }
+                catch (Exception ex) {
+                    Api.Logger.LogError("Unable to run NW !", ex);
                 }
             }
             else {
@@ -112,6 +123,20 @@ namespace Newgen.Packages.Internet {
         }
 
         /// <summary>
+        /// Handles the <see cref="E:MenuItemNWClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMenuItemNWClick(object sender, System.Windows.RoutedEventArgs e) {
+            try {
+                package.CustomizedSettings.RenderingMode = RenderingMode.NW;
+                UpdateColor();
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+        }
+
+        /// <summary>
         /// Users the control mouse left button up.
         /// </summary>
         /// <param name="sender">The sender.</param>
@@ -129,14 +154,35 @@ namespace Newgen.Packages.Internet {
             try {
                 if (package.CustomizedSettings.RenderingMode == RenderingMode.External) {
                     this.MenuItemExternal.Background = new SolidColorBrush(Colors.DarkGray);
+                    this.MenuItemNW.Background = new SolidColorBrush(Colors.Transparent);
+                    this.MenuItemIE.Background = new SolidColorBrush(Colors.Transparent);
+                }
+                else if (package.CustomizedSettings.RenderingMode == RenderingMode.NW) {
+                    this.MenuItemExternal.Background = new SolidColorBrush(Colors.Transparent);
+                    this.MenuItemNW.Background = new SolidColorBrush(Colors.DarkGray);
                     this.MenuItemIE.Background = new SolidColorBrush(Colors.Transparent);
                 }
                 else {
-                    this.MenuItemIE.Background = new SolidColorBrush(Colors.DarkGray);
                     this.MenuItemExternal.Background = new SolidColorBrush(Colors.Transparent);
+                    this.MenuItemNW.Background = new SolidColorBrush(Colors.Transparent);
+                    this.MenuItemIE.Background = new SolidColorBrush(Colors.DarkGray);
                 }
             }
             catch /* Eat */ { /* Tasty ? */ }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:MenuItemExternalCommandTextChanged" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMenuItemExternalCommandTextChanged(object sender, TextChangedEventArgs e) {
+            var textBox = sender as TextBox;
+
+            if (!string.IsNullOrWhiteSpace(textBox.Text))
+                if (!textBox.Text.Equals(package.CustomizedSettings.ExternalBrowserCommand, StringComparison.InvariantCultureIgnoreCase))
+                    package.CustomizedSettings.ExternalBrowserCommand = textBox.Text;
         }
     }
 }

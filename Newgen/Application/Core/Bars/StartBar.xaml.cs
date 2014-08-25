@@ -254,7 +254,7 @@ namespace Newgen {
         private void OnSettingsButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             CloseToolbar();
 
-            SettingsHub.ShowHub();
+            (new SettingsHub()).Show();
         }
 
         /// <summary>

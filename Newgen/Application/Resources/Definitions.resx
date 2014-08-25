@@ -438,4 +438,16 @@
   <data name="Internet" xml:space="preserve">
     <value>Internet</value>
   </data>
+  <data name="TileContextMenuItemNW" xml:space="preserve">
+    <value>Node Webkit</value>
+  </data>
+  <data name="TileContextMenuItemExternalCommand" xml:space="preserve">
+    <value>External Browser App Command</value>
+  </data>
+  <data name="NWRunHelpTitle" xml:space="preserve">
+    <value>Newgen HtmlApp Platform</value>
+  </data>
+  <data name="NWRunHelpContent" xml:space="preserve">
+    <value>Press Alt+F4 to quit this HtmlApp.</value>
+  </data>
 </root>

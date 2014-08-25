@@ -206,12 +206,44 @@ key
                 (current, text) => {
                     if (string.IsNullOrWhiteSpace(text))
                         return;
-                    
+
                     try {
                         action(current, text);
                     }
                     catch /* Eat */ { }
                 });
+        }
+
+        /// <summary>
+        /// Fixes the windows taskbar.
+        /// </summary>
+        /// <remarks>...</remarks>
+        internal static void FixWindowsTaskbar() {
+            try {
+                IntPtr taskbar = WinAPI.FindWindow("Shell_TrayWnd", "");
+                IntPtr hwndOrb = WinAPI.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
+                (App.Screen).Width = SystemParameters.PrimaryScreenWidth;
+
+                if (Settings.Current.ShowTaskbarAlways) {
+                    (App.Screen).Height = SystemParameters.WorkArea.Height;
+                    (App.Screen).Top = SystemParameters.WorkArea.Top;
+                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Show);
+                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Show);
+                }
+                else if (Settings.Current.ShowTaskbar) {
+                    (App.Screen).Height = SystemParameters.PrimaryScreenHeight;
+                    (App.Screen).Top = 0;
+                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Show);
+                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Show);
+                }
+                else {
+                    (App.Screen).Height = SystemParameters.PrimaryScreenHeight;
+                    (App.Screen).Top = 0;
+                    WinAPI.ShowWindow(taskbar, WindowShowStyle.Hide);
+                    WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Hide);
+                }
+            }
+            catch { }
         }
     }
 }
