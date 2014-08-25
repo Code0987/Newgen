@@ -469,9 +469,9 @@ namespace Newgen.Packages {
 
                     // Defaults
                     if (!IsInitialized(Internet.InternetPackage.PackageId))
-                        Load(Internet.InternetPackage.Create());
+                        Load(Internet.InternetPackage.Create(), true);
                     if (!IsInitialized(Notifications.NotificationsPackage.PackageId))
-                        Load(Notifications.NotificationsPackage.Create());
+                        Load(Notifications.NotificationsPackage.Create(), true);
 
                     Api.Logger.LogInformation(string.Format("Scanned all packages."));
                 });
