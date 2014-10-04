@@ -6,6 +6,7 @@ using System.Linq;
 using System.Windows.Media.Imaging;
 using System;
 using libns;
+using System.Windows.Media;
 
 namespace Newgen.Packages.Notifications {
 
@@ -22,6 +23,15 @@ namespace Newgen.Packages.Notifications {
             InitializeComponent();
 
             DataContext = n;
+
+            if (n.Title.Contains("Error"))
+                Background = new SolidColorBrush(Color.FromArgb(0x3F, 0xFF, 0x54, 0x54));
+            if (n.Title.Contains("Warning"))
+                Background = new SolidColorBrush(Color.FromArgb(0x3F, 0xFF, 0xD0, 0x52));
+            if (n.Title.Contains("Debug"))
+                Background = new SolidColorBrush(Color.FromArgb(0x3F, 0xB0, 0x52, 0xFF));
+            if (n.Title.Contains("Information"))
+                Background = new SolidColorBrush(Color.FromArgb(0x3F, 0x40, 0xAF, 0xFB));
         }
 
         /// <summary>
@@ -34,7 +44,7 @@ namespace Newgen.Packages.Notifications {
             var n = DataContext as Notification;
             if (n != null)
                 return;
-            var m = n.Other as Action;
+            var m = n[typeof(Action)] as Action;
             if (m != null)
                 m();
         }

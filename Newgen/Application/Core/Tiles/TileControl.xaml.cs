@@ -180,7 +180,6 @@ namespace Newgen.Packages {
         /// </summary>
         /// <remarks>...</remarks>
         public void Unload() {
-            PackageManager.Current.Unload(package.Metadata.Id);
             LayoutRoot.Child = null;
         }
 

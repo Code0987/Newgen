@@ -12,7 +12,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using iFramework.Security.Licensing;
 
 namespace Newgen {
 
@@ -35,52 +34,26 @@ namespace Newgen {
         /// <param name="sender">The sender.</param>
         /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnLoaded(object sender, RoutedEventArgs e) {
+        void OnLoaded(object sender, RoutedEventArgs e) {
             try {
-                EnableWidgetLock.IsChecked = Settings.Current.IsTilesLockEnabled;
+                TilesSizeSlider.Value = (double)Settings.Current.MinTileHeight;
+                TilesSizeSlider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(TilesSizeScale_ValueChanged);
 
-                double tilesheight = (App.Screen).TilesControl.ActualHeight - (20);
-                double rh = ((tilesheight - Settings.Current.TileSpacing * 2) / 3);
-
-                TilesSizeScale.Maximum = (double)rh;
-                TilesSizeScale.Minimum = 90.0;
-                TilesSizeScale.Value = (double)Settings.Current.MinTileHeight;
-                TilesSizeScale.ValueChanged += new RoutedPropertyChangedEventHandler<double>(TilesSizeScale_ValueChanged);
-                ValTilesSpacing.Text = Settings.Current.TileSpacing.ToString();
-                ValTilesSpacing.TextChanged += new TextChangedEventHandler(ValTilesSpacing_TextChanged);
+                TilesSpacingSlider.Value = Settings.Current.TileSpacing;
+                TilesSpacingSlider.ValueChanged += new RoutedPropertyChangedEventHandler<double>(TilesSpacingSlider_ValueChanged);
 
             }
             catch /* Eat */ { /* Tasty ? */ }
         }
 
-        private void Apply() {
-            Settings.Current.IsTilesLockEnabled = (bool)EnableWidgetLock.IsChecked;
-
+        void TilesSpacingSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            if (TilesSpacingSlider.Value > 0)
+                Settings.Current.TileSpacing = Convert.ToInt32(TilesSpacingSlider.Value);
         }
-
-
-
-        private void ValTilesSpacing_TextChanged(object sender, TextChangedEventArgs e) {
-            try {
-                if (string.IsNullOrEmpty(ValTilesSpacing.Text) || string.IsNullOrWhiteSpace(ValTilesSpacing.Text)) {
-                    return;
-                }
-
-                int anInteger;
-                anInteger = Convert.ToInt32(ValTilesSpacing.Text);
-                anInteger = int.Parse(ValTilesSpacing.Text);
-                bool valid = anInteger > 0;
-                if (valid) {
-                    Settings.Current.TileSpacing = anInteger;
-                }
-            }
-            catch {
-                ValTilesSpacing.Text = Settings.Current.LockScreenTime.ToString();
-            }
-        }
-        private void TilesSizeScale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
-            Settings.Current.MinTileWidth = TilesSizeScale.Value;
-            Settings.Current.MinTileHeight = TilesSizeScale.Value;
+        
+        void TilesSizeScale_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
+            Settings.Current.MinTileWidth = TilesSizeSlider.Value;
+            Settings.Current.MinTileHeight = TilesSizeSlider.Value;
         }
 
     }

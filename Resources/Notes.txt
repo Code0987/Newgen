@@ -21,7 +21,7 @@ Package format
         Launcher for Apps, Files, Urls
         Internal integrated package
 
-Packages
+    Packages
 
     Help package
         HTML based help slideshow

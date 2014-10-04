@@ -1,0 +1,81 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<DirectedGraph GraphDirection="LeftToRight" xmlns="http://schemas.microsoft.com/vs/2009/dgml">
+  <Nodes>
+    <Node Id="Application\Application" Label="Application" Category="Project" />
+    <Node Id="DotNetZip 1.9.3" Label="DotNetZip 1.9.3" Category="Package" />
+    <Node Id="Facebook 6.8.0" Label="Facebook 6.8.0" Category="Package" />
+    <Node Id="Google.Apis 1.9.0" Label="Google.Apis 1.9.0" Category="Package" />
+    <Node Id="Google.Apis.Analytics.v3 1.9.0.1030" Label="Google.Apis.Analytics.v3 1.9.0.1030" Category="Package" />
+    <Node Id="Google.Apis.Auth 1.9.0" Label="Google.Apis.Auth 1.9.0" Category="Package" />
+    <Node Id="Google.Apis.Core 1.9.0" Label="Google.Apis.Core 1.9.0" Category="Package" />
+    <Node Id="Google.GData.AccessControl 2.2.0.0" Label="Google.GData.AccessControl 2.2.0.0" Category="Package" />
+    <Node Id="Google.GData.Calendar 2.2.0.0" Label="Google.GData.Calendar 2.2.0.0" Category="Package" />
+    <Node Id="Google.GData.Client 2.2.0.0" Label="Google.GData.Client 2.2.0.0" Category="Package" />
+    <Node Id="Google.GData.Extensions 2.2.0.0" Label="Google.GData.Extensions 2.2.0.0" Category="Package" />
+    <Node Id="Hammock 1.3.1" Label="Hammock 1.3.1" Category="Package" />
+    <Node Id="log4net 2.0.3" Label="log4net 2.0.3" Category="Package" />
+    <Node Id="Microsoft.Bcl 1.1.9" Label="Microsoft.Bcl 1.1.9" Category="Package" />
+    <Node Id="Microsoft.Bcl.Async 1.0.168" Label="Microsoft.Bcl.Async 1.0.168" Category="Package" />
+    <Node Id="Microsoft.Bcl.Build 1.0.21" Label="Microsoft.Bcl.Build 1.0.21" Category="Package" />
+    <Node Id="Microsoft.Net.Http 2.2.28" Label="Microsoft.Net.Http 2.2.28" Category="Package" />
+    <Node Id="Microsoft.WindowsAPICodePack-Core 1.1.0.2" Label="Microsoft.WindowsAPICodePack-Core 1.1.0.2" Category="Package" />
+    <Node Id="Microsoft.WindowsAPICodePack-Shell 1.1.0.0" Label="Microsoft.WindowsAPICodePack-Shell 1.1.0.0" Category="Package" />
+    <Node Id="Newtonsoft.Json 6.0.5" Label="Newtonsoft.Json 6.0.5" Category="Package" />
+    <Node Id="OpenPop.NET 2.0.6.1076" Label="OpenPop.NET 2.0.6.1076" Category="Package" />
+    <Node Id="TweetSharp 2.3.1" Label="TweetSharp 2.3.1" Category="Package" />
+    <Node Id="Zlib.Portable 1.10.0" Label="Zlib.Portable 1.10.0" Category="Package" />
+  </Nodes>
+  <Links>
+    <Link Source="Google.Apis 1.9.0" Target="Google.Apis.Core 1.9.0" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.9.0" Target="Zlib.Portable 1.10.0" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.9.0" Target="Google.Apis.Core 1.9.0" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.9.0" Target="log4net 2.0.3" Category="Package Dependency" />
+    <Link Source="Google.Apis 1.9.0" Target="Zlib.Portable 1.10.0" Category="Package Dependency" />
+    <Link Source="Google.Apis.Analytics.v3 1.9.0.1030" Target="Google.Apis 1.9.0" Category="Package Dependency" />
+    <Link Source="Google.Apis.Analytics.v3 1.9.0.1030" Target="Google.Apis.Auth 1.9.0" Category="Package Dependency" />
+    <Link Source="Google.Apis.Auth 1.9.0" Target="Google.Apis.Core 1.9.0" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.9.0" Target="Microsoft.Bcl 1.1.9" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.9.0" Target="Microsoft.Bcl.Async 1.0.168" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.9.0" Target="Microsoft.Bcl.Build 1.0.21" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.9.0" Target="Microsoft.Net.Http 2.2.28" Category="Package Dependency" />
+    <Link Source="Google.Apis.Core 1.9.0" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Google.GData.AccessControl 2.2.0.0" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Google.GData.AccessControl 2.2.0.0" Target="Google.GData.Client 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Google.GData.AccessControl 2.2.0.0" Target="Google.GData.Extensions 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Google.GData.Calendar 2.2.0.0" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Google.GData.Calendar 2.2.0.0" Target="Google.GData.Client 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Google.GData.Calendar 2.2.0.0" Target="Google.GData.Extensions 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Google.GData.Calendar 2.2.0.0" Target="Google.GData.AccessControl 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Google.GData.Client 2.2.0.0" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Google.GData.Extensions 2.2.0.0" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Google.GData.Extensions 2.2.0.0" Target="Google.GData.Client 2.2.0.0" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl 1.1.9" Target="Microsoft.Bcl.Build 1.0.21" Category="Package Dependency" />
+    <Link Source="Microsoft.Bcl.Async 1.0.168" Target="Microsoft.Bcl 1.1.9" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.28" Target="Microsoft.Bcl 1.1.9" Category="Package Dependency" />
+    <Link Source="Microsoft.Net.Http 2.2.28" Target="Microsoft.Bcl.Build 1.0.21" Category="Package Dependency" />
+    <Link Source="Microsoft.WindowsAPICodePack-Shell 1.1.0.0" Target="Microsoft.WindowsAPICodePack-Core 1.1.0.2" Category="Package Dependency" />
+    <Link Source="TweetSharp 2.3.1" Target="Newtonsoft.Json 6.0.5" Category="Package Dependency" />
+    <Link Source="Application\Application" Target="DotNetZip 1.9.3" Category="Installed Package" />
+    <Link Source="Application\Application" Target="Facebook 6.8.0" Category="Installed Package" />
+    <Link Source="Application\Application" Target="Google.Apis.Analytics.v3 1.9.0.1030" Category="Installed Package" />
+    <Link Source="Application\Application" Target="Google.GData.Calendar 2.2.0.0" Category="Installed Package" />
+    <Link Source="Application\Application" Target="Hammock 1.3.1" Category="Installed Package" />
+    <Link Source="Application\Application" Target="Microsoft.WindowsAPICodePack-Shell 1.1.0.0" Category="Installed Package" />
+    <Link Source="Application\Application" Target="OpenPop.NET 2.0.6.1076" Category="Installed Package" />
+    <Link Source="Application\Application" Target="TweetSharp 2.3.1" Category="Installed Package" />
+  </Links>
+  <Categories>
+    <Category Id="Project" />
+    <Category Id="Package" />
+  </Categories>
+  <Styles>
+    <Style TargetType="Node" GroupLabel="Project" ValueLabel="True">
+      <Condition Expression="HasCategory('Project')" />
+      <Setter Property="Background" Value="Blue" />
+    </Style>
+    <Style TargetType="Link" GroupLabel="Package Dependency" ValueLabel="True">
+      <Condition Expression="HasCategory('Package Dependency')" />
+      <Setter Property="Background" Value="Yellow" />
+    </Style>
+  </Styles>
+</DirectedGraph>

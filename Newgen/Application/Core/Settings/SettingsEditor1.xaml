@@ -8,56 +8,56 @@
              xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
              xmlns:r="clr-namespace:Newgen.Resources"
              Loaded="OnLoaded"
-             Background="Wheat"
              d:DesignHeight="960"
              d:DesignWidth="480"
              mc:Ignorable="d">
+    <UserControl.Background>
+        <RadialGradientBrush Center="0,0" RadiusX="1" RadiusY="1" GradientOrigin="0,0">
+            <GradientStop Color="#285100FF" Offset="0"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+        </RadialGradientBrush>
+    </UserControl.Background>
     <Grid>
         <StackPanel>
+            <TextBlock Margin="0,0,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.SystemIntegration}" />
             <CheckBox Name="EnableAutoStartCheckBox"
-                      Click="OnEnableAutoStartCheckBoxClick"
+                      Margin="0,5,0,0"
                       Content="{x:Static r:Definitions.EnableAutoStart}"
                       IsChecked="{app:SettingsBinding Autostart}" />
 
             <TextBlock Margin="0,15,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Keyboard}" />
-
             <CheckBox Name="EnableHK"
                       Margin="0,5,0,0"
-                      Click="OnEnableHKClick"
                       Content="{x:Static r:Definitions.EnableHK}"
                       IsChecked="{app:SettingsBinding EnableHotkeys}" />
 
             <TextBlock Margin="0,10,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Time}" />
-
             <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TimeFormat}" />
             <WrapPanel Margin="30,0,0,0" Orientation="Horizontal">
                 <RadioButton Name="Time12HRadioButton"
                              Margin="0,0,20,0"
-                             Click="OnTime12HRadioButtonClick"
+                             Click="Time12HRadioButton_Click"
                              Content="{x:Static r:Definitions.TimeFormat12H}"
                              IsChecked="True" />
-                <RadioButton Name="Time24HRadioButton" Click="OnTime24HRadioButtonClick" Content="{x:Static r:Definitions.TimeFormat24H}" />
+                <RadioButton Name="Time24HRadioButton" Click="Time24HRadioButton_Click" Content="{x:Static r:Definitions.TimeFormat24H}" />
             </WrapPanel>
 
             <TextBlock Margin="0,10,0,0" Text="{x:Static r:Definitions.LockScreenTime}" />
-
-            <TextBox Name="LockScreenTimeTextBox" Margin="30,0,0,0" TextChanged="OnLockScreenTimeTextBoxTextChanged" />
+            <Slider Name="LockScreenTimeSlider" Margin="30,0,0,0" SmallChange="1" Maximum="1800" Minimum="-1" />
 
             <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Language}" />
+            <ComboBox Name="LanguageComboBox" Margin="0,5,0,0" />
 
-            <ComboBox Name="LanguageComboBox" Margin="0,5,0,0" SelectionChanged="OnLanguageComboBoxSelectionChanged" />
-
-            <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Text_Settings_ProvideUsageData}" />
+            <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.ProvideUsageData}" />
             <StackPanel Margin="0,5,0,0">
-                <CheckBox Content="{x:Static r:Definitions.Text_Settings_ProvideUsageData}" IsChecked="{app:SettingsBinding ProvideUsageData}" />
+                <CheckBox Content="{x:Static r:Definitions.ProvideUsageData}" IsChecked="{app:SettingsBinding ProvideUsageData}" />
                 <TextBlock Margin="0,6,0,0"
                            VerticalAlignment="Center"
                            FontSize="{StaticResource ContentFontSizeSmall}"
-                           Text="{x:Static r:Definitions.Text_Settings_ProvideUsageDataInfo}"
+                           Text="{x:Static r:Definitions.ProvideUsageDataDescription}"
                            TextTrimming="CharacterEllipsis"
                            TextWrapping="Wrap" />
             </StackPanel>
         </StackPanel>
-
     </Grid>
 </UserControl>

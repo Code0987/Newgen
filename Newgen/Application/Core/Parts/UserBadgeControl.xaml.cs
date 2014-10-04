@@ -1,4 +1,5 @@
-﻿using System;
+using Newgen.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -72,7 +73,7 @@ namespace Newgen {
                     File.Copy(dialog.FileName, Settings.Current.StartScreenUserImage, true);
                 }
                 catch /* Eat */ {
-                    MessageBox.Show("Problem with user account image.", "Error");
+                    MessageBox.Show(Definitions.ProblemWithUserAccountImage, Definitions.Error);
                 }
         }
         /// <summary>

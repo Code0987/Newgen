@@ -62,7 +62,7 @@ namespace Newgen.Packages.Notifications {
                 Name = PackageId,
                 AuthorEMailAddress = string.Format(WebShared.Newgen_Api_AuthorEMailFormat, PackageId),
                 AuthorWebsite = string.Format(WebShared.Newgen_Api_AuthorWebsiteUriFormat, PackageId),
-                Description = "Notification package (Internal/Local) shows notification right infont of your eyes across Newgen."
+                Description = "Notification package (Internal/Local) shows notification right in font of your eyes across Newgen."
             };
         }
 

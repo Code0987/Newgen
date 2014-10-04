@@ -133,7 +133,9 @@ namespace Newgen {
         /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
-
+            PackageManager.Current.GetPackage(PackageMetadata, f => { 
+                
+            });
         }
 
         /// <summary>

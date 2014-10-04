@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Globalization;
 using System.IO;
 using System.Linq;
@@ -8,8 +9,8 @@ using System.Windows.Data;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Xml.Serialization;
-using iFramework.Security.Licensing;
 using libns;
+using libns.Applied.Licensing;
 using libns.UI;
 using Newgen.Resources;
 
@@ -46,12 +47,26 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public Guid ActiveLicenseId { get; set; }
 
+        private bool autoStart;
         /// <summary>
         /// Gets or sets a value indicating whether this <see cref="Settings" /> is autostart.
         /// </summary>
         /// <value><c>true</c> if autostart; otherwise, <c>false</c>.</value>
         /// <remarks>...</remarks>
-        public bool Autostart { get; set; }
+        public bool Autostart { get { return autoStart; } set {
+            if(autoStart != value)
+                try {
+                    if (value)
+                        ApplicationExtensions.SetStartWithWindows(
+                            App.Current.Title,
+                            Process.GetCurrentProcess().MainModule.FileName
+                            );
+                    else
+                        ApplicationExtensions.RemoveStartWithWindows(App.Current.Title);
+                }
+                catch /* Eat */ { /* Tasty ? */ }
+
+            autoStart = value; } }
 
         /// <summary>
         /// Gets or sets the color of the background.
@@ -136,20 +151,6 @@ namespace Newgen {
         /// <value><c>true</c> if [show taskbar always]; otherwise, <c>false</c>.</value>
         /// <remarks>...</remarks>
         public bool ShowTaskbarAlways { get; set; }
-
-        /// <summary>
-        /// Gets or sets the slide show images.
-        /// </summary>
-        /// <value>The slide show images.</value>
-        /// <remarks>...</remarks>
-        public List<string> SlideShowImages { get; set; }
-
-        /// <summary>
-        /// Gets or sets the slide show time.
-        /// </summary>
-        /// <value>The slide show time.</value>
-        /// <remarks>...</remarks>
-        public int SlideShowTime { get; set; }
 
         /// <summary>
         /// Gets or sets the start text.
@@ -255,7 +256,6 @@ namespace Newgen {
             ActiveLicenseId = Guid.Empty;
 
             TileScreenGroups = new List<TileControlsGroupBarSettings>();
-            SlideShowImages = new List<string>();
 
             BackgroundColor = Color.FromRgb(55, 55, 55);
             ToolbarBackgroundColor = Color.FromRgb(35, 135, 200);
@@ -269,7 +269,6 @@ namespace Newgen {
 
             LockScreenTime = -1;
             TileSpacing = 8;
-            SlideShowTime = 30;
 
             Autostart = true;
             IsUserTileEnabled = true;
@@ -303,9 +302,7 @@ namespace Newgen {
 #if DEBUG
  true
 #else
- (ClientManager.Current.IsActive(ActiveLicenseId))
- &&
- (ClientManager.Current.IsValid(ActiveLicenseId, App.Current.Guid))
+ LicenseManager.Current.IsValid(id: ActiveLicenseId, productId: App.Current.Guid.ToString())
 #endif
 ;
             }
@@ -321,8 +318,6 @@ namespace Newgen {
             // Update
 
             if (!IsProMode) {
-                SlideShowImages.Clear();
-
                 BackgroundColor = Color.FromRgb(55, 55, 55);
                 ToolbarBackgroundColor = Color.FromRgb(35, 135, 200);
 
@@ -330,7 +325,6 @@ namespace Newgen {
 
                 LockScreenTime = -1;
                 TileSpacing = 8;
-                SlideShowTime = 30;
 
                 IsUserTileEnabled = true;
                 UseBgImage = true;

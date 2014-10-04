@@ -8,6 +8,7 @@ namespace TodayPackage {
     /// </summary>
     public class Settings {
         internal const char ListItemPartsDelimiter = '@';
+        internal static readonly string ListItemDefault = string.Format("Waiting ...{0}...", ListItemPartsDelimiter);
 
         public List<string> Feeds { get; set; }
 

@@ -1,4 +1,5 @@
-﻿using System;
+using Newgen.Resources;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -13,7 +14,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using iFramework.Security.Licensing;
+using libns.Applied.Licensing;
+using NS.Web;
 
 namespace Newgen {
 
@@ -28,6 +30,8 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public SettingsEditor0() {
             InitializeComponent();
+
+            LicenseControl.LicenseManager.RequestEndpoint = new Uri(WebShared.libns_Applied_Licensing_Uri_NSApps_net);
         }
 
         /// <summary>
@@ -36,7 +40,7 @@ namespace Newgen {
         /// <param name="licenseId">The license identifier.</param>
         /// <remarks>...</remarks>
         private void OnLicenseControlActiveLicenseIdChanged(Guid licenseId) {
-            if (ClientManager.Current.IsValid(id: licenseId, productId: App.Current.Guid.ToString())) {
+            if (LicenseManager.Current.IsValid(id: licenseId, productId: App.Current.Guid.ToString())) {
                 Settings.Current.ActiveLicenseId = licenseId;
                 Settings.Current.Save();
             }
@@ -94,7 +98,7 @@ namespace Newgen {
         }
 
         private void ResetButton_Click(object sender, RoutedEventArgs e) {
-            if (MessageBox.Show("Do you want to reset Newgen settings (This will not remove your widgets, but a restart is required) ?", "Confirmation", MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
+            if (MessageBox.Show(Definitions.DoYouWantToResetNewgenSettingsThisWillNotRemoveYourWidgetsButARestartIsRequired, Definitions.Confirmation, MessageBoxButton.YesNo) == MessageBoxResult.Yes) {
                 try { if (File.Exists(Settings.FilePath)) File.Delete(Settings.FilePath); }
                 catch { }
             }

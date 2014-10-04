@@ -147,12 +147,13 @@ namespace Newgen.Packages.Internet {
         /// </summary>
         /// <returns>System.String.</returns>
         /// <remarks>...</remarks>
-        public static string GetDefaultPagePath() {
+        public static string GetHomePagePath(string url) {
             var content = File.ReadAllText(Path.Combine(App.Current.Location, "Resources/HtmlApp/HomePage-template.html"));
             try {
                 content = content
                     .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
                     .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))
+                    .Replace("{{Url}}", url)
                     ;
             }
             catch /* Eat */ { /* Tasty ? */ }

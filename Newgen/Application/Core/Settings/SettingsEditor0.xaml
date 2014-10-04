@@ -10,6 +10,12 @@
              d:DesignHeight="960"
              d:DesignWidth="480"
              mc:Ignorable="d">
+    <UserControl.Background>
+        <RadialGradientBrush Center="0,0" RadiusX="1" RadiusY="1" GradientOrigin="0,0">
+            <GradientStop Color="#280080FF" Offset="0"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+        </RadialGradientBrush>
+    </UserControl.Background>
     <Grid>
         <Image Width="128"
                Margin="300,0,0,0"
@@ -52,7 +58,7 @@
                        FontStyle="Italic"
                        Foreground="{StaticResource Brush_061}"
                        Text="{}{...}" />
-            <lc:LicenseControl xmlns:lc="clr-namespace:iFramework.Security.Licensing.UI"
+            <lc:LicenseControl xmlns:lc="clr-namespace:libns.Applied.Licensing.UI"
                                x:Name="LicenseControl"
                                Margin="-10"
                                ActiveLicenseIdChanged="OnLicenseControlActiveLicenseIdChanged"

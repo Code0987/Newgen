@@ -10,13 +10,19 @@
              d:DesignHeight="960"
              d:DesignWidth="480"
              mc:Ignorable="d">
+    <UserControl.Background>
+        <RadialGradientBrush Center="0,0" RadiusX="1" RadiusY="1" GradientOrigin="0,0">
+            <GradientStop Color="#2800FF0C" Offset="0"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+        </RadialGradientBrush>
+    </UserControl.Background>
     <Grid>
         <StackPanel>
-            <CheckBox Name="EnableWidgetLock" Content="{x:Static r:Definitions.LockWidgets}" />
-            <TextBlock x:Name="TextTilesSizeScale" Margin="0,5,0,0" Text="{x:Static r:Definitions.TilesSize}" />
-            <Slider Name="TilesSizeScale" Margin="30,0,0,0" SmallChange="1" />
+            <CheckBox IsChecked="{app:SettingsBinding IsTilesLockEnabled}" Content="{x:Static r:Definitions.TilesLock}" ToolTip="{x:Static r:Definitions.CheckToEnableOrDisableThisFeature}" />
+            <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TilesSize}" />
+            <Slider Name="TilesSizeSlider" Margin="30,0,0,0" SmallChange="1" Maximum="360" Minimum="90" />
             <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TilesSpacing}" />
-            <TextBox Name="ValTilesSpacing" Margin="30,0,0,0" />
+            <Slider Name="TilesSpacingSlider" Margin="30,0,0,0" SmallChange="1" Maximum="64" Minimum="0" />
         </StackPanel>
     </Grid>
 </UserControl>

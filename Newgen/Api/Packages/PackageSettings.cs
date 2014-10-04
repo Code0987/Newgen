@@ -2,20 +2,19 @@
 using System.Collections.Generic;
 using System.IO;
 using libns;
-using System.Runtime.Serialization;
-using System.Runtime.Serialization.Formatters.Binary;
-using System.Runtime.Serialization.Json;
 
 namespace Newgen.Packages {
+
     /// <summary>
     /// Class PackageSettings.
     /// </summary>
     /// <remarks>...</remarks>
     public class PackageSettings {
+
         /// <summary>
-        /// The package metadata mark
+        /// The customized key
         /// </summary>
-        public static readonly string CacheFilename = "Package.Settings";
+        public const string CustomizedKey = "Customized";
 
         /// <summary>
         /// Gets or sets the column.
@@ -27,7 +26,7 @@ namespace Newgen.Packages {
         /// <summary>
         /// Gets or sets a value indicating whether this instance is enabled.
         /// </summary>
-        /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c>.</value>
+        /// <value><c>true</c> if this instance is enabled; otherwise, <c>false</c> .</value>
         /// <remarks>...</remarks>
         public bool IsEnabled { get; set; }
 
@@ -53,7 +52,12 @@ namespace Newgen.Packages {
         public int Row { get; set; }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PackageSettings" /> class.
+        /// The package metadata mark
+        /// </summary>
+        public static readonly string CacheFilename = "Package.Settings";
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageSettings"/> class.
         /// </summary>
         /// <remarks>...</remarks>
         public PackageSettings() {
@@ -83,9 +87,11 @@ namespace Newgen.Packages {
         /// <returns>T.</returns>
         /// <remarks>...</remarks>
         public T Customize<T>(string key, Action<T> customizer = null) {
-            var value = (T)Activator.CreateInstance(typeof(T));
+            var value = Activator.CreateInstance<T>();
             try {
-                value = ObjectData[key].DeserializeFromJavascript<T>();
+                var value_des = ObjectData[key].DeserializeFromJavascript<T>();
+                if (value_des != null)
+                    value = value_des;
             }
             catch (Exception ex) { Api.Logger.LogError("Unable to read previous settings !", ex); }
             if (customizer != null) {
@@ -118,7 +124,7 @@ namespace Newgen.Packages {
         /// <param name="key">The key.</param>
         /// <returns>T.</returns>
         /// <remarks>...</remarks>
-        public T Customize<T>(T value, string key = "Customized") {
+        public T Customize<T>(T value, string key = CustomizedKey) {
             return Customize<T>(key, value);
         }
 
@@ -130,7 +136,7 @@ namespace Newgen.Packages {
         /// <param name="key">The key.</param>
         /// <returns>T.</returns>
         /// <remarks>...</remarks>
-        public T Customize<T>(Action<T> customizer = null, string key = "Customized") {
+        public T Customize<T>(Action<T> customizer = null, string key = CustomizedKey) {
             return Customize<T>(key, customizer);
         }
     }

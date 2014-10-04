@@ -32,49 +32,10 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Handles the <see cref="E:EnableAutoStartCheckBoxClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnEnableAutoStartCheckBoxClick(object sender, RoutedEventArgs e) {
-            try {
-                if (Settings.Current.Autostart)
-                    ApplicationExtensions.SetStartWithWindows(
-                        App.Current.Title,
-                        Process.GetCurrentProcess().MainModule.FileName
-                        );
-                else
-                    ApplicationExtensions.RemoveStartWithWindows(App.Current.Title);
-            }
-            catch /* Eat */ { /* Tasty ? */ }
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:EnableHKClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnEnableHKClick(object sender, RoutedEventArgs e) {
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:LanguageComboBoxSelectionChanged" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="SelectionChangedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnLanguageComboBoxSelectionChanged(object sender, SelectionChangedEventArgs e) {
-            if (LanguageComboBox.SelectedIndex > -1)
-                Settings.Current.Language = Settings.Current.Cultures[LanguageComboBox.SelectedIndex].Name;
-        }
-
-        /// <summary>
         /// Handles the <see cref="E:Loaded" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnLoaded(object sender, RoutedEventArgs e) {
             try {
@@ -84,49 +45,50 @@ namespace Newgen {
                     });
                 }
                 LanguageComboBox.Text = CultureInfo.GetCultureInfo(Settings.Current.Language).NativeName;
+                LanguageComboBox.SelectionChanged += LanguageComboBox_SelectionChanged;
 
                 if (Api.Settings.TimeMode == TimeMode.H12)
                     Time12HRadioButton.IsChecked = true;
                 if (Api.Settings.TimeMode == TimeMode.H24)
                     Time24HRadioButton.IsChecked = true;
-                LockScreenTimeTextBox.Text = Settings.Current.LockScreenTime.ToString();
 
-                //if (!Settings.IsProMode) {
-                //    EnableAutoStartCheckBox.IsEnabled = false;
-                //    EnableHK.IsEnabled = false;
-                //    Time12HRadioButton.IsEnabled = false;
-                //    Time24HRadioButton.IsEnabled = false;
-                //    LockScreenTimeTextBox.IsEnabled = false;
-                //}
+                LockScreenTimeSlider.Value = (double)Settings.Current.MinTileHeight;
+                LockScreenTimeSlider.ValueChanged += LockScreenTimeSlider_ValueChanged;
             }
             catch /* Eat */ { /* Tasty ? */ }
         }
 
         /// <summary>
-        /// Handles the <see cref="E:LockScreenTimeTextBoxTextChanged" /> event.
+        /// Locks the screen time slider_ value changed.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="TextChangedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The e.</param>
         /// <remarks>...</remarks>
-        private void OnLockScreenTimeTextBoxTextChanged(object sender, TextChangedEventArgs e) {
+        private void LockScreenTimeSlider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e) {
             try {
-                if (string.IsNullOrWhiteSpace(LockScreenTimeTextBox.Text))
-                    Settings.Current.LockScreenTime = -1;
-                else
-                    Settings.Current.LockScreenTime = int.Parse(LockScreenTimeTextBox.Text);
+                Settings.Current.LockScreenTime = (int)(LockScreenTimeSlider.Value);
             }
-            catch /* Eat */ {
-                LockScreenTimeTextBox.Text = Settings.Current.LockScreenTime.ToString();
-            }
+            catch /* Eat */ { /* Tasty ? */ }
+        }
+
+        /// <summary>
+        /// Handles the SelectionChanged event of the LanguageComboBox control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="SelectionChangedEventArgs" /> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void LanguageComboBox_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            if (LanguageComboBox.SelectedIndex > -1)
+                Settings.Current.Language = Settings.Current.Cultures[LanguageComboBox.SelectedIndex].Name;
         }
 
         /// <summary>
         /// Handles the <see cref="E:Time12HRadioButtonClick" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnTime12HRadioButtonClick(object sender, RoutedEventArgs e) {
+        private void Time12HRadioButton_Click(object sender, RoutedEventArgs e) {
             Api.Settings.TimeMode = TimeMode.H24;
         }
 
@@ -134,9 +96,9 @@ namespace Newgen {
         /// Handles the <see cref="E:Time24HRadioButtonClick" /> event.
         /// </summary>
         /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnTime24HRadioButtonClick(object sender, RoutedEventArgs e) {
+        private void Time24HRadioButton_Click(object sender, RoutedEventArgs e) {
             Api.Settings.TimeMode = TimeMode.H24;
         }
     }

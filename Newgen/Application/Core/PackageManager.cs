@@ -1,15 +1,12 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Reflection;
 using System.Threading.Tasks;
 using Ionic.Zip;
-using libns;
-using libns.Applied;
-using libns.Language;
-using libns.Native;
-using libns.Threading;
 
 /// <summary>
 /// The Core namespace.
@@ -36,6 +33,15 @@ namespace Newgen.Packages {
         public event Action<Package> Unloaded;
 
         /// <summary>
+        /// Gets the current.
+        /// </summary>
+        /// <value>The current.</value>
+        /// <remarks>...</remarks>
+        public static PackageManager Current {
+            get { return current ?? (current = new PackageManager()); }
+        }
+
+        /// <summary>
         /// The post remove mark
         /// </summary>
         public const string PostRemoveFilename = "Package.Remove";
@@ -51,26 +57,11 @@ namespace Newgen.Packages {
         public const string PostUpdateFilename = "Package.Update";
 
         /// <summary>
-        /// The current application domain
+        /// Gets or sets the downloads.
         /// </summary>
-        public AppDomain CurrentAppDomain;
-        /// <summary>
-        /// The current
-        /// </summary>
-        private static PackageManager current;
-
-        /// <summary>
-        /// The cache
-        /// </summary>
-        private List<Package> packages;
-        /// <summary>
-        /// Gets the current.
-        /// </summary>
-        /// <value>The current.</value>
+        /// <value>The downloads.</value>
         /// <remarks>...</remarks>
-        public static PackageManager Current {
-            get { return current ?? (current = new PackageManager()); }
-        }
+        public List<PackageManagerDownloadItem> Downloads { get; set; }
 
         /// <summary>
         /// Gets or sets the location.
@@ -89,13 +80,39 @@ namespace Newgen.Packages {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="PackageManager" /> class.
+        /// Gets or sets the web client.
+        /// </summary>
+        /// <value>The web client.</value>
+        /// <remarks>...</remarks>
+        public WebClient WebClient { get; set; }
+
+        /// <summary>
+        /// The current application domain
+        /// </summary>
+        public AppDomain CurrentAppDomain;
+
+        /// <summary>
+        /// The current
+        /// </summary>
+        private static PackageManager current;
+
+        /// <summary>
+        /// The cache
+        /// </summary>
+        private List<Package> packages;
+
+        /// <summary>
+        /// Initializes a new instance of the <see cref="PackageManager"/> class.
         /// </summary>
         /// <remarks>...</remarks>
         public PackageManager() {
             Location = Api.PackagesRoot;
 
             CurrentAppDomain = AppDomain.CurrentDomain;
+
+            WebClient = new WebClient() { BaseAddress = "" };
+            WebClient.DownloadProgressChanged += OnWebClientDownloadProgressChanged;
+            WebClient.DownloadFileCompleted += OnWebClientDownloadFileCompleted;
         }
 
         /// <summary>
@@ -192,6 +209,42 @@ namespace Newgen.Packages {
         }
 
         /// <summary>
+        /// Gets the package.
+        /// </summary>
+        /// <param name="metadata">The metadata.</param>
+        /// <param name="configurator">The configurator.</param>
+        /// <remarks>...</remarks>
+        public void GetPackage(PackageMetadata metadata, Action<PackageManagerDownloadItem> configurator) {
+            var item = Downloads.Where(f => f.Metadata == metadata).FirstOrDefault();
+
+            // Check if already downloaded
+            if (item != null) {
+                // Check
+                if (item.IsDownloaded && File.Exists(item.FileName)) {
+                    // File is present and downloaded completely.
+                    if (item.DownloadCompletedHandler != null)
+                        item.DownloadCompletedHandler(item, null);
+                    // So, return.
+                    return;
+                }
+                else
+                    // Something happened, restart download.
+                    Downloads.Remove(item);
+            }
+
+            item = new PackageManagerDownloadItem();
+
+            item.Location = InternalHelper.GetUpdatesUrlFor(metadata.Id);
+            item.FileName = Path.GetTempFileName(); // To reduce garbage around cache.
+
+            // Create entry.
+            Downloads.Add(item);
+
+            // Start download.
+            WebClient.DownloadFileAsync(item.Location, item.FileName, item);
+        }
+
+        /// <summary>
         /// Initializes from.
         /// </summary>
         /// <param name="package">The package.</param>
@@ -257,14 +310,14 @@ namespace Newgen.Packages {
                 catch /* Eat */ { /* Tasty ? */ }
 
             // Scan Internet
-            if (package == null)
+            if (package == null && !IsInitialized(Internet.InternetPackage.PackageId))
                 try {
                     package = Internet.InternetPackage.CreateFrom(location);
                 }
                 catch /* Eat */ { /* Tasty ? */ }
 
             // Scan notifications
-            if (package == null)
+            if (package == null && !IsInitialized(Notifications.NotificationsPackage.PackageId))
                 try {
                     package = Notifications.NotificationsPackage.CreateFrom(location);
                 }
@@ -283,7 +336,9 @@ namespace Newgen.Packages {
         /// Determines whether the specified package identifier is enabled.
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
-        /// <returns><c>true</c> if the specified package identifier is enabled; otherwise, <c>false</c>.</returns>
+        /// <returns>
+        /// <c>true</c> if the specified package identifier is enabled; otherwise, <c>false</c> .
+        /// </returns>
         /// <remarks>...</remarks>
         public bool IsEnabled(string packageId) {
             var package = Get(packageId);
@@ -294,7 +349,9 @@ namespace Newgen.Packages {
         /// Determines whether the specified package is enabled.
         /// </summary>
         /// <param name="package">The package.</param>
-        /// <returns><c>true</c> if the specified package is enabled; otherwise, <c>false</c>.</returns>
+        /// <returns>
+        /// <c>true</c> if the specified package is enabled; otherwise, <c>false</c> .
+        /// </returns>
         /// <remarks>...</remarks>
         public bool IsEnabled(Package package) {
             return package.Settings.IsEnabled;
@@ -304,7 +361,9 @@ namespace Newgen.Packages {
         /// Determines whether the specified package identifier is cached.
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
-        /// <returns><c>true</c> if the specified package identifier is cached; otherwise, <c>false</c>.</returns>
+        /// <returns>
+        /// <c>true</c> if the specified package identifier is cached; otherwise, <c>false</c> .
+        /// </returns>
         /// <remarks>...</remarks>
         public bool IsInitialized(string packageId) {
             return Packages.Any(f => f.Metadata.Id.Equals(packageId));
@@ -315,7 +374,8 @@ namespace Newgen.Packages {
         /// </summary>
         /// <param name="packageId">The package identifier.</param>
         /// <returns>
-        /// <c>true</c> if [is update available for] [the specified package identifier]; otherwise, <c>false</c>.
+        /// <c>true</c> if [is update available for] [the specified package identifier]; otherwise,
+        /// <c>false</c> .
         /// </returns>
         /// <remarks>...</remarks>
         public bool IsUpdateAvailableFor(string packageId) {
@@ -532,5 +592,83 @@ namespace Newgen.Packages {
             foreach (var package in Packages)
                 Unload(package);
         }
+
+        /// <summary>
+        /// Handles the <see cref="E:WebClientDownloadFileCompleted"/> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The <see cref="AsyncCompletedEventArgs"/> instance containing the event data.
+        /// </param>
+        /// <remarks>...</remarks>
+        private void OnWebClientDownloadFileCompleted(object sender, AsyncCompletedEventArgs e) {
+            var item = e.UserState as PackageManagerDownloadItem;
+
+            if (item != null) {
+                // Move the file to download cache.
+                if (!e.Cancelled && e.Error == null) {
+                    // Set flag
+                    item.IsDownloaded = true;
+
+                    try {
+                        var newFileName = Path.Combine(Api.CacheRoot, item.Metadata.Id);
+
+                        File.Move(item.FileName, newFileName);
+
+                        item.FileName = newFileName;
+                    }
+                    catch (Exception ex) { Api.Logger.LogError(ex.TargetSite.Name, ex); }
+                }
+
+                if (item.DownloadCompletedHandler != null)
+                    item.DownloadCompletedHandler(item, e);
+            }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:WebClientDownloadProgressChanged"/> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">
+        /// The <see cref="DownloadProgressChangedEventArgs"/> instance containing the event data.
+        /// </param>
+        /// <remarks>...</remarks>
+        private void OnWebClientDownloadProgressChanged(object sender, DownloadProgressChangedEventArgs e) {
+            var item = e.UserState as PackageManagerDownloadItem;
+
+            if (item != null && item.DownloadProgressHandler != null)
+                item.DownloadProgressHandler(sender, e);
+        }
+    }
+
+    /// <summary>
+    /// Class PackageManagerDownloadItem.
+    /// </summary>
+    /// <remarks>...</remarks>
+    public class PackageManagerDownloadItem {
+        /// <summary>
+        /// The download completed handler
+        /// </summary>
+        public Action<PackageManagerDownloadItem, AsyncCompletedEventArgs> DownloadCompletedHandler;
+        /// <summary>
+        /// The download progress handler
+        /// </summary>
+        public DownloadProgressChangedEventHandler DownloadProgressHandler;
+        /// <summary>
+        /// The file name
+        /// </summary>
+        public string FileName;
+        /// <summary>
+        /// The is downloaded
+        /// </summary>
+        public bool IsDownloaded;
+        /// <summary>
+        /// The location
+        /// </summary>
+        public Uri Location;
+        /// <summary>
+        /// The metadata
+        /// </summary>
+        public PackageMetadata Metadata;
     }
 }

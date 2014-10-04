@@ -4,13 +4,16 @@ using System.Drawing;
 using System.IO;
 using System.Linq;
 using System.ServiceModel.Syndication;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Interop;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using libns;
+using libns.Applied;
 using libns.Media.Imaging;
 using libns.Native;
+using libns.Threading;
 using Microsoft.WindowsAPICodePack.Shell;
 using Newgen.Packages;
 using NS.Web;
@@ -22,6 +25,7 @@ namespace Newgen {
     /// </summary>
     /// <remarks>...</remarks>
     public static class InternalHelper {
+
         /// <summary>
         /// The startup time
         /// </summary>
@@ -31,6 +35,15 @@ namespace Newgen {
         /// The feeds aggregator
         /// </summary>
         public static FeedsAggregator FeedsAggregator;
+
+#if !DEBUG
+
+        /// <summary>
+        /// The tracker
+        /// </summary>
+        internal static ExtendedTracker tracker;
+
+#endif
 
         /// <summary>
         /// Initializes static members of the <see cref="InternalHelper"/> class.
@@ -45,25 +58,61 @@ namespace Newgen {
 #if DEBUG
             FeedsAggregator.ExceptionOccurred += (o, e) => { throw e; };
 #endif
+
+#if !DEBUG
+
+            // Tracker
+            tracker = new ExtendedTracker(
+                NS.Web.WebShared.GoogleAnalytics_NSApps_net_Id,
+                NS.Web.WebShared.GoogleAnalytics_NSApps_net_Domain
+                );
+
+#endif
         }
 
         /// <summary>
-        /// Packages the feed item to metadata.
+        /// Fors the each HWND.
         /// </summary>
-        /// <param name="feedItem">The feed item.</param>
-        /// <returns>PackageMetadata.</returns>
+        /// <param name="w">The w.</param>
+        /// <param name="action">The action.</param>
         /// <remarks>...</remarks>
-        public static PackageMetadata PackageFeedItemToMetadata(this SyndicationItem feedItem) {
-            return new PackageMetadata() {
-                Id = feedItem.Id,
-                Name = feedItem.Title.Text,
-                Description = (feedItem.Summary == null ? string.Empty : feedItem.Summary.Text).Trim(),
-                Version = feedItem.PublishDate.UtcDateTime,
-                Author = feedItem.Authors.Select(f => f.Uri).Aggregate((f, g) => string.Join(" ", f, g)),
-                AuthorWebsite = "",//TODO: Fix
-                AuthorEMailAddress = "",//TODO: Fix
-                License = feedItem.Content == null ? string.Empty : feedItem.Content.ToString()//TODO: Fix
-            };
+        public static void ForEachHWND(this Window w, Action<IntPtr, string> action) {
+            WinAPI.ForEachVisibleWindow(
+                ((HwndSource)HwndSource.FromVisual(w)).Handle,
+                (current, text) => {
+                    if (string.IsNullOrWhiteSpace(text))
+                        return;
+
+                    try {
+                        action(current, text);
+                    }
+                    catch /* Eat */ { }
+                });
+        }
+
+        /// <summary>
+        /// Gets all icons.
+        /// </summary>
+        /// <param name="path">The path.</param>
+        /// <returns>Tuple&lt;ImageSource, System.Int32&gt;[].</returns>
+        /// <remarks>...</remarks>
+        public static Tuple<ImageSource, int>[] GetAllIcons(this string path) {
+            var icons = new List<Tuple<ImageSource, int>>();
+            var count = 0;
+            while (true) {
+                var icon = WinAPI.ShellThumbnail.ExtractIconFromExe(path, true, count);
+
+                if (icon == null)
+                    break;
+
+                icons.Add(Tuple.Create(
+                    icon.ToBitmap().ToBitmapSource() as ImageSource,
+                    count
+                    ));
+
+                count++;
+            }
+            return icons.ToArray();
         }
 
         /// <summary>
@@ -79,26 +128,6 @@ namespace Newgen {
                     return new BitmapImage(InternalHelper.GetUpdatesUrlFor(logoLink.Uri.OriginalString)); // TODO: Enable cache
             }
             return new BitmapImage(new Uri("/Resources/NWP_Icon.ico", UriKind.Relative));
-        }
-
-        /// <summary>
-        /// Gets the updates URL for.
-        /// </summary>
-        /// <param name="key">The key.</param>
-        /// <returns>Uri.</returns>
-        /// <remarks>...</remarks>
-        public static Uri GetUpdatesUrlFor(string key) {
-            return new Uri(string.Format
-(
-#if DEBUG
-"{0}/Cache/c3373d77-29c6-4670-8afb-43f0830bc3cf/14/{1}"
-#else
-"{0}/Cache/c3373d77-29c6-4670-8afb-43f0830bc3cf/14/{1}"
-#endif
-,
-WebShared.DataSiteUri,
-key
-));
         }
 
         /// <summary>
@@ -170,48 +199,60 @@ key
         }
 
         /// <summary>
-        /// Gets all icons.
+        /// Gets the updates URL for.
         /// </summary>
-        /// <param name="path">The path.</param>
-        /// <returns>Tuple&lt;ImageSource, System.Int32&gt;[].</returns>
+        /// <param name="key">The key.</param>
+        /// <returns>Uri.</returns>
         /// <remarks>...</remarks>
-        public static Tuple<ImageSource, int>[] GetAllIcons(this string path) {
-            var icons = new List<Tuple<ImageSource, int>>();
-            var count = 0;
-            while (true) {
-                var icon = WinAPI.ShellThumbnail.ExtractIconFromExe(path, true, count);
-
-                if (icon == null)
-                    break;
-
-                icons.Add(Tuple.Create(
-                    icon.ToBitmap().ToBitmapSource() as ImageSource,
-                    count
-                    ));
-
-                count++;
-            }
-            return icons.ToArray();
+        public static Uri GetUpdatesUrlFor(string key) {
+            return new Uri(string.Format("{0}/Cache/c3373d77-29c6-4670-8afb-43f0830bc3cf/14/{1}", WebShared.DataSiteUri, key));
         }
 
         /// <summary>
-        /// Fors the each HWND.
+        /// Packages the feed item to metadata.
         /// </summary>
-        /// <param name="w">The w.</param>
-        /// <param name="action">The action.</param>
+        /// <param name="feedItem">The feed item.</param>
+        /// <returns>PackageMetadata.</returns>
         /// <remarks>...</remarks>
-        public static void ForEachHWND(this Window w, Action<IntPtr, string> action) {
-            WinAPI.ForEachVisibleWindow(
-                ((HwndSource)HwndSource.FromVisual(w)).Handle,
-                (current, text) => {
-                    if (string.IsNullOrWhiteSpace(text))
-                        return;
+        public static PackageMetadata PackageFeedItemToMetadata(this SyndicationItem feedItem) {
+            return new PackageMetadata() {
+                Id = feedItem.Id,
+                Name = feedItem.Title.Text,
+                Description = (feedItem.Summary == null ? string.Empty : feedItem.Summary.Text).Trim(),
+                Version = feedItem.PublishDate.UtcDateTime,
+                Author = feedItem.Authors.Select(f => f.Uri).Aggregate((f, g) => string.Join(" ", f, g)),
+                AuthorWebsite = "",//TODO: Fix
+                AuthorEMailAddress = "",//TODO: Fix
+                License = feedItem.Content == null ? string.Empty : feedItem.Content.ToString()//TODO: Fix
+            };
+        }
 
-                    try {
-                        action(current, text);
-                    }
-                    catch /* Eat */ { }
-                });
+        /// <summary>
+        /// Sends the analytics.
+        /// </summary>
+        /// <returns>Task.</returns>
+        /// <remarks>...</remarks>
+        public static async Task SendAnalytics() { // TODO: Replace with universal GA library.
+            var uri = new Uri(Newgen.Resources.Definitions.Link_App);
+            var cat = Newgen.Resources.Definitions.Text_App;
+
+            try {
+                
+#if !DEBUG
+
+                await tracker
+                    .TrackEventAsync(cat, "Packages", "Loaded", PackageManager.Current.Packages.Count)
+                    .ConfigureIgnoreExceptions();
+                await tracker
+                    .TrackEventAsync(cat, "Packages", "Installed", PackageManager.Current.Packages.Count)
+                    .ConfigureIgnoreExceptions();
+                await tracker
+                    .TrackEventAsync(cat, "IsLicensePresent", Settings.IsProMode ? "Yes" : "No", 1)
+                    .ConfigureIgnoreExceptions();
+
+#endif
+            }
+            catch /* Eat */ { /* Tasty ? */ }
         }
 
         /// <summary>

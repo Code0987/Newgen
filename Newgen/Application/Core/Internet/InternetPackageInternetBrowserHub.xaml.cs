@@ -193,7 +193,8 @@ namespace Newgen.Packages.Internet {
         /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnHomeButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            browser.Navigate(InternetPackageSettings.DefaultLocation, File.ReadAllText(InternetPackage.GetDefaultPagePath()));
+            var path = InternetPackage.GetHomePagePath(InternetPackageSettings.DefaultLocation);
+            browser.Navigate(path, File.ReadAllText(path));
         }
 
         /// <summary>

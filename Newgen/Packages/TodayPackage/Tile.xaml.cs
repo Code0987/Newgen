@@ -139,7 +139,7 @@ namespace TodayPackage {
             try {
                 currentTextParts = (package.CustomizedSettings.List.Count > 0
                     ? package.CustomizedSettings.List[random.Next(package.CustomizedSettings.List.Count)]
-                    : string.Empty)
+                    : Settings.ListItemDefault)
                     .Split(Settings.ListItemPartsDelimiter);
 
                 (Content.Resources["TransitionAnimationOff"] as Storyboard).Begin();

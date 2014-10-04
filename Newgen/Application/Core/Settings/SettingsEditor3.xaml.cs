@@ -14,7 +14,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using iFramework.Security.Licensing;
 using libns.Native;
 
 namespace Newgen {
@@ -50,7 +49,7 @@ namespace Newgen {
 
         private void UpdateTaskBarPEXL() {
             try {
-
+                return;
                 //TODO:StartSystem.tbtimer.Stop();
 
                 ListBox_ItemsToExclude.Items.Clear();

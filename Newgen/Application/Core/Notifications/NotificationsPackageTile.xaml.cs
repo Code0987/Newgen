@@ -52,7 +52,7 @@ namespace Newgen.Packages.Notifications {
         /// <param name="args">The arguments.</param>
         /// <remarks>...</remarks>
         protected void OnLoggerLog(DynamicLog logger, LogLevel level, object message, System.Exception exception, object[] args) {
-            nm.ShowNotification(new Notification(level.ToString(), message.ToString()));
+            nm.ShowNotification(new Notification(level.ToString(), message.ToString(), 1000 * 30));
         }
 
         /// <summary>
@@ -64,9 +64,9 @@ namespace Newgen.Packages.Notifications {
         protected void OnNotificationLogic(DynamicNotificationManager manager, Notification n) {
             this.InvokeAsyncThreadSafe(() => {
                 var item = new NotificationsPackageTileItem(n);
-                n.Other = item;
-                ItemsContainer.Children.Add(item);
-                ItemsScrollViewer.ScrollToBottom();
+                n[typeof(NotificationsPackageTileItem)] = item;
+                ItemsContainer.Children.Insert(0, item);
+                ItemsScrollViewer.ScrollToTop();
             });
         }
 
@@ -78,7 +78,7 @@ namespace Newgen.Packages.Notifications {
         /// <remarks>...</remarks>
         protected void OnNotificationCompleteLogic(DynamicNotificationManager manager, Notification n) {
             this.InvokeAsyncThreadSafe(() => {
-                var item = n.Other as NotificationsPackageTileItem;
+                var item = n[typeof(NotificationsPackageTileItem)] as NotificationsPackageTileItem;
                 if (item != null)
                     ItemsContainer.Children.Remove(item);
             });

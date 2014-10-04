@@ -50,10 +50,10 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Internal%29.cs">
+    <Compile Include="..\..\..\..\Keys\WebShared%28Internal%29.cs">
       <Link>References\WebShared%28Internal%29.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\..\..\..\Data\Apps\Sandbox\Keys\WebShared%28Newgen.Api%29.cs">
+    <Compile Include="..\..\..\..\Keys\WebShared%28Newgen.Api%29.cs">
       <Link>References\WebShared%28Newgen.Api%29.cs</Link>
     </Compile>
     <Compile Include="ForecastItem.xaml.cs">

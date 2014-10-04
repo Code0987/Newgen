@@ -9,7 +9,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
-using EdgeJs;
 using libns;
 using libns.Applied;
 using libns.Language;
@@ -17,7 +16,6 @@ using libns.Native;
 using libns.Threading;
 using Newgen.Packages;
 using Newgen.Packages.HtmlApp;
-using Newgen.Packages.Notifications;
 
 namespace Newgen {
 
@@ -36,15 +34,6 @@ namespace Newgen {
         /// The object keyboard process
         /// </summary>
         private WinAPI.HookProc objKeyboardProcess;
-
-#if !DEBUG
-
-        /// <summary>
-        /// The tracker
-        /// </summary>
-        internal static ExtendedTracker tracker;
-
-#endif
 
         /// <summary>
         /// Gets the app icon.
@@ -95,7 +84,7 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="App" /> class.
+        /// Initializes a new instance of the <see cref="App"/> class.
         /// </summary>
         /// <remarks>...</remarks>
         public App() {
@@ -103,7 +92,7 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Finalizes an instance of the <see cref="App" /> class.
+        /// Finalizes an instance of the <see cref="App"/> class.
         /// </summary>
         /// <remarks>...</remarks>
         ~App() {
@@ -115,10 +104,9 @@ namespace Newgen {
         /// Handles the Startup event of the Application control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="StartupEventArgs" /> instance containing the event data.</param>
+        /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void Application_Startup(object sender, StartupEventArgs e) {
-
             // Helper registration
             this.RegisterApplication();
 
@@ -179,20 +167,8 @@ namespace Newgen {
 
 #if !DEBUG
 
-            // Tracker
-            tracker = new ExtendedTracker(
-                NS.Web.WebShared.GoogleAnalytics_NSApps_net_Id,
-                NS.Web.WebShared.GoogleAnalytics_NSApps_net_Domain
-                );
-
             // Run tracker under non-dispatcher context.
-            this.Dispatcher.RunFor(async () => {
-                var uri = new Uri(Newgen.Resources.Definitions.Link_App);
-
-                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "Packages", "Loaded", Settings.Current.LoadedWidgets.Count);
-                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "Packages", "Installed", PackageManager.Current.Packages.Count);
-                await tracker.TrackEventAsync(Newgen.Resources.Definitions.Text_App, "License", Settings.IsProMode ? "Full" : "Free", 1);
-            }, -1, TimeSpan.FromMinutes(45).TotalMilliseconds);
+            InternalHelper.SendAnalytics().ConfigureInstances(-1);
 
 #endif
         }
@@ -201,7 +177,7 @@ namespace Newgen {
         /// Handles the Exit event of the Application control.
         /// </summary>
         /// <param name="sender">The source of the event.</param>
-        /// <param name="e">The <see cref="ExitEventArgs" /> instance containing the event data.</param>
+        /// <param name="e">The <see cref="ExitEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void Application_Exit(object sender, ExitEventArgs e) {
             Api.OnPreFinalization();
@@ -232,7 +208,7 @@ namespace Newgen {
         /// </summary>
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">
-        /// The <see cref="System.Windows.Threading.DispatcherUnhandledExceptionEventArgs" />
+        /// The <see cref="System.Windows.Threading.DispatcherUnhandledExceptionEventArgs"/>
         /// instance containing the event data.
         /// </param>
         /// <remarks>...</remarks>
@@ -248,7 +224,6 @@ namespace Newgen {
         /// <remarks>...</remarks>
         private void OnMessageReceived(IntPtr hWnd, EMessage message) {
             switch (message.Key) {
-
             // Url
             case EMessage.UrlKey:
             case EMessage.InternetKey:

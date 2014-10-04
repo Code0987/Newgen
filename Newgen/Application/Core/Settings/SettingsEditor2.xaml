@@ -10,65 +10,67 @@
              d:DesignHeight="960"
              d:DesignWidth="480"
              mc:Ignorable="d">
+    <UserControl.Background>
+        <RadialGradientBrush Center="0,0" RadiusX="1" RadiusY="1" GradientOrigin="0,0">
+            <GradientStop Color="#28FF5D00" Offset="0"/>
+            <GradientStop Color="#00000000" Offset="1"/>
+        </RadialGradientBrush>
+    </UserControl.Background>
     <Grid>
         <StackPanel>
-            <CheckBox Name="EnableShowTaskbarACheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowTaskbarA}" />
-            <CheckBox Name="EnableShowTaskbarCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowTaskbar}" />
-            <CheckBox Name="EnableUseTBCheckBox" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableTB}" />
-            <CheckBox Name="EnableUserTile" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableUserTile}" />
-            <CheckBox Name="EnableBgImage" Click="CheckBoxClick" Content="{x:Static r:Definitions.BgImgUse}" />
-            <DockPanel Margin="30,0,0,0">
+            <CheckBox Content="{x:Static r:Definitions.EnableShowTaskbarA}" IsChecked="{app:SettingsBinding ShowTaskbarAlways}" />
+            <CheckBox Content="{x:Static r:Definitions.EnableShowTaskbar}" IsChecked="{app:SettingsBinding ShowTaskbar}" />
+            <CheckBox Content="{x:Static r:Definitions.EnableTB}" IsChecked="{app:SettingsBinding UseThumbailsBar}" />
+            <CheckBox Content="{x:Static r:Definitions.EnableUserTile}" IsChecked="{app:SettingsBinding IsUserTileEnabled}" />
+            
+            <CheckBox Content="{x:Static r:Definitions.BgImgUse}" IsChecked="{app:SettingsBinding UseBgImage}" />
+            <DockPanel Margin="30,0,0,0" IsEnabled="{app:SettingsBinding UseBgImage}">
                 <Button Name="ChangeBgImg"
-                                    HorizontalAlignment="Left"
-                                    Click="ChangeBgImgClick"
-                                    Content="{x:Static r:Definitions.BgImgSelect}" />
+                        HorizontalAlignment="Left"
+                        Click="ChangeBgImgClick"
+                        Content="{x:Static r:Definitions.BgImgSelect}" />
             </DockPanel>
-            <TextBlock x:Name="TextBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.Bg}" />
-            <DockPanel Margin="30,0,0,0">
-                <Rectangle Name="NewgenBgColor"
-                                       Width="40"
-                                       Height="40"
-                                       HorizontalAlignment="Left"
-                                       Fill="#FF250931"
-                                       Stroke="LightGray"
-                                       StrokeThickness="2" />
-                <Button Name="ChangeBgColorButton"
-                                    HorizontalAlignment="Left"
-                                    Click="ChangeBgColorButtonClick"
-                                    Content="{x:Static r:Definitions.ChangeBg}" />
-            </DockPanel>
-            <CheckBox Name="Enable_OOBE_SS" Click="CheckBoxClick" Content="{x:Static r:Definitions.StartScreenSSEnable}" />
-            <StackPanel x:Name="OOBE_SS" Margin="30,0,0,0">
-                <Button Name="ChangeSSImgs"
-                                    HorizontalAlignment="Left"
-                                    Click="ChangeSSImgs_Click"
-                                    Content="{x:Static r:Definitions.StartScreenSSImgSelect}" />
-                <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.StartScreenSSTimeFrame}" />
-                <TextBox Name="ValStartScreenSSTimeFrame" Margin="0,0,0,0" Text="15" />
+            
+            <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.Bg}" />
+            <StackPanel>
+                <DockPanel Margin="30,0,0,0">
+                    <Rectangle Name="NewgenBgColor"
+                               Width="40"
+                               Height="40"
+                               HorizontalAlignment="Left"
+                               Fill="#FF250931"
+                               Stroke="LightGray"
+                               StrokeThickness="2" />
+                    <Button Name="ChangeBgColorButton"
+                            HorizontalAlignment="Left"
+                            Click="ChangeBgColorButtonClick"
+                            Content="{x:Static r:Definitions.ChangeBg}" />
+                </DockPanel>
+                <TextBlock Text="{x:Static r:Definitions.BgAlpha}" Margin="30,5,0,0" />
+                <Slider Name="BgColorAlpha"
+                        Margin="30,0,0,0"
+                        LargeChange="5"
+                        Maximum="255"
+                        Minimum="1"
+                        SmallChange="1"
+                        Value="255" />
             </StackPanel>
 
-            <TextBlock x:Name="TextBgTrans" Margin="0,5,0,0" Text="{x:Static r:Definitions.BgAlpha}" />
-            <Slider Name="BgColorAlpha"
-                                Margin="30,0,0,10"
-                                LargeChange="5"
-                                Maximum="255"
-                                Minimum="1"
-                                SmallChange="1"
-                                Value="255" />
-            <CheckBox Name="EnableStartBarAlways" Click="CheckBoxClick" Content="{x:Static r:Definitions.EnableShowStartbarA}" />
+
+            <CheckBox Name="EnableStartBarAlways" IsChecked="{app:SettingsBinding ShowStartbarAlways}" Content="{x:Static r:Definitions.EnableShowStartbarA}" />
             <TextBlock x:Name="TextStartBatBgColor" Margin="0,5,0,0" Text="{x:Static r:Definitions.StartBarBg}" />
             <DockPanel Margin="30,0,0,0">
                 <Rectangle Name="StartBarBgColor"
-                                       Width="40"
-                                       Height="40"
-                                       Margin="0,0,0,0"
-                                       HorizontalAlignment="Left"
-                                       Stroke="LightGray"
-                                       StrokeThickness="2" />
+                           Width="40"
+                           Height="40"
+                           Margin="0,0,0,0"
+                           HorizontalAlignment="Left"
+                           Stroke="LightGray"
+                           StrokeThickness="2" />
                 <Button Name="ChangeStartBarBgColorButton"
-                                    HorizontalAlignment="Left"
-                                    Click="ChangeStartBarBgColorButton_Click"
-                                    Content="{x:Static r:Definitions.StartBarBgChange}" />
+                        HorizontalAlignment="Left"
+                        Click="ChangeStartBarBgColorButton_Click"
+                        Content="{x:Static r:Definitions.StartBarBgChange}" />
             </DockPanel>
             <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.StartScreenTitle}" />
             <TextBox Name="ValStartScreenTitle" Margin="30,0,0,0" />

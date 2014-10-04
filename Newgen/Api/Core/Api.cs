@@ -1,6 +1,7 @@
 ﻿using System;
 using System.IO;
 using System.Windows;
+using System.Windows.Controls;
 using libns;
 using libns.Communication.IPC;
 
@@ -100,6 +101,13 @@ namespace Newgen {
         public static ExtendedApplication Host { get; internal set; }
 
         /// <summary>
+        /// Gets or sets the background canvas.
+        /// </summary>
+        /// <value>The background canvas.</value>
+        /// <remarks>...</remarks>
+        public static Canvas BackgroundCanvas { get; set; }
+
+        /// <summary>
         /// Gets the logger.
         /// </summary>
         /// <value>The logger.</value>
@@ -188,7 +196,12 @@ namespace Newgen {
         public static void OnPreInitialization(ExtendedApplication host) {
             Host = host;
 
-            Logger = Logger.CreateFileLogger(LoggerName, CacheRoot);
+            Logger = Logger.CreateFileLogger(LoggerName, CacheRoot
+#if DEBUG
+                , "%I.log"
+#else
+#endif
+                );
 
             Messenger = new SimpleWindowsMessaging<EMessage>();
 

@@ -1,4 +1,5 @@
-﻿using System;
+using Newgen.Resources;
+using System;
 using System.Diagnostics;
 using System.Windows;
 using System.Windows.Controls;
@@ -59,15 +60,15 @@ namespace Newgen.Packages.Internet {
                     p.Start();
                 }
                 catch (Exception ex) {
-                    Api.Logger.LogError("Unable to launch external browser !", ex);
+                    Api.Logger.LogError(Definitions.UnableToLaunchExternalBrowser, ex);
                 }
             }
             else if (package.CustomizedSettings.RenderingMode == RenderingMode.NW) {
                 try {
-                    NW.Run(InternetPackage.GetDefaultPagePath()); // HACK: Pass default url to NW.
+                    NW.Run(InternetPackage.GetHomePagePath(url));
                 }
                 catch (Exception ex) {
-                    Api.Logger.LogError("Unable to run NW !", ex);
+                    Api.Logger.LogError(Definitions.UnableToRunNW, ex);
                 }
             }
             else {

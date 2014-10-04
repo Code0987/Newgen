@@ -1,4 +1,5 @@
-﻿using System;
+using Newgen.Resources;
+using System;
 using System.IO;
 using System.Windows;
 using Microsoft.Win32;
@@ -96,7 +97,7 @@ namespace Newgen.Packages.AppLink {
                 IconImage.Source = ((AppLinkPackageTile)package.Tile).Icon.Source;
             }
             catch (Exception) {
-                MessageBox.Show(Api.MSG_ER_FEATURE, "Error");
+                MessageBox.Show(Api.MSG_ER_FEATURE, Definitions.Error);
             }
         }
     }

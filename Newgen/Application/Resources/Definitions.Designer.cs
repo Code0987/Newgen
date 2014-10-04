@@ -196,6 +196,24 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Check or click to enable/disable this feature..
+        /// </summary>
+        public static string CheckToEnableOrDisableThisFeature {
+            get {
+                return ResourceManager.GetString("CheckToEnableOrDisableThisFeature", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirmation.
+        /// </summary>
+        public static string Confirmation {
+            get {
+                return ResourceManager.GetString("Confirmation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Licensed under Type 2 License of NS. ( http://NSApps.net/License ).
         /// </summary>
         public static string Copyright {
@@ -219,6 +237,27 @@ namespace Newgen.Resources {
         public static string DisableStartBarClock {
             get {
                 return ResourceManager.GetString("DisableStartBarClock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want copy of downloaded update file, in case the update installation failed ?
+        ///
+        ///(Note: File will be copied to your desktop.).
+        /// </summary>
+        public static string DoYouWantCopyOfDownloadedUpdateFileInCaseTheUpdateInstallationFailedNoteFileWillBeCopiedToYourDesktop {
+            get {
+                return ResourceManager.GetString("DoYouWantCopyOfDownloadedUpdateFileInCaseTheUpdateInstallationFailedNoteFileWillB" +
+                        "eCopiedToYourDesktop", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Do you want to reset Newgen settings (This will not remove your widgets, but a restart is required) ?.
+        /// </summary>
+        public static string DoYouWantToResetNewgenSettingsThisWillNotRemoveYourWidgetsButARestartIsRequired {
+            get {
+                return ResourceManager.GetString("DoYouWantToResetNewgenSettingsThisWillNotRemoveYourWidgetsButARestartIsRequired", resourceCulture);
             }
         }
         
@@ -304,6 +343,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Error.
+        /// </summary>
+        public static string Error {
+            get {
+                return ResourceManager.GetString("Error", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exit Newgen.
         /// </summary>
         public static string ExitItem {
@@ -376,7 +424,7 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to http://NSApps.net/Apps/Newgen.
+        ///   Looks up a localized string similar to https://NSApps.net/Apps/Newgen.
         /// </summary>
         public static string Link_App {
             get {
@@ -385,20 +433,11 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Lock screen time (in minutes) (use blank or -1 for no screen):.
+        ///   Looks up a localized string similar to Lock screen time (in minutes) (-1 to disable):.
         /// </summary>
         public static string LockScreenTime {
             get {
                 return ResourceManager.GetString("LockScreenTime", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Lock widgets in their places, i.e. disable re-arrangment of widgets.
-        /// </summary>
-        public static string LockWidgets {
-            get {
-                return ResourceManager.GetString("LockWidgets", resourceCulture);
             }
         }
         
@@ -493,11 +532,38 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Problem with user account image..
+        /// </summary>
+        public static string ProblemWithUserAccountImage {
+            get {
+                return ResourceManager.GetString("ProblemWithUserAccountImage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to profile.
         /// </summary>
         public static string Profile {
             get {
                 return ResourceManager.GetString("Profile", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provide Usage Data.
+        /// </summary>
+        public static string ProvideUsageData {
+            get {
+                return ResourceManager.GetString("ProvideUsageData", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Help us by providing application usage data for beter application experience and services. No private or personal data will be collected, neither will be shared..
+        /// </summary>
+        public static string ProvideUsageDataDescription {
+            get {
+                return ResourceManager.GetString("ProvideUsageDataDescription", resourceCulture);
             }
         }
         
@@ -718,6 +784,15 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to System integration.
+        /// </summary>
+        public static string SystemIntegration {
+            get {
+                return ResourceManager.GetString("SystemIntegration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to TaskBar.
         /// </summary>
         public static string TaskBar {
@@ -795,24 +870,6 @@ namespace Newgen.Resources {
         public static string Text_Previous {
             get {
                 return ResourceManager.GetString("Text_Previous", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Provide Usage Data.
-        /// </summary>
-        public static string Text_Settings_ProvideUsageData {
-            get {
-                return ResourceManager.GetString("Text_Settings_ProvideUsageData", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Help us by providing application usage data for beter application experience and services. No private or personal data will be collected, neither will be shared..
-        /// </summary>
-        public static string Text_Settings_ProvideUsageDataInfo {
-            get {
-                return ResourceManager.GetString("Text_Settings_ProvideUsageDataInfo", resourceCulture);
             }
         }
         
@@ -898,7 +955,16 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Tiles size (*):.
+        ///   Looks up a localized string similar to Lock tiles in their places, i.e. disable re-arrangment of tiles.
+        /// </summary>
+        public static string TilesLock {
+            get {
+                return ResourceManager.GetString("TilesLock", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Tiles size (Restart needed !).
         /// </summary>
         public static string TilesSize {
             get {
@@ -907,7 +973,7 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Space between tiles (*):.
+        ///   Looks up a localized string similar to Space between tiles (Restart needed !).
         /// </summary>
         public static string TilesSpacing {
             get {
@@ -975,6 +1041,24 @@ namespace Newgen.Resources {
         public static string UNA {
             get {
                 return ResourceManager.GetString("UNA", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to launch external browser !.
+        /// </summary>
+        public static string UnableToLaunchExternalBrowser {
+            get {
+                return ResourceManager.GetString("UnableToLaunchExternalBrowser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unable to run NW !.
+        /// </summary>
+        public static string UnableToRunNW {
+            get {
+                return ResourceManager.GetString("UnableToRunNW", resourceCulture);
             }
         }
         

@@ -162,6 +162,12 @@
   <data name="ChangeTileColor" xml:space="preserve">
     <value>Change tile color</value>
   </data>
+  <data name="CheckToEnableOrDisableThisFeature" xml:space="preserve">
+    <value>Check or click to enable/disable this feature.</value>
+  </data>
+  <data name="Confirmation" xml:space="preserve">
+    <value>Confirmation</value>
+  </data>
   <data name="Copyright" xml:space="preserve">
     <value>Licensed under Type 2 License of NS. ( http://NSApps.net/License )</value>
   </data>
@@ -170,6 +176,14 @@
   </data>
   <data name="DisableStartBarClock" xml:space="preserve">
     <value>Disable StartBar Clock</value>
+  </data>
+  <data name="DoYouWantCopyOfDownloadedUpdateFileInCaseTheUpdateInstallationFailedNoteFileWillBeCopiedToYourDesktop" xml:space="preserve">
+    <value>Do you want copy of downloaded update file, in case the update installation failed ?
+
+(Note: File will be copied to your desktop.)</value>
+  </data>
+  <data name="DoYouWantToResetNewgenSettingsThisWillNotRemoveYourWidgetsButARestartIsRequired" xml:space="preserve">
+    <value>Do you want to reset Newgen settings (This will not remove your widgets, but a restart is required) ?</value>
   </data>
   <data name="EnableAutoStart" xml:space="preserve">
     <value>Start Newgen when Windows loads</value>
@@ -198,6 +212,9 @@
   <data name="EnableUserTile" xml:space="preserve">
     <value>Enable UserBadgeControl (User name and Picture) on main screen. (*)</value>
   </data>
+  <data name="Error" xml:space="preserve">
+    <value>Error</value>
+  </data>
   <data name="ExitItem" xml:space="preserve">
     <value>Exit Newgen</value>
   </data>
@@ -210,6 +227,9 @@
   <data name="GuideFirst_Welcome_Msg2" xml:space="preserve">
     <value>A product by NS. © 2014 NS. All rights reserved.</value>
   </data>
+  <data name="Internet" xml:space="preserve">
+    <value>Internet</value>
+  </data>
   <data name="Item" xml:space="preserve">
     <value>Settings</value>
   </data>
@@ -220,13 +240,16 @@
     <value>Language</value>
   </data>
   <data name="Link_App" xml:space="preserve">
-    <value>http://NSApps.net/Apps/Newgen</value>
+    <value>https://NSApps.net/Apps/Newgen</value>
   </data>
   <data name="LockScreenTime" xml:space="preserve">
-    <value>Lock screen time (in minutes) (use blank or -1 for no screen):</value>
+    <value>Lock screen time (in minutes) (-1 to disable):</value>
   </data>
-  <data name="LockWidgets" xml:space="preserve">
-    <value>Lock widgets in their places, i.e. disable re-arrangment of widgets</value>
+  <data name="NWRunHelpContent" xml:space="preserve">
+    <value>Press Alt+F4 to quit this HtmlApp.</value>
+  </data>
+  <data name="NWRunHelpTitle" xml:space="preserve">
+    <value>Newgen HtmlApp Platform</value>
   </data>
   <data name="OkButton" xml:space="preserve">
     <value>ok</value>
@@ -252,6 +275,9 @@
   <data name="PinWebItem" xml:space="preserve">
     <value>Pin website / url</value>
   </data>
+  <data name="ProblemWithUserAccountImage" xml:space="preserve">
+    <value>Problem with user account image.</value>
+  </data>
   <data name="Profile" xml:space="preserve">
     <value>profile</value>
   </data>
@@ -260,6 +286,9 @@
   </data>
   <data name="RemoveItem" xml:space="preserve">
     <value>Unpin</value>
+  </data>
+  <data name="ResetTileColor" xml:space="preserve">
+    <value>Reset tile color (Restart needed !)</value>
   </data>
   <data name="Restart" xml:space="preserve">
     <value>* Some Changes will be applied after restarting Newgen.</value>
@@ -296,6 +325,9 @@
   </data>
   <data name="StartBarLogoChange" xml:space="preserve">
     <value>change</value>
+  </data>
+  <data name="StartBarSettingsItem" xml:space="preserve">
+    <value>Settings</value>
   </data>
   <data name="StartItem" xml:space="preserve">
     <value>Start</value>
@@ -348,10 +380,10 @@
   <data name="Text_Previous" xml:space="preserve">
     <value>previous ...</value>
   </data>
-  <data name="Text_Settings_ProvideUsageData" xml:space="preserve">
+  <data name="ProvideUsageData" xml:space="preserve">
     <value>Provide Usage Data</value>
   </data>
-  <data name="Text_Settings_ProvideUsageDataInfo" xml:space="preserve">
+  <data name="ProvideUsageDataDescription" xml:space="preserve">
     <value>Help us by providing application usage data for beter application experience and services. No private or personal data will be collected, neither will be shared.</value>
   </data>
   <data name="Text_Skip" xml:space="preserve">
@@ -363,17 +395,32 @@
   <data name="TileContextMenuDisableItem" xml:space="preserve">
     <value>Unpin</value>
   </data>
+  <data name="TileContextMenuItemExternal" xml:space="preserve">
+    <value>External</value>
+  </data>
+  <data name="TileContextMenuItemExternalCommand" xml:space="preserve">
+    <value>External Browser App Command</value>
+  </data>
+  <data name="TileContextMenuItemIE" xml:space="preserve">
+    <value>Internet Explorer (embedded)</value>
+  </data>
+  <data name="TileContextMenuItemNW" xml:space="preserve">
+    <value>Node Webkit</value>
+  </data>
   <data name="TileContextMenuRemoveItem" xml:space="preserve">
     <value>Remove (Restart needed !)</value>
   </data>
   <data name="TilesItem" xml:space="preserve">
     <value>Pin widgets / tiles</value>
   </data>
+  <data name="TilesLock" xml:space="preserve">
+    <value>Lock tiles in their places, i.e. disable re-arrangment of tiles</value>
+  </data>
   <data name="TilesSize" xml:space="preserve">
-    <value>Tiles size (*):</value>
+    <value>Tiles size (Restart needed !)</value>
   </data>
   <data name="TilesSpacing" xml:space="preserve">
-    <value>Space between tiles (*):</value>
+    <value>Space between tiles (Restart needed !)</value>
   </data>
   <data name="Time" xml:space="preserve">
     <value>Time</value>
@@ -395,6 +442,12 @@
   </data>
   <data name="UNA" xml:space="preserve">
     <value>:) updated</value>
+  </data>
+  <data name="UnableToLaunchExternalBrowser" xml:space="preserve">
+    <value>Unable to launch external browser !</value>
+  </data>
+  <data name="UnableToRunNW" xml:space="preserve">
+    <value>Unable to run NW !</value>
   </data>
   <data name="UnLockItem" xml:space="preserve">
     <value>Un-Lock ( Enable Dragging )</value>
@@ -423,31 +476,7 @@
   <data name="WindowTitle" xml:space="preserve">
     <value>Newgen options</value>
   </data>
-  <data name="StartBarSettingsItem" xml:space="preserve">
-    <value>Settings</value>
-  </data>
-  <data name="ResetTileColor" xml:space="preserve">
-    <value>Reset tile color (Restart needed !)</value>
-  </data>
-  <data name="TileContextMenuItemExternal" xml:space="preserve">
-    <value>External</value>
-  </data>
-  <data name="TileContextMenuItemIE" xml:space="preserve">
-    <value>Internet Explorer (embedded)</value>
-  </data>
-  <data name="Internet" xml:space="preserve">
-    <value>Internet</value>
-  </data>
-  <data name="TileContextMenuItemNW" xml:space="preserve">
-    <value>Node Webkit</value>
-  </data>
-  <data name="TileContextMenuItemExternalCommand" xml:space="preserve">
-    <value>External Browser App Command</value>
-  </data>
-  <data name="NWRunHelpTitle" xml:space="preserve">
-    <value>Newgen HtmlApp Platform</value>
-  </data>
-  <data name="NWRunHelpContent" xml:space="preserve">
-    <value>Press Alt+F4 to quit this HtmlApp.</value>
+  <data name="SystemIntegration" xml:space="preserve">
+    <value>System integration</value>
   </data>
 </root>

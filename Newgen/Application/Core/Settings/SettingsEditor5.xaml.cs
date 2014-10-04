@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
@@ -16,7 +16,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Xml.Linq;
-using iFramework.Security.Licensing;
 using Newgen.Resources;
 using libns.Threading;
 
@@ -141,7 +140,7 @@ namespace Newgen {
                             try {
                                 UpdateButton.Content = Definitions.UNA;
                                 UpdateButton.IsEnabled = false;
-                                if (Api.ShowQAMessage("Do you want copy of downloaded update file, in case the update installation failed ?\n\n(Note: File will be copied to your desktop.)").HasFlag(MessageBoxResult.Yes)) {
+                                if (Api.ShowQAMessage(Definitions.DoYouWantCopyOfDownloadedUpdateFileInCaseTheUpdateInstallationFailedNoteFileWillBeCopiedToYourDesktop).HasFlag(MessageBoxResult.Yes)) {
                                     FileInfo fi = new FileInfo(tempdown);
                                     string desktop = Environment.GetFolderPath(Environment.SpecialFolder.DesktopDirectory, Environment.SpecialFolderOption.DoNotVerify);
                                     this.InvokeAsync(() => File.Copy(tempdown, desktop + "\\" + fi.Name)).Wait();

@@ -19,10 +19,10 @@
                     <SkewTransform AngleX="60" />
                 </TransformGroup>
             </LinearGradientBrush.Transform>
-            <GradientStop Offset="0.20" Color="#A377AE00" />
-            <GradientStop Offset=".25" Color="#A389C900" />
-            <GradientStop Offset="0.70" Color="#A389C900" />
-            <GradientStop Offset="0.75" Color="#A377AE00" />
+            <GradientStop Offset="0.20" Color="#D8F3F3F3" />
+            <GradientStop Offset="0.247" Color="#D8FFFFFF" />
+            <GradientStop Offset="0.70" Color="#D8FFFFFF" />
+            <GradientStop Offset="0.75" Color="#D8F3F3F3" />
         </LinearGradientBrush>
     </Border.Background>
     <Grid Margin="0" ClipToBounds="True">
@@ -67,7 +67,7 @@
         <app:DragScrollViewer x:Name="ItemsScrollViewer"
                               Grid.Row="1"
                               HorizontalScrollBarVisibility="Disabled"
-                              VerticalScrollBarVisibility="Auto">
+                              VerticalScrollBarVisibility="Hidden">
             <VirtualizingStackPanel x:Name="ItemsContainer" />
         </app:DragScrollViewer>
     </Grid>
