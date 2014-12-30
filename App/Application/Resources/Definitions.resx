@@ -395,18 +395,6 @@
   <data name="TileContextMenuDisableItem" xml:space="preserve">
     <value>Unpin</value>
   </data>
-  <data name="TileContextMenuItemExternal" xml:space="preserve">
-    <value>External</value>
-  </data>
-  <data name="TileContextMenuItemExternalCommand" xml:space="preserve">
-    <value>External Browser App Command</value>
-  </data>
-  <data name="TileContextMenuItemIE" xml:space="preserve">
-    <value>Internet Explorer (embedded)</value>
-  </data>
-  <data name="TileContextMenuItemNW" xml:space="preserve">
-    <value>Node Webkit</value>
-  </data>
   <data name="TileContextMenuRemoveItem" xml:space="preserve">
     <value>Remove (Restart needed !)</value>
   </data>
@@ -442,9 +430,6 @@
   </data>
   <data name="UNA" xml:space="preserve">
     <value>:) updated</value>
-  </data>
-  <data name="UnableToLaunchExternalBrowser" xml:space="preserve">
-    <value>Unable to launch external browser !</value>
   </data>
   <data name="UnableToRunNW" xml:space="preserve">
     <value>Unable to run NW !</value>

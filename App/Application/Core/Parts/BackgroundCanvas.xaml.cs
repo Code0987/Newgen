@@ -28,13 +28,6 @@ namespace Newgen {
                 catch /* Eat */ {
                     MessageBox.Show(Api.MSG_ER_FEATURE, Definitions.Error);
                 }
-
-            try {
-                Api.BackgroundCanvas = this;
-            }
-            catch /* Eat */ {
-                MessageBox.Show(Api.MSG_ER_FEATURE, Definitions.Error);
-            }
         }
     }
 }

@@ -45,7 +45,7 @@
                        MaxHeight="256"
                        HorizontalAlignment="Right"
                        VerticalAlignment="Top"
-                       Source="/Resources/Default.png"
+                       Source="/Newgen.Core;component/Resources/Default.png"
                        Stretch="None" />
                 <Button Margin="5"
                         HorizontalAlignment="Stretch"

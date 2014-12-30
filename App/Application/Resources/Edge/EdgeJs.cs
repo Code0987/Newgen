@@ -137,7 +137,7 @@ namespace EdgeJs {
         /// <returns>System.Int32.</returns>
         /// <remarks>...</remarks>
         [DllImport("kernel32.dll", EntryPoint = "LoadLibrary")]
-        private static extern int LoadLibrary([MarshalAs(UnmanagedType.LPStr)] string lpLibFileName);
+        public static extern int LoadLibrary([MarshalAs(UnmanagedType.LPStr)] string lpLibFileName);
 
         /// <summary>
         /// Nodes the start.
@@ -147,6 +147,6 @@ namespace EdgeJs {
         /// <returns>System.Int32.</returns>
         /// <remarks>...</remarks>
         [DllImport("node.dll", EntryPoint = "#585", CallingConvention = CallingConvention.Cdecl)]
-        private static extern int NodeStart(int argc, string[] argv);
+        public static extern int NodeStart(int argc, string[] argv);
     }
 }

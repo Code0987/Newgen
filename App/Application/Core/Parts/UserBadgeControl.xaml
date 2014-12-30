@@ -80,7 +80,7 @@
                Width="64"
                Height="64"
                po:Freeze="True"
-               Source="/Resources/Newgen_Icon.ico"
+               Source="/Newgen.Core;component/Resources/Newgen_Icon.ico"
                Stretch="Fill" />
     </Grid>
 </UserControl>

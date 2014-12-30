@@ -27,7 +27,7 @@ process.env['EDGE_NATIVE'] = process.env['EDGE_NATIVE'] ||
 var edge = require('./edge.js');
 
 var initialize = edge.func({
-    assemblyFile: __dirname + '\\..\\..\\Newgen.exe',
+    assemblyFile: __dirname + '\\..\\..\\Newgen.Core.dll',
     typeName: 'EdgeJs.Edge',
     methodName: 'InitializeInternal'
 });

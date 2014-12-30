@@ -901,42 +901,6 @@ namespace Newgen.Resources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to External.
-        /// </summary>
-        public static string TileContextMenuItemExternal {
-            get {
-                return ResourceManager.GetString("TileContextMenuItemExternal", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to External Browser App Command.
-        /// </summary>
-        public static string TileContextMenuItemExternalCommand {
-            get {
-                return ResourceManager.GetString("TileContextMenuItemExternalCommand", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Internet Explorer (embedded).
-        /// </summary>
-        public static string TileContextMenuItemIE {
-            get {
-                return ResourceManager.GetString("TileContextMenuItemIE", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Node Webkit.
-        /// </summary>
-        public static string TileContextMenuItemNW {
-            get {
-                return ResourceManager.GetString("TileContextMenuItemNW", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Remove (Restart needed !).
         /// </summary>
         public static string TileContextMenuRemoveItem {
@@ -1041,15 +1005,6 @@ namespace Newgen.Resources {
         public static string UNA {
             get {
                 return ResourceManager.GetString("UNA", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Unable to launch external browser !.
-        /// </summary>
-        public static string UnableToLaunchExternalBrowser {
-            get {
-                return ResourceManager.GetString("UnableToLaunchExternalBrowser", resourceCulture);
             }
         }
         

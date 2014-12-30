@@ -308,21 +308,7 @@ namespace Newgen.Packages {
                     package = AppLink.AppLinkPackage.CreateFrom(location);
                 }
                 catch /* Eat */ { /* Tasty ? */ }
-
-            // Scan Internet
-            if (package == null && !IsInitialized(Internet.InternetPackage.PackageId))
-                try {
-                    package = Internet.InternetPackage.CreateFrom(location);
-                }
-                catch /* Eat */ { /* Tasty ? */ }
-
-            // Scan notifications
-            if (package == null && !IsInitialized(Notifications.NotificationsPackage.PackageId))
-                try {
-                    package = Notifications.NotificationsPackage.CreateFrom(location);
-                }
-                catch /* Eat */ { /* Tasty ? */ }
-
+            
             // Cache
             if (package != null)
                 package = InitializeFrom(package);
@@ -530,12 +516,6 @@ namespace Newgen.Packages {
                         if (package != null)
                             Load(package);
                     }
-
-                    // Defaults
-                    if (!IsInitialized(Internet.InternetPackage.PackageId))
-                        Load(Internet.InternetPackage.Create(), true);
-                    if (!IsInitialized(Notifications.NotificationsPackage.PackageId))
-                        Load(Notifications.NotificationsPackage.Create(), true);
 
                     Api.Logger.LogInformation(string.Format("Scanned all packages."));
                 });

@@ -108,7 +108,7 @@
             <app:StartBarItem.Icon>
                 <VisualBrush Stretch="Uniform">
                     <VisualBrush.Visual>
-                        <Image Source="/Resources/Newgen_Icon.ico" />
+                        <Image Source="/Newgen.Core;component/Resources/Newgen_Icon.ico" />
                     </VisualBrush.Visual>
                 </VisualBrush>
             </app:StartBarItem.Icon>

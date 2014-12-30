@@ -99,14 +99,7 @@ namespace Newgen {
         /// <value>The host.</value>
         /// <remarks>...</remarks>
         public static ExtendedApplication Host { get; internal set; }
-
-        /// <summary>
-        /// Gets or sets the background canvas.
-        /// </summary>
-        /// <value>The background canvas.</value>
-        /// <remarks>...</remarks>
-        public static Canvas BackgroundCanvas { get; set; }
-
+        
         /// <summary>
         /// Gets the logger.
         /// </summary>

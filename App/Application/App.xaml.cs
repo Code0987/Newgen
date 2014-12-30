@@ -40,14 +40,14 @@ namespace Newgen {
         /// </summary>
         /// <value>The app icon.</value>
         /// <remarks>...</remarks>
-        public override System.Drawing.Icon AppIcon { get { return new System.Drawing.Icon(Application.GetResourceStream(new Uri("/Resources/Newgen_Icon.ico", UriKind.Relative)).Stream); } }
+        public override System.Drawing.Icon AppIcon { get { return new System.Drawing.Icon(Application.GetResourceStream(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)).Stream); } }
 
         /// <summary>
         /// Gets the app logo.
         /// </summary>
         /// <value>The app logo.</value>
         /// <remarks>...</remarks>
-        public override System.Windows.Media.Imaging.BitmapSource AppLogo { get { return new BitmapImage(new Uri("/Resources/Newgen_Icon.ico", UriKind.Relative)); } }
+        public override System.Windows.Media.Imaging.BitmapSource AppLogo { get { return new BitmapImage(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)); } }
 
         /// <summary>
         /// Gets the screen.
@@ -157,7 +157,7 @@ namespace Newgen {
             });
 
             // Load view
-            StartupUri = new Uri("Core/Screen.xaml", UriKind.Relative);
+            StartupUri = new Uri("/Newgen.Core;component/Core/Screen.xaml", UriKind.Relative);
 
             // Start server.
             try {

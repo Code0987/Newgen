@@ -1,5 +1,5 @@
 <SmartAssemblyProject ProjectId="{c38d3a81-1d22-4e81-b143-32dc460650b7}" Version="2.0">
-    <MainAssemblyFileName>..\..\Resources\bin\Debug\Newgen.exe</MainAssemblyFileName>
+    <MainAssemblyFileName>..\..\Resources\bin\Debug\Newgen.Core.exe</MainAssemblyFileName>
     <Configuration Name="Release">
         <Options>
             <DoNotAddPoweredByAttribute />
@@ -13,7 +13,7 @@
             <Debugging CreatePDB="1" />
         </Options>
         <ApplicationName />
-        <Destination DestinationFileName="..\..\Resources\bin\Debug\!Secure\Newgen.exe" />
+        <Destination DestinationFileName="..\..\Resources\bin\Debug\!Secure\Newgen.Core.dll" />
         <Assemblies>
             <Assembly AssemblyName="Newgen, Culture=neutral, PublicKeyToken=null">
                 <Merging>

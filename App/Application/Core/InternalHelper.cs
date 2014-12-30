@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.ServiceModel.Syndication;
 using System.Threading.Tasks;
 using System.Windows;
@@ -127,7 +128,7 @@ namespace Newgen {
                 if (logoLink != null)
                     return new BitmapImage(InternalHelper.GetUpdatesUrlFor(logoLink.Uri.OriginalString)); // TODO: Enable cache
             }
-            return new BitmapImage(new Uri("/Resources/NWP_Icon.ico", UriKind.Relative));
+            return new BitmapImage(new Uri("/Newgen.Core;component/Resources/NWP_Icon.ico", UriKind.Relative));
         }
 
         /// <summary>
@@ -192,7 +193,7 @@ namespace Newgen {
                 }
             }
             catch {
-                source = new BitmapImage(new Uri("/Resources/Default.png", UriKind.Relative));
+                source = new BitmapImage(new Uri("/Newgen.Core;component/Resources/Default.png", UriKind.Relative));
             }
 
             return source;
@@ -285,6 +286,28 @@ namespace Newgen {
                 }
             }
             catch { }
+        }
+        
+        /// <summary>
+        /// Gets the default page URL.
+        /// </summary>
+        /// <returns>System.String.</returns>
+        /// <remarks>...</remarks>
+        public static string GetHomePagePath(string url) {
+            var content = File.ReadAllText(Path.Combine(App.Current.Location, "Resources/HtmlApp/HomePage-template.html"));
+            try {
+                content = content
+                    .Replace("{{WelcomeMessage}}", string.Format("Hello {0} !", Environment.UserName))
+                    .Replace("{{InternetStatus}}", string.Format("{0}", NetworkInterface.GetIsNetworkAvailable() ? "Type your query / url below !" : "Turn on your `internet connection` to connect with world !"))
+                    .Replace("{{Url}}", url)
+                    ;
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+
+            var path = Path.Combine(App.Current.Location, "Resources/HtmlApp/HomePage.html");
+            File.WriteAllText(path, content);
+
+            return path;
         }
     }
 }

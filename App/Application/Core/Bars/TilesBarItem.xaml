@@ -81,7 +81,7 @@
                 Margin="5"
                 HorizontalAlignment="Center">
             <Border.Background>
-                <ImageBrush x:Name="IconImage" ImageSource="/Resources/NWP_Icon.ico" Stretch="UniformToFill" />
+                <ImageBrush x:Name="IconImage" ImageSource="/Newgen.Core;component/Resources/NWP_Icon.ico" Stretch="UniformToFill" />
             </Border.Background>
         </Border>
     </DockPanel>
