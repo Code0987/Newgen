@@ -1,0 +1,13 @@
+﻿<Grid x:Class="NotificationsPackage.SettingsEditorControl"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+      xmlns:lib="clr-namespace:NotificationsPackage"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+      xmlns:p="clr-namespace:NotificationsPackage.Properties"
+      d:DesignHeight="150"
+      d:DesignWidth="300"
+      mc:Ignorable="d">
+    <StackPanel Margin="0,5">
+    </StackPanel>
+</Grid>

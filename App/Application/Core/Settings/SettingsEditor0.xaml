@@ -1,7 +1,7 @@
 ﻿<UserControl x:Class="Newgen.SettingsEditor0"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:app="clr-namespace:Newgen"
+             xmlns:lib="clr-namespace:Newgen"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
@@ -16,7 +16,7 @@
             <GradientStop Color="#00000000" Offset="1"/>
         </RadialGradientBrush>
     </UserControl.Background>
-    <Grid>
+    <Grid Margin="10">
         <Image Width="128"
                Margin="300,0,0,0"
                HorizontalAlignment="Right"

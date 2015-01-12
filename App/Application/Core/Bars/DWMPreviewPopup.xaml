@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Newgen.DWMPreviewPopup"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:app="clr-namespace:Newgen"
+        xmlns:lib="clr-namespace:Newgen"
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:r="clr-namespace:Newgen.Resources"
         Width="300"
@@ -29,7 +29,7 @@
                               ShadowDepth="0" />
         </Border.Effect>
         <Border.Background>
-            <SolidColorBrush Color="{app:SettingsBinding ToolbarBackgroundColor}" />
+            <SolidColorBrush Color="{lib:SettingsBinding ToolbarBackgroundColor}" />
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>

@@ -1,9 +1,9 @@
 ﻿<UserControl x:Class="Newgen.SettingsEditor1"
              xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-             xmlns:app="clr-namespace:Newgen"
+             xmlns:lib="clr-namespace:Newgen"
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-             xmlns:libns="clr-namespace:libns;assembly=Newgen.Api"
+             xmlns:libns="clr-namespace:libns"
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
              xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
              xmlns:r="clr-namespace:Newgen.Resources"
@@ -17,19 +17,19 @@
             <GradientStop Color="#00000000" Offset="1"/>
         </RadialGradientBrush>
     </UserControl.Background>
-    <Grid>
+    <Grid Margin="10">
         <StackPanel>
             <TextBlock Margin="0,0,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.SystemIntegration}" />
             <CheckBox Name="EnableAutoStartCheckBox"
                       Margin="0,5,0,0"
                       Content="{x:Static r:Definitions.EnableAutoStart}"
-                      IsChecked="{app:SettingsBinding Autostart}" />
+                      IsChecked="{lib:SettingsBinding Autostart}" />
 
             <TextBlock Margin="0,15,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Keyboard}" />
             <CheckBox Name="EnableHK"
                       Margin="0,5,0,0"
                       Content="{x:Static r:Definitions.EnableHK}"
-                      IsChecked="{app:SettingsBinding EnableHotkeys}" />
+                      IsChecked="{lib:SettingsBinding EnableHotkeys}" />
 
             <TextBlock Margin="0,10,0,0" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.Time}" />
             <TextBlock Margin="0,5,0,0" Text="{x:Static r:Definitions.TimeFormat}" />
@@ -50,7 +50,7 @@
 
             <TextBlock Margin="0,25,0,5" FontSize="{StaticResource ContentFontSizeLarge}" Text="{x:Static r:Definitions.ProvideUsageData}" />
             <StackPanel Margin="0,5,0,0">
-                <CheckBox Content="{x:Static r:Definitions.ProvideUsageData}" IsChecked="{app:SettingsBinding ProvideUsageData}" />
+                <CheckBox Content="{x:Static r:Definitions.ProvideUsageData}" IsChecked="{lib:SettingsBinding ProvideUsageData}" />
                 <TextBlock Margin="0,6,0,0"
                            VerticalAlignment="Center"
                            FontSize="{StaticResource ContentFontSizeSmall}"

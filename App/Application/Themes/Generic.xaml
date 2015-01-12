@@ -4,7 +4,7 @@
                     xmlns:m="clr-namespace:Newgen">
     
     <ResourceDictionary.MergedDictionaries>
-        <ResourceDictionary Source="/Newgen.Api;component/Themes/Generic.xaml" />
+        <ResourceDictionary Source="/Newgen.Core;component/Themes/Theme.xaml" />
         <ResourceDictionary Source="/Newgen.Core;component/References/LicenseControl.Styles.xaml" />
     </ResourceDictionary.MergedDictionaries>
     

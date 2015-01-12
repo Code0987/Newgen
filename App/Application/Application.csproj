@@ -68,10 +68,6 @@
     <Reference Include="WindowsFormsIntegration" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api\Api.csproj">
-      <Project>{74cb342d-3d96-42d5-8b13-76306fe35380}</Project>
-      <Name>Api</Name>
-    </ProjectReference>
     <ProjectReference Include="Core.csproj">
       <Project>{79B4C045-E7E8-4C24-B3F0-D991C6B2779B}</Project>
       <Name>Core</Name>

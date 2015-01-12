@@ -1,7 +1,7 @@
 ﻿<Window x:Class="Newgen.Screen"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        xmlns:app="clr-namespace:Newgen"
+        xmlns:lib="clr-namespace:Newgen"
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:r="clr-namespace:Newgen.Resources"
         AllowsTransparency="True"
@@ -25,7 +25,7 @@
         </ResourceDictionary>
     </Window.Resources>
     <Grid x:Name="Root">
-        <app:BackgroundCanvas />
+        <lib:BackgroundCanvas />
         <Grid>
             <Grid.RowDefinitions>
                 <RowDefinition Height="Auto" />
@@ -47,10 +47,10 @@
                            Foreground="#C8FFFFFF"
                            MouseUp="OnTitleTextMouseUp"
                            po:Freeze="True"
-                           Text="{app:SettingsBinding StartText}" />
-                <app:UserBadgeControl x:Name="UserBadgeControl" Grid.Column="1" />
+                           Text="{lib:SettingsBinding StartText}" />
+                <lib:UserBadgeControl x:Name="UserBadgeControl" Grid.Column="1" />
             </Grid>
-            <app:TilesControl x:Name="TilesControl" Grid.Row="1" TilesPadding="118,0,0,0" />
+            <lib:TilesControl x:Name="TilesControl" Grid.Row="1" TilesPadding="118,0,0,0" />
         </Grid>
     </Grid>
 </Window>

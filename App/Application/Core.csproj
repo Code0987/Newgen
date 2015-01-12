@@ -103,9 +103,6 @@
     <Compile Include="..\..\..\Keys\WebShared%28libns.Applied.Licensing%29.cs">
       <Link>References\WebShared%28libns.Applied.Licensing%29.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\Keys\WebShared%28Newgen.Api%29.cs">
-      <Link>References\WebShared%28Newgen.Api%29.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\libns\libns.net\Applied\GoogleAnalyticsTracker.cs">
       <Link>References\GA\GoogleAnalyticsTracker.cs</Link>
     </Compile>
@@ -118,23 +115,118 @@
     <Compile Include="..\..\..\libns\libns.net\Applied\Licensing\Licensing.cs">
       <Link>References\Licensing.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Applied\WebTools.cs">
+      <Link>References\WebTools.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Collection\DictionaryExtensions.cs">
+      <Link>References\DictionaryExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Communication\IPC\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs">
+      <Link>References\SimpleWindowsMessaging{TWindowsMessagingMessage}.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Core\EventExtensions.cs">
+      <Link>References\EventExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Core\NotifyPropertyExtension.cs">
+      <Link>References\NotifyPropertyExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Core\StringExtensions.cs">
+      <Link>References\StringExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Core\TypeExtensions.cs">
+      <Link>References\TypeExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Exception\Logger.cs">
+      <Link>References\Logger.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\DataStoreHelper.cs">
+      <Link>References\DataStoreHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\SerializationExtensions.cs">
+      <Link>References\SerializationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\StorageExtensions.cs">
+      <Link>References\StorageExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\StreamExtensions.cs">
+      <Link>References\StreamExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Language\Parsers\ArgumentsParser.cs">
+      <Link>References\ArgumentsParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Media\Animation\AnimationExtensions.cs">
+      <Link>References\AnimationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Media\Imaging\ImagingBase.cs">
+      <Link>References\ImagingBase.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Media\Imaging\ImagingExtensions.cs">
+      <Link>References\ImagingExtensions.cs</Link>
+    </Compile>
     <Compile Include="..\..\..\libns\libns.net\Native\DeviceExtensions.cs">
       <Link>References\DeviceExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Native\WinAPI.cs">
+      <Link>References\WinAPI.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Native\WinAPIManagedHelper.cs">
+      <Link>References\WinAPIManagedHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\DispatcherThreading.cs">
+      <Link>References\DispatcherThreading.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\SingleInstanceHelper.cs">
+      <Link>References\SingleInstanceHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\Singleton.cs">
+      <Link>References\Singleton.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\TaskExtensions.cs">
+      <Link>References\TaskExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Threading\ThreadingExtensions.cs">
+      <Link>References\ThreadingExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\UI\ApplicationExtensions.cs">
+      <Link>References\ApplicationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\UI\ControlsExtensions.cs">
+      <Link>References\ControlsExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\UI\DWMThumbnailControl.cs">
       <Link>References\DWMThumbnailControl.cs</Link>
     </Compile>
+    <Compile Include="..\..\..\libns\libns.net\UI\MarkupExtension.cs">
+      <Link>References\MarkupExtension.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\UI\NotificationExtensions.cs">
+      <Link>References\NotificationExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Web\DownloadExtensions.cs">
+      <Link>References\DownloadExtensions.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Web\FeedsAggregator.cs">
+      <Link>References\FeedsAggregator.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Web\HttpExtensions.cs">
+      <Link>References\HttpExtensions.cs</Link>
+    </Compile>
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Api.cs" />
     <Compile Include="Core\Bars\DWMPreviewPopup.xaml.cs">
       <DependentUpon>DWMPreviewPopup.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\Browser.cs" />
+    <Compile Include="Core\Parts\Browser.cs" />
     <Compile Include="Core\HtmlApp\HtmlAppPackage.cs" />
+    <Compile Include="Core\PackageManager\Package.cs" />
+    <Compile Include="Core\PackageManager\PackageMetadata.cs" />
+    <Compile Include="Core\PackageManager\PackageSettings.cs" />
     <Compile Include="Core\Parts\BrowserControl.xaml.cs">
       <DependentUpon>BrowserControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Core\Parts\HubWindow.cs" />
     <Compile Include="Core\Parts\WaitWindow.xaml.cs">
       <DependentUpon>WaitWindow.xaml</DependentUpon>
     </Compile>
@@ -179,7 +271,7 @@
     <Compile Include="Core\AppLink\AppLinkPackageAddressBarWindow.xaml.cs">
       <DependentUpon>AppLinkPackageAddressBarWindow.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\DragScrollViewer.cs" />
+    <Compile Include="Core\Parts\DragScrollViewer.cs" />
     <Compile Include="Core\Screen.xaml.cs">
       <DependentUpon>Screen.xaml</DependentUpon>
     </Compile>
@@ -196,7 +288,7 @@
     <Compile Include="Core\AppLink\AppLinkPackageTile.xaml.cs">
       <DependentUpon>AppLinkPackageTile.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Core\PackageManager.cs" />
+    <Compile Include="Core\PackageManager\PackageManager.cs" />
     <Compile Include="Core\Store\StoreHub.xaml.cs">
       <DependentUpon>StoreHub.xaml</DependentUpon>
     </Compile>
@@ -250,6 +342,13 @@
     <Content Include="Resources\NodeWebkit\package-template.json">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
+    <Resource Include="Resources\Fonts\SourceSansPro-LightIt.otf" />
+    <Resource Include="Resources\Fonts\SourceSansPro-Light.otf" />
+    <Resource Include="Resources\Fonts\seguili.ttf" />
+    <Resource Include="Resources\Fonts\SegoeWP.ttf" />
+    <Resource Include="Resources\Fonts\SegoeWP-Light.ttf" />
+    <Resource Include="Resources\Fonts\segoeuil.ttf" />
+    <Resource Include="Resources\Fonts\OpenSans-Light.ttf" />
     <Reference Include="Facebook, Version=6.0.10.0, Culture=neutral, PublicKeyToken=58cb4f2111d1e6de, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\..\..\..\Apps\Ref\NuGetCache\packages\Facebook.6.8.0\lib\net45\Facebook.dll</HintPath>
@@ -386,12 +485,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\Api\Api.csproj">
-      <Project>{74cb342d-3d96-42d5-8b13-76306fe35380}</Project>
-      <Name>Api</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <EmbeddedResource Include="Resources\Definitions.resx">
       <Generator>PublicResXFileCodeGenerator</Generator>
       <SubType>Designer</SubType>
@@ -520,7 +613,43 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Themes\Fonts.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Core.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Themes\Generic.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Glyphs.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\MSControls.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Palette.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Theme.Metro.Light.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\Theme.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WPF.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Themes\WPFExplicit.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

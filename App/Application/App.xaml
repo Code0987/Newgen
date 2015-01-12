@@ -1,7 +1,7 @@
 ﻿<libns:ExtendedApplication x:Class="Newgen.App"
                          xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                          xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                         xmlns:libns="clr-namespace:libns;assembly=Newgen.Api"
+                         xmlns:libns="clr-namespace:libns"
                          DispatcherUnhandledException="Application_DispatcherUnhandledException"
                          Exit="Application_Exit"
                          Startup="Application_Startup">

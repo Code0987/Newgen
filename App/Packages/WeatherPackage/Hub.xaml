@@ -1,0 +1,95 @@
+﻿<Newgen:HubWindow x:Class="WeatherPackage.Hub"
+               xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+               xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+               xmlns:Properties="clr-namespace:WeatherPackage.Properties"
+               xmlns:Newgen="clr-namespace:Newgen;assembly=Newgen.Core"
+               xmlns:ctl="clr-namespace:WeatherPackage"
+               Title="{x:Static Properties:Resources.Text_Weather}"
+               Foreground="White"
+               Loaded="HubWindow_Loaded">
+    <Window.Background>
+        <LinearGradientBrush EndPoint="0.5,1" MappingMode="RelativeToBoundingBox" StartPoint="0.5,0">
+            <GradientStop Color="#E5000000"/>
+            <GradientStop Color="#E5573400" Offset="1"/>
+        </LinearGradientBrush>
+    </Window.Background>
+    <Grid Name="Root">
+        <Grid Margin="30">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+            </Grid.RowDefinitions>
+            <StackPanel HorizontalAlignment="Center" Orientation="Horizontal">
+                <Image Name="Image_WeatherIcon"
+                       Height="280"
+                       Source="Resources/weather_1.png"
+                       Stretch="UniformToFill" />
+                <StackPanel>
+                    <TextBlock Name="TextBox_CurrentLocation"
+                               Margin="0,0,0,-40"
+                               Text="Location"
+                               TextBlock.FontSize="60"
+                               TextBlock.FontWeight="Light" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Orientation="Horizontal">
+                            <TextBlock Name="TextBox_CurrentTemp"
+                                       VerticalAlignment="Bottom"
+                                       Text="0°"
+                                       TextBlock.FontSize="160"
+                                       TextBlock.FontWeight="Light" />
+                            <TextBlock Name="TextBox_CurrentLowTemp"
+                                       Margin="-40,0,0,30"
+                                       VerticalAlignment="Bottom"
+                                       Text="0°"
+                                       TextBlock.FontSize="36"
+                                       TextBlock.FontWeight="Light" />
+                        </StackPanel>
+                        <StackPanel Margin="30,0,40,30" VerticalAlignment="Bottom">
+                            <TextBlock Name="TextBox_CurrentSky"
+                                       DockPanel.Dock="Bottom"
+                                       Text="Sky"
+                                       TextBlock.FontSize="52"
+                                       TextBlock.FontWeight="Light" />
+                            <TextBlock Name="TextBox_CurrentFeelsLike"
+                                       DockPanel.Dock="Bottom"
+                                       Text="Feels like 0°"
+                                       TextBlock.FontSize="36"
+                                       TextBlock.FontWeight="Light" />
+                        </StackPanel>
+                        <StackPanel Margin="30,0,40,30" VerticalAlignment="Bottom">
+                            <TextBlock Name="TextBox_CurrentHumidity"
+                                       DockPanel.Dock="Bottom"
+                                       Text="0% Humidity"
+                                       TextBlock.FontSize="36"
+                                       TextBlock.FontWeight="Light" />
+                            <TextBlock Name="TextBox_CurrentPrecip"
+                                       DockPanel.Dock="Bottom"
+                                       Text="0% Chances of Rain"
+                                       TextBlock.FontSize="36"
+                                       TextBlock.FontWeight="Light" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </StackPanel>
+            <Grid x:Name="ForecastItems" Grid.Row="1" Margin="-15,30,-15,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <ctl:ForecastItem Grid.Column="0" Background="#3FB9007A" />
+                <ctl:ForecastItem Grid.Column="1" Background="#3FFF0000" />
+                <ctl:ForecastItem Grid.Column="2" Background="#3FFFC500" />
+                <ctl:ForecastItem Grid.Column="3" Background="#3F1A9100" />
+                <ctl:ForecastItem Grid.Column="4" Background="#3F002459" />
+            </Grid>
+        </Grid>
+        <Button Name="BackButton"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Click="OnBackButtonClick"
+                Style="{StaticResource HubBackButton}" />
+    </Grid>
+</Newgen:HubWindow>
