@@ -26,9 +26,6 @@ Simple package manager for any kind of packages.
             /version (text)
                 This contains version of package.
 
-            /logo (png)
-                This is max-resolution logo (image) file.
-
             /sources (text) [optional]
                 This is sources file, containing links for updating package.
                 {
