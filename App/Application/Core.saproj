@@ -1,12 +1,12 @@
 <SmartAssemblyProject ProjectId="{c38d3a81-1d22-4e81-b143-32dc460650b7}" Version="2.0">
-    <MainAssemblyFileName>..\..\Resources\bin\Debug\Newgen.Core.exe</MainAssemblyFileName>
+    <MainAssemblyFileName>..\..\Resources\bin\Debug\Newgen.Core.dll</MainAssemblyFileName>
     <Configuration Name="Release">
         <Options>
             <DoNotAddPoweredByAttribute />
             <ExceptionReporting Template="res:{SmartExceptions}.1033.dll" />
             <FeatureUsageReporting Template="res:SmartUsageWithUIConsentFirstRun1033.dll" />
             <StringsEncoding Compress="1" Encode="1" UseCache="1" />
-            <StrongNameSigning />
+            <StrongNameSigning KeyFileName="..\..\Resources\Tools\Newgen.snk" Sign="1" TamperProtect="0" />
             <OtherOptimizations />
             <Obfuscation FieldsNameMangling="1" NameMangling="1" />
             <OtherProtections SuppressIldasm="1" />
@@ -281,6 +281,16 @@
                     <Pruning />
                     <Obfuscation />
                 </Merging>
+            </Assembly>
+            <Assembly AssemblyName="Newgen.Core, Culture=neutral, PublicKeyToken=null">
+                <Merging>
+                    <ResourcesCompression />
+                    <MemberRefsProxy />
+                    <Pruning />
+                    <Obfuscation />
+                    <ControlFlow />
+                </Merging>
+                <Embedding />
             </Assembly>
         </Assemblies>
     </Configuration>

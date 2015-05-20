@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Controls;
 using libns;
 using libns.Communication.IPC;
+using libns.Logging;
 using Newgen.Packages;
 using NS.Web;
 
@@ -191,16 +192,16 @@ namespace Newgen {
         public static void OnPreInitialization(ExtendedApplication host) {
             Host = host;
 
-            Logger = Logger.CreateFileLogger(LoggerName, CacheRoot
-#if DEBUG
-                , "%I.log"
-#else
+            Logger = new Logger(LoggerName, new FileLogListener(
+                filelocation: CacheRoot
+#if DEBUG 
+                , buffer: 1
 #endif
-                );
+                ));
 
             Messenger = new SimpleWindowsMessaging<EMessage>();
 
-            Host.Exit += (s, e) => Logger.Close();
+            Host.Exit += (s, e) => Logger.Dispose();
 
             if (!Directory.Exists(PackagesRoot))
                 Directory.CreateDirectory(PackagesRoot);

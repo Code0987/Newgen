@@ -136,14 +136,23 @@
     <Compile Include="..\..\..\libns\libns.net\Core\TypeExtensions.cs">
       <Link>References\TypeExtensions.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\Exception\Logger.cs">
-      <Link>References\Logger.cs</Link>
-    </Compile>
     <Compile Include="..\..\..\libns\libns.net\IO\DataStoreHelper.cs">
       <Link>References\DataStoreHelper.cs</Link>
     </Compile>
-    <Compile Include="..\..\..\libns\libns.net\IO\SerializationExtensions.cs">
-      <Link>References\SerializationExtensions.cs</Link>
+    <Compile Include="..\..\..\libns\libns.net\IO\Serialization.Binary.cs">
+      <Link>References\Serialization.Binary.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\Serialization.cs">
+      <Link>References\Serialization.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\Serialization.JSON.cs">
+      <Link>References\Serialization.JSON.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\Serialization.XAML.cs">
+      <Link>References\Serialization.XAML.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\IO\Serialization.XML.cs">
+      <Link>References\Serialization.XML.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\IO\StorageExtensions.cs">
       <Link>References\StorageExtensions.cs</Link>
@@ -153,6 +162,12 @@
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\Language\Parsers\ArgumentsParser.cs">
       <Link>References\ArgumentsParser.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Logging\Logging.cs">
+      <Link>References\Logging.cs</Link>
+    </Compile>
+    <Compile Include="..\..\..\libns\libns.net\Logging\LoggingExtensions.cs">
+      <Link>References\LoggingExtensions.cs</Link>
     </Compile>
     <Compile Include="..\..\..\libns\libns.net\Media\Animation\AnimationExtensions.cs">
       <Link>References\AnimationExtensions.cs</Link>
