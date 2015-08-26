@@ -12,10 +12,13 @@ using System.Windows.Media.Imaging;
 using libns;
 using libns.Applied;
 using libns.Language;
+using libns.Logging;
 using libns.Native;
 using libns.Threading;
 using Newgen.Packages;
-using Newgen.Packages.HtmlApp;
+using Newgen.HtmlApp;
+using PackageManager;
+using System.Collections.Specialized;
 
 namespace Newgen {
 
@@ -24,6 +27,16 @@ namespace Newgen {
     /// </summary>
     /// <remarks>...</remarks>
     public partial class App : ExtendedApplication {
+
+        /// <summary>
+        /// The pm
+        /// </summary>
+        public static PackageManagerPackage PM;
+
+        /// <summary>
+        /// The PSS
+        /// </summary>
+        public static PackageSettingsStorage PSS;
 
         /// <summary>
         /// The PTR hook
@@ -157,7 +170,7 @@ namespace Newgen {
             });
 
             // Load view
-            StartupUri = new Uri("/Newgen.Core;component/Core/Screen.xaml", UriKind.Relative);
+            StartupUri = new Uri("/Newgen.Core;component/Screen.xaml", UriKind.Relative);
 
             // Start server.
             try {
@@ -171,6 +184,56 @@ namespace Newgen {
             InternalHelper.SendAnalytics().ConfigureInstances(-1);
 
 #endif
+
+            // PM.        
+            PSS = new PackageSettingsStorage();
+            PM = PackageManagerPackage.Create(PSS);
+
+            PM.Settings.RemoveAll(f => f is RuntimeSettings);
+            PM.Settings.Add(new NewgenPackageManagerRuntimeSettings(PM));
+      
+            PM.Logger.Listeners.Add(new LoggerLogListener(PackageManagerExtensions.Logger));
+            PackageManagerExtensions.Logger.Listeners.Add(new LoggerLogListener(Api.Logger));
+            
+            PM.Packages.CollectionChanged += (o, a) => {
+                switch (a.Action) {
+
+                // On package loaded.
+                case NotifyCollectionChangedAction.Add:
+                    foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
+                        Dispatcher.BeginInvoke(new Action(() => {
+                            package.Start();
+                        }));
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Move:
+                    break;
+
+                // On package un-loaded.
+                case NotifyCollectionChangedAction.Remove:
+                    foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
+                        Dispatcher.BeginInvoke(new Action(() => {
+                            package.Stop();
+                        }));
+                    }
+                    break;
+
+                case NotifyCollectionChangedAction.Replace:
+                    break;
+
+                case NotifyCollectionChangedAction.Reset:
+                    break;
+
+                default:
+                    break;
+                }
+            };
+
+            // Find all packages
+            if (!PM.GetSettings().ScanLocations.Contains(Api.PackagesRoot))
+                PM.GetSettings().ScanLocations.Add(Api.PackagesRoot);
+            ThreadingExtensions.LazyInvoke(async () => await PM.LoadAll(), 3500);
         }
 
         /// <summary>
@@ -179,7 +242,7 @@ namespace Newgen {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="ExitEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void Application_Exit(object sender, ExitEventArgs e) {
+        private async void Application_Exit(object sender, ExitEventArgs e) {
             Api.OnPreFinalization();
 
             // Stop server.
@@ -188,10 +251,13 @@ namespace Newgen {
             }
             catch (Exception ex) { Api.Logger.LogError("Can't stop HtmlApp server.", ex); }
 
+            // Detach from IPC.
             Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);
 
-            PackageManager.Current.UnloadAll();
+            // Save all packages.
+            await PM.SaveAll().ConfigureAwait(false);
 
+            // Fix taskbar before leaving.
             try {
                 var taskbar = WinAPI.FindWindow("Shell_TrayWnd", "");
                 var hwndOrb = WinAPI.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
@@ -200,7 +266,7 @@ namespace Newgen {
             }
             catch /* Eat */ { }
 
-            Thread.Sleep(1500); // 1.5s enough ?
+            Thread.Sleep(1500); // HACK: 1.5s enough ?
         }
 
         /// <summary>
@@ -227,8 +293,10 @@ namespace Newgen {
             // Url
             case EMessage.UrlKey:
             case EMessage.InternetKey:
-                if (PackageManager.Current.IsEnabled(EMessage.InternetKey))
-                    PackageManager.Current.Get(EMessage.InternetKey).OnMessageReceived(message);
+                var internetPackage = PM.Packages.OfType<NewgenPackage>().Where(f => f.GetId().Equals(EMessage.InternetKey)).FirstOrDefault();
+
+                if (internetPackage.GetSettings().IsEnabled)
+                    internetPackage.OnMessageReceived(message);
                 else
                     WinAPI.ShellExecute(IntPtr.Zero, "open", message.Value, string.Empty, string.Empty, 0);
 
@@ -243,16 +311,16 @@ namespace Newgen {
 
                 break;
 
-            // Url
+            // All
             case EMessage.AllKey:
-                foreach (var package in PackageManager.Current.Packages)
+                foreach (var package in PM.Packages.OfType<NewgenPackage>())
                     package.OnMessageReceived(message);
 
                 break;
 
             // Must be a package !
             default: {
-                    var package = PackageManager.Current.Get(message.Key);
+                var package = PM.Packages.OfType<NewgenPackage>().Where(f => f.GetId().Equals(message.Key)).FirstOrDefault();
                     if (package != null)
                         package.OnMessageReceived(message);
                 }
@@ -326,7 +394,9 @@ namespace Newgen {
                 Settings.Current.Save();
                 Application.Current.MainWindow.Close();
             }
-            finally { Application.Current.Shutdown(0); }
+            finally { 
+                Application.Current.Shutdown(0); 
+            }
         }
 
         /// <summary>
@@ -335,7 +405,7 @@ namespace Newgen {
         /// <remarks>...</remarks>
         internal static void Restart() {
             var psi = new ProcessStartInfo {
-                Arguments = "/C TIMEOUT /T 5 /NOBREAK && \"" + Assembly.GetEntryAssembly().Location + "\"",
+                Arguments = "/C TIMEOUT /T 25 /NOBREAK && \"" + Assembly.GetEntryAssembly().Location + "\"",
                 WindowStyle = ProcessWindowStyle.Hidden,
                 CreateNoWindow = true,
                 FileName = "cmd.exe"
