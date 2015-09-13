@@ -66,10 +66,10 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public void Disable() {
-            if (!this.GetSettings().IsEnabled)
+            if (!GetSettings().IsEnabled)
                 return;
 
-            this.GetSettings().IsEnabled = false;
+            GetSettings().IsEnabled = false;
 
             Stop(true);
 
@@ -81,14 +81,14 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public void Enable() {
-            if (this.GetSettings().IsEnabled)
+            if (GetSettings().IsEnabled)
                 return;
 
-            this.GetSettings().IsEnabled = true;
+            GetSettings().IsEnabled = true;
 
             Start(true);
 
-            this.GetSettings().IsEnabled = true;
+            GetSettings().IsEnabled = true;
 
             Api.Logger.LogInformation(string.Format("Package [{0}] enabled.", this.GetId()));
         }
@@ -202,7 +202,7 @@ namespace Newgen {
         public void Start(bool force = false) {
             OnBeforeStart();
 
-            if (!force && !this.GetSettings().IsEnabled)
+            if (!force && !GetSettings().IsEnabled)
                 return;
 
             OnStart();
@@ -217,7 +217,7 @@ namespace Newgen {
         /// <param name="force">if set to <c>true</c> [force].</param>
         /// <remarks>...</remarks>
         public void Stop(bool force = false) {
-            if (!force && !this.GetSettings().IsEnabled)
+            if (!force && !GetSettings().IsEnabled)
                 return;
 
             OnBeforeStop();
@@ -230,10 +230,9 @@ namespace Newgen {
         /// <summary>
         /// Toggles the enabled.
         /// </summary>
-        /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
         public void ToggleEnabled() {
-            if (!this.GetSettings().IsEnabled)
+            if (!GetSettings().IsEnabled)
                 Enable();
             else
                 Disable();
@@ -324,9 +323,9 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public override bool IsProxificationSupportedOn(Package package) {
             return
-                package.SettingsStorage.Has(package, Newgen.HtmlApp.HtmlAppPackage.PackageTypeId)
+                package.SettingsStorage.Has(package, HtmlAppPackage.PackageTypeId)
                 ||
-                package.SettingsStorage.Has(package, Newgen.AppLink.AppLinkPackage.PackageTypeId)
+                package.SettingsStorage.Has(package, AppLinkPackage.PackageTypeId)
                 ||
                 package.SettingsStorage.Has(package, NewgenPackage.PackageTypeId)
                 ;
@@ -344,15 +343,15 @@ namespace Newgen {
             package.Save();
 
             // Find internal package type.
-            if (package.SettingsStorage.Has(package, Newgen.HtmlApp.HtmlAppPackage.PackageTypeId)) {
+            if (package.SettingsStorage.Has(package, HtmlAppPackage.PackageTypeId)) {
                 var newPackage = new HtmlAppPackage(package.Location, package.SettingsStorage);
                 return newPackage;
             }
-            else if (package.SettingsStorage.Has(package, Newgen.AppLink.AppLinkPackage.PackageTypeId)) {                
+            if (package.SettingsStorage.Has(package, AppLinkPackage.PackageTypeId)) {                
                 var newPackage = new AppLinkPackage(package.Location, package.SettingsStorage);
                 return newPackage;
             }
-            else if (package.SettingsStorage.Has(package, NewgenPackage.PackageTypeId)) {
+            if (package.SettingsStorage.Has(package, NewgenPackage.PackageTypeId)) {
                 // 1. Find the compiled assembly.
                 var packageAssemblyPath = Path.Combine(package.Location, package.GetId() + ".dll");
 
@@ -365,10 +364,13 @@ namespace Newgen {
                     (object)package.Location,
                     package.SettingsStorage
                     ) as NewgenPackage;
-                newPackage.ProxyProvider = Package;
-                newPackage.Load();
+                if (newPackage != null)
+                {
+                    newPackage.ProxyProvider = Package;
+                    newPackage.Load();
 
-                return newPackage;
+                    return newPackage;
+                }
             }
 
             return base.Proxify(package);
@@ -448,7 +450,7 @@ namespace Newgen {
             catch (Exception ex) { Api.Logger.LogError("Unable to read previous settings !", ex); }
             if (customizer != null) {
                 customizer(value);
-                ObjectData[key] = value.SerializeToJavascript<T>();
+                ObjectData[key] = value.SerializeToJavascript();
             }
             return value;
         }
@@ -463,7 +465,7 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public T Customize<T>(string key, T value) {
             if (value != null) {
-                ObjectData[key] = value.SerializeToJavascript<T>();
+                ObjectData[key] = value.SerializeToJavascript();
             }
             return value;
         }
@@ -477,7 +479,7 @@ namespace Newgen {
         /// <returns>T.</returns>
         /// <remarks>...</remarks>
         public T Customize<T>(T value, string key = CustomizedKey) {
-            return Customize<T>(key, value);
+            return Customize(key, value);
         }
 
         /// <summary>
@@ -489,7 +491,7 @@ namespace Newgen {
         /// <returns>T.</returns>
         /// <remarks>...</remarks>
         public T Customize<T>(Action<T> customizer = null, string key = CustomizedKey) {
-            return Customize<T>(key, customizer);
+            return Customize(key, customizer);
         }
     }
 

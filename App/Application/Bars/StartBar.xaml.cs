@@ -298,17 +298,5 @@ namespace Newgen {
 
             StoreHub.ShowHub();
         }
-
-        /// <summary>
-        /// Handles the <see cref="E:TilesItemClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnTilesItemClick(object sender, RoutedEventArgs e) {
-            CloseToolbar();
-
-            App.Screen.TilesBar.OpenToolbar();
-        }
     }
 }

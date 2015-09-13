@@ -1,24 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Threading;
-using System.Threading.Tasks;
 using System.Windows;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using libns;
-using libns.Applied;
 using libns.Language;
 using libns.Logging;
 using libns.Native;
 using libns.Threading;
-using Newgen.Packages;
 using Newgen.HtmlApp;
 using PackageManager;
 using System.Collections.Specialized;
+using Application = System.Windows.Application;
 
 namespace Newgen {
 
@@ -53,14 +54,14 @@ namespace Newgen {
         /// </summary>
         /// <value>The app icon.</value>
         /// <remarks>...</remarks>
-        public override System.Drawing.Icon AppIcon { get { return new System.Drawing.Icon(Application.GetResourceStream(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)).Stream); } }
+        public override Icon AppIcon { get { return new Icon(GetResourceStream(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)).Stream); } }
 
         /// <summary>
         /// Gets the app logo.
         /// </summary>
         /// <value>The app logo.</value>
         /// <remarks>...</remarks>
-        public override System.Windows.Media.Imaging.BitmapSource AppLogo { get { return new BitmapImage(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)); } }
+        public override BitmapSource AppLogo { get { return new BitmapImage(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)); } }
 
         /// <summary>
         /// Gets the screen.
@@ -109,7 +110,7 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         ~App() {
-            WinAPI.UnhookWindowsHookEx(this.ptrHook);
+            WinAPI.UnhookWindowsHookEx(ptrHook);
             objKeyboardProcess = null;
         }
 
@@ -125,28 +126,20 @@ namespace Newgen {
 
             // Notifications
             this.AddNotificationManager(new SysTrayNotificationManager(this.CreateWinFormsNotifiyIcon(notifier => {
-                notifier.ContextMenu = new System.Windows.Forms.ContextMenu();
-                notifier.ContextMenu.MenuItems.Add("Resume UI", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        foreach (var window in App.Current.Windows) {
-                            ((Window)window).Activate();
-                            ((Window)window).Show();
-                        }
-                    }));
-                });
-                notifier.ContextMenu.MenuItems.Add("Suspend UI", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(() => {
-                        foreach (var window in App.Current.Windows) {
-                            ((Window)window).Hide();
-                        }
-                    }));
-                });
-                notifier.ContextMenu.MenuItems.Add("Restart", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(Restart));
-                });
-                notifier.ContextMenu.MenuItems.Add("Close", (a, b) => {
-                    App.Current.Dispatcher.BeginInvoke(new Action(Close));
-                });
+                notifier.ContextMenu = new ContextMenu();
+                notifier.ContextMenu.MenuItems.Add("Resume UI", (a, b) => Current.Dispatcher.BeginInvoke(new Action(() => {
+                                                                                                                              foreach (var window in Current.Windows) {
+                                                                                                                                  ((Window)window).Activate();
+                                                                                                                                  ((Window)window).Show();
+                                                                                                                              }
+                })));
+                notifier.ContextMenu.MenuItems.Add("Suspend UI", (a, b) => Current.Dispatcher.BeginInvoke(new Action(() => {
+                                                                                                                               foreach (var window in Current.Windows) {
+                                                                                                                                   ((Window)window).Hide();
+                                                                                                                               }
+                })));
+                notifier.ContextMenu.MenuItems.Add("Restart", (a, b) => Current.Dispatcher.BeginInvoke(new Action(Restart)));
+                notifier.ContextMenu.MenuItems.Add("Close", (a, b) => Current.Dispatcher.BeginInvoke(new Action(Close)));
                 // OBSOLETE: notifier.ShowBalloonTip(1000, "Newgen", "Loading ...", System.Windows.Forms.ToolTipIcon.Info);
             })));
 
@@ -278,7 +271,7 @@ namespace Newgen {
         /// instance containing the event data.
         /// </param>
         /// <remarks>...</remarks>
-        private void Application_DispatcherUnhandledException(object sender, System.Windows.Threading.DispatcherUnhandledExceptionEventArgs e) {
+        private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {
             e.Handled = true;
         }
 
@@ -304,8 +297,8 @@ namespace Newgen {
 
             // Notification
             case EMessage.NotificationKey:
-                App.Current.ShowNotification(
-                    new Notification(message.Value.Substring(0, System.Math.Min(10, message.Value.Length)) + "...", message.Value),
+                Current.ShowNotification(
+                    new Notification(message.Value.Substring(0, Math.Min(10, message.Value.Length)) + "...", message.Value),
                     NotificationProviderType.Custom | NotificationProviderType.Native
                     );
 

@@ -11,15 +11,6 @@
                    PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp">
     <Window.ContextMenu>
         <ContextMenu>
-            <MenuItem Click="OnTilesItemClick" Header="{x:Static r:Definitions.TilesItem}">
-                <MenuItem.Icon>
-                    <Path Width="16"
-                          Height="16"
-                          Data="{StaticResource ViewTilesGeometry}"
-                          Fill="{StaticResource GlyphBackgroundBrush}"
-                          Stretch="Fill" />
-                </MenuItem.Icon>
-            </MenuItem>
             <MenuItem Click="OnPinAppItemClick" Header="{x:Static r:Definitions.PinAppItem}">
                 <MenuItem.Icon>
                     <Path Width="16"

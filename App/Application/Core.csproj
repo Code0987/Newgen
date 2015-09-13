@@ -387,12 +387,6 @@
     <Compile Include="Tiles\TileControlsGroupBar.xaml.cs">
       <DependentUpon>TileControlsGroupBar.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Bars\TilesBarItem.xaml.cs">
-      <DependentUpon>TilesBarItem.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Bars\TilesBar.xaml.cs">
-      <DependentUpon>TilesBar.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Bars\StartBarItem.xaml.cs">
       <DependentUpon>StartBarItem.xaml</DependentUpon>
     </Compile>
@@ -700,14 +694,6 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Tiles\TileControlsGroupBar.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Bars\TilesBarItem.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
-    <Page Include="Bars\TilesBar.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>

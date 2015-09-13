@@ -41,11 +41,6 @@ namespace Newgen {
         internal ThumbnailsBar ThumbnailsBar;
 
         /// <summary>
-        /// The tiles bar
-        /// </summary>
-        internal TilesBar TilesBar;
-
-        /// <summary>
         /// The wait window
         /// </summary>
         internal WaitWindow WaitDialog;
@@ -138,18 +133,13 @@ namespace Newgen {
             else
                 TaskBar.OpenToolbar();
             StartBar.OpenToolbar();
-
-            TilesBar = new TilesBar();
-            TilesBar.OpenToolbar();
-
+            
             ThreadingExtensions.LazyInvokeThreadSafe(() => {
                 if (Settings.Current.UseThumbailsBar)
                     ThumbnailsBar.CloseToolbar();
                 else
                     TaskBar.CloseToolbar();
                 StartBar.CloseToolbar();
-
-                TilesBar.CloseToolbar();
             }, 250);
         }
 
