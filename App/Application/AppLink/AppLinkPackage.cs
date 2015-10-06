@@ -121,7 +121,7 @@ namespace Newgen.AppLink {
                 icon.ToFile(new PngBitmapEncoder(), Path.Combine(Location, customizedSettings.IconPath));
 
                 // Create tile color
-                GetSettings().ObjectData[TileControl.TileBgColorKey] = icon.CalculateAverageColor().ToString();
+                GetSettings().ObjectData[TileControl.TileBgColorKey] = icon.CalculateAverageColor(0xFF).ToString();
             }
         }
 
@@ -165,6 +165,13 @@ namespace Newgen.AppLink {
         /// </summary>
         /// <remarks>...</remarks>
         protected override void OnStart() {
+            customizedSettings = GetSettings().Customize<AppLinkPackageCustomizedSettings>();
+
+            // Fix logo
+            if (!Settings.OfType<NewgenPackageLogoSettings>().Any())
+                Settings.Add(new NewgenPackageLogoSettings(this));
+            Settings.OfType<NewgenPackageLogoSettings>().First().Value = Path.Combine(Location, customizedSettings.IconPath);
+
             // Load UI
             Application.Current.Dispatcher.Invoke(new Action(() => {
                 tile = new AppLinkPackageTile();
@@ -195,10 +202,7 @@ namespace Newgen.AppLink {
 
                 tile.ContextMenu = new ContextMenu();
                 var mi_options = new MenuItem();
-                mi_options.Header = "Options";
-                mi_options.Click += (f, g) => {
-                    (new AppLinkPackageOptionsHub(this)).ShowDialog();
-                };
+                mi_options.Header = new AppLinkPackageSettingsEditor(this);
                 tile.ContextMenu.Items.Add(mi_options);
 
                 // Re load tile

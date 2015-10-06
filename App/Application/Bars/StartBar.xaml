@@ -1,14 +1,26 @@
 ﻿<lib:ToolbarWindow x:Class="Newgen.StartBar"
                    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+                   xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
                    xmlns:lib="clr-namespace:Newgen"
+                   xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+                   xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                    xmlns:r="clr-namespace:Newgen.Resources"
-                   Width="80"
+                   Width="320"
+                   MinHeight="768"
+                   Background="Transparent"
                    DragEnter="OnDragEnter"
                    Drop="OnDrop"
                    Loaded="OnLoaded"
                    Location="Right"
-                   PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp">
+                   MouseLeftButtonDown="OnMouseLeftButtonDown"
+                   MouseLeftButtonUp="OnMouseLeftButtonUp"
+                   MouseMove="OnMouseMove"
+                   MouseRightButtonDown="OnMouseRightButtonDown"
+                   PreviewMouseLeftButtonUp="OnPreviewMouseLeftButtonUp"
+                   d:DesignHeight="320"
+                   d:DesignWidth="768"
+                   mc:Ignorable="d">
     <Window.ContextMenu>
         <ContextMenu>
             <MenuItem Click="OnPinAppItemClick" Header="{x:Static r:Definitions.PinAppItem}">
@@ -67,66 +79,60 @@
             </MenuItem>
         </ContextMenu>
     </Window.ContextMenu>
-    <StackPanel Name="ItemsContainer" VerticalAlignment="Center">
-        <lib:StartBarItem x:Name="SearchButton"
-                         Title="{x:Static r:Definitions.SearchItem}"
-                         MouseLeftButtonUp="OnSearchButtonMouseLeftButtonUp"
-                         Order="5">
-            <lib:StartBarItem.Icon>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource SearchGeometry}" />
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </lib:StartBarItem.Icon>
-        </lib:StartBarItem>
-        <lib:StartBarItem x:Name="DevicesButton"
-                         Title="{x:Static r:Definitions.DevicesItem}"
-                         MouseLeftButtonDown="OnDevicesButtonMouseLeftButtonUp"
-                         Order="3">
-            <lib:StartBarItem.Icon>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource DevicesGeometry}" />
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </lib:StartBarItem.Icon>
-        </lib:StartBarItem>
-        <lib:StartBarItem x:Name="StartButton"
-                         Title="{x:Static r:Definitions.StartItem}"
-                         MouseLeftButtonDown="OnStartButtonMouseLeftButtonUp"
-                         Order="0">
-            <lib:StartBarItem.Icon>
-                <VisualBrush Stretch="Uniform">
-                    <VisualBrush.Visual>
-                        <Image Source="/Newgen.Core;component/Resources/Newgen_Icon.ico" />
-                    </VisualBrush.Visual>
-                </VisualBrush>
-            </lib:StartBarItem.Icon>
-        </lib:StartBarItem>
-        <lib:StartBarItem x:Name="StoreButton"
-                         Title="{x:Static r:Definitions.StoreItem}"
-                         MouseLeftButtonUp="OnStoreButtonMouseLeftButtonUp"
-                         Order="2">
-            <lib:StartBarItem.Icon>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource StoreGeometry}" />
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </lib:StartBarItem.Icon>
-        </lib:StartBarItem>
-        <lib:StartBarItem x:Name="SettingsButton"
-                         Title="{x:Static r:Definitions.StartBarSettingsItem}"
-                         MouseLeftButtonUp="OnSettingsButtonMouseLeftButtonUp"
-                         Order="4">
-            <lib:StartBarItem.Icon>
-                <DrawingBrush>
-                    <DrawingBrush.Drawing>
-                        <GeometryDrawing Brush="{StaticResource Brush_010}" Geometry="{StaticResource Settings1Geometry}" />
-                    </DrawingBrush.Drawing>
-                </DrawingBrush>
-            </lib:StartBarItem.Icon>
-        </lib:StartBarItem>
-    </StackPanel>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="*" MinWidth="80" />
+            <ColumnDefinition Width="*" MinWidth="240" />
+        </Grid.ColumnDefinitions>
+        <lib:DragScrollViewer Grid.Column="0"
+                              Background="#64FFB900"
+                              DragEverywhere="True"
+                              HorizontalScrollBarVisibility="Auto"
+                              VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="ProcessesContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
+        </lib:DragScrollViewer>
+        <Grid Grid.Column="1">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="*" MinHeight="200" />
+                <RowDefinition Height="*" MinHeight="488" />
+                <RowDefinition Height="*" MinHeight="80" />
+            </Grid.RowDefinitions>
+            <StackPanel Grid.Row="0" Background="#6474FF00" />
+            <StackPanel Grid.Row="1" Background="#640EA490" />
+            <Grid Name="ButtonsContainer" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="1*" MinHeight="80" />
+                </Grid.RowDefinitions>
+                <Button x:Name="SettingsButton"
+                        Grid.Row="1"
+                        Grid.Column="0"
+                        Click="SettingsButton_Click"
+                        Style="{StaticResource B_FX_A1_Style}"
+                        ToolTip="{x:Static r:Definitions.StartBarSettingsItem}">
+                    <Path Data="{StaticResource Settings1Geometry}" Stroke="{StaticResource Brush_010}" />
+                </Button>
+                <Button x:Name="StartButton"
+                        Grid.Row="1"
+                        Grid.Column="1"
+                        MouseLeftButtonUp="StartButton_MouseLeftButtonUp"
+                        Style="{StaticResource B_FX_A1_Style}"
+                        ToolTip="{x:Static r:Definitions.StartItem}">
+                    <Image Margin="-10" Source="/Newgen.Core;component/Resources/Newgen_Icon.ico" />
+                </Button>
+                <Button x:Name="StoreButton"
+                        Grid.Row="1"
+                        Grid.Column="2"
+                        Click="StoreButton_Click"
+                        Style="{StaticResource B_FX_A1_Style}"
+                        ToolTip="{x:Static r:Definitions.StartBarSettingsItem}">
+                    <Path Data="{StaticResource StoreGeometry}" Stroke="{StaticResource Brush_010}" />
+                </Button>
+            </Grid>
+        </Grid>
+    </Grid>
 </lib:ToolbarWindow>

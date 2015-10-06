@@ -20,7 +20,7 @@ namespace Newgen {
         /// <summary>
         /// The towner
         /// </summary>
-        private TaskBar taskBar;
+        private StartBar taskBar;
 
         /// <summary>
         /// Gets or sets the handles.
@@ -35,7 +35,7 @@ namespace Newgen {
         /// <param name="owner">The owner.</param>
         /// <param name="handles">The handles.</param>
         /// <remarks>...</remarks>
-        public TaskBarItem(TaskBar owner, List<IntPtr> handles) {
+        public TaskBarItem(StartBar owner, List<IntPtr> handles) {
             InitializeComponent();
 
             Handles = handles;
@@ -54,7 +54,7 @@ namespace Newgen {
         /// <param name="owner">The owner.</param>
         /// <param name="handle">The handle.</param>
         /// <remarks>...</remarks>
-        public TaskBarItem(TaskBar owner, IntPtr handle)
+        public TaskBarItem(StartBar owner, IntPtr handle)
             : this(owner, new List<IntPtr> { handle }) {
         }
 

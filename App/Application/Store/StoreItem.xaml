@@ -65,79 +65,55 @@
                VerticalAlignment="Top"
                Source="/Newgen.Core;component/Resources/NWP_Icon.ico"
                Stretch="UniformToFill" />
-        <TextBlock Margin="5"
-                   HorizontalAlignment="Center"
+        <TextBlock Name="IdText"
+                   Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSizeLarge}"
-                   Foreground="#FF000000"
-                   Text="{Binding Path=Name,
-                                  Mode=OneWay,
-                                  FallbackValue=Name}"
-                   TextWrapping="WrapWithOverflow" />
-        <Button Name="InstallButton"
-                Margin="5"
-                HorizontalAlignment="Stretch"
-                Background="#512FC901"
-                BorderBrush="#FF20B200"
-                Click="OnInstallButtonClick"
-                Content="Install package"
-                FontSize="{StaticResource ContentFontSizeSmall}" />
-        <Button Name="UnInstallButton"
-                Margin="5"
-                HorizontalAlignment="Stretch"
-                Background="#51EC3600"
-                BorderBrush="#FFCD0404"
-                Click="OnUnInstallButtonClick"
-                Content="Un-install package"
-                FontSize="{StaticResource ContentFontSizeSmall}" />
-        <Button Name="EnDisableButton"
-                Margin="5"
-                HorizontalAlignment="Stretch"
-                Background="#515600EC"
-                BorderBrush="#FF5600EC"
-                Click="OnEnDisableButtonClick"
-                Content="En/Disable package"
-                FontSize="{StaticResource ContentFontSizeSmall}" />
-        <TextBlock Margin="5,5,5,5"
-                   FontSize="{StaticResource ContentFontSize}"
                    Foreground="#FF0080C9"
-                   Text="{Binding Path=Id,
-                                  Mode=OneWay,
-                                  FallbackValue=Id}"
+                   Text="Id"
+                   TextAlignment="Center"
                    TextWrapping="WrapWithOverflow" />
-        <TextBlock Margin="5,5,5,5"
+        <Grid Margin="5,0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Button x:Name="InstallUnInstallButton"
+                    Grid.Column="0"
+                    HorizontalAlignment="Stretch"
+                    Background="#512FC901"
+                    BorderBrush="#FF20B200"
+                    Click="OnInstallUnInstallButtonClick"
+                    Content="Install/UnInstall"
+                    FontSize="{StaticResource ContentFontSizeSmall}" />
+            <Button x:Name="EnableDisableButton"
+                    Grid.Column="1"
+                    HorizontalAlignment="Stretch"
+                    Background="#515600EC"
+                    BorderBrush="#FF5600EC"
+                    Click="OnEnableDisableButtonClick"
+                    Content="Enable/Disable"
+                    FontSize="{StaticResource ContentFontSizeSmall}" />
+        </Grid>
+        <TextBlock Name="VersionText"
+                   Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSize}"
                    Foreground="#FFF98800"
-                   Text="{Binding Path=Version,
-                                  Mode=OneWay,
-                                  FallbackValue=Version}"
+                   Text="Version"
+                   TextAlignment="Center"
                    TextWrapping="WrapWithOverflow" />
-        <TextBlock Margin="5,5,5,5"
+        <TextBlock Name="AuthorText"
+                   Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSizeSmall}"
                    Foreground="#FF6300DA"
-                   Text="{Binding Path=Author,
-                                  Mode=OneWay,
-                                  FallbackValue=Author}"
+                   Text="Author"
+                   TextAlignment="Center"
                    TextWrapping="WrapWithOverflow" />
-        <TextBlock Margin="5,5,5,5"
-                   FontSize="{StaticResource ContentFontSizeSmall}"
-                   Foreground="#FF0046FF"
-                   Text="{Binding Path=AuthorWebsite,
-                                  Mode=OneWay,
-                                  FallbackValue=AuthorWebsite}"
-                   TextWrapping="WrapWithOverflow" />
-        <TextBlock Margin="5,5,5,5"
-                   FontSize="{StaticResource ContentFontSizeSmall}"
-                   Foreground="#FF0046FF"
-                   Text="{Binding Path=AuthorEMailAddress,
-                                  Mode=OneWay,
-                                  FallbackValue=AuthorEMailAddress}"
-                   TextWrapping="WrapWithOverflow" />
-        <TextBlock Margin="5,5,5,5"
+        <TextBlock Name="DescriptionText"
+                   Margin="5,5,5,5"
                    FontSize="{StaticResource ContentFontSize}"
                    Foreground="#FF000000"
-                   Text="{Binding Path=Description,
-                                  Mode=OneWay,
-                                  FallbackValue=Description}"
+                   Text="Description"
+                   TextAlignment="Center"
                    TextWrapping="WrapWithOverflow" />
     </VirtualizingStackPanel>
 </UserControl>

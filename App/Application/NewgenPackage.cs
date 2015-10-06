@@ -138,7 +138,7 @@ namespace Newgen {
                             logo = resourcePath.OriginalString;
                         }
                         catch /* Eat */ {
-                            cachedLogo = new BitmapImage(new Uri("pack://application:,,,/Newgen;component/Resources/NWP_Icon.ico", UriKind.RelativeOrAbsolute));
+                            cachedLogo = new BitmapImage(new Uri("pack://application:,,,/Newgen.Core;component/Resources/NWP_Icon.ico", UriKind.RelativeOrAbsolute));
                         }
                     }
                 }
@@ -187,9 +187,9 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public void Remove() {
-            Stop();
+            Stop(true);
 
-            // TODO: Impl. this.
+            // TODO: Let PM handle this.
 
             Api.Logger.LogInformation(string.Format("Package [{0}] removed.", this.GetId()));
         }

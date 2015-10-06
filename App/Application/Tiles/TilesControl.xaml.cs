@@ -306,24 +306,23 @@ namespace Newgen {
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
         public void Place(NewgenPackage package) {
-            // Ignore if package is disabled.
-            if (!package.GetSettings().IsEnabled)
+            if (package == null || package.Tile == null)
                 return;
 
-                // Create tile ui.
-                var tileControl = new TileControl(package) {
-                    Order = TilesControlHost.Children.Count
-                };
+            // Create tile ui.
+            var tileControl = new TileControl(package) {
+                Order = TilesControlHost.Children.Count
+            };
 
-                tileControl.MouseLeftButtonDown += OnTileControlMouseLeftButtonDown;
-                tileControl.MouseLeftButtonUp += OnTileControlMouseLeftButtonUp;
-                tileControl.MouseMove += OnTileControlMouseMove;
+            tileControl.MouseLeftButtonDown += OnTileControlMouseLeftButtonDown;
+            tileControl.MouseLeftButtonUp += OnTileControlMouseLeftButtonUp;
+            tileControl.MouseMove += OnTileControlMouseMove;
 
-                // Start tile.
-                tileControl.Start();
+            // Start tile.
+            tileControl.Start();
 
-                // Place tile.
-                Place(tileControl, alsoAddToHost: true);
+            // Place tile.
+            Place(tileControl, alsoAddToHost: true);
         }
 
         /// <summary>
@@ -332,30 +331,29 @@ namespace Newgen {
         /// <param name="package">The package.</param>
         /// <remarks>...</remarks>
         public void DePlace(NewgenPackage package) {
-            // Ignore if package is disabled.
-            if (!package.GetSettings().IsEnabled)
+            if (package == null && package.Tile == null)
                 return;
 
-                // Find correct tile.
-                var tileControl = TileControls.Find(x => x.package == package);
+            // Find correct tile.
+            var tileControl = TileControls.Find(x => x.package == package);
 
-                if (tileControl == null)
-                    return;
+            if (tileControl == null)
+                return;
 
-                AnimationExtensions.Animate(tileControl, OpacityProperty, 150, 0, 0.7, 0.3);
+            AnimationExtensions.Animate(tileControl, OpacityProperty, 150, 0, 0.7, 0.3);
 
-                // Lazy-ness for animation.
-                ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
-                    tileControl.MouseLeftButtonDown -= OnTileControlMouseLeftButtonDown;
-                    tileControl.MouseLeftButtonUp -= OnTileControlMouseLeftButtonUp;
-                    tileControl.MouseMove -= OnTileControlMouseMove;
+            // Lazy-ness for animation.
+            ThreadingExtensions.LazyInvokeThreadSafe(new Action(() => {
+                tileControl.MouseLeftButtonDown -= OnTileControlMouseLeftButtonDown;
+                tileControl.MouseLeftButtonUp -= OnTileControlMouseLeftButtonUp;
+                tileControl.MouseMove -= OnTileControlMouseMove;
 
-                    // De-place tile.
-                    DePlace(tileControl, alsoRemoveFromHost: true, permanently: false);
+                // De-place tile.
+                DePlace(tileControl, alsoRemoveFromHost: true, permanently: false);
 
-                    // Stop tile.
-                    tileControl.Stop();
-                }), 180);
+                // Stop tile.
+                tileControl.Stop();
+            }), 180);
         }
 
         /// <summary>

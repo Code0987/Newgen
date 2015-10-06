@@ -1,21 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Windows;
-using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Interop;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Media.Imaging;
-using libns;
 using libns.Media.Animation;
-using libns.Media.Imaging;
 using libns.Native;
 using libns.Threading;
-using Microsoft.Win32;
-using Newgen.Packages;
 
 namespace Newgen {
 
@@ -29,11 +19,6 @@ namespace Newgen {
         /// The start bar
         /// </summary>
         internal StartBar StartBar;
-
-        /// <summary>
-        /// The task bar
-        /// </summary>
-        internal TaskBar TaskBar;
 
         /// <summary>
         /// The thumbnails bar
@@ -92,10 +77,6 @@ namespace Newgen {
                     ThumbnailsBar.Topmost = false;
                     ThumbnailsBar.Topmost = true;
                 }
-                else if (TaskBar != null) {
-                    TaskBar.Topmost = false;
-                    TaskBar.Topmost = true;
-                }
                 if (StartBar != null) {
                     StartBar.Topmost = false;
                     StartBar.Topmost = true;
@@ -105,10 +86,6 @@ namespace Newgen {
                 if (ThumbnailsBar != null) {
                     ThumbnailsBar.Topmost = true;
                     ThumbnailsBar.Topmost = false;
-                }
-                else if (TaskBar != null) {
-                    TaskBar.Topmost = true;
-                    TaskBar.Topmost = false;
                 }
                 if (StartBar != null) {
                     StartBar.Topmost = true;
@@ -125,20 +102,14 @@ namespace Newgen {
             StartBar = new StartBar();
             if (Settings.Current.UseThumbailsBar)
                 ThumbnailsBar = new ThumbnailsBar();
-            else
-                TaskBar = new TaskBar();
 
             if (Settings.Current.UseThumbailsBar)
                 ThumbnailsBar.OpenToolbar();
-            else
-                TaskBar.OpenToolbar();
             StartBar.OpenToolbar();
             
             ThreadingExtensions.LazyInvokeThreadSafe(() => {
                 if (Settings.Current.UseThumbailsBar)
                     ThumbnailsBar.CloseToolbar();
-                else
-                    TaskBar.CloseToolbar();
                 StartBar.CloseToolbar();
             }, 250);
         }
@@ -183,9 +154,6 @@ namespace Newgen {
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             if (ThumbnailsBar != null) {
                 ThumbnailsBar.CloseToolbar();
-            }
-            else if (TaskBar != null) {
-                TaskBar.CloseToolbar();
             }
             if (StartBar != null) {
                 StartBar.CloseToolbar();

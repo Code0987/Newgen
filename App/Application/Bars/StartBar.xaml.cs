@@ -1,8 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
+using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
@@ -10,8 +12,8 @@ using libns.Media.Animation;
 using libns.Native;
 using libns.Threading;
 using Microsoft.Win32;
-using Newgen.Packages;
 using Newgen.AppLink;
+using Newgen.Packages;
 using PackageManager;
 
 namespace Newgen {
@@ -22,6 +24,7 @@ namespace Newgen {
     /// <remarks>...</remarks>
     public partial class StartBar : ToolbarWindow {
         private DateTime mouseClickTimestamp = DateTime.Now;
+        private DWMPreviewPopup popup;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StartBar" /> class.
@@ -40,9 +43,6 @@ namespace Newgen {
             if (Settings.Current.ShowStartbarAlways)
                 return;
 
-            foreach (var item in ItemsContainer.Children.OfType<StartBarItem>())
-                item.OnToolbarClosed();
-
             base.CloseToolbar();
 
             var anim_userTile = App.Screen.UserBadgeControl.Resources["LeftAnimation"] as Storyboard;
@@ -58,16 +58,37 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public override void OpenToolbar() {
             if (!Settings.IsProMode) {
-                DevicesButton.Visibility = Visibility.Collapsed;
                 PinWebItem.Visibility = Visibility.Collapsed;
                 SaveSettingsItem.Visibility = Visibility.Collapsed;
             }
-            
+
             base.OpenToolbar();
 
-            foreach (var item in ItemsContainer.Children.OfType<StartBarItem>())
-                item.OnToolbarOpened();
+            // Load all taskbar items
+            this.ForEachHWND((current, text) => {
+                var items = ProcessesContainer.Children.OfType<TaskBarItem>().ToList();
 
+                if (items.Count == 0) {
+                    var fip = new FileInfo(WinAPI.GetProcessPath(current));
+                    if (!Settings.Current.TaskBarProcessExclusionList.Contains(fip.Name) && !fip.Name.StartsWith(App.Current.Location)) {
+                        AddIcon(current);
+                    }
+                }
+                else {
+                    var existcount = 0;
+                    foreach (var item in items) {
+                        if (item.Handles.Contains(current))
+                            existcount++;
+                    }
+                    if (existcount <= 0) {
+                        var fip = new FileInfo(WinAPI.GetProcessPath(current));
+                        if (!Settings.Current.TaskBarProcessExclusionList.Contains(fip.Name) && !fip.Name.StartsWith(App.Current.Location)) {
+                            AddIcon(current);
+                        }
+                    }
+                }
+            });
+            
             var anim_userTile = App.Screen.UserBadgeControl.Resources["LeftAnimation"] as Storyboard;
             ((DoubleAnimation)anim_userTile.Children[0]).To = -this.Width;
             ((DoubleAnimation)anim_userTile.Children[0]).AccelerationRatio = 0.7;
@@ -76,20 +97,40 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Handles the <see cref="E:DevicesButtonMouseLeftButtonUp" /> event.
+        /// Adds the icon.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
+        /// <param name="hWnd">The h WND.</param>
         /// <remarks>...</remarks>
-        private void OnDevicesButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            CloseToolbar();
+        internal void AddIcon(IntPtr hWnd) {
+            var hWndpath = new FileInfo(WinAPI.GetProcessPath(hWnd)).Name;
+            var items = ProcessesContainer.Children.OfType<TaskBarItem>().ToList();
+            var isadded = false;
 
-            if (Environment.OSVersion.Version.Major >= 6 && Environment.OSVersion.Version.Minor >= 1)
-                Process.Start("explorer.exe", "shell:::{A8A91A66-3A7D-4424-8D24-04E180695C7A}");
-            else
-                Process.Start("explorer.exe", "e,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}");
+            foreach (var sbi in items) {
+                if (WinAPI.GetProcessPath(sbi.Handles[0]).Contains(hWndpath)) {
+                    sbi.Handles.Add(hWnd);
+                    isadded = true;
+
+                    AnimationExtensions.Animate(sbi, OpacityProperty, 200, 0, 1, 0.3, 0.7);
+                }
+            }
+            if (!isadded) {
+                var icon = new TaskBarItem(this, hWnd);
+                ProcessesContainer.Children.Add(icon);
+                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 1, 0.3, 0.7);
+            }
+        }
+
+        /// <summary>
+        /// Removes the icon.
+        /// </summary>
+        /// <param name="icon">The icon.</param>
+        /// <remarks>...</remarks>
+        internal void RemoveIcon(TaskBarItem icon) {
+            if (icon != null) {
+                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 0.3, 0.7);
+                ThreadingExtensions.LazyInvokeThreadSafe(() => { ProcessesContainer.Children.Remove(icon); }, 205);
+            }
         }
 
         /// <summary>
@@ -132,6 +173,91 @@ namespace Newgen {
         /// <param name="e">The <see cref="RoutedEventArgs" /> instance containing the event data.</param>
         /// <remarks>...</remarks>
         private void OnLoaded(object sender, RoutedEventArgs e) {
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:MouseLeftButtonDown" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
+            //Mouse.Capture(this);
+
+            //if (e.ClickCount == 1 && e.LeftButton == MouseButtonState.Pressed) {
+            //    var handle = IntPtr.Zero;
+
+            //    var desktopHWND = WinAPI.GetDesktopWindow();
+            //    var child = WinAPI.GetWindow(desktopHWND, GetWindowCmd.GW_CHILD);
+            //    while (child != IntPtr.Zero) {
+            //        var LHParent = WinAPI.GetWindowLongPtr(child, GWL.GWL_HWNDPARENT);
+            //        var LEXSTYLE = WinAPI.GetWindowLongPtr(child, GWL.GWL_EXSTYLE);
+            //        if (
+            //            WinAPI.IsWindowVisible(child) // Visible
+            //            && ((LHParent == IntPtr.Zero) || (LHParent == desktopHWND)) // Child of desktop
+            //            && (((int)LEXSTYLE & 0x00000080) == 0 || ((int)LEXSTYLE & 0x40000) != 0) // Is valid window/popup
+            //            )
+            //            handle = child;
+            //        child = WinAPI.GetWindow(child, GetWindowCmd.GW_HWNDNEXT);
+            //    }
+
+            //    popup = new DWMPreviewPopup(this, handle, true);
+            //    popup.Show();
+            //}
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:MouseLeftButtonUp" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            Topmost = true;
+            if (!IsOpened)
+                OpenToolbar();
+
+            //Mouse.Capture(null);
+
+            //foreach (var window in App.Current.Windows.OfType<Window>())
+            //    if (window.GetType() == typeof(DWMPreviewPopup))
+            //        window.Close();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:MouseMove" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMouseMove(object sender, MouseEventArgs e) {
+            //if (!IsOpened)
+            //    OpenToolbar();
+
+            //// Re-position popup with mouse
+            //if (popup != null && popup.IsLoaded && popup.WindowStartupLocation != WindowStartupLocation.CenterScreen) {
+            //    var mp = PointToScreen(Mouse.GetPosition(this));
+            //    popup.Top = mp.Y - (popup.ActualHeight / 2);
+            //    popup.Left = mp.X - (popup.ActualWidth / 2);
+            //}
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:MouseRightButtonDown" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnMouseRightButtonDown(object sender, MouseButtonEventArgs e) {
+            //// Capture mouse
+            //Mouse.Capture(this);
+            //// Get all visible windows
+            //var handles = new List<IntPtr>();
+            //this.ForEachHWND((current, text) => handles.Add(current));
+            //// Show popup at center of screen
+            //popup = new DWMPreviewPopup(this, handles, false);
+            //popup.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            //popup.Show();
         }
 
         /// <summary>
@@ -194,10 +320,10 @@ namespace Newgen {
         /// </param>
         /// <remarks>...</remarks>
         private void OnPreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+            Topmost = true;
             if (e.OriginalSource == LayoutRoot ||
                e.OriginalSource == TouchDecorator ||
-               e.OriginalSource == ContentDecorator ||
-               e.OriginalSource == ItemsContainer) {
+               e.OriginalSource == ContentDecorator) {
                 if (!IsOpened)
                     OpenToolbar();
                 else
@@ -228,45 +354,24 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Handles the <see cref="E:SearchButtonMouseLeftButtonUp" /> event.
+        /// Handles the Click event of the SettingsButton control.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnSearchButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            CloseToolbar();
-
-            Api.Messenger.Send(new EMessage() {
-                Key = EMessage.UrlKey,
-                Value = "http://www.google.com/search?q="
-            });
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:SettingsButtonMouseLeftButtonUp" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
-        /// <remarks>...</remarks>
-        private void OnSettingsButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        private void SettingsButton_Click(object sender, RoutedEventArgs e) {
             CloseToolbar();
 
             (new SettingsHub()).Show();
         }
 
         /// <summary>
-        /// Handles the <see cref="E:StartButtonMouseLeftButtonUp" /> event.
+        /// Handles the MouseLeftButtonUp event of the StartButton control.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="MouseButtonEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnStartButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        private void StartButton_MouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
             if (e.ClickCount >= 2) {
                 App.Screen.Hide();
                 CloseToolbar();
@@ -286,17 +391,49 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Handles the <see cref="E:StoreButtonMouseLeftButtonUp" /> event.
+        /// Handles the Click event of the StoreButton control.
         /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">
-        /// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
-        /// </param>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="RoutedEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void OnStoreButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        private void StoreButton_Click(object sender, RoutedEventArgs e) {
             CloseToolbar();
 
             StoreHub.ShowHub();
         }
+
+        ///// <summary>
+        ///// Handles the <see cref="E:DevicesButtonMouseLeftButtonUp" /> event.
+        ///// </summary>
+        ///// <param name="sender">The sender.</param>
+        ///// <param name="e">
+        ///// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
+        ///// </param>
+        ///// <remarks>...</remarks>
+        //private void OnDevicesButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        //    CloseToolbar();
+
+        //    if (Environment.OSVersion.Version.Major >= 6 && Environment.OSVersion.Version.Minor >= 1)
+        //        Process.Start("explorer.exe", "shell:::{A8A91A66-3A7D-4424-8D24-04E180695C7A}");
+        //    else
+        //        Process.Start("explorer.exe", "e,::{20D04FE0-3AEA-1069-A2D8-08002B30309D}");
+        //}
+
+        ///// <summary>
+        ///// Handles the <see cref="E:SearchButtonMouseLeftButtonUp" /> event.
+        ///// </summary>
+        ///// <param name="sender">The sender.</param>
+        ///// <param name="e">
+        ///// The <see cref="MouseButtonEventArgs" /> instance containing the event data.
+        ///// </param>
+        ///// <remarks>...</remarks>
+        //private void OnSearchButtonMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
+        //    CloseToolbar();
+
+        //    Api.Messenger.Send(new EMessage() {
+        //        Key = EMessage.UrlKey,
+        //        Value = "http://www.google.com/search?q="
+        //    });
+        //}
     }
 }

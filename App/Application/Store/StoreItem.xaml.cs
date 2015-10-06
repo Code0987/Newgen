@@ -1,11 +1,11 @@
-﻿using System.ServiceModel.Syndication;
+﻿using System;
+using System.Linq;
+using System.ServiceModel.Syndication;
 using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media.Animation;
-using System.Linq;
-using System.Windows.Media.Imaging;
-using System;
-using Newgen.Packages;
+using Newgen;
+using PackageManager;
 
 namespace Newgen {
 
@@ -14,13 +14,16 @@ namespace Newgen {
     /// </summary>
     public partial class StoreItem : UserControl {
         internal readonly SyndicationItem FeedItem;
+        internal readonly Package Package;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StoreItem" /> class.
         /// </summary>
+        /// <param name="package">The package.</param>
         /// <param name="feedItem">The feed item.</param>
         /// <remarks>...</remarks>
-        public StoreItem(SyndicationItem feedItem) {
+        public StoreItem(Package package, SyndicationItem feedItem) {
+            Package = package;
             FeedItem = feedItem;
 
             InitializeComponent();
@@ -29,10 +32,94 @@ namespace Newgen {
         /// <summary>
         /// Initializes a new instance of the <see cref="StoreItem"/> class.
         /// </summary>
-        /// <param name="packageMetadata">The package metadata.</param>
         /// <remarks>...</remarks>
         public StoreItem() {
             InitializeComponent();
+        }
+
+        /// <summary>
+        /// Loads the store item from feed item.
+        /// </summary>
+        /// <remarks>...</remarks>
+        private void LoadStoreItemFromFeedItem() {
+        }
+
+        /// <summary>
+        /// Loads the store item from package.
+        /// </summary>
+        /// <remarks>...</remarks>
+        private void LoadStoreItemFromPackage() {
+            var pkg = Package as NewgenPackage;
+            if (pkg != null)
+                IconImage.Source = pkg.GetLogo();
+
+            IdText.Text = Package.GetId();
+
+            VersionText.Text = Package.GetVersion();
+
+            if (string.IsNullOrWhiteSpace(VersionText.Text))
+                VersionText.Visibility = System.Windows.Visibility.Collapsed;
+            else
+                VersionText.Visibility = System.Windows.Visibility.Visible;
+
+            try {
+                var ps = Package.Settings.OfType<AuthorsSettings>().FirstOrDefault();
+
+                if (ps != null) {
+                    if (ps.Authors != null)
+                        AuthorText.Text = string.Join(Environment.NewLine, ps.Authors.Select(f => string.Format("{0}\t-\t{1}", f.Key, f.Value)));
+                    else
+                        AuthorText.Text = ps.Value;
+                }
+                else
+                    AuthorText.Text = string.Empty;
+
+                if (string.IsNullOrWhiteSpace(AuthorText.Text))
+                    AuthorText.Visibility = System.Windows.Visibility.Collapsed;
+                else
+                    AuthorText.Visibility = System.Windows.Visibility.Visible;
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+            try {
+                var ps = Package.Settings.OfType<DescriptionSettings>().FirstOrDefault();
+
+                if (ps != null)
+                    DescriptionText.Text = ps.Value;
+                else
+                    DescriptionText.Text = string.Empty;
+
+                if (string.IsNullOrWhiteSpace(DescriptionText.Text))
+                    DescriptionText.Visibility = System.Windows.Visibility.Collapsed;
+                else
+                    DescriptionText.Visibility = System.Windows.Visibility.Visible;
+            }
+            catch /* Eat */ { /* Tasty ? */ }
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:EnDisableButtonClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs" /> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnEnableDisableButtonClick(object sender, System.Windows.RoutedEventArgs e) {
+            var pkg = Package as NewgenPackage;
+            if (pkg == null)
+                return;
+
+            pkg.ToggleEnabled();
+        }
+
+        /// <summary>
+        /// Handles the <see cref="E:InstallButtonClick" /> event.
+        /// </summary>
+        /// <param name="sender">The sender.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs" /> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void OnInstallUnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
+            
+            //PackageManager.Current.GetPackage(PackageMetadata, f => {
+            //});
         }
 
         /// <summary>
@@ -44,8 +131,11 @@ namespace Newgen {
         /// </param>
         /// <remarks>...</remarks>
         private void OnLoaded(object sender, System.Windows.RoutedEventArgs e) {
-            //// Load UI
-            //DataContext = PackageMetadata;
+            if (Package != null)
+                LoadStoreItemFromPackage();
+
+            if (FeedItem != null)
+                LoadStoreItemFromFeedItem();
 
             //// Load other
             //if (FeedItem == null) { // Local package
@@ -57,7 +147,6 @@ namespace Newgen {
             //    UnInstallButton.Visibility = System.Windows.Visibility.Collapsed;
             //}
             //else { // Remote package
-
             //    IconImage.Source = FeedItem.GetPackageLogo();
 
             //    var isAd = false;
@@ -107,7 +196,9 @@ namespace Newgen {
         /// </param>
         /// <remarks>...</remarks>
         private void OnMouseLeftButtonDown(object sender, MouseButtonEventArgs e) {
-            (Resources["MouseDownAnimation"] as Storyboard).Begin();
+            var storyboard = Resources["MouseDownAnimation"] as Storyboard;
+            if (storyboard != null)
+                storyboard.Begin();
         }
 
         /// <summary>
@@ -119,39 +210,9 @@ namespace Newgen {
         /// </param>
         /// <remarks>...</remarks>
         private void OnMouseLeftButtonUp(object sender, MouseButtonEventArgs e) {
-            (Resources["MouseUpAnimation"] as Storyboard).Begin();
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:InstallButtonClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
-            //PackageManager.Current.GetPackage(PackageMetadata, f => { 
-                
-            //});
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:UnInstallButtonClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnUnInstallButtonClick(object sender, System.Windows.RoutedEventArgs e) {
-
-        }
-
-        /// <summary>
-        /// Handles the <see cref="E:EnDisableButtonClick" /> event.
-        /// </summary>
-        /// <param name="sender">The sender.</param>
-        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
-        /// <remarks>...</remarks>
-        private void OnEnDisableButtonClick(object sender, System.Windows.RoutedEventArgs e) {
-            //PackageManager.Current.ToggleEnabled(PackageManager.Current.Get(PackageMetadata.Id));
+            var storyboard = Resources["MouseUpAnimation"] as Storyboard;
+            if (storyboard != null)
+                storyboard.Begin();
         }
     }
 }

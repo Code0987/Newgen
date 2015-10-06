@@ -65,7 +65,7 @@ namespace Newgen {
             foreach (var feed in fa.CachedFeeds)
                 foreach (var item in feed.Items) {
                     var method = new Action(() => {
-                        ItemsContainerForPackages.Children.Add(new StoreItem(item));
+                        ItemsContainerForPackages.Children.Add(new StoreItem(null, item));
                     });
                     this.InvokeAsyncThreadSafe(method);
                 }
@@ -76,13 +76,12 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         private void OnLocalDataReady() {
-            // TOOD: Complete this.
-            //foreach (var package in App.PM.Packages) {
-            //    var method = new Action(() => {
-            //        ItemsContainerForPackages.Children.Add(new StoreItem(package.Metadata));
-            //    });
-            //    this.InvokeAsyncThreadSafe(method);
-            //}
+            foreach (var package in App.PM.Packages) {
+                var method = new Action(() => {
+                    ItemsContainerForPackages.Children.Add(new StoreItem(package, null));
+                });
+                this.InvokeAsyncThreadSafe(method);
+            }
         }
 
         /// <summary>
