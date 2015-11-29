@@ -35,6 +35,8 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         public Screen() {
+            Api.Logger.LogInformation("STARTING screen.");
+
             this.InitializeComponent();
 
             if (Settings.Current.BackgroundColor.A == 255)
@@ -42,7 +44,7 @@ namespace Newgen {
         }
 
         /// <summary>
-        /// Shows the hide animation window.
+        /// Toggles the wait dialog.
         /// </summary>
         /// <param name="circles">if set to <c>true</c> [circles].</param>
         /// <param name="text">The text.</param>
@@ -141,6 +143,8 @@ namespace Newgen {
             AnimationExtensions.Animate(this.Header, OpacityProperty, 250, 1);
 
             LoadToolbars();
+
+            Api.Logger.LogInformation("STARTED screen.");
         }
 
         /// <summary>

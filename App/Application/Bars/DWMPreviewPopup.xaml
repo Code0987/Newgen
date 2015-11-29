@@ -4,8 +4,8 @@
         xmlns:lib="clr-namespace:Newgen"
         xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
         xmlns:r="clr-namespace:Newgen.Resources"
-        Width="300"
-        Height="230"
+        Width="320"
+        Height="260"
         AllowsTransparency="True"
         Background="{x:Null}"
         Closing="OnClosing"
@@ -21,9 +21,9 @@
         Topmost="True"
         WindowStartupLocation="Manual"
         WindowStyle="None">
-    <Border Margin="10" BorderThickness="0">
+    <Border Margin="5" BorderThickness="1" BorderBrush="Black">
         <Border.Effect>
-            <DropShadowEffect BlurRadius="15"
+            <DropShadowEffect BlurRadius="5"
                               Direction="90"
                               Opacity="0.75"
                               ShadowDepth="0" />
@@ -38,16 +38,15 @@
             </Grid.RowDefinitions>
             <TextBlock x:Name="TextTitle"
                        Grid.Row="0"
-                       MaxHeight="46"
-                       FontSize="{StaticResource ContentFontSize}"
-                       Foreground="{StaticResource Brush_009}"
-                       Text="DWM Preview"
-                       TextAlignment="Center"
+                       FontSize="{StaticResource ContentFontSizeSmall}"
+                       Foreground="{StaticResource Brush_005}"
+                       Text="{}{Title}"
                        TextTrimming="CharacterEllipsis"
-                       TextWrapping="Wrap" />
+                       HorizontalAlignment="Center"
+                       TextWrapping="NoWrap" VerticalAlignment="Top" Margin="3,5,3,0" />
             <DockPanel Name="ThumbnailsContainer"
                        Grid.Row="1"
-                       Margin="5"
+                       Margin="3"
                        HorizontalAlignment="Center"
                        VerticalAlignment="Center"
                        Background="#00000000"

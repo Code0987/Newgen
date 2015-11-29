@@ -6,7 +6,7 @@
                    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
                    xmlns:po="http://schemas.microsoft.com/winfx/2006/xaml/presentation/options"
                    xmlns:r="clr-namespace:Newgen.Resources"
-                   Width="320"
+                   Width="300"
                    MinHeight="768"
                    Background="Transparent"
                    DragEnter="OnDragEnter"
@@ -81,15 +81,15 @@
     </Window.ContextMenu>
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="*" MinWidth="80" />
+            <ColumnDefinition Width="*" />
             <ColumnDefinition Width="*" MinWidth="240" />
         </Grid.ColumnDefinitions>
         <lib:DragScrollViewer Grid.Column="0"
                               Background="#64FFB900"
                               DragEverywhere="True"
                               HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto">
-            <StackPanel Name="ProcessesContainer" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                              VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
+            <StackPanel Name="ProcessesContainer" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
         </lib:DragScrollViewer>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -109,7 +109,6 @@
                     <RowDefinition Height="1*" MinHeight="80" />
                 </Grid.RowDefinitions>
                 <Button x:Name="SettingsButton"
-                        Grid.Row="1"
                         Grid.Column="0"
                         Click="SettingsButton_Click"
                         Style="{StaticResource B_FX_A1_Style}"
@@ -117,7 +116,6 @@
                     <Path Data="{StaticResource Settings1Geometry}" Stroke="{StaticResource Brush_010}" />
                 </Button>
                 <Button x:Name="StartButton"
-                        Grid.Row="1"
                         Grid.Column="1"
                         MouseLeftButtonUp="StartButton_MouseLeftButtonUp"
                         Style="{StaticResource B_FX_A1_Style}"
@@ -125,7 +123,6 @@
                     <Image Margin="-10" Source="/Newgen.Core;component/Resources/Newgen_Icon.ico" />
                 </Button>
                 <Button x:Name="StoreButton"
-                        Grid.Row="1"
                         Grid.Column="2"
                         Click="StoreButton_Click"
                         Style="{StaticResource B_FX_A1_Style}"

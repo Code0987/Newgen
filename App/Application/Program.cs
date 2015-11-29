@@ -5,7 +5,7 @@ namespace Newgen {
     /// <summary>
     /// Program.
     /// </summary>
-    /// <remarks>Proxy to run <see cref="Newgen.App"/>, as to avoid circular dependencies on official packages.</remarks>
+    /// <remarks>Proxy to run <see cref="Newgen.App" />, as to avoid circular dependencies on official packages.</remarks>
     public static class Program {
 
         /// <summary>

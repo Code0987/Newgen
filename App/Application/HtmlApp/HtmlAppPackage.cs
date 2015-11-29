@@ -210,6 +210,7 @@ namespace Newgen.HtmlApp {
         /// <returns>Task&lt;System.Object&gt;.</returns>
         /// <remarks>...</remarks>
         public static async Task<object> StartServer() {
+            try {
             // Find port.
             var port = 44311 /* WebTools.GetFreeTcpPort("localhost") */;
             // Set host.
@@ -234,6 +235,12 @@ namespace Newgen.HtmlApp {
             Debug.WriteLine((new WebClient()).DownloadString(new Uri(GetServerUriOfMetaResourceFor("Test"))));
 #endif
 
+            Api.Logger.LogInformation("Html server started.");
+            }
+            catch (Exception ex) {
+                Api.Logger.LogInformation("Html server start failed.", ex);
+            }
+
             return null;
         }
 
@@ -247,7 +254,11 @@ namespace Newgen.HtmlApp {
             try {
                 return await serverTask(null);
             }
-            catch { return null; }
+            catch (Exception ex) {
+                Api.Logger.LogInformation("Html server stop failed.", ex);
+            }
+
+            return null;
         }
 
         /// <summary>

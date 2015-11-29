@@ -257,7 +257,7 @@ namespace Newgen {
             TouchDecorator.Opacity = 1;
 
             ContentDecorator.Opacity = 1;
-            TouchDecorator.Background = new SolidColorBrush(Settings.Current.ToolbarBackgroundColor);
+            TouchDecorator.Background = new SolidColorBrush(Color.FromArgb(255, 0, 0, 0));
             ContentDecorator.Background = new SolidColorBrush(Settings.Current.ToolbarBackgroundColor);
 
             switch (Location) {

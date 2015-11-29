@@ -231,7 +231,7 @@ namespace Newgen {
                     try {
                         current.GetAndValidateActiveLicense();
                     }
-                    catch { }
+                    catch { Api.Logger.LogWarning("License validation failed."); }
                     // 3. Update settings
                     current.Update();
                 }

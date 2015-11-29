@@ -7,7 +7,7 @@
              Margin="0,0,5,5"
              HorizontalAlignment="Stretch"
              VerticalAlignment="Top"
-             Background="#FCFFFFFF"
+             Background="#00000000"
              Loaded="OnLoaded"
              MouseLeftButtonDown="OnMouseLeftButtonDown"
              MouseLeftButtonUp="OnMouseLeftButtonUp"

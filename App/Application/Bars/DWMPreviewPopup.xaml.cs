@@ -89,8 +89,8 @@ namespace Newgen {
 
                 ThumbnailsContainer.Children.Clear();
 
-                AnimationExtensions.Animate(this, OpacityProperty, 150, 0, 0.7, 0.3);
-                AnimationExtensions.Animate(this, LeftProperty, 150, Left, -Left, 0.7, 0.3);
+                AnimationExtensions.Animate(this, OpacityProperty, 500, 0, 0.1, 0.9);
+                AnimationExtensions.Animate(this, LeftProperty, 1050, Left, -Left, 0.9, 0.1);
 
                 e.Cancel = true;
             }
@@ -106,8 +106,8 @@ namespace Newgen {
             Focus();
             Activate();
 
-            AnimationExtensions.Animate(this, OpacityProperty, 150, 1, 0.7, 0.3);
-            AnimationExtensions.Animate(this, LeftProperty, 150, 2*Left, Left, 0.7, 0.3);
+            AnimationExtensions.Animate(this, OpacityProperty, 250, 1, 0.8, 0.2);
+            AnimationExtensions.Animate(this, LeftProperty, 250, 2*Left, Left, 0.9, 0.1);
 
             var index = 1;
             foreach (var hWnd in hWnds)
@@ -133,14 +133,7 @@ namespace Newgen {
 
                     index++;
                 }
-                catch /* Eat */ { }
-
-            // Initiate auto close
-            if (!autoSwitchOnClose) {
-                this.Dispatcher.RunFor(() => {
-                    Close();
-                }, -1, 1000);
-            }
+                catch /* Eat */ { }            
         }
 
         /// <summary>

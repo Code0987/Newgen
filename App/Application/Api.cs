@@ -192,12 +192,7 @@ namespace Newgen {
         public static void OnPreInitialization(ExtendedApplication host) {
             Host = host;
 
-            Logger = new Logger(LoggerName, new FileLogListener(
-                filelocation: CacheRoot
-#if DEBUG 
-                , buffer: 1
-#endif
-                )
+            Logger = new Logger(LoggerName, new FileLogListener(filelocation: CacheRoot, buffer: 1)
 #if DEBUG 
                 , new DebugLogListener()
 #endif

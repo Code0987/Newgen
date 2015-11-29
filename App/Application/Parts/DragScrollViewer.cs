@@ -188,7 +188,7 @@ namespace Newgen
         private void TickDragScroll(object sender, EventArgs e)
         {
             try { if (hscroll == null) { hscroll = this.Template.FindName("PART_HorizontalScrollBar", this) as FrameworkElement; } }
-            catch { }
+            catch (Exception ex) { Api.Logger.LogError(ex); }
             if (_isDragging)
             {
                 //if (VerticalScrollBarVisibility == ScrollBarVisibility.Disabled)

@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.IO;
 using System.Linq;
 using System.Windows;
@@ -8,12 +7,14 @@ using System.Windows.Controls;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Animation;
+using System.Windows.Media.Imaging;
+using System.Windows.Threading;
 using libns.Media.Animation;
+using libns.Media.Imaging;
 using libns.Native;
 using libns.Threading;
 using Microsoft.Win32;
 using Newgen.AppLink;
-using Newgen.Packages;
 using PackageManager;
 
 namespace Newgen {
@@ -25,6 +26,7 @@ namespace Newgen {
     public partial class StartBar : ToolbarWindow {
         private DateTime mouseClickTimestamp = DateTime.Now;
         private DWMPreviewPopup popup;
+        private DispatcherTimer popupTimer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="StartBar" /> class.
@@ -66,29 +68,29 @@ namespace Newgen {
 
             // Load all taskbar items
             this.ForEachHWND((current, text) => {
-                var items = ProcessesContainer.Children.OfType<TaskBarItem>().ToList();
+                var items = ProcessesContainer.Children.OfType<FrameworkElement>().ToList();
 
                 if (items.Count == 0) {
                     var fip = new FileInfo(WinAPI.GetProcessPath(current));
                     if (!Settings.Current.TaskBarProcessExclusionList.Contains(fip.Name) && !fip.Name.StartsWith(App.Current.Location)) {
-                        AddIcon(current);
+                        AddProcessIconUI(current);
                     }
                 }
                 else {
                     var existcount = 0;
                     foreach (var item in items) {
-                        if (item.Handles.Contains(current))
+                        if (((List<IntPtr>)item.DataContext).Contains(current))
                             existcount++;
                     }
                     if (existcount <= 0) {
                         var fip = new FileInfo(WinAPI.GetProcessPath(current));
                         if (!Settings.Current.TaskBarProcessExclusionList.Contains(fip.Name) && !fip.Name.StartsWith(App.Current.Location)) {
-                            AddIcon(current);
+                            AddProcessIconUI(current);
                         }
                     }
                 }
             });
-            
+
             var anim_userTile = App.Screen.UserBadgeControl.Resources["LeftAnimation"] as Storyboard;
             ((DoubleAnimation)anim_userTile.Children[0]).To = -this.Width;
             ((DoubleAnimation)anim_userTile.Children[0]).AccelerationRatio = 0.7;
@@ -101,35 +103,151 @@ namespace Newgen {
         /// </summary>
         /// <param name="hWnd">The h WND.</param>
         /// <remarks>...</remarks>
-        internal void AddIcon(IntPtr hWnd) {
-            var hWndpath = new FileInfo(WinAPI.GetProcessPath(hWnd)).Name;
-            var items = ProcessesContainer.Children.OfType<TaskBarItem>().ToList();
-            var isadded = false;
+        internal void AddProcessIconUI(IntPtr hWnd) {
+            // Get path.
+            var pp = WinAPI.GetProcessPath(hWnd);
+            var hWndpath = new FileInfo(pp).Name;
 
-            foreach (var sbi in items) {
-                if (WinAPI.GetProcessPath(sbi.Handles[0]).Contains(hWndpath)) {
-                    sbi.Handles.Add(hWnd);
-                    isadded = true;
+            // Check if already added or not.
+            foreach (var sbi in ProcessesContainer.Children.OfType<FrameworkElement>().ToList()) {
+                if (WinAPI.GetProcessPath(((List<IntPtr>)sbi.DataContext)[0]).Contains(hWndpath)) {
+                    ((List<IntPtr>)sbi.DataContext).Add(hWnd);
 
-                    AnimationExtensions.Animate(sbi, OpacityProperty, 200, 0, 1, 0.3, 0.7);
+                    AnimationExtensions.Animate(sbi, OpacityProperty, 500, 0, 1, 0.2, 0.8);
+
+                    return;
                 }
             }
-            if (!isadded) {
-                var icon = new TaskBarItem(this, hWnd);
-                ProcessesContainer.Children.Add(icon);
-                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 1, 0.3, 0.7);
-            }
+
+            // Get thumb.
+            var thumb = InternalHelper.GetThumbnail(pp);
+
+            if (thumb == null)
+                return;
+            
+            // Create ui.
+            var iconUIImage = new Image() { Source = thumb, Margin = new Thickness(7) };
+            var iconUI = new Button() {
+                DataContext = new List<IntPtr>() { hWnd },
+                Content = iconUIImage,
+                MinHeight = 32,
+                MinWidth = 32,
+                MaxHeight = 64,
+                MaxWidth = 64,
+                Style = App.Current.Resources["B_FX_A1_Style"] as Style
+            };
+            iconUI.Background = ((BitmapSource)thumb).CalculateAverageColor(0xFF).ToBrush();
+            RenderOptions.SetBitmapScalingMode(iconUIImage, BitmapScalingMode.HighQuality);
+            iconUI.Loaded += iconUI_Loaded;
+            iconUI.PreviewMouseLeftButtonUp += iconUI_PreviewMouseLeftButtonUp;
+            iconUI.MouseEnter += iconUI_MouseEnter;
+            iconUI.MouseLeave += iconUI_MouseLeave;
+
+            // Add to list.
+            ProcessesContainer.Children.Add(iconUI);
+
+            // FX.
+            AnimationExtensions.Animate(iconUI, OpacityProperty, 450, 0, 1, 0.2, 0.8);
         }
 
         /// <summary>
         /// Removes the icon.
         /// </summary>
-        /// <param name="icon">The icon.</param>
+        /// <param name="iconUI">The icon UI.</param>
         /// <remarks>...</remarks>
-        internal void RemoveIcon(TaskBarItem icon) {
-            if (icon != null) {
-                AnimationExtensions.Animate(icon, OpacityProperty, 200, 0, 0.3, 0.7);
-                ThreadingExtensions.LazyInvokeThreadSafe(() => { ProcessesContainer.Children.Remove(icon); }, 205);
+        internal void RemoveProcessIconUI(FrameworkElement iconUI) {
+            // Remove from list.
+            if (iconUI != null) {
+                AnimationExtensions.Animate(iconUI, OpacityProperty, 700, 0, 0.1, 0.9);
+
+                ThreadingExtensions.LazyInvokeThreadSafe(() => {
+                    ProcessesContainer.Children.Remove(iconUI);
+                }, 600);
+            }
+        }
+
+        /// <summary>
+        /// Handles the Loaded event of the iconUI control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.RoutedEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void iconUI_Loaded(object sender, System.Windows.RoutedEventArgs e) {
+            // Monitor process, and remove icon if it exits.
+            foreach (var hWnd in ((List<IntPtr>)((FrameworkElement)sender).DataContext))
+                try {
+                    var p = WinAPI.GetProcess(hWnd);
+                    p.EnableRaisingEvents = true;
+                    p.Exited += new EventHandler((o, a) => {
+                        try {
+                            this.InvokeAsyncThreadSafe(() => {
+                                RemoveProcessIconUI(this);
+                            });
+                        }
+                        catch (Exception ex) { Api.Logger.LogWarning("Problem while process exit on icon ui.", ex); }
+                    });
+                }
+                catch (Exception ex) { Api.Logger.LogWarning("Problem while monitoring process for exit.", ex); }
+        }
+
+        /// <summary>
+        /// Handles the MouseEnter event of the iconUI control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void iconUI_MouseEnter(object sender, System.Windows.Input.MouseEventArgs e) {
+            // Kill timer first.
+            if (popupTimer != null) {
+                popupTimer.Stop();
+                popupTimer = null;
+            }
+
+            // If old popup is visible, kill it also.
+            if (popup != null) {
+                popup.Close();
+                popup = null;
+            }
+            // Create new popup.            
+                popup = new DWMPreviewPopup(this, ((List<IntPtr>)((FrameworkElement)sender).DataContext), false);
+            
+            var tp = ((FrameworkElement)sender).TransformToAncestor(this).Transform(new Point());
+
+            popup.Left = Left - 5 - ActualWidth;
+            popup.Top = tp.Y - (popup.Height / 2);
+
+            popup.Show();
+        }
+
+        /// <summary>
+        /// Handles the MouseLeave event of the iconUI control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void iconUI_MouseLeave(object sender, System.Windows.Input.MouseEventArgs e) {
+            // Should not fire, but in case.
+            if (popup == null || !popup.IsLoaded)
+                return;
+
+            // Close popup after 1 sec.
+            popupTimer = ThreadingExtensions.LazyInvokeThreadSafe(() => {
+                popup.Close();
+            }, 1000);
+        }
+
+        /// <summary>
+        /// Handles the PreviewMouseLeftButtonUp event of the iconUI control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="System.Windows.Input.MouseButtonEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void iconUI_PreviewMouseLeftButtonUp(object sender, System.Windows.Input.MouseButtonEventArgs e) {
+            foreach (var hWnd in ((List<IntPtr>)((FrameworkElement)sender).DataContext)) {
+                if (!WinAPI.IsIconic(hWnd))
+                    WinAPI.ShowWindow(hWnd, WindowShowStyle.Minimize);
+                else
+                    WinAPI.SwitchToThisWindow(hWnd, true);
             }
         }
 

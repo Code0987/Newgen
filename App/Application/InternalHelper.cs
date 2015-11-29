@@ -137,7 +137,7 @@ namespace Newgen {
         /// <param name="path">The path.</param>
         /// <returns>ImageSource.</returns>
         /// <remarks>...</remarks>
-        public static ImageSource GetThumbnail(this string path) {
+        public static BitmapSource GetThumbnail(this string path) {
             var source = default(BitmapSource);
             try {
                 // For Vista +

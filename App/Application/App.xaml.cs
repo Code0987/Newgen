@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.Specialized;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -18,7 +19,6 @@ using libns.Native;
 using libns.Threading;
 using Newgen.HtmlApp;
 using PackageManager;
-using System.Collections.Specialized;
 using Application = System.Windows.Application;
 
 namespace Newgen {
@@ -77,9 +77,14 @@ namespace Newgen {
         /// <remarks>...</remarks>
         [STAThread]
         public static void Main(string[] args) {
-            var app = (new App());
-            app.AddSingleInstanceHelper(f => (f as App).InitializeComponent());
-            app.DisposeSafely();
+            try {
+                var app = (new App());
+                app.AddSingleInstanceHelper(f => (f as App).InitializeComponent());
+                app.DisposeSafely();
+            }
+            catch (Exception ex) {
+                Api.Logger.LogError(ex);
+            }
         }
 
         /// <summary>
@@ -103,6 +108,10 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public App() {
             Api.OnPreInitialization(this);
+
+            Api.Logger.LogInformation("STARTING app.");
+
+            AppDomain.CurrentDomain.UnhandledException += CurrentDomain_UnhandledException;
         }
 
         /// <summary>
@@ -110,6 +119,8 @@ namespace Newgen {
         /// </summary>
         /// <remarks>...</remarks>
         ~App() {
+            AppDomain.CurrentDomain.UnhandledException -= CurrentDomain_UnhandledException;
+
             WinAPI.UnhookWindowsHookEx(ptrHook);
             objKeyboardProcess = null;
         }
@@ -120,7 +131,7 @@ namespace Newgen {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private void Application_Startup(object sender, StartupEventArgs e) {
+        private async void Application_Startup(object sender, StartupEventArgs e) {
             // Helper registration
             this.RegisterApplication();
 
@@ -128,15 +139,15 @@ namespace Newgen {
             this.AddNotificationManager(new SysTrayNotificationManager(this.CreateWinFormsNotifiyIcon(notifier => {
                 notifier.ContextMenu = new ContextMenu();
                 notifier.ContextMenu.MenuItems.Add("Resume UI", (a, b) => Current.Dispatcher.BeginInvoke(new Action(() => {
-                                                                                                                              foreach (var window in Current.Windows) {
-                                                                                                                                  ((Window)window).Activate();
-                                                                                                                                  ((Window)window).Show();
-                                                                                                                              }
+                    foreach (var window in Current.Windows) {
+                        ((Window)window).Activate();
+                        ((Window)window).Show();
+                    }
                 })));
                 notifier.ContextMenu.MenuItems.Add("Suspend UI", (a, b) => Current.Dispatcher.BeginInvoke(new Action(() => {
-                                                                                                                               foreach (var window in Current.Windows) {
-                                                                                                                                   ((Window)window).Hide();
-                                                                                                                               }
+                    foreach (var window in Current.Windows) {
+                        ((Window)window).Hide();
+                    }
                 })));
                 notifier.ContextMenu.MenuItems.Add("Restart", (a, b) => Current.Dispatcher.BeginInvoke(new Action(Restart)));
                 notifier.ContextMenu.MenuItems.Add("Close", (a, b) => Current.Dispatcher.BeginInvoke(new Action(Close)));
@@ -148,8 +159,10 @@ namespace Newgen {
                 var objCurrentModule = Process.GetCurrentProcess().MainModule;
                 objKeyboardProcess = new WinAPI.HookProc(CaptureKey);
                 ptrHook = WinAPI.SetWindowsHookEx(13, objKeyboardProcess, WinAPI.GetModuleHandle(objCurrentModule.ModuleName), 0);
+
+                Api.Logger.LogInformation("Hooking into system key events done without error.");
             }
-            catch { }
+            catch { Api.Logger.LogWarning("Hooking into system key events done with error."); }
 
             // IPC messages
             Api.Messenger.MessageReceived += new Action<IntPtr, EMessage>(OnMessageReceived);
@@ -166,10 +179,7 @@ namespace Newgen {
             StartupUri = new Uri("/Newgen.Core;component/Screen.xaml", UriKind.Relative);
 
             // Start server.
-            try {
-                HtmlAppPackage.StartServer().ConfigureAwait(false);
-            }
-            catch (Exception ex) { Api.Logger.LogError("Can't start HtmlApp server.", ex); }
+            await HtmlAppPackage.StartServer().ConfigureAwait(false);
 
 #if !DEBUG
 
@@ -177,56 +187,72 @@ namespace Newgen {
             InternalHelper.SendAnalytics().ConfigureInstances(-1);
 
 #endif
+            try {
+                // PM.
+                PSS = new PackageSettingsStorage();
+                PM = PackageManagerPackage.Create(PSS);
 
-            // PM.        
-            PSS = new PackageSettingsStorage();
-            PM = PackageManagerPackage.Create(PSS);
+                PM.Settings.RemoveAll(f => f is RuntimeSettings);
+                PM.Settings.Add(new NewgenPackageManagerRuntimeSettings(PM));
 
-            PM.Settings.RemoveAll(f => f is RuntimeSettings);
-            PM.Settings.Add(new NewgenPackageManagerRuntimeSettings(PM));
-      
-            PM.Logger.Listeners.Add(new LoggerLogListener(PackageManagerExtensions.Logger));
-            PackageManagerExtensions.Logger.Listeners.Add(new LoggerLogListener(Api.Logger));
-            
-            PM.Packages.CollectionChanged += (o, a) => {
-                switch (a.Action) {
+                PM.Logger.Listeners.Add(new LoggerLogListener(PackageManagerExtensions.Logger));
+                PackageManagerExtensions.Logger.Listeners.Add(new LoggerLogListener(Api.Logger));
 
-                // On package loaded.
-                case NotifyCollectionChangedAction.Add:
-                    foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
-                        Dispatcher.BeginInvoke(new Action(() => {
-                            package.Start();
-                        }));
+                PM.Packages.CollectionChanged += (o, a) => {
+                    switch (a.Action) {
+                    // On package loaded.
+                    case NotifyCollectionChangedAction.Add:
+                        foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
+                            Dispatcher.BeginInvoke(new Action(() => {
+                                package.Start();
+                            }));
+                        }
+                        break;
+
+                    case NotifyCollectionChangedAction.Move:
+                        break;
+
+                    // On package un-loaded.
+                    case NotifyCollectionChangedAction.Remove:
+                        foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
+                            Dispatcher.BeginInvoke(new Action(() => {
+                                package.Stop();
+                            }));
+                        }
+                        break;
+
+                    case NotifyCollectionChangedAction.Replace:
+                        break;
+
+                    case NotifyCollectionChangedAction.Reset:
+                        break;
+
+                    default:
+                        break;
                     }
-                    break;
+                };
 
-                case NotifyCollectionChangedAction.Move:
-                    break;
+                // Find all packages
+                if (!PM.GetSettings().ScanLocations.Contains(Api.PackagesRoot))
+                    PM.GetSettings().ScanLocations.Add(Api.PackagesRoot);
+                ThreadingExtensions.LazyInvoke(async () => await PM.LoadAll(), 3500);
+            }
+            catch (Exception ex) {
+                Api.Logger.LogError("PM cannot be started.", ex);
+                App.Close();
+            }
 
-                // On package un-loaded.
-                case NotifyCollectionChangedAction.Remove:
-                    foreach (var package in a.NewItems.OfType<NewgenPackage>()) {
-                        Dispatcher.BeginInvoke(new Action(() => {
-                            package.Stop();
-                        }));
-                    }
-                    break;
+            Api.Logger.LogInformation("STARTED app.");
+        }
 
-                case NotifyCollectionChangedAction.Replace:
-                    break;
-
-                case NotifyCollectionChangedAction.Reset:
-                    break;
-
-                default:
-                    break;
-                }
-            };
-
-            // Find all packages
-            if (!PM.GetSettings().ScanLocations.Contains(Api.PackagesRoot))
-                PM.GetSettings().ScanLocations.Add(Api.PackagesRoot);
-            ThreadingExtensions.LazyInvoke(async () => await PM.LoadAll(), 3500);
+        /// <summary>
+        /// Handles the UnhandledException event of the CurrentDomain control.
+        /// </summary>
+        /// <param name="sender">The source of the event.</param>
+        /// <param name="e">The <see cref="UnhandledExceptionEventArgs"/> instance containing the event data.</param>
+        /// <remarks>...</remarks>
+        private void CurrentDomain_UnhandledException(object sender, UnhandledExceptionEventArgs e) {
+            Api.Logger.LogError(e.ExceptionObject);
         }
 
         /// <summary>
@@ -239,10 +265,7 @@ namespace Newgen {
             Api.OnPreFinalization();
 
             // Stop server.
-            try {
-                HtmlAppPackage.StopServer().ConfigureAwait(false);
-            }
-            catch (Exception ex) { Api.Logger.LogError("Can't stop HtmlApp server.", ex); }
+            await HtmlAppPackage.StopServer().ConfigureAwait(false);
 
             // Detach from IPC.
             Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);
@@ -252,12 +275,10 @@ namespace Newgen {
 
             // Fix taskbar before leaving.
             try {
-                var taskbar = WinAPI.FindWindow("Shell_TrayWnd", "");
-                var hwndOrb = WinAPI.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null);
-                WinAPI.ShowWindow(taskbar, WindowShowStyle.Show);
-                WinAPI.ShowWindow(hwndOrb, WindowShowStyle.Show);
+                WinAPI.ShowWindow(WinAPI.FindWindow("Shell_TrayWnd", ""), WindowShowStyle.Show);
+                WinAPI.ShowWindow(WinAPI.FindWindowEx(IntPtr.Zero, IntPtr.Zero, (IntPtr)0xC017, null), WindowShowStyle.Show);
             }
-            catch /* Eat */ { }
+            catch (Exception ex) { Api.Logger.LogWarning(ex); }
 
             Thread.Sleep(1500); // HACK: 1.5s enough ?
         }
@@ -273,6 +294,8 @@ namespace Newgen {
         /// <remarks>...</remarks>
         private void Application_DispatcherUnhandledException(object sender, DispatcherUnhandledExceptionEventArgs e) {
             e.Handled = true;
+
+            Api.Logger.LogError(e.Exception);
         }
 
         /// <summary>
@@ -282,6 +305,8 @@ namespace Newgen {
         /// <param name="message">The message.</param>
         /// <remarks>...</remarks>
         private void OnMessageReceived(IntPtr hWnd, EMessage message) {
+            Api.Logger.LogInformation("IPC message received.", message.Key, message.Value);
+
             switch (message.Key) {
             // Url
             case EMessage.UrlKey:
@@ -313,7 +338,7 @@ namespace Newgen {
 
             // Must be a package !
             default: {
-                var package = PM.Packages.OfType<NewgenPackage>().Where(f => f.GetId().Equals(message.Key)).FirstOrDefault();
+                    var package = PM.Packages.OfType<NewgenPackage>().Where(f => f.GetId().Equals(message.Key)).FirstOrDefault();
                     if (package != null)
                         package.OnMessageReceived(message);
                 }
@@ -387,8 +412,11 @@ namespace Newgen {
                 Settings.Current.Save();
                 Application.Current.MainWindow.Close();
             }
-            finally { 
-                Application.Current.Shutdown(0); 
+            catch (Exception ex) {
+                Api.Logger.LogWarning("CLOSING app.", ex);
+            }
+            finally {
+                Application.Current.Shutdown(0);
             }
         }
 

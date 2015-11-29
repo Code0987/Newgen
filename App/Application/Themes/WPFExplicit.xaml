@@ -423,7 +423,7 @@
         <Setter Property="UseLayoutRounding" Value="True" />
         <Setter Property="OverridesDefaultStyle" Value="False" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
-        <Setter Property="Padding" Value="10,2" />
+        <Setter Property="Padding" Value="7,2" />
         <Setter Property="MinHeight" Value="30" />
         <Setter Property="MinWidth" Value="30" />
         <Setter Property="Template">
@@ -545,7 +545,7 @@
                                 <VisualState x:Name="Unfocused" />
                             </VisualStateGroup>
                         </VisualStateManager.VisualStateGroups>
-                        <Rectangle Fill="{TemplateBinding Background}" Stroke="{TemplateBinding Foreground}" StrokeThickness="1" />
+                        <Rectangle Fill="Transparent" Stroke="Transparent"></Rectangle>
                         <ContentControl x:Name="ContentControl"
                                         Margin="{TemplateBinding Padding}"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -555,7 +555,7 @@
                         </ContentControl>
                         <Rectangle x:Name="FocusedVisualElement"
                                    Stroke="{StaticResource ButtonPressedBorderBrush}"
-                                   StrokeThickness="2"
+                                   StrokeThickness="0"
                                    Visibility="Collapsed" />
                         <Rectangle x:Name="DisabledVisualElement" Fill="{StaticResource DisabledVisualElement}" Visibility="Collapsed" />
                     </Grid>
