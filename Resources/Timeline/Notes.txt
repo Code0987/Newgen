@@ -1,0 +1,55 @@
+## Newgen
+
+A GUI frontend and desktop customization app for PM.
+
+Packages
+     Alternate scan locations
+
+Package format
+     - Package files (applications, docs, ...) *
+     - .pkg (JSONX format)
+          {
+               "id": "...",
+
+               "script.preInstall": "...",
+               "script.postInstall": "...",
+               "script.preUnInstall": "...",
+               "script.preUnInstall": "...",
+          }
+
+     - .pkg-settings (JSONX format)
+          {
+          }
+
+     - Native packages (i.e. compiled c# dll based)
+     - HTML5 packages (i.e. node-webkit based)
+     - Folder based custom packages (i.e. use any folder as a package)
+          - Support for PortableApps.com app folder
+          - Support for selecting main launcher file (.exe, .lnk, ...)
+          - Monitor running apps launched under newgen.
+
+Package installer
+     Example: 
+          In cmd-line version, pm get AECCP would download latest pirated & portable Adobe After Effects package from authors' web.
+          The package can be downloaded as without pm using users' download manager and then put into pm, like
+          pm get AECCP --data-at=<location>, in this mode it would download only package definition and use provided location for data. 
+
+Launchy like launcher.
+
+Re-integrate package/widgets with new HTML5 node-webkit runner support.
+Optimize memory resources.
+
+Re-design package metadata to user 'package.json' like file for metadata, so that Newgen can index and integrate non-newgen packages, also list them as link to launch a cmd to that package folder with appropriate package manager like nuget, npm, ...
+
+Finish Settings layout.
+
+Re-design Store - List all indexded packages, like in evernote cards style.
+Provide update support.
+
+OnMove [Feature]
+     This would pack selected packages (like most used recently) into a USB/Removable drive, so they can be used while on move.
+     Then later when move is over, Newgen/Extension would automatically determine that, on connecting same drive again and sync back all the changes done while on move and then flush the drive.
+
+Instead of providing web-browser, first use user's choice of browser (chrome, firefox, ...) through plugins/extensions, hooks or crooks.
+
+Package that can sync music in phone and newgen windows

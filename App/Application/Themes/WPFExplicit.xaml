@@ -458,7 +458,6 @@
                                                          DecelerationRatio="0.3"
                                                          Duration="0:0:0.45"
                                                          From="0"
-                                                         Storyboard.TargetName="Self"
                                                          Storyboard.TargetProperty="Opacity"
                                                          To="1" />
                                     </Storyboard>

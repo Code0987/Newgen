@@ -63,12 +63,26 @@ namespace Newgen {
         /// <remarks>...</remarks>
         public override BitmapSource AppLogo { get { return new BitmapImage(new Uri("/Newgen.Core;component/Resources/Newgen_Icon.ico", UriKind.Relative)); } }
 
+        private static Screen screen;
+
         /// <summary>
         /// Gets the screen.
         /// </summary>
         /// <value>The start screen.</value>
         /// <remarks>...</remarks>
-        public static Screen Screen { get { return Application.Current.MainWindow as Screen; } }
+        public static Screen Screen {
+            get {
+                if (screen == null) {
+                    screen = new Screen();
+                    Application.Current.MainWindow = screen;
+                }
+
+                if (Application.Current.MainWindow as Screen == null)
+                    Api.Logger.LogWarning("Somehow Application.Current.MainWindow is not screen.");
+
+                return screen;
+            }
+        }
 
         /// <summary>
         /// Defines the entry point of the application.
@@ -77,14 +91,9 @@ namespace Newgen {
         /// <remarks>...</remarks>
         [STAThread]
         public static void Main(string[] args) {
-            try {
-                var app = (new App());
-                app.AddSingleInstanceHelper(f => (f as App).InitializeComponent());
-                app.DisposeSafely();
-            }
-            catch (Exception ex) {
-                Api.Logger.LogError(ex);
-            }
+            var app = (new App());
+            app.AddSingleInstanceHelper(f => (f as App).InitializeComponent());
+            app.DisposeSafely();
         }
 
         /// <summary>
@@ -131,7 +140,7 @@ namespace Newgen {
         /// <param name="sender">The source of the event.</param>
         /// <param name="e">The <see cref="StartupEventArgs"/> instance containing the event data.</param>
         /// <remarks>...</remarks>
-        private async void Application_Startup(object sender, StartupEventArgs e) {
+        private void Application_Startup(object sender, StartupEventArgs e) {
             // Helper registration
             this.RegisterApplication();
 
@@ -176,10 +185,7 @@ namespace Newgen {
             });
 
             // Load view
-            StartupUri = new Uri("/Newgen.Core;component/Screen.xaml", UriKind.Relative);
-
-            // Start server.
-            await HtmlAppPackage.StartServer().ConfigureAwait(false);
+            Screen.Show();
 
 #if !DEBUG
 
@@ -239,7 +245,6 @@ namespace Newgen {
             }
             catch (Exception ex) {
                 Api.Logger.LogError("PM cannot be started.", ex);
-                App.Close();
             }
 
             Api.Logger.LogInformation("STARTED app.");
@@ -263,9 +268,6 @@ namespace Newgen {
         /// <remarks>...</remarks>
         private async void Application_Exit(object sender, ExitEventArgs e) {
             Api.OnPreFinalization();
-
-            // Stop server.
-            await HtmlAppPackage.StopServer().ConfigureAwait(false);
 
             // Detach from IPC.
             Api.Messenger.MessageReceived -= new Action<IntPtr, EMessage>(OnMessageReceived);

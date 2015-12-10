@@ -6,7 +6,6 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
-using EdgeJs;
 using libns;
 using libns.Media.Imaging;
 using Microsoft.Win32;
@@ -44,11 +43,6 @@ namespace Newgen.HtmlApp {
         /// The tile image
         /// </summary>
         internal Image tileImage;
-
-        /// <summary>
-        /// The server task
-        /// </summary>
-        private static Func<object, Task<object>> serverTask;
 
         /// <summary>
         /// Gets or sets the server host.
@@ -202,63 +196,6 @@ namespace Newgen.HtmlApp {
             else if (clear) {
                 regkey.DeleteValue(app);
             }
-        }
-
-        /// <summary>
-        /// Runs the server.
-        /// </summary>
-        /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
-        public static async Task<object> StartServer() {
-            try {
-            // Find port.
-            var port = 44311 /* WebTools.GetFreeTcpPort("localhost") */;
-            // Set host.
-            ServerHost += ":" + port.ToString();
-            // Create.
-            var start = Edge.Func(
-                string.Format(
-                "return require('{0}')",
-                "./../HtmlApp/Server.js"
-                ));
-            // Start.
-            serverTask = (Func<object, Task<object>>)await start(new {
-                port = port,
-                host = ServerHost,
-                location = App.Current.Location.ToUriPath(),
-
-                metaKey = MetaResourceIdentifier
-            });
-
-#if DEBUG
-            // TEST: Detect edge issues here.
-            Debug.WriteLine((new WebClient()).DownloadString(new Uri(GetServerUriOfMetaResourceFor("Test"))));
-#endif
-
-            Api.Logger.LogInformation("Html server started.");
-            }
-            catch (Exception ex) {
-                Api.Logger.LogInformation("Html server start failed.", ex);
-            }
-
-            return null;
-        }
-
-        /// <summary>
-        /// Stops the server.
-        /// </summary>
-        /// <returns>Task&lt;System.Object&gt;.</returns>
-        /// <remarks>...</remarks>
-        public static async Task<object> StopServer() {
-            // Stop.
-            try {
-                return await serverTask(null);
-            }
-            catch (Exception ex) {
-                Api.Logger.LogInformation("Html server stop failed.", ex);
-            }
-
-            return null;
         }
 
         /// <summary>
