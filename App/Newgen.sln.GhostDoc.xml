@@ -14,6 +14,7 @@
 <HelpConfigurations selected="HelpFile">
   <HelpConfiguration name="HelpFile">
     <OutputPath>..\Resources\Documentation</OutputPath>
+    <CleanupOutputPath>true</CleanupOutputPath>
     <ImageFolderPath />
     <HtmlFormats>
       <HtmlHelp>true</HtmlHelp>
@@ -31,6 +32,11 @@
       <EnableTags>false</EnableTags>
       <TagList />
     </IncludeScopes>
+    <SyntaxLanguages>
+      <CSharp>true</CSharp>
+      <VisualBasic>true</VisualBasic>
+      <CPlusPlus>true</CPlusPlus>
+    </SyntaxLanguages>
     <ResolveCrefLinks>true</ResolveCrefLinks>
     <HeaderText>Documentation</HeaderText>
     <FooterText>© 2014 NS.</FooterText>
@@ -39,4 +45,7 @@
     </SelectedProjects>
   </HelpConfiguration>
 </HelpConfigurations>
+<GeneralProperties>
+  <SearchInheritedCommentsOnlyWithinProject>False</SearchInheritedCommentsOnlyWithinProject>
+</GeneralProperties>
 </GhostDoc>

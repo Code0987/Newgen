@@ -41,7 +41,9 @@
                           Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="PinWebItem" Click="OnPinWebItemClick" Header="{x:Static r:Definitions.PinWebItem}">
+            <MenuItem x:Name="PinWebItem"
+                      Click="OnPinWebItemClick"
+                      Header="{x:Static r:Definitions.PinWebItem}">
                 <MenuItem.Icon>
                     <Path Width="16"
                           Height="16"
@@ -59,7 +61,9 @@
                           Stretch="Fill" />
                 </MenuItem.Icon>
             </MenuItem>
-            <MenuItem x:Name="SaveSettingsItem" Click="OnSaveSettingsItemClick" Header="{x:Static r:Definitions.SaveSettingsItem}">
+            <MenuItem x:Name="SaveSettingsItem"
+                      Click="OnSaveSettingsItemClick"
+                      Header="{x:Static r:Definitions.SaveSettingsItem}">
                 <MenuItem.Icon>
                     <Path Width="16"
                           Height="16"
@@ -85,11 +89,15 @@
             <ColumnDefinition Width="*" MinWidth="240" />
         </Grid.ColumnDefinitions>
         <lib:DragScrollViewer Grid.Column="0"
+                              HorizontalAlignment="Stretch"
+                              HorizontalContentAlignment="Stretch"
                               Background="#64FFB900"
                               DragEverywhere="True"
                               HorizontalScrollBarVisibility="Auto"
-                              VerticalScrollBarVisibility="Auto" HorizontalAlignment="Stretch" HorizontalContentAlignment="Stretch">
-            <StackPanel Name="ProcessesContainer" HorizontalAlignment="Stretch" VerticalAlignment="Bottom" />
+                              VerticalScrollBarVisibility="Auto">
+            <StackPanel Name="ProcessesContainer"
+                        HorizontalAlignment="Stretch"
+                        VerticalAlignment="Bottom" />
         </lib:DragScrollViewer>
         <Grid Grid.Column="1">
             <Grid.RowDefinitions>
@@ -97,7 +105,9 @@
                 <RowDefinition Height="*" MinHeight="488" />
                 <RowDefinition Height="*" MinHeight="80" />
             </Grid.RowDefinitions>
-            <StackPanel Grid.Row="0" Background="#6474FF00" />
+            <StackPanel Grid.Row="0" Background="#6474FF00">
+                <lib:ExpressControl />
+            </StackPanel>
             <StackPanel Grid.Row="1" Background="#640EA490" />
             <Grid Name="ButtonsContainer" Grid.Row="2">
                 <Grid.ColumnDefinitions>

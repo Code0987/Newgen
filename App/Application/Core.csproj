@@ -318,6 +318,9 @@
     <Compile Include="Bars\DWMPreviewPopup.xaml.cs">
       <DependentUpon>DWMPreviewPopup.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Express\ExpressControl.xaml.cs">
+      <DependentUpon>ExpressControl.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Parts\Browser.cs" />
     <Compile Include="HtmlApp\HtmlAppPackage.cs" />
     <Compile Include="NewgenPackage.cs" />
@@ -525,6 +528,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Bars\DWMPreviewPopup.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Express\ExpressControl.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
